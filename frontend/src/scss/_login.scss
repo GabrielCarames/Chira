@@ -1,0 +1,107 @@
+@mixin input-styles() {
+    background-color: $gray-dark-color;
+    color: $white-color;
+    height: 40px;
+    width: 100%;
+    border: 1px solid #AAAAAA;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    padding-left: 10px;
+}
+
+@mixin form-section-styles() {
+    min-width: 230px;
+    display: flex;
+    flex-direction: column;
+}
+
+@mixin welcome-text( $color, $font-size, $line-height, $font-weight ) {
+    color: $color;
+    font-size: $font-size;
+    line-height: $line-height;
+    font-weight: $font-weight;
+}
+
+.login {
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    overflow-y: scroll;
+    .login__welcome {
+        display: flex;
+        flex-direction: column;
+        margin-top: 5em;
+        align-items: center;
+        .welcome__image {
+            height: 100%;
+            width: auto;
+        }
+        .welcome__text {
+            text-align: center;
+            .welcome__title {
+                @include welcome-text($white-color, $h1, 0, bold);
+            }
+            .welcome__paragraph {
+                @include welcome-text($gray-color, $h3, 27px, bold);
+                max-width: 100%;
+            }
+        }
+    }
+    .login__form {
+        color: $gray-color;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 100%;
+        .form_section {
+            max-width: 80%;
+            .form__name-section {
+                @include form-section-styles;
+                .form__label {
+                    margin-left: 10px;
+                }
+                .form__input {
+                    @include input-styles
+                }
+            }
+            .form__phone-section {
+                @include form-section-styles;
+                margin-top: 20px;
+                .form__label {
+                    margin-left: 10px;
+                }
+                .form__input {
+                    @include input-styles
+                }
+            }
+        }
+        .form__button {
+            margin-top: 20px;
+            height: 100%;
+            width: 130px;
+            border-radius: 15px;
+            background-color: $first-color;
+            border-width: 0;
+            display: flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items: center;
+            .form__text-button {
+                color: $white-color;
+                font-family: Poppins;
+                font-size: $h5;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 17px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 320px) and (max-width: 480px){
+    
+}

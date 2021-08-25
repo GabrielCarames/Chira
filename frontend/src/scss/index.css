@@ -1,0 +1,177 @@
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+html*, html *::before, html *::after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+}
+
+body {
+  background-color: #172029;
+  font-family: 'Poppins', sans-serif;
+}
+
+.login {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.login .login__welcome {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 5em;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login .login__welcome .welcome__image {
+  height: 100%;
+  width: auto;
+}
+
+.login .login__welcome .welcome__text {
+  text-align: center;
+}
+
+.login .login__welcome .welcome__text .welcome__title {
+  color: white;
+  font-size: 32px;
+  line-height: 0;
+  font-weight: bold;
+}
+
+.login .login__welcome .welcome__text .welcome__paragraph {
+  color: #aaaaaa;
+  font-size: 18px;
+  line-height: 27px;
+  font-weight: bold;
+  max-width: 100%;
+}
+
+.login .login__form {
+  color: #aaaaaa;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  max-width: 100%;
+}
+
+.login .login__form .form_section {
+  max-width: 80%;
+}
+
+.login .login__form .form_section .form__name-section {
+  min-width: 230px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.login .login__form .form_section .form__name-section .form__label {
+  margin-left: 10px;
+}
+
+.login .login__form .form_section .form__name-section .form__input {
+  background-color: #212121;
+  color: white;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #AAAAAA;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  padding-left: 10px;
+}
+
+.login .login__form .form_section .form__phone-section {
+  min-width: 230px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 20px;
+}
+
+.login .login__form .form_section .form__phone-section .form__label {
+  margin-left: 10px;
+}
+
+.login .login__form .form_section .form__phone-section .form__input {
+  background-color: #212121;
+  color: white;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #AAAAAA;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  padding-left: 10px;
+}
+
+.login .login__form .form__button {
+  margin-top: 20px;
+  height: 100%;
+  width: 130px;
+  border-radius: 15px;
+  background-color: #1975e0;
+  border-width: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.login .login__form .form__button .form__text-button {
+  color: white;
+  font-family: Poppins;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 17px;
+}
+/*# sourceMappingURL=index.css.map */

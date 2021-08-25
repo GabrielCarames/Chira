@@ -1,0 +1,36 @@
+$first-color: rgba(25, 117, 224, 1);
+$firt-alpha-color: rgba(82, 151, 232, 1);
+$second-color: rgba(38, 49, 63, 1);
+$second-alpha-color: rgba(23, 32, 41, 1);
+$white-color: rgba(255, 255, 255, 1);
+$black-color: rgba(0, 0, 0, 1);
+$link-color: rgba(80, 158, 227, 1);
+$gray-color: rgba(170, 170, 170, 1);
+$gray-light-color: rgba(243, 243, 243, 1);
+$gray-dark-color: rgba(33, 33, 33, 1);
+$white-alpha-color: rgba(255, 255, 255, 1);
+$title-color: rgba(51, 51, 51, 1);
+$text-color: rgba(34, 34, 34, 1);
+
+$h1: 32px;
+$h2: 24px;
+$h3: 18px;
+$h4: 16px;
+$h5: 13px;
+$h6: 11px;
+$text: 16px;
+$little-text: 11px;
+
+
+html {
+    box-sizing: border-box;
+    &*, *::before, *::after {
+        box-sizing: inherit;
+    }
+}
+body {
+    background-color: $second-alpha-color;
+    font-family: 'Poppins', sans-serif;
+}
+
+@import "./login";
