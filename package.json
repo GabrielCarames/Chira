@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/GabrielCarames/Chira/issues"
   },
-  "homepage": "https://github.com/GabrielCarames/Chira#readme"
+  "homepage": "https://github.com/GabrielCarames/Chira#readme",
+  "dependencies": {
+    "concurrently": "^6.2.1"
+  }
 }

@@ -8,6 +8,14 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     padding-left: 10px;
+    outline: none;
+    &:hover {
+        border-color: $first-color;
+        transition: .2s;
+    }
+    &:focus {
+        border-color: $first-color;
+    }
 }
 
 @mixin form-section-styles() {
@@ -78,8 +86,24 @@
                     @include input-styles
                 }
             }
+            .form__otp-section {
+                visibility: hidden;
+                position: absolute;
+                @include form-section-styles;
+                margin-top: 20px;
+                &.active {
+                    visibility: visible;
+                    position: inherit;
+                }
+                .form__label {
+                    margin-left: 10px;
+                }
+                .form__input {
+                    @include input-styles
+                }
+            }
         }
-        .form__button {
+        .form__button, .form__otp-button{
             margin-top: 20px;
             height: 100%;
             width: 130px;
@@ -90,6 +114,9 @@
             flex-direction:column;
             justify-content:center;
             align-items: center;
+            &:hover {
+                opacity: .5;
+            }
             .form__text-button {
                 color: $white-color;
                 font-family: Poppins;
@@ -99,9 +126,19 @@
                 line-height: 17px;
             }
         }
+        .form__button {
+            &.active {
+                visibility: hidden;
+                position: absolute;
+            }
+        }
+        .form__otp-button {
+            visibility: hidden;
+            position: absolute;
+            &.active {
+                visibility: visible;
+                position: inherit;
+            }
+        }
     }
-}
-
-@media screen and (min-width: 320px) and (max-width: 480px){
-    
 }

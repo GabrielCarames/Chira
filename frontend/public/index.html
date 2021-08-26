@@ -7,14 +7,41 @@
       name="description"
       content="Web site created using create-react-app"
     />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <title>Chira</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    
   </body>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+  <script>
+    
+    var firebaseConfig = {
+      apiKey: "AIzaSyDAe3AbjWZ4O6D5Q1WprYj47moX9IaF-o4",
+      authDomain: "chira-199ce.firebaseapp.com",
+      projectId: "chira-199ce",
+      storageBucket: "chira-199ce.appspot.com",
+      messagingSenderId: "421563002410",
+      appId: "1:421563002410:web:c5f07a699fddb42c25dd53",
+      measurementId: "G-54KK31S0NE",
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.auth().languageCode = 'it';
+    window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('recaptcha-container');
+      firebase.analytics();
+  </script>
+  
 </html>

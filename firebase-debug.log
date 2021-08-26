@@ -1,0 +1,24 @@
+[debug] [2021-08-25T17:04:18.944Z] ----------------------------------------------------------------------
+[debug] [2021-08-25T17:04:18.946Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\GABRIEL\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2021-08-25T17:04:18.946Z] CLI Version:   9.16.0
+[debug] [2021-08-25T17:04:18.946Z] Platform:      win32
+[debug] [2021-08-25T17:04:18.946Z] Node Version:  v14.15.1
+[debug] [2021-08-25T17:04:18.947Z] Time:          Wed Aug 25 2021 14:04:18 GMT-0300 (hora estándar de Argentina)
+[debug] [2021-08-25T17:04:18.947Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2021-08-25T17:04:18.948Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2021-08-25T17:04:18.961Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-08-25T17:04:18.961Z] > authorizing via signed-in user (gabrielcarames1@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  C:\Users\GABRIEL\Desktop\Chira
+
+[debug] [2021-08-25T17:04:19.871Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2021-08-25T17:04:19.871Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}

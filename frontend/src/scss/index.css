@@ -113,6 +113,17 @@ body {
           box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
   padding-left: 10px;
+  outline: none;
+}
+
+.login .login__form .form_section .form__name-section .form__input:hover {
+  border-color: #1975e0;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.login .login__form .form_section .form__name-section .form__input:focus {
+  border-color: #1975e0;
 }
 
 .login .login__form .form_section .form__phone-section {
@@ -142,9 +153,67 @@ body {
           box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
   padding-left: 10px;
+  outline: none;
 }
 
-.login .login__form .form__button {
+.login .login__form .form_section .form__phone-section .form__input:hover {
+  border-color: #1975e0;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.login .login__form .form_section .form__phone-section .form__input:focus {
+  border-color: #1975e0;
+}
+
+.login .login__form .form_section .form__otp-section {
+  visibility: hidden;
+  position: absolute;
+  min-width: 230px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 20px;
+}
+
+.login .login__form .form_section .form__otp-section.active {
+  visibility: visible;
+  position: inherit;
+}
+
+.login .login__form .form_section .form__otp-section .form__label {
+  margin-left: 10px;
+}
+
+.login .login__form .form_section .form__otp-section .form__input {
+  background-color: #212121;
+  color: white;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #AAAAAA;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  padding-left: 10px;
+  outline: none;
+}
+
+.login .login__form .form_section .form__otp-section .form__input:hover {
+  border-color: #1975e0;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.login .login__form .form_section .form__otp-section .form__input:focus {
+  border-color: #1975e0;
+}
+
+.login .login__form .form__button, .login .login__form .form__otp-button {
   margin-top: 20px;
   height: 100%;
   width: 130px;
@@ -166,12 +235,31 @@ body {
           align-items: center;
 }
 
-.login .login__form .form__button .form__text-button {
+.login .login__form .form__button:hover, .login .login__form .form__otp-button:hover {
+  opacity: .5;
+}
+
+.login .login__form .form__button .form__text-button, .login .login__form .form__otp-button .form__text-button {
   color: white;
   font-family: Poppins;
   font-size: 13px;
   font-style: normal;
   font-weight: 700;
   line-height: 17px;
+}
+
+.login .login__form .form__button.active {
+  visibility: hidden;
+  position: absolute;
+}
+
+.login .login__form .form__otp-button {
+  visibility: hidden;
+  position: absolute;
+}
+
+.login .login__form .form__otp-button.active {
+  visibility: visible;
+  position: inherit;
 }
 /*# sourceMappingURL=index.css.map */
