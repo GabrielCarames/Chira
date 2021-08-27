@@ -10,9 +10,9 @@ const App = () => {
 
   return (
       <main>
-        {/* <Login /> */}
+        <Login />
         {/* <Header /> */}
-        <Main />
+        {/* <Main /> */}
         {/* {login ? <Main /> : <Login />} */}
       </main>
   );

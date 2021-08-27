@@ -156,7 +156,7 @@ const Main = () => {
 
                 </div>
                 <div className="main__input-section">
-                    <input className="main__input" type="text" name="message" id="" placeholder="Escribe un mensaje aquí" autocomplete="off"/>
+                    <input className="main__input" type="text" name="message" id="" placeholder="Escribe un mensaje aquí" autoComplete="off"/>
                 </div>
             </section>
         </section>

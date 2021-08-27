@@ -1,6 +1,7 @@
 // Estableces las dependencias
 const express = require('express');
 const app = express()
+const cors = require('cors')
 
 // Le decis a express que ponga como puerto del servidor bajo una condición
 /* Si en el archivo .env existe una variable PORT (la cual no existe localmente, pero en deploy si),
@@ -8,11 +9,13 @@ const app = express()
 */
 app.set('port', process.env.PORT || 3001)
 
+
+app.use(cors());
 // Le decis a express para qe pueda entender archivos .JSON
 app.use(express.json()) // No se si es totalmente necesario ahora mismo, pero una vez tuve problemas con JSON y lo meto siempre ahora
 
 // Especificas las rutas que tenes
-// app.use('/users', require('./routes/users'))
+app.use('/users', require('./routes/users'))
 // && cd.. && cd frontend && npm start
 // Le decis a express que obtenga el puerto de antes y arranque el sv
 app.listen(app.get('port'))

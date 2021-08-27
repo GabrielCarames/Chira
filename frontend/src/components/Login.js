@@ -1,6 +1,8 @@
 import logo from '../images/logo.png'
 import firebase from '../firebase'
 import { useState } from 'react'
+import axios from 'axios'
+import Main from './Main';
 // import firebase from './firebase'
 
 const Login = () => {
@@ -42,10 +44,18 @@ const Login = () => {
     const onSubmitOTP = (e) => {
         e.preventDefault()
         const code = form.otp
-        window.confirmationResult.confirm(code).then((result) => {
-          const user = result.user;
-          console.log(JSON.stringify(user))
-          alert("User is verified")
+        window.confirmationResult.confirm(code).then(async (result) => {
+          const user = JSON.stringify(result.user)
+          console.log(user)
+            //CHE ESTO DEBERIA MANDAR LOS DATOS AL BACKEND Y RENDERIZAR MAIN.JS
+            try {
+                await axios.post('http://localhost:3001/users/register', user).then(res => {
+                    console.log("fua lo chiiste toma", res)
+                })
+                
+            } catch (error) {
+                
+            }
         }).catch((error) => {
           console.log(error)
         });
