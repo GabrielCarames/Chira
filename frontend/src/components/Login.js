@@ -66,15 +66,15 @@ const Login = () => {
             <form className="login__form form" onSubmit={active ? onSubmitOTP : onSignInSubmit }>
                 <section className="form_section">
                     <div className="form__name-section">
-                        <label className="form__label" for="name">Nombre</label>
+                        <label className="form__label" htmlFor="name">Nombre</label>
                         <input className="form__input" id="name" type="text" name="name" />
                     </div>
                     <div className="form__phone-section">
-                        <label className="form__label" for="mobile">Número de celular</label>
+                        <label className="form__label" htmlFor="mobile">Número de celular</label>
                         <input className="form__input" id="mobile" type="tel" name="mobile" onChange={handleChange}/>
                     </div>
                     <div className={active ? "form__otp-section active" : "form__otp-section"}>
-                        <label className="form__label" for="otp">Código de verificación</label>
+                        <label className="form__label" htmlFor="otp">Código de verificación</label>
                         <input className="form__input" id="otp" type="tel" name="otp" onChange={handleChange}/>
                     </div>
                 </section>

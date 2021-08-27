@@ -1,3 +1,7 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "html-to-css-autocompletion.autocompletionFilesScope": "linked-files",
+    "html-to-css-autocompletion.getSelectorsFromFileTypes": [
+        "html"
+    ]
 }

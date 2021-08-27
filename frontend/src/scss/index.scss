@@ -1,5 +1,5 @@
 $first-color: rgba(25, 117, 224, 1);
-$firt-alpha-color: rgba(82, 151, 232, 1);
+$first-alpha-color: rgba(82, 151, 232, 1);
 $second-color: rgba(38, 49, 63, 1);
 $second-alpha-color: rgba(23, 32, 41, 1);
 $white-color: rgba(255, 255, 255, 1);
@@ -31,6 +31,11 @@ html {
 body {
     background-color: $second-alpha-color;
     font-family: 'Poppins', sans-serif;
+    margin: 0;
+    main {
+        overflow-x: clip;
+    }
 }
 
 @import "./login";
+@import "./main";
