@@ -6,9 +6,13 @@ const Main = () => {
         <section className="main">
             <section className="main__left-section">
                 <nav className="main__navbar navbar">
-                    <i className="fas fa-bars"></i>
+                    <div className="main__settings">
+                        <i className="fas fa-bars"></i>
+                    </div>
                     <h3 className="navbar__title">Chira</h3>
-                    <i className="fas fa-search"></i>
+                    <div className="main__search">
+                        <i className="fas fa-search"></i>
+                    </div>
                 </nav>
                 <main className="main__contacts-container">
                     <ul className="main__contacts-list list">
@@ -20,7 +24,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                         <li className="list__item">
                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                             <div className="list__info">
@@ -29,7 +32,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                         <li className="list__item">
                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                             <div className="list__info">
@@ -38,7 +40,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                         <li className="list__item">
                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                             <div className="list__info">
@@ -47,7 +48,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                         <li className="list__item">
                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                             <div className="list__info">
@@ -56,7 +56,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                         <li className="list__item">
                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                             <div className="list__info">
@@ -65,7 +64,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                         <li className="list__item">
                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                             <div className="list__info">
@@ -74,7 +72,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                         <li className="list__item">
                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                             <div className="list__info">
@@ -83,7 +80,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                         <li className="list__item">
                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                             <div className="list__info">
@@ -92,7 +88,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                         <li className="list__item">
                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                             <div className="list__info">
@@ -101,7 +96,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                         <li className="list__item">
                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                             <div className="list__info">
@@ -110,7 +104,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                         <li className="list__item">
                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                             <div className="list__info">
@@ -119,7 +112,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                         <li className="list__item">
                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                             <div className="list__info">
@@ -128,7 +120,6 @@ const Main = () => {
                             </div>
                             <h6 className="list__time-ago">30:43hs</h6>
                         </li>
-                        <hr className="list__divisor"/>
                     </ul>
                 </main>
                 {/* FIJATE COMO OBTENER LAS VARIABLES DE ACA DE LAS HORAS Y METERLAS EN SASS */}
@@ -143,7 +134,6 @@ const Main = () => {
                 </aside> */}
             </section>
             <section className="main__chat-section">
-                <div className="main__vertical-line"></div>
                 <nav className="main__chat-navbar navbar">
                     <div className="navbar__contact">
                         <img className="navbar__avatar" src={avatar} alt="contact-avatar" />
@@ -153,10 +143,21 @@ const Main = () => {
                         </div>
                     </div>
                     <div className="navbar__tools">
-                        <i className="fas fa-search"></i>
-                        <i className="fas fa-ellipsis-v"></i>
+                        <div className="navbar__search">
+                            <i className="fas fa-search"></i>
+
+                        </div>
+                        <div className="navbar__settings">
+                            <i className="fas fa-ellipsis-v"></i>
+                        </div>
                     </div>
                 </nav>
+                <div className="main__messages-section">
+
+                </div>
+                <div className="main__input-section">
+                    <input className="main__input" type="text" name="message" id="" placeholder="Escribe un mensaje aquí" autocomplete="off"/>
+                </div>
             </section>
         </section>
     )
