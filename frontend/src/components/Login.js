@@ -1,14 +1,13 @@
 import logo from '../images/logo.png'
 import firebase from '../firebase'
 import { useState } from 'react'
+import { useHistory } from "react-router-dom";
 import axios from 'axios'
-import Main from './Main';
-// import firebase from './firebase'
 
-const Login = () => {
+const Login = (props) => {
     const [form, setForm] = useState();
     const [ active, setActive ] = useState()
-
+    let history = useHistory()
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -49,7 +48,9 @@ const Login = () => {
             user.updateProfile({displayName: form.username}).then(async () => {
                 try {
                     await axios.post('http://localhost:3001/users/register', user).then(res => {
-                        console.log("fua lo chiiste toma", res)
+                        console.log("fua lo chiiste toma", res.data);
+                        localStorage.setItem('userLogged', res.data);
+                        history.push("/");
                     })
                 } catch (error) {
                     console.log("error", error)

@@ -11,6 +11,7 @@ router.post('/register', async function (req, res) {
     const userData = req.body
     const newUser = await userController.createUser(userData)
     console.log("nuevo usuario creado", newUser)
+    res.send(newUser)
 })
 
 module.exports = router;

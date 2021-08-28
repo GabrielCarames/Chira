@@ -1,19 +1,24 @@
-
-// eslint-disable-next-line
 import Login from './components/Login'
-// eslint-disable-next-line
-import Header from './components/Header';
-// eslint-disable-next-line
 import Main from './components/Main';
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 const App = () => {
+  
+  const checkLogIn = () => {
+    const userLogged = localStorage.getItem('userLogged')
+    if(userLogged) return <Main />
+    else return <Login />
+  }
 
   return (
       <main>
-        <Login />
-        {/* <Header /> */}
-        {/* <Main /> */}
-        {/* {login ? <Main /> : <Login />} */}
+        <BrowserRouter>
+          <Switch>
+              <Route exact path="/" component={checkLogIn} />
+              <Route exact path="/login" component={Login} />
+              <Route path="*" component={checkLogIn} />
+          </Switch>
+        </BrowserRouter>
       </main>
   );
 }
