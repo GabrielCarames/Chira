@@ -13,7 +13,7 @@ app.set('port', process.env.PORT || 3001)
 app.use(cors());
 // Le decis a express para qe pueda entender archivos .JSON
 app.use(express.json()) // No se si es totalmente necesario ahora mismo, pero una vez tuve problemas con JSON y lo meto siempre ahora
-
+app.use(express.urlencoded()); // Es para metodos de POST y PUT, le decis al sv que pueda recibir elementos html algo asi
 // Especificas las rutas que tenes
 app.use('/users', require('./routes/users'))
 // && cd.. && cd frontend && npm start

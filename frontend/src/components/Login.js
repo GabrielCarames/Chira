@@ -44,20 +44,21 @@ const Login = () => {
     const onSubmitOTP = (e) => {
         e.preventDefault()
         const code = form.otp
-        window.confirmationResult.confirm(code).then(async (result) => {
-          const user = JSON.stringify(result.user)
-          console.log(user)
-            //CHE ESTO DEBERIA MANDAR LOS DATOS AL BACKEND Y RENDERIZAR MAIN.JS
-            try {
-                await axios.post('http://localhost:3001/users/register', user).then(res => {
-                    console.log("fua lo chiiste toma", res)
-                })
-                
-            } catch (error) {
-                
-            }
+        window.confirmationResult.confirm(code).then( (result) => {
+            const user = result.user
+            user.updateProfile({displayName: form.username}).then(async () => {
+                try {
+                    await axios.post('http://localhost:3001/users/register', user).then(res => {
+                        console.log("fua lo chiiste toma", res)
+                    })
+                } catch (error) {
+                    console.log("error", error)
+                }
+            }).catch((error) => {
+            console.log("error", error)
+            });
         }).catch((error) => {
-          console.log(error)
+            console.log("error", error)
         });
       }
 
@@ -76,8 +77,8 @@ const Login = () => {
             <form className="login__form form" onSubmit={active ? onSubmitOTP : onSignInSubmit }>
                 <section className="form_section">
                     <div className="form__name-section">
-                        <label className="form__label" htmlFor="name">Nombre</label>
-                        <input className="form__input" id="name" type="text" name="name" />
+                        <label className="form__label" htmlFor="username">Nombre</label>
+                        <input className="form__input" id="username" type="text" name="username" onChange={handleChange}/>
                     </div>
                     <div className="form__phone-section">
                         <label className="form__label" htmlFor="mobile">Número de celular</label>
@@ -94,10 +95,11 @@ const Login = () => {
                 <button type="submit" className={active ? "form__otp-button active" : "form__otp-button"}>
                     <p className="form__text-button">Registrarse</p>
                 </button>
+                <div id="sign-in-button"></div>
             </form>
 
-        <form onSubmit={onSignInSubmit}>
-            <div id="sign-in-button"></div>
+        {/* <form onSubmit={onSignInSubmit}>
+            
             <input type="number" name="mobile" onChange={handleChange}/>
             <button type="submit">submiteame</button>
         </form>
@@ -105,7 +107,7 @@ const Login = () => {
         <form onSubmit={onSubmitOTP}>
             <input type="number" name="otp"  onChange={handleChange}/>
             <button type="submit">submiteameotp</button>
-        </form>
+        </form> */}
         </section>
     )
 }
