@@ -426,6 +426,14 @@ body main {
 
 .main .main__left-section .main__contacts-container {
   border-left: 2px solid #000;
+  height: 1080px;
+  overflow: auto;
+}
+
+.main .main__left-section .main__contacts-container::-webkit-scrollbar-thumb {
+  background-color: #acacac;
+  border-radius: 50px;
+  height: 120px;
 }
 
 .main .main__left-section .main__contacts-container .main__contacts-list {
@@ -492,6 +500,98 @@ body main {
   width: 100%;
   height: 1px;
   border-color: #26313f;
+}
+
+.main .main__left-section .main__burger-menu {
+  position: absolute;
+  visibility: hidden;
+}
+
+.main .main__left-section .main__burger-menu.active {
+  visibility: visible;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 90px;
+  margin-left: 30px;
+  width: 360px;
+  height: 430px;
+  border-radius: 15px;
+}
+
+.main .main__left-section .main__burger-menu .burger__user-info {
+  height: 155px;
+  background-color: #172029;
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 15px 0 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main .main__left-section .main__burger-menu .burger__user-info .burger__user-avatar {
+  width: 62px;
+  height: auto;
+}
+
+.main .main__left-section .main__burger-menu .burger__user-info .burger__user-name {
+  line-height: 0;
+  margin-bottom: 10px;
+}
+
+.main .main__left-section .main__burger-menu .burger__user-info .burger__user-number {
+  line-height: 0;
+  color: #aaaaaa;
+}
+
+.main .main__left-section .main__burger-menu .burger__settings-section {
+  background-color: #26313f;
+}
+
+.main .main__left-section .main__burger-menu .burger__settings-section .burger__setting-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.main .main__left-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.main .main__left-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item .list-avatar {
+  font-size: 25px;
+  width: 30px;
+}
+
+.main .main__left-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item .list-title {
+  margin-left: 20px;
+  font-size: 13px;
+  line-height: 0;
 }
 
 .main .main__chat-section {

@@ -50,7 +50,13 @@
             }
         .main__contacts-container {
             border-left: 2px solid #000;
-            // overflow-y:scroll !important;
+            height: 1080px;
+            overflow: auto;
+            &::-webkit-scrollbar-thumb {
+                background-color: #acacac;
+                border-radius: 50px;
+                height: 120px;
+            }
             .main__contacts-list {
                 display: flex;
                 flex-direction: column;
@@ -70,7 +76,6 @@
                     &:hover {
                         background-color: $second-color;
                     }
-                    // justify-content: center;
                     .list__avatar {
                     }
                     .list__info {
@@ -98,18 +103,65 @@
                 }
             }
         }
-        // .list__time-container {
-        //     position: fixed;
-        //     width: 100%;
-        //     height: 100%;
-        //     text-align: right;
-        //     background-color: rgba(255, 0, 0, 0);
-        //     z-index: 1000;
-        //     display: grid;
-        //     grid-template-columns: 1fr;
-        //     grid-template-rows: repeat(8, 64px);
-        //     gap: 20px;
-        // }
+        .main__burger-menu {
+            position: absolute;
+            visibility: hidden;
+            &.active {
+                visibility: visible;
+                display: flex;
+                flex-direction: column;
+                margin-top: 90px;
+                margin-left: 30px;
+                width: 360px;
+                height: 430px;
+                border-radius: 15px;
+            }
+            .burger__user-info {
+                height: 155px;
+                background-color: $second-alpha-color;
+                padding: 20px;
+                box-sizing: border-box;
+                border-radius: 15px 0 0 0;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                .burger__user-avatar {
+                    width: 62px;
+                    height: auto;
+                }
+                .burger__user-name {
+                    line-height: 0;
+                    margin-bottom: 10px;
+                }
+                .burger__user-number {
+                    line-height: 0;
+                    color: $gray-color;
+                }
+            }
+            .burger__settings-section {
+                background-color: $second-color;
+                .burger__setting-list {
+                    display: flex;
+                    flex-direction: column;
+                    padding-left: 20px;
+                    list-style: none;
+                    .list__item {
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                        .list-avatar {
+                            font-size: 25px;
+                            width: 30px;
+                        }
+                        .list-title {
+                            margin-left: 20px;
+                            font-size: $h5;
+                            line-height: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
     .main__chat-section {
         display: flex;
