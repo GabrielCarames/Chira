@@ -1,13 +1,16 @@
-import logo from '../images/logo.png'
-import firebase from '../firebase'
 import { useState } from 'react'
 import { useHistory } from "react-router-dom";
+import firebase from '../firebase'
 import axios from 'axios'
+import Loader from "react-loader-spinner";
+import logo from '../images/logo.png'
 
-const Login = (props) => {
-    const [form, setForm] = useState();
+const Login = () => {
+    const [ form, setForm ] = useState();
     const [ active, setActive ] = useState()
+    const [ loading, setLoading ] = useState()
     let history = useHistory()
+
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -25,42 +28,50 @@ const Login = (props) => {
         });
       }
 
+    const firebaseSignIn = (phoneNumber, appVerifier) => {
+        firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier).then((confirmationResult) => {
+            window.confirmationResult = confirmationResult;
+            setTimeout(() => {
+                setActive(true)
+                setLoading(false)
+            }, 2000);
+        }).catch(error => console.log("Error: ", error));
+    }
+
     const onSignInSubmit = (e) => {
         e.preventDefault()
+        setLoading(true)
         configureCaptcha()
         const phoneNumber = "+54" + form.mobile;
         const appVerifier = window.recaptchaVerifier;
-        firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
-            .then((confirmationResult) => {
-                window.confirmationResult = confirmationResult;
-                console.log("codigoenviadoylisto")
-             setActive(true)
-            }).catch((error) => {
-                console.log(error)
-            });
+        firebaseSignIn(phoneNumber, appVerifier)
+    }
+
+    const registerUser = async (user) => {
+        try {
+            await axios.post('http://localhost:3001/users/register', user).then(res => {
+                setLoading(false);
+                localStorage.setItem('userLogged', res.data);
+                history.push("/");
+            })
+        } catch (error) {console.log("Error: ", error)}
+    }
+
+    const updateUserData = (user, newUsername) => {
+        user.updateProfile({displayName: newUsername}).then(() => {
+            registerUser(user)
+        }).catch(error => console.log("Error: ", error));
     }
 
     const onSubmitOTP = (e) => {
         e.preventDefault()
+        setLoading(true)
         const code = form.otp
+        const newUsername = form.username
         window.confirmationResult.confirm(code).then( (result) => {
             const user = result.user
-            user.updateProfile({displayName: form.username}).then(async () => {
-                try {
-                    await axios.post('http://localhost:3001/users/register', user).then(res => {
-                        console.log("fua lo chiiste toma", res.data);
-                        localStorage.setItem('userLogged', res.data);
-                        history.push("/");
-                    })
-                } catch (error) {
-                    console.log("error", error)
-                }
-            }).catch((error) => {
-            console.log("error", error)
-            });
-        }).catch((error) => {
-            console.log("error", error)
-        });
+            updateUserData(user, newUsername)
+        }).catch(error => console.log("Error: ", error));
       }
 
     return(
@@ -91,24 +102,17 @@ const Login = (props) => {
                     </div>
                 </section>
                 <button type="submit" className={active ? "form__button active" : "form__button"}>
-                    <p className="form__text-button">Enviar código de verificación</p>
+                    <p className="form__text-button">
+                        {loading ? <Loader type="Oval" color="#00BFFF" height={31} width={65} /> : "Enviar código de verificación"}
+                     </p>
                 </button>
                 <button type="submit" className={active ? "form__otp-button active" : "form__otp-button"}>
-                    <p className="form__text-button">Registrarse</p>
+                    <p className="form__text-button">
+                         {loading ? <Loader type="Oval" color="#00BFFF" height={31} width={65} /> : "Registrarse"}
+                        </p>
                 </button>
                 <div id="sign-in-button"></div>
             </form>
-
-        {/* <form onSubmit={onSignInSubmit}>
-            
-            <input type="number" name="mobile" onChange={handleChange}/>
-            <button type="submit">submiteame</button>
-        </form>
-
-        <form onSubmit={onSubmitOTP}>
-            <input type="number" name="otp"  onChange={handleChange}/>
-            <button type="submit">submiteameotp</button>
-        </form> */}
         </section>
     )
 }
