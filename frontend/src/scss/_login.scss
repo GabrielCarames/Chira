@@ -82,9 +82,78 @@
                 .form__label {
                     margin-left: 10px;
                 }
-                .form__input {
-                    @include input-styles
+                .form__phone-input {
+                    height: 40px;
+                    background-color: $gray-dark-color;
+                    .form__input {
+                        background-color: $gray-dark-color;
+                        color: $white-color;
+                        font-family: 'Poppins', sans-serif;
+                        font-size: 13px;
+                        border: 1px solid #AAAAAA;
+                        height: 40px;
+                        &:hover {
+                            border-color: $first-color;
+                            transition: .2s;
+                        }
+                        &:focus {
+                            border-color: $first-color;
+                        }
+                    }
+                    .form__dropdown-button {
+                        background-color: $gray-dark-color;
+                        border: 1px solid #AAAAAA;
+                        height: 40px;
+                        color: $white-color;
+                        &:hover {
+                            border-color: $first-color;
+                            transition: .2s;
+                        }
+                        &:focus {
+                            border-color: $first-color;
+                        }
+                        .selected-flag {
+                            background-color: $gray-dark-color;
+                            &:hover {
+                                background-color: $hover-color;
+                            }
+                        }
+                        .form__dropdown {
+                            background-color: $second-color;
+                            box-shadow: 0px 0px 5px 0px black;
+                            .highlight {
+                                background-color: $hover-color;
+                            }
+                            & > li {
+                                font-family: 'Poppins', sans-serif;
+                                font-size: 13px;
+                                &:hover {
+                                    background-color: $hover-color;
+                                }
+                            }
+                            .divider {
+                               border-bottom:1px solid $gray-color;
+                            }
+                            .form__dropdown-search {
+                                background-color: $second-color;
+                                
+                                &:hover {
+                                    background-color: #26313f;
+                                }
+                                .search-box {
+                                    font-family: 'Poppins', sans-serif;
+                                    font-size: 13px;
+                                    width: 90%;
+                                    color: $white-color;
+                                    background-color: $second-alpha-color;
+                                }
+                            }
+                        }
+                    }
                 }
+                // .form__input {
+                //     @include input-styles
+                // }
             }
             .form__otp-section {
                 visibility: hidden;

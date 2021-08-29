@@ -1,9 +1,10 @@
 import Login from './components/Login'
 import Main from './components/Main';
+import { useState } from 'react'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 const App = () => {
-  
+
   const checkLogIn = () => {
     const userLogged = localStorage.getItem('userLogged')
     if(userLogged) return <Main />
@@ -11,7 +12,8 @@ const App = () => {
   }
 
   return (
-      <main>
+    
+    <main>
         <BrowserRouter>
           <Switch>
               <Route exact path="/" component={checkLogIn} />

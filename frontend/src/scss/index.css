@@ -148,28 +148,92 @@ body main {
   margin-left: 10px;
 }
 
-.login .login__form .form_section .form__phone-section .form__input {
-  background-color: #212121;
-  color: white;
+.login .login__form .form_section .form__phone-section .form__phone-input {
   height: 40px;
-  width: 100%;
-  border: 1px solid #AAAAAA;
-  border-radius: 5px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
-  padding-left: 10px;
-  outline: none;
+  background-color: #212121;
 }
 
-.login .login__form .form_section .form__phone-section .form__input:hover {
+.login .login__form .form_section .form__phone-section .form__phone-input .form__input {
+  background-color: #212121;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  border: 1px solid #AAAAAA;
+  height: 40px;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__input:hover {
   border-color: #1975e0;
   -webkit-transition: .2s;
   transition: .2s;
 }
 
-.login .login__form .form_section .form__phone-section .form__input:focus {
+.login .login__form .form_section .form__phone-section .form__phone-input .form__input:focus {
   border-color: #1975e0;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button {
+  background-color: #212121;
+  border: 1px solid #AAAAAA;
+  height: 40px;
+  color: white;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button:hover {
+  border-color: #1975e0;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button:focus {
+  border-color: #1975e0;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .selected-flag {
+  background-color: #212121;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .selected-flag:hover {
+  background-color: #37465a;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown {
+  background-color: #26313f;
+  -webkit-box-shadow: 0px 0px 5px 0px black;
+          box-shadow: 0px 0px 5px 0px black;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown .highlight {
+  background-color: #37465a;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown > li {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown > li:hover {
+  background-color: #37465a;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown .divider {
+  border-bottom: 1px solid #aaaaaa;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown .form__dropdown-search {
+  background-color: #26313f;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown .form__dropdown-search:hover {
+  background-color: #26313f;
+}
+
+.login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown .form__dropdown-search .search-box {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  width: 90%;
+  color: white;
+  background-color: #172029;
 }
 
 .login .login__form .form_section .form__otp-section {
