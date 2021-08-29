@@ -1,13 +1,21 @@
 
+import { useState } from 'react'
+import { useLoginHelper } from '../hooks/useLoginHelper'
 import Loader from "react-loader-spinner";
 import logo from '../images/logo.png'
-import { useLoginHelper } from '../hooks/useLoginHelper'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
 const Login = () => {
-    const { form, active, handleChange, loading, onSignInSubmit, onSubmitOTP } = useLoginHelper();
-    
+    const { active, handleChange, loading, onSignInSubmit, onSubmitOTP } = useLoginHelper();
+    const [ phoneNumberInput, setPhoneNumberInput ] = useState()
+
+    const handlePhoneInput = (value, data) => {
+        const phoneNumber = value.slice(data.dialCode.length)
+        const dialCode = data.dialCode
+        setPhoneNumberInput([phoneNumber, dialCode])
+    }
+
     return(
         <section className="login"> 
             <figure className="login__welcome welcome">
@@ -20,7 +28,7 @@ const Login = () => {
                     </div>
                 </figcaption>
             </figure>
-            <form className="login__form form" onSubmit={(e) => {active ? onSubmitOTP(e) : onSignInSubmit(e)}}>
+            <form className="login__form form" onSubmit={(e) => {active ? onSubmitOTP(e, phoneNumberInput) : onSignInSubmit(e, phoneNumberInput)}}>
                 <section className="form_section">
                     <div className="form__name-section">
                         <label className="form__label" htmlFor="username">Nombre</label>
@@ -28,8 +36,7 @@ const Login = () => {
                     </div>
                     <div className="form__phone-section">
                         <label className="form__label" htmlFor="mobile">Número de celular</label>
-                        <PhoneInput containerClass="form__phone-input" inputClass="form__input" buttonClass="form__dropdown-button" dropdownClass="form__dropdown" searchClass="form__dropdown-search" country={'ar'} preferredCountries={['es','us','mx']} enableSearch="true" disableSearchIcon="false"/>
-                        {/* <input className="form__input" id="mobile" type="tel" name="mobile"  onChange={handleChange} /> */}
+                        <PhoneInput containerClass="form__phone-input" id="mobile" name="mobile" copyNumbersOnly="false" onChange={(value, data) => handlePhoneInput(value, data)} inputClass="form__input" buttonClass="form__dropdown-button" dropdownClass="form__dropdown" searchClass="form__dropdown-search" searchPlaceholder="Buscar número" searchNotFound="No se encontró un prefijo" country={'ar'} preferredCountries={['es','us','mx']} enableSearch="true" disableSearchIcon="false"/>
                     </div>
                     <div className={active ? "form__otp-section active" : "form__otp-section"}>
                         <label className="form__label" htmlFor="otp">Código de verificación</label>

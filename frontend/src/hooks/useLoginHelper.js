@@ -11,7 +11,6 @@ export function useLoginHelper() {
     let history = useHistory()
 
     const handleChange = (e) => {
-        console.log("holas")
         setForm({
             ...form,
             [e.target.name]: e.target.value
@@ -36,19 +35,18 @@ export function useLoginHelper() {
                 setActive(true)
                 setLoading(false)
             }, 2000);
-        }).catch(error => console.log("Error1: ", phoneNumber, appVerifier ,error));
+        }).catch(error => console.log("Error: ", error));
     }
 
-    const onSignInSubmit = (e) => {
-        
-        console.log("dalelocol", form)
-
+    const onSignInSubmit = (e, phoneNumberInput) => {
+        const phoneNumber = phoneNumberInput[0]
+        const dialCode = "+" + phoneNumberInput[1]
         e.preventDefault()
         setLoading(true)
         configureCaptcha()
-        const phoneNumber = "+54" + form.mobile;
+        const completePhoneNumber = dialCode + phoneNumber;
         const appVerifier = window.recaptchaVerifier;
-        firebaseSignIn(phoneNumber, appVerifier)
+        firebaseSignIn(completePhoneNumber, appVerifier)
     }
 
     const registerUser = async (user) => {
@@ -58,13 +56,13 @@ export function useLoginHelper() {
                 localStorage.setItem('userLogged', res.data);
                 history.push("/");
             })
-        } catch (error) {console.log("Error2: ", error)}
+        } catch (error) {console.log("Error: ", error)}
     }
 
     const updateUserData = (user, newUsername) => {
         user.updateProfile({displayName: newUsername}).then(() => {
             registerUser(user)
-        }).catch(error => console.log("Error3: ", error));
+        }).catch(error => console.log("Error: ", error));
     }
 
     const onSubmitOTP = (e) => {
@@ -75,11 +73,10 @@ export function useLoginHelper() {
         window.confirmationResult.confirm(code).then( (result) => {
             const user = result.user
             updateUserData(user, newUsername)
-        }).catch(error => console.log("Error4: ", error));
+        }).catch(error => console.log("Error: ", error));
       }
 
       return {
-          form,
           active,
           loading, 
           handleChange,

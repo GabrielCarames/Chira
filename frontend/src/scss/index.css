@@ -10,7 +10,7 @@ html*, html *::before, html *::after {
 
 body {
   background-color: #172029;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   margin: 0;
   overflow-y: hidden;
 }
@@ -117,7 +117,7 @@ body main {
   border-radius: 5px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   padding-left: 10px;
   outline: none;
 }
@@ -151,15 +151,17 @@ body main {
 .login .login__form .form_section .form__phone-section .form__phone-input {
   height: 40px;
   background-color: #212121;
+  width: 100%;
 }
 
 .login .login__form .form_section .form__phone-section .form__phone-input .form__input {
   background-color: #212121;
   color: white;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
   border: 1px solid #AAAAAA;
   height: 40px;
+  width: 100%;
 }
 
 .login .login__form .form_section .form__phone-section .form__phone-input .form__input:hover {
@@ -201,6 +203,7 @@ body main {
   background-color: #26313f;
   -webkit-box-shadow: 0px 0px 5px 0px black;
           box-shadow: 0px 0px 5px 0px black;
+  width: calc(100% + 68vw);
 }
 
 .login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown .highlight {
@@ -208,7 +211,7 @@ body main {
 }
 
 .login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown > li {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
 }
 
@@ -229,7 +232,7 @@ body main {
 }
 
 .login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown .form__dropdown-search .search-box {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
   width: 90%;
   color: white;
@@ -268,7 +271,7 @@ body main {
   border-radius: 5px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   padding-left: 10px;
   outline: none;
 }
@@ -312,7 +315,7 @@ body main {
 
 .login .login__form .form__button .form__text-button, .login .login__form .form__otp-button .form__text-button {
   color: white;
-  font-family: Poppins;
+  font-family: "Poppins", sans-serif;
   font-size: 13px;
   font-style: normal;
   font-weight: 700;
@@ -332,6 +335,12 @@ body main {
 .login .login__form .form__otp-button.active {
   visibility: visible;
   position: inherit;
+}
+
+@media screen and (min-width: 410px) {
+  .login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown {
+    width: 310px;
+  }
 }
 
 .main {
