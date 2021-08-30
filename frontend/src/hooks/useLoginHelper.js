@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { useHistory } from "react-router-dom";
 import firebase from '../firebase'
 import axios from 'axios'
+import FlashContext from '../contexts/FlashContext'
 
 export function useLoginHelper() {
     const [ active, setActive ] = useState()
     const [ loading, setLoading ] = useState()
     const [ form, setForm ] = useState()
-
+    const { setFlashMessage } = useContext(FlashContext)
     let history = useHistory()
 
     const handleChange = (e) => {
@@ -28,14 +29,13 @@ export function useLoginHelper() {
       }
 
     const firebaseSignIn = (phoneNumber, appVerifier) => {
-        console.log(phoneNumber, appVerifier)
         firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier).then((confirmationResult) => {
             window.confirmationResult = confirmationResult;
             setTimeout(() => {
                 setActive(true)
                 setLoading(false)
             }, 2000);
-        }).catch(error => console.log("Error: ", error));
+        }).catch(error => setFlashMessage({type: 'failure', error: error}));
     }
 
     const onSignInSubmit = (e, phoneNumberInput) => {
@@ -56,13 +56,15 @@ export function useLoginHelper() {
                 localStorage.setItem('userLogged', res.data);
                 history.push("/");
             })
-        } catch (error) {console.log("Error: ", error)}
+        } catch (error) {
+            setFlashMessage({type: 'failure', error: error})
+        }
     }
 
     const updateUserData = (user, newUsername) => {
         user.updateProfile({displayName: newUsername}).then(() => {
             registerUser(user)
-        }).catch(error => console.log("Error: ", error));
+        }).catch(error => setFlashMessage({type: 'failure', error: error}));
     }
 
     const onSubmitOTP = (e) => {
@@ -73,7 +75,7 @@ export function useLoginHelper() {
         window.confirmationResult.confirm(code).then( (result) => {
             const user = result.user
             updateUserData(user, newUsername)
-        }).catch(error => console.log("Error: ", error));
+        }).catch(error => setFlashMessage({type: 'failure', error: error}));
       }
 
       return {

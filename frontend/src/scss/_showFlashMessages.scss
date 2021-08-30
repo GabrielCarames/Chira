@@ -1,0 +1,22 @@
+.flash-message {
+    background-color: $first-color;
+    color: $white-color;
+    height: 80px;
+    width: 100%;
+    position: absolute;
+    z-index: 3000;
+    .flash-message__content {
+        display: grid;
+        grid-template-columns: 1200px 50px;
+        gap: 600px;
+        align-items: center;
+        .flash-message__message {
+            justify-self: right;
+        }
+        .fa-times {
+            justify-self: right;
+            font-size: $h2;
+            cursor: pointer;
+        }
+    }
+}

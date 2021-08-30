@@ -33,7 +33,6 @@ body main {
   position: fixed;
   height: 100%;
   width: 100%;
-  overflow-y: scroll;
 }
 
 .login .login__welcome {
@@ -800,5 +799,37 @@ body main {
   .main .main__chat-section {
     width: 1200px;
   }
+}
+
+.flash-message {
+  background-color: #1975e0;
+  color: white;
+  height: 80px;
+  width: 100%;
+  position: absolute;
+  z-index: 3000;
+}
+
+.flash-message .flash-message__content {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1200px 50px;
+      grid-template-columns: 1200px 50px;
+  gap: 600px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.flash-message .flash-message__content .flash-message__message {
+  -ms-grid-column-align: right;
+      justify-self: right;
+}
+
+.flash-message .flash-message__content .fa-times {
+  -ms-grid-column-align: right;
+      justify-self: right;
+  font-size: 24px;
+  cursor: pointer;
 }
 /*# sourceMappingURL=index.css.map */
