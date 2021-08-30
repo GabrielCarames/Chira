@@ -12,7 +12,7 @@ body {
   background-color: #172029;
   font-family: "Poppins", sans-serif;
   margin: 0;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 body main {
@@ -286,9 +286,9 @@ body main {
 }
 
 .login .login__form .form__button, .login .login__form .form__otp-button {
-  margin-top: 20px;
+  margin-top: 30px;
   height: 100%;
-  width: 130px;
+  width: 250px;
   border-radius: 15px;
   background-color: #1975e0;
   border-width: 0;
@@ -306,9 +306,12 @@ body main {
       -ms-flex-align: center;
           align-items: center;
   cursor: pointer;
+  padding: 5px;
 }
 
 .login .login__form .form__button:hover, .login .login__form .form__otp-button:hover {
+  -webkit-transition: .25s;
+  transition: .25s;
   opacity: .5;
 }
 
@@ -326,14 +329,24 @@ body main {
   position: absolute;
 }
 
+.login .login__form .form__button.loading {
+  pointer-events: none;
+}
+
 .login .login__form .form__otp-button {
   visibility: hidden;
   position: absolute;
+  height: 60px;
+  width: 200px;
 }
 
 .login .login__form .form__otp-button.active {
   visibility: visible;
   position: inherit;
+}
+
+.login .login__form .form__otp-button.loading {
+  pointer-events: none;
 }
 
 @media screen and (min-width: 410px) {

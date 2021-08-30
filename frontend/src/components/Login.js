@@ -43,14 +43,12 @@ const Login = () => {
                         <input className="form__input" id="otp" type="tel" name="otp" onChange={handleChange}/>
                     </div>
                 </section>
-                <button type="submit" className={active ? "form__button active" : "form__button"}>
-                    <p className="form__text-button">
-                        {loading ? <Loader type="Oval" color="#00BFFF" height={31} width={65} /> : "Enviar código de verificación"}
-                     </p>
+                <button type="submit" className={active ? "form__button active" : loading ? "form__button loading" : "form__button"}>
+                        {loading ? <Loader type="Oval" color="#00BFFF" height={40} width={65} /> : <p className="form__text-button">Enviar código de verificación</p>}
                 </button>
-                <button type="submit" className={active ? "form__otp-button active" : "form__otp-button"}>
+                <button type="submit" className={active ? loading ? "form__otp-button active loading" :"form__otp-button active" : "form__otp-button"}>
                     <p className="form__text-button">
-                         {loading ? <Loader type="Oval" color="#00BFFF" height={31} width={65} /> : "Registrarse"}
+                         {loading ? <Loader type="Oval" color="#00BFFF" height={40} width={65} /> : "Registrarse"}
                         </p>
                 </button>
                 <div id="sign-in-button"></div>

@@ -34,7 +34,7 @@ body {
     background-color: $second-alpha-color;
     font-family: $poppins;
     margin: 0;
-    overflow-y: hidden;
+    overflow-y: auto;
     main {
         overflow-x: clip;
     }

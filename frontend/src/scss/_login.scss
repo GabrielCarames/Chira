@@ -173,9 +173,9 @@
             }
         }
         .form__button, .form__otp-button{
-            margin-top: 20px;
+            margin-top: 30px;
             height: 100%;
-            width: 130px;
+            width: 250px;
             border-radius: 15px;
             background-color: $first-color;
             border-width: 0;
@@ -184,9 +184,12 @@
             justify-content:center;
             align-items: center;
             cursor: pointer;
+            padding: 5px;
             &:hover {
+                transition: .25s;
                 opacity: .5;
             }
+            
             .form__text-button {
                 color: $white-color;
                 font-family: $poppins;
@@ -201,13 +204,21 @@
                 visibility: hidden;
                 position: absolute;
             }
+            &.loading {
+                pointer-events: none;
+            }
         }
         .form__otp-button {
             visibility: hidden;
             position: absolute;
+            height: 60px;
+            width: 200px;
             &.active {
                 visibility: visible;
                 position: inherit;
+            }
+            &.loading {
+                pointer-events: none;
             }
         }
     }
