@@ -35,7 +35,10 @@ export function useLoginHelper() {
                 setActive(true)
                 setLoading(false)
             }, 2000);
-        }).catch(error => setFlashMessage({type: 'failure', error: error}));
+        }).catch(error => {
+            if(error.response) setFlashMessage({type: 'failure', error: error.response.data});
+            else setFlashMessage({type: 'failure', error: error})
+        })
     }
 
     const onSignInSubmit = (e, phoneNumberInput) => {
@@ -57,14 +60,18 @@ export function useLoginHelper() {
                 history.push("/");
             })
         } catch (error) {
-            setFlashMessage({type: 'failure', error: error})
+            if(error.response) setFlashMessage({type: 'failure', error: error.response.data})
+            else setFlashMessage({type: 'failure', error: error})
         }
     }
 
     const updateUserData = (user, newUsername) => {
         user.updateProfile({displayName: newUsername}).then(() => {
             registerUser(user)
-        }).catch(error => setFlashMessage({type: 'failure', error: error}));
+        }).catch(error => {
+            if(error.response) setFlashMessage({type: 'failure', error: error.response.data});
+            else setFlashMessage({type: 'failure', error: error})
+        })
     }
 
     const onSubmitOTP = (e) => {
@@ -75,7 +82,10 @@ export function useLoginHelper() {
         window.confirmationResult.confirm(code).then( (result) => {
             const user = result.user
             updateUserData(user, newUsername)
-        }).catch(error => setFlashMessage({type: 'failure', error: error}));
+        }).catch(error => {
+            if(error.response) setFlashMessage({type: 'failure', error: error.response.data});
+            else setFlashMessage({type: 'failure', error: error})
+        })
       }
 
       return {

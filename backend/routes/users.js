@@ -9,9 +9,14 @@ router.get('/', async function (req, res) {
 
 router.post('/register', async function (req, res) {
     const userData = req.body
-    const newUser = await userController.createUser(userData)
-    console.log("nuevo usuario creado", newUser)
-    res.send(newUser)
+    const registeredUser = await userController.findUserByPhoneNumber(userData)
+    if(registeredUser) {
+        res.status(401).send("Ya existe un usuario con ese número de teléfono")
+    } else {
+        const newUser = await userController.createUser(userData)
+        console.log("nuevo usuario creado", newUser)
+        res.send(newUser)
+    }
 })
 
 module.exports = router;

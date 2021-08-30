@@ -6,15 +6,15 @@
     position: absolute;
     z-index: 3000;
     .flash-message__content {
-        display: grid;
-        grid-template-columns: 1200px 50px;
-        gap: 600px;
-        align-items: center;
         .flash-message__message {
-            justify-self: right;
+            text-align:center;
         }
         .fa-times {
-            justify-self: right;
+            position: fixed;
+            right: 0;
+            top: 0;
+            margin-top: 30px;
+            margin-right: 30px;
             font-size: $h2;
             cursor: pointer;
         }

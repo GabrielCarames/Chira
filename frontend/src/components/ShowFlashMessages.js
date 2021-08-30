@@ -17,7 +17,7 @@ const ShowFlashMessages = props => {
   // },[])
 
   useEffect(() => {
-    flashMessage && console.log("soymama", flashMessage, "sommmmm", flashMessage.error.message)
+    flashMessage && console.log("soymama", flashMessage, "sommmmm", flashMessage.error)
   }, [flashMessage])
 
   // useEffect(() => {
@@ -31,7 +31,7 @@ const ShowFlashMessages = props => {
     visible && 
       <section className="flash-message">
         <div className="flash-message__content">
-          <h2 className="flash-message__message">Se ha producido un error:&nbsp; {flashMessage.error.message}</h2>
+          <h2 className="flash-message__message">Se ha producido un error:&nbsp; {flashMessage.error.message ? flashMessage.error.message : flashMessage.error}</h2>
           <i className="fas fa-times" onClick={() => setVisible(false)}></i>
         </div>
       </section>

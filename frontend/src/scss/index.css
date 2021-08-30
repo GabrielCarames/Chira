@@ -810,25 +810,16 @@ body main {
   z-index: 3000;
 }
 
-.flash-message .flash-message__content {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 1200px 50px;
-      grid-template-columns: 1200px 50px;
-  gap: 600px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
 .flash-message .flash-message__content .flash-message__message {
-  -ms-grid-column-align: right;
-      justify-self: right;
+  text-align: center;
 }
 
 .flash-message .flash-message__content .fa-times {
-  -ms-grid-column-align: right;
-      justify-self: right;
+  position: fixed;
+  right: 0;
+  top: 0;
+  margin-top: 30px;
+  margin-right: 30px;
   font-size: 24px;
   cursor: pointer;
 }
