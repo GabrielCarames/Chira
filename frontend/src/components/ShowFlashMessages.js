@@ -4,7 +4,7 @@ import FlashContext from "../contexts/FlashContext";
 const ShowFlashMessages = props => {
   const [visible, setVisible] = useState(true);
   // const [FlashMessage, setFlashMessage] = useState();
-  const { flashMessage, setFlashMessage } = useContext(FlashContext)
+  const { flashMessage } = useContext(FlashContext)
   //aca podrida usar el useref para no renderizarlo la primera vez trucazo
   // useEffect(() => {
   //   async function axiosData() { // la funcion esta no seq ue iondda, me la pedia react para no generar warnings amarillos
@@ -17,8 +17,12 @@ const ShowFlashMessages = props => {
   // },[])
 
   useEffect(() => {
-    flashMessage && console.log("soymama", flashMessage, "sommmmm", flashMessage.error)
+    flashMessage && console.log("Error mensaje: ", flashMessage.error)
   }, [flashMessage])
+
+  useEffect(() => {
+    !visible && window.location.reload()
+  }, [visible])
 
   // useEffect(() => {
   //   setTimeout(async () => {

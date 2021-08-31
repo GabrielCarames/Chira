@@ -7,15 +7,15 @@ import FlashContext from './contexts/FlashContext';
 
 const App = () => {
   const [ flashMessage, setFlashMessage ] = useState(false)
+  const [ userLoggedMain, setUserLoggedMain ] = useState(true)
 
   const checkLogIn = () => {
     const userLogged = localStorage.getItem('userLogged')
-    if(userLogged) return <Main />
+    if(userLogged) return <Main props={{"userLoggedMain": userLoggedMain, setUserLoggedMain}}/>
     else return <Login />
   }
 
   return (
-    
     <main>
       <FlashContext.Provider value={{flashMessage, setFlashMessage}}>
         <ShowFlashMessages delay={3000}/>

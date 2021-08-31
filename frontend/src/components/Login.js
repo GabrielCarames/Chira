@@ -7,7 +7,7 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
 const Login = () => {
-    const { active, handleChange, loading, onSignInSubmit, onSubmitOTP } = useLoginHelper();
+    const { active, handleChange, loading, verifier } = useLoginHelper();
     const [ phoneNumberInput, setPhoneNumberInput ] = useState()
 
     const handlePhoneInput = (value, data) => {
@@ -28,15 +28,15 @@ const Login = () => {
                     </div>
                 </figcaption>
             </figure>
-            <form className="login__form form" onSubmit={(e) => {active ? onSubmitOTP(e, phoneNumberInput) : onSignInSubmit(e, phoneNumberInput)}}>
+            <form className="login__form form" onSubmit={(e) => {verifier(e, phoneNumberInput)}}>
                 <section className="form_section">
                     <div className="form__name-section">
                         <label className="form__label" htmlFor="username">Nombre</label>
-                        <input className="form__input" id="username" type="text" name="username" onChange={handleChange}  minLength="6" maxLength="18" pattern="[A-Za-z0-9]+" />
+                        <input className="form__input" id="username" type="text" name="username" onChange={handleChange}  minLength="0" maxLength="18" pattern="[A-Za-z0-9]+" required/>
                     </div>
                     <div className="form__phone-section">
                         <label className="form__label" htmlFor="mobile">Número de celular</label>
-                        <PhoneInput containerClass="form__phone-input" id="mobile" name="mobile" copyNumbersOnly="false" onChange={(value, data) => handlePhoneInput(value, data)} inputClass="form__input" buttonClass="form__dropdown-button" dropdownClass="form__dropdown" searchClass="form__dropdown-search" searchPlaceholder="Buscar número" searchNotFound="No se encontró un prefijo" country={'ar'} preferredCountries={['es','us','mx']} enableSearch="true" disableSearchIcon="false"/>
+                        <PhoneInput containerClass="form__phone-input" id="mobile" name="mobile" copyNumbersOnly="false" onChange={(value, data) => handlePhoneInput(value, data)} inputClass="form__input" buttonClass="form__dropdown-button" dropdownClass="form__dropdown" searchClass="form__dropdown-search" searchPlaceholder="Buscar número" searchNotFound="No se encontró un prefijo" country={'ar'} preferredCountries={['es','us','mx']} enableSearch="true" disableSearchIcon="false" />
                     </div>
                     <div className={active ? "form__otp-section active" : "form__otp-section"}>
                         <label className="form__label" htmlFor="otp">Código de verificación</label>

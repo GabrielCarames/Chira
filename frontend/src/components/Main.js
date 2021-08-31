@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import avatar from '../images/avatar.png'
 
-const Main = () => {
+const Main = (props) => {
     const [ active, setActive ] = useState()
 
     return(
@@ -165,7 +165,7 @@ const Main = () => {
                                 <i className="list-avatar fas fa-cog"></i>
                                 <h6 className="list-title">Configuración</h6>
                             </li>
-                            <li className="list__item" onClick={() => localStorage.removeItem('userLogged')}>
+                            <li className="list__item" onClick={() => {localStorage.removeItem('userLogged'); props.props.setUserLoggedMain(false)}}>
                                 <i className="list-avatar fas fa-sign-out-alt"></i>
                                 <h6 className="list-title">Salir</h6>
                             </li>

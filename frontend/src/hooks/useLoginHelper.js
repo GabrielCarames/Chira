@@ -41,6 +41,17 @@ export function useLoginHelper() {
         })
     }
 
+    const verifier = (e, phoneNumberInput) => {
+        if(!phoneNumberInput){
+            const error = new Error('Ingrese un número de celular')
+            setFlashMessage({type: 'failure', error: error})
+        } else {
+            if(active) {
+                onSubmitOTP(e, phoneNumberInput)
+            } else onSignInSubmit(e, phoneNumberInput)
+        }
+    }
+
     const onSignInSubmit = (e, phoneNumberInput) => {
         const phoneNumber = phoneNumberInput[0]
         const dialCode = "+" + phoneNumberInput[1]
@@ -92,8 +103,7 @@ export function useLoginHelper() {
           active,
           loading, 
           handleChange,
-          onSignInSubmit,
-          onSubmitOTP
+          verifier
       }
 }
 
