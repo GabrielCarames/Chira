@@ -1,0 +1,90 @@
+.main__chat-section {
+    display: flex;
+    flex-direction: column;
+    border-right: 2px solid #000;
+    .main__chat-navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: $second-color;
+        height: 90px;
+        width: 100%;
+        border-left: 2px solid #000;
+        cursor: pointer;
+        .navbar__contact {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 300px;
+            height: 100%;
+            .navbar__avatar {
+                width: 66px;
+                height: 66px;
+            }
+            .navbar__info {
+                display: flex;
+                flex-direction: column;
+                line-height: 0;
+                text-align: start;
+                margin-right: 40px;
+                .navbar__username {
+
+                }
+                .navbar__timeago {
+                    font-size: $h5;
+                    color: $gray-color;
+                }
+            }
+        }
+        .navbar__tools {
+            display: flex;
+            justify-content: right;
+            width: 200px;
+            margin-right: 10px;
+            font-size: 21px;
+            .navbar__search {
+                @include icons-div-styles;
+                &:hover {
+                    background-color: $hover-color;
+                }
+            }
+            .navbar__settings {
+                @include icons-div-styles;
+                &:hover {
+                    background-color: $hover-color;
+                }
+            }
+        }
+    }
+    .main__messages-section {
+        height: 81vh;
+        width: 100%;
+        background: rgba(90, 141, 141, 0.75);
+        box-shadow: inset 226px 260px 250px rgba(0, 0, 0, 0.25);
+    }
+    .main__input-section {
+        background-color: $second-alpha-color;
+        height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .main__input {
+            color: $gray-color;
+            background-color: $second-color;
+            border: none;
+            border-radius: 30px;
+            padding-left: 20px;
+            height: 45px;
+            width: 90%;
+            font-size: $h5;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+        }
+    }
+}
+
+@media screen and (min-width: 1201px) {
+    .main__chat-section {
+        width: 1200px;    
+    }
+}

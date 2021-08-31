@@ -20,3 +20,27 @@
         }
     }
 }
+
+@media screen and (min-width: 320px) and (max-width: 720px) {
+    .flash-message {
+        height: 100px;
+        .flash-message__content {
+            font-size: $h6;
+            display: flex;
+        flex-direction: column;
+            .flash-message__message {
+                text-align:center;
+            }
+            .fa-times {
+                text-align: center;
+                position: inherit;
+                right: inherit;
+                top: inherit;
+                margin-top: inherit;
+                margin-right: inherit;
+                font-size: $h4;
+                
+            }
+        }
+    }
+}

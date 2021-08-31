@@ -12,7 +12,7 @@ body {
   background-color: #172029;
   font-family: "Poppins", sans-serif;
   margin: 0;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 body main {
@@ -369,7 +369,282 @@ body main {
           flex-direction: column;
 }
 
-.main .main__left-section .main__navbar {
+@media screen and (min-width: 1201px) {
+  .main {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .main .main__left-section {
+    width: 480px;
+  }
+  .main .main__left-section .main__navbar-section {
+    height: 90px;
+  }
+  .main .main__left-section .main__navbar-section .main__navbar {
+    height: 90px;
+  }
+  .main .main__chat-section {
+    width: 1200px;
+  }
+}
+
+.main__content-section {
+  width: 480px;
+  height: 100%;
+  border-left: 2px solid black;
+}
+
+.main__content-section .main__contacts {
+  height: 1080px;
+  overflow: auto;
+}
+
+.main__content-section .main__contacts::-webkit-scrollbar-thumb {
+  background-color: #acacac;
+  border-radius: 50px;
+  height: 120px;
+}
+
+.main__content-section .main__contacts .main__contacts-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 40px 270px 90px;
+      grid-template-columns: 40px 270px 90px;
+  -ms-grid-rows: 80px;
+      grid-template-rows: 80px;
+  gap: 18px;
+  padding-left: 8px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 5px;
+  cursor: pointer;
+  border-bottom: 2px solid #26313f;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item:hover {
+  background-color: #26313f;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item .list__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__username {
+  line-height: 0;
+  font-size: 13px;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__messages {
+  line-height: 0;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
+  position: fixed;
+  right: 0;
+  margin-right: 20px;
+  z-index: 1000;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__divisor {
+  width: 100%;
+  height: 1px;
+  border-color: #26313f;
+}
+
+.main__content-section .main__add-friends {
+  width: 100%;
+}
+
+.main__content-section .main__add-friend-button {
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 390px;
+  margin-bottom: 20px;
+  bottom: 0;
+  width: 65px;
+  height: 65px;
+  background-color: #1975e0;
+  border-radius: 300px;
+  z-index: 1000;
+  cursor: pointer;
+}
+
+.main__content-section .main__add-friend-button:hover {
+  -webkit-transition: .25s;
+  transition: .25s;
+  background-color: #5297e8;
+}
+
+.main__content-section .main__add-friend-button .fa-user-plus {
+  font-size: 24px;
+}
+
+.main__content-section .main__burger-menu {
+  position: absolute;
+  visibility: hidden;
+}
+
+.main__content-section .main__burger-menu.active {
+  visibility: visible;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 90px;
+  margin-left: 30px;
+  width: 360px;
+  height: 430px;
+  border-radius: 15px;
+}
+
+.main__content-section .main__burger-menu .burger__user-info {
+  height: 155px;
+  background-color: #172029;
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 15px 0 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main__content-section .main__burger-menu .burger__user-info .burger__user-avatar {
+  width: 62px;
+  height: auto;
+}
+
+.main__content-section .main__burger-menu .burger__user-info .burger__user-name {
+  line-height: 0;
+  margin-bottom: 10px;
+}
+
+.main__content-section .main__burger-menu .burger__user-info .burger__user-number {
+  line-height: 0;
+  color: #aaaaaa;
+}
+
+.main__content-section .main__burger-menu .burger__settings-section {
+  background-color: #26313f;
+}
+
+.main__content-section .main__burger-menu .burger__settings-section .burger__setting-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.main__content-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.main__content-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item .list-avatar {
+  font-size: 25px;
+  width: 30px;
+}
+
+.main__content-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item .list-title {
+  margin-left: 20px;
+  font-size: 13px;
+  line-height: 0;
+}
+
+@media screen and (min-width: 481px) and (max-width: 1200px) {
+  .main .main__left-section .main__content-section .main__contacts .main__contacts-list .list__item {
+    -ms-grid-columns: 50px 320px 92px;
+        grid-template-columns: 50px 320px 92px;
+    gap: 18px;
+  }
+  .main .main__left-section .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
+    position: fixed;
+    right: 0;
+    margin-right: 20px;
+  }
+}
+
+@media screen and (min-width: 1201px) {
+  .main .main__content-section .main__contacts .main__contacts-list .list__item {
+    -ms-grid-columns: 58px 320px 92px;
+        grid-template-columns: 58px 320px 92px;
+    gap: 14px;
+    padding-left: 8px;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin-top: 5px;
+  }
+  .main .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
+    position: inherit;
+  }
+}
+
+.main__navbar-section {
+  height: 60px;
+}
+
+.main__navbar-section .main__navbar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -379,17 +654,16 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  height: 60px;
   margin: 0;
   background-color: #26313f;
   border-left: 2px solid #000;
 }
 
-.main .main__left-section .main__navbar .fas {
+.main__navbar-section .main__navbar .fas {
   font-size: 20px;
 }
 
-.main .main__left-section .main__navbar .main__settings {
+.main__navbar-section .main__navbar .main__settings {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -409,11 +683,11 @@ body main {
   margin-left: 15px;
 }
 
-.main .main__left-section .main__navbar .main__settings:hover {
+.main__navbar-section .main__navbar .main__settings:hover {
   background-color: #37465a;
 }
 
-.main .main__left-section .main__navbar .main__search {
+.main__navbar-section .main__navbar .main__search {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -432,181 +706,33 @@ body main {
   transition: .2s;
 }
 
-.main .main__left-section .main__navbar .main__search:hover {
+.main__navbar-section .main__navbar .main__search:hover {
   background-color: #37465a;
 }
 
-.main .main__left-section .main__contacts-container {
-  border-left: 2px solid #000;
-  height: 1080px;
-  overflow: auto;
+@media screen and (min-width: 481px) and (max-width: 1200px) {
+  .main .main__left-section .main__content-section .main__contacts .main__contacts-list .list__item {
+    -ms-grid-columns: 50px 320px 92px;
+        grid-template-columns: 50px 320px 92px;
+    gap: 18px;
+  }
+  .main .main__left-section .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
+    position: fixed;
+    right: 0;
+    margin-right: 20px;
+  }
 }
 
-.main .main__left-section .main__contacts-container::-webkit-scrollbar-thumb {
-  background-color: #acacac;
-  border-radius: 50px;
-  height: 120px;
+@media screen and (min-width: 1201px) {
+  .main .main__left-section .main__navbar-section {
+    height: 90px;
+  }
+  .main .main__left-section .main__navbar-section .main__navbar {
+    height: 90px;
+  }
 }
 
-.main .main__left-section .main__contacts-container .main__contacts-list {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-}
-
-.main .main__left-section .main__contacts-container .main__contacts-list .list__item {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 40px 270px 90px;
-      grid-template-columns: 40px 270px 90px;
-  -ms-grid-rows: 80px;
-      grid-template-rows: 80px;
-  gap: 18px;
-  padding-left: 8px;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-top: 5px;
-  cursor: pointer;
-  border-bottom: 2px solid #26313f;
-}
-
-.main .main__left-section .main__contacts-container .main__contacts-list .list__item:hover {
-  background-color: #26313f;
-}
-
-.main .main__left-section .main__contacts-container .main__contacts-list .list__item .list__info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.main .main__left-section .main__contacts-container .main__contacts-list .list__item .list__info .list__username {
-  line-height: 0;
-  font-size: 13px;
-}
-
-.main .main__left-section .main__contacts-container .main__contacts-list .list__item .list__info .list__messages {
-  line-height: 0;
-}
-
-.main .main__left-section .main__contacts-container .main__contacts-list .list__item .list__time-ago {
-  position: fixed;
-  right: 0;
-  margin-right: 20px;
-  z-index: 1000;
-}
-
-.main .main__left-section .main__contacts-container .main__contacts-list .list__divisor {
-  width: 100%;
-  height: 1px;
-  border-color: #26313f;
-}
-
-.main .main__left-section .main__burger-menu {
-  position: absolute;
-  visibility: hidden;
-}
-
-.main .main__left-section .main__burger-menu.active {
-  visibility: visible;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  margin-top: 90px;
-  margin-left: 30px;
-  width: 360px;
-  height: 430px;
-  border-radius: 15px;
-}
-
-.main .main__left-section .main__burger-menu .burger__user-info {
-  height: 155px;
-  background-color: #172029;
-  padding: 20px;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
-  border-radius: 15px 0 0 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.main .main__left-section .main__burger-menu .burger__user-info .burger__user-avatar {
-  width: 62px;
-  height: auto;
-}
-
-.main .main__left-section .main__burger-menu .burger__user-info .burger__user-name {
-  line-height: 0;
-  margin-bottom: 10px;
-}
-
-.main .main__left-section .main__burger-menu .burger__user-info .burger__user-number {
-  line-height: 0;
-  color: #aaaaaa;
-}
-
-.main .main__left-section .main__burger-menu .burger__settings-section {
-  background-color: #26313f;
-}
-
-.main .main__left-section .main__burger-menu .burger__settings-section .burger__setting-list {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  padding-left: 20px;
-  list-style: none;
-}
-
-.main .main__left-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  cursor: pointer;
-}
-
-.main .main__left-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item .list-avatar {
-  font-size: 25px;
-  width: 30px;
-}
-
-.main .main__left-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item .list-title {
-  margin-left: 20px;
-  font-size: 13px;
-  line-height: 0;
-}
-
-.main .main__chat-section {
+.main__chat-section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -617,7 +743,7 @@ body main {
   border-right: 2px solid #000;
 }
 
-.main .main__chat-section .main__chat-navbar {
+.main__chat-section .main__chat-navbar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -634,7 +760,7 @@ body main {
   cursor: pointer;
 }
 
-.main .main__chat-section .main__chat-navbar .navbar__contact {
+.main__chat-section .main__chat-navbar .navbar__contact {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -648,12 +774,12 @@ body main {
   height: 100%;
 }
 
-.main .main__chat-section .main__chat-navbar .navbar__contact .navbar__avatar {
+.main__chat-section .main__chat-navbar .navbar__contact .navbar__avatar {
   width: 66px;
   height: 66px;
 }
 
-.main .main__chat-section .main__chat-navbar .navbar__contact .navbar__info {
+.main__chat-section .main__chat-navbar .navbar__contact .navbar__info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -666,12 +792,12 @@ body main {
   margin-right: 40px;
 }
 
-.main .main__chat-section .main__chat-navbar .navbar__contact .navbar__info .navbar__timeago {
+.main__chat-section .main__chat-navbar .navbar__contact .navbar__info .navbar__timeago {
   font-size: 13px;
   color: #aaaaaa;
 }
 
-.main .main__chat-section .main__chat-navbar .navbar__tools {
+.main__chat-section .main__chat-navbar .navbar__tools {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -683,7 +809,7 @@ body main {
   font-size: 21px;
 }
 
-.main .main__chat-section .main__chat-navbar .navbar__tools .navbar__search {
+.main__chat-section .main__chat-navbar .navbar__tools .navbar__search {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -702,11 +828,11 @@ body main {
   transition: .2s;
 }
 
-.main .main__chat-section .main__chat-navbar .navbar__tools .navbar__search:hover {
+.main__chat-section .main__chat-navbar .navbar__tools .navbar__search:hover {
   background-color: #37465a;
 }
 
-.main .main__chat-section .main__chat-navbar .navbar__tools .navbar__settings {
+.main__chat-section .main__chat-navbar .navbar__tools .navbar__settings {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -725,11 +851,11 @@ body main {
   transition: .2s;
 }
 
-.main .main__chat-section .main__chat-navbar .navbar__tools .navbar__settings:hover {
+.main__chat-section .main__chat-navbar .navbar__tools .navbar__settings:hover {
   background-color: #37465a;
 }
 
-.main .main__chat-section .main__messages-section {
+.main__chat-section .main__messages-section {
   height: 81vh;
   width: 100%;
   background: rgba(90, 141, 141, 0.75);
@@ -737,7 +863,7 @@ body main {
           box-shadow: inset 226px 260px 250px rgba(0, 0, 0, 0.25);
 }
 
-.main .main__chat-section .main__input-section {
+.main__chat-section .main__input-section {
   background-color: #172029;
   height: 90px;
   display: -webkit-box;
@@ -751,7 +877,7 @@ body main {
           justify-content: center;
 }
 
-.main .main__chat-section .main__input-section .main__input {
+.main__chat-section .main__input-section .main__input {
   color: #aaaaaa;
   background-color: #26313f;
   border: none;
@@ -764,13 +890,83 @@ body main {
   outline: none;
 }
 
+.main__navbar-section {
+  height: 60px;
+}
+
+.main__navbar-section .main__navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin: 0;
+  background-color: #26313f;
+  border-left: 2px solid #000;
+}
+
+.main__navbar-section .main__navbar .fas {
+  font-size: 20px;
+}
+
+.main__navbar-section .main__navbar .main__settings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 300px;
+  margin-right: 15px;
+  cursor: pointer;
+  -webkit-transition: .2s;
+  transition: .2s;
+  margin-left: 15px;
+}
+
+.main__navbar-section .main__navbar .main__settings:hover {
+  background-color: #37465a;
+}
+
+.main__navbar-section .main__navbar .main__search {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 300px;
+  margin-right: 15px;
+  cursor: pointer;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.main__navbar-section .main__navbar .main__search:hover {
+  background-color: #37465a;
+}
+
 @media screen and (min-width: 481px) and (max-width: 1200px) {
-  .main .main__left-section .main__contacts-container .main__contacts-list .list__item {
+  .main .main__left-section .main__content-section .main__contacts .main__contacts-list .list__item {
     -ms-grid-columns: 50px 320px 92px;
         grid-template-columns: 50px 320px 92px;
     gap: 18px;
   }
-  .main .main__left-section .main__contacts-container .main__contacts-list .list__item .list__time-ago {
+  .main .main__left-section .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
     position: fixed;
     right: 0;
     margin-right: 20px;
@@ -778,39 +974,11 @@ body main {
 }
 
 @media screen and (min-width: 1201px) {
-  .main {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -webkit-box-direction: normal;
-        -ms-flex-direction: row;
-            flex-direction: row;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  .main .main__left-section {
-    width: 480px;
-  }
-  .main .main__left-section .main__navbar {
+  .main .main__left-section .main__navbar-section {
     height: 90px;
   }
-  .main .main__left-section .main__contacts-container .main__contacts-list .list__item {
-    -ms-grid-columns: 58px 320px 92px;
-        grid-template-columns: 58px 320px 92px;
-    gap: 14px;
-    padding-left: 8px;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    margin-top: 5px;
-  }
-  .main .main__left-section .main__contacts-container .main__contacts-list .list__item .list__time-ago {
-    position: inherit;
-  }
-  .main .main__chat-section {
-    width: 1200px;
+  .main .main__left-section .main__navbar-section .main__navbar {
+    height: 90px;
   }
 }
 
@@ -835,5 +1003,33 @@ body main {
   margin-right: 30px;
   font-size: 24px;
   cursor: pointer;
+}
+
+@media screen and (min-width: 320px) and (max-width: 720px) {
+  .flash-message {
+    height: 100px;
+  }
+  .flash-message .flash-message__content {
+    font-size: 11px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .flash-message .flash-message__content .flash-message__message {
+    text-align: center;
+  }
+  .flash-message .flash-message__content .fa-times {
+    text-align: center;
+    position: inherit;
+    right: inherit;
+    top: inherit;
+    margin-top: inherit;
+    margin-right: inherit;
+    font-size: 16px;
+  }
 }
 /*# sourceMappingURL=index.css.map */
