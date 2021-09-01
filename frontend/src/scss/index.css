@@ -910,6 +910,7 @@ body main {
           justify-content: center;
   height: 70px;
   font-size: 18px;
+  border-bottom: 2px solid #26313f;
 }
 
 .main__add-friends .add-friends__navbar .add-friends__back {
@@ -975,6 +976,72 @@ body main {
   color: white;
   padding-left: 15px;
   font-family: 'Poppins';
+}
+
+.main__add-friends .friends-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main__add-friends .friends-section .friends__loader {
+  margin-top: 50%;
+  text-align: center;
+}
+
+.main__add-friends .friends-section .friends-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  list-style: none;
+  padding-left: 10px;
+  margin: 0;
+}
+
+.main__add-friends .friends-section .friends-list .friends-suggestion {
+  text-align: center;
+}
+
+.main__add-friends .friends-section .friends-list .friends-not-found {
+  text-align: center;
+}
+
+.main__add-friends .friends-section .friends-list .list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 82px;
+  border-bottom: 2px solid #26313f;
+}
+
+.main__add-friends .friends-section .friends-list .list__item .list__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 30px;
+  line-height: 0;
+}
+
+.main__add-friends .friends-section .friends-list .list__item .list__info .list__last-seen {
+  color: #aaaaaa;
 }
 
 .main__navbar-section {
