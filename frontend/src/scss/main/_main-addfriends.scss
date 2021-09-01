@@ -1,0 +1,48 @@
+.main__add-friends {
+    background-color: $second-alpha-color;
+    height: 100%;
+    .add-friends__navbar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 70px;
+        font-size: $h3;
+        .add-friends__back {
+            @include icons-div-styles;
+            &:hover {
+                background-color: #37465a;
+            }
+            .fa-arrow-left {
+                cursor: pointer;
+            }
+        }
+        .add-friends__input-container {
+            width: 380px;
+            height: 40px;
+            border-radius: 3000px;
+            background-color: $second-color;
+            border: 1px solid $second-alpha-color;
+            display: flex;
+            align-items: center;
+            &:hover {
+                border-color: $first-color;
+            }
+            &:focus {
+                border-color: red;
+            }
+            .fa-search {
+                margin-left: 10px;
+            }
+            .add-friends__input {
+                width: 331px;
+                height: 38px;
+                border: none;
+                background-color: $second-color;
+                border-radius: 3000px;
+                outline: none;
+                color: $white-color;
+                padding-left: 15px;
+            }
+        }
+    }
+}

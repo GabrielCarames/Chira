@@ -391,9 +391,6 @@ body main {
   .main .main__left-section .main__navbar-section .main__navbar {
     height: 90px;
   }
-  .main .main__chat-section {
-    width: 1200px;
-  }
 }
 
 .main__content-section {
@@ -888,6 +885,95 @@ body main {
   font-size: 13px;
   font-family: 'Poppins', sans-serif;
   outline: none;
+}
+
+@media screen and (min-width: 1201px) {
+  .main__chat-section {
+    width: 1200px;
+  }
+}
+
+.main__add-friends {
+  background-color: #172029;
+  height: 100%;
+}
+
+.main__add-friends .add-friends__navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 70px;
+  font-size: 18px;
+}
+
+.main__add-friends .add-friends__navbar .add-friends__back {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 300px;
+  margin-right: 15px;
+  cursor: pointer;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.main__add-friends .add-friends__navbar .add-friends__back:hover {
+  background-color: #37465a;
+}
+
+.main__add-friends .add-friends__navbar .add-friends__back .fa-arrow-left {
+  cursor: pointer;
+}
+
+.main__add-friends .add-friends__navbar .add-friends__input-container {
+  width: 380px;
+  height: 40px;
+  border-radius: 3000px;
+  background-color: #26313f;
+  border: 1px solid #172029;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main__add-friends .add-friends__navbar .add-friends__input-container:hover {
+  border-color: #1975e0;
+}
+
+.main__add-friends .add-friends__navbar .add-friends__input-container:focus {
+  border-color: red;
+}
+
+.main__add-friends .add-friends__navbar .add-friends__input-container .fa-search {
+  margin-left: 10px;
+}
+
+.main__add-friends .add-friends__navbar .add-friends__input-container .add-friends__input {
+  width: 331px;
+  height: 38px;
+  border: none;
+  background-color: #26313f;
+  border-radius: 3000px;
+  outline: none;
+  color: white;
+  padding-left: 15px;
 }
 
 .main__navbar-section {

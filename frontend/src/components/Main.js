@@ -1,11 +1,12 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import avatar from '../images/avatar.png'
 import AddFriend from './AddFriend'
 import MainContacts from './MainContacts'
+import AddFriendsMenu from "../contexts/AddFriendsMenu";
 
 const Main = (props) => {
     const [ active, setActive ] = useState()
-    const [ addFriend, setAddFriend ] = useState(false)
+    const { addFriendsMenu, setAddFriendsMenu } = useContext(AddFriendsMenu)
 
     return(
         <section className="main">
@@ -22,8 +23,8 @@ const Main = (props) => {
                     </nav>
                 </section>
                 <section className="main__content-section">
-                    {addFriend ? <AddFriend /> : <MainContacts />}
-                    <div className="main__add-friend-button" onClick={() => {setAddFriend(true)}}>
+                    {addFriendsMenu ? <AddFriend /> : <MainContacts />}
+                    <div className="main__add-friend-button" onClick={() => {setAddFriendsMenu(true)}}>
                         <i class="fas fa-user-plus"></i>
                     </div>
                     {/* FIJATE COMO OBTENER LAS VARIABLES DE ACA DE LAS HORAS Y METERLAS EN SASS */}
