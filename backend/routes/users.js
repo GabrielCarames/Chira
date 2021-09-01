@@ -23,4 +23,11 @@ router.post('/register', async function (req, res) {
     }
 })
 
+router.post('/friendsearch', async function (req, res) {
+    const userName = req.body.term
+    const requestUser = await userController.findUsersByName(userName)
+    console.log(requestUser)
+    res.send(requestUser)
+})
+
 module.exports = router;

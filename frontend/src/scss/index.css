@@ -974,6 +974,7 @@ body main {
   outline: none;
   color: white;
   padding-left: 15px;
+  font-family: 'Poppins';
 }
 
 .main__navbar-section {

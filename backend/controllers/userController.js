@@ -18,6 +18,11 @@ userController.findUserByPhoneNumber = async (userData) => {
     return userRegistered
 }
 
+userController.findUsersByName = async (userName) => {
+    const usersName = User.find({'username': userName})
+    return usersName
+}
+
 userController.createUser = async (userData) => {
     const { displayName, phoneNumber } = userData
     const newUser = new User ({
