@@ -5,7 +5,7 @@ import ShowFriends from './ShowFriends';
 const AddFriend = () => {
     const { setAddFriendsMenu } = useContext(AddFriendsMenu)
     const [ friendSearch, setFriendSearch ] = useState();
-
+    
     return(
         <section className="main__add-friends add-friends">
             <section className="add-friends__navbar">

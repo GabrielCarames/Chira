@@ -74,6 +74,9 @@
         border-radius: 300px;
         z-index: 1000;
         cursor: pointer;
+        &.active {
+            visibility: hidden;
+        }
         &:hover{
             transition: .25s;
             background-color: $first-alpha-color;

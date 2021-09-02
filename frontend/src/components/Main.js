@@ -24,7 +24,7 @@ const Main = (props) => {
                 </section>
                 <section className="main__content-section">
                     {addFriendsMenu ? <AddFriend /> : <MainContacts />}
-                    <div className="main__add-friend-button" onClick={() => {setAddFriendsMenu(true)}}>
+                    <div className={addFriendsMenu ? "main__add-friend-button active" : "main__add-friend-button" } onClick={() => {setAddFriendsMenu(true)}}>
                         <i className="fas fa-user-plus"></i>
                     </div>
                     {/* FIJATE COMO OBTENER LAS VARIABLES DE ACA DE LAS HORAS Y METERLAS EN SASS */}

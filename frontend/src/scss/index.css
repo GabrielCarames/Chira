@@ -506,6 +506,10 @@ body main {
   cursor: pointer;
 }
 
+.main__content-section .main__add-friend-button.active {
+  visibility: hidden;
+}
+
 .main__content-section .main__add-friend-button:hover {
   -webkit-transition: .25s;
   transition: .25s;
@@ -954,12 +958,12 @@ body main {
           align-items: center;
 }
 
-.main__add-friends .add-friends__navbar .add-friends__input-container:hover {
+.main__add-friends .add-friends__navbar .add-friends__input-container:focus-within {
   border-color: #1975e0;
 }
 
-.main__add-friends .add-friends__navbar .add-friends__input-container:focus {
-  border-color: red;
+.main__add-friends .add-friends__navbar .add-friends__input-container:hover {
+  border-color: #1975e0;
 }
 
 .main__add-friends .add-friends__navbar .add-friends__input-container .fa-search {
@@ -1056,7 +1060,6 @@ body main {
           justify-content: center;
   margin-left: 200px;
   font-size: 24px;
-  cursor: pointer;
   border-radius: 3000px;
   width: 50px;
   height: 50px;
@@ -1073,6 +1076,10 @@ body main {
 .main__add-friends .friends-section .friends-list .list__item .list__add-friend .fa-user-check {
   pointer-events: none;
   cursor: none;
+}
+
+.main__add-friends .friends-section .friends-list .list__item .list__add-friend .fa-plus {
+  cursor: pointer;
 }
 
 .main__navbar-section {

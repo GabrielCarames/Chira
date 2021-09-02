@@ -4,9 +4,10 @@ import avatar from '../images/avatar.png'
 import Loader from "react-loader-spinner";
 
 const ShowFriends = ({friendSearch}) => {
-    const { onSearchSubmit } = useAddFriendsHelper();
+    const { addFriend, onSearchSubmit } = useAddFriendsHelper();
     const [ showFriends, setShowFriends ] = useState();
     const [ loader, setLoader ] = useState();
+    const [ friendAdded, setFriendAdded ] = useState();
     const stringUser = localStorage.getItem('userLogged');
     const user = JSON.parse(stringUser)
 
@@ -49,7 +50,7 @@ const ShowFriends = ({friendSearch}) => {
                                         {
                                             alreadyFriends[0]
                                             ? <i className="fas fa-user-check"></i>
-                                            : <i className="fas fa-user-plus"></i>
+                                            : <i className={friendAdded ? "fas fa-user-check" : "fas fa-user-plus"} onClick={() => {addFriend(friend); setFriendAdded(true)}}></i>
                                         }
                                     </div>
                                 </li>
