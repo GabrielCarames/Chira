@@ -555,7 +555,7 @@ body main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 360px;
+  width: 320px;
   height: 430px;
   border-radius: 15px;
 }
@@ -1073,7 +1073,7 @@ body main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 360px;
+  width: 320px;
   height: 430px;
   border-radius: 15px;
 }
