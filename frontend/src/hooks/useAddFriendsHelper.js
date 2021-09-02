@@ -17,8 +17,20 @@ export function useAddFriendsHelper() {
         }
       });
 
+      const addFriend = async friend => {
+        console.log('qeures añadir a este pibe:', friend);
+        try {
+            const res = await axios.post('http://localhost:3001/users/addfriend', {friend})
+            console.log("ganaste", res.data)
+        } catch (error) {
+            if(error.response) setFlashMessage({type: 'failure', error: error.response.data})
+            else setFlashMessage({type: 'failure', error: error})
+        }
+      }
+
       return {
-        onSearchSubmit
+        onSearchSubmit,
+        addFriend
       }
 }
 

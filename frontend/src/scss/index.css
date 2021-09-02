@@ -991,6 +991,14 @@ body main {
           justify-content: center;
 }
 
+.main__add-friends .friends-section .friends-suggestion {
+  text-align: center;
+}
+
+.main__add-friends .friends-section .friends-not-found {
+  text-align: center;
+}
+
 .main__add-friends .friends-section .friends__loader {
   margin-top: 50%;
   text-align: center;
@@ -1007,14 +1015,6 @@ body main {
   list-style: none;
   padding-left: 10px;
   margin: 0;
-}
-
-.main__add-friends .friends-section .friends-list .friends-suggestion {
-  text-align: center;
-}
-
-.main__add-friends .friends-section .friends-list .friends-not-found {
-  text-align: center;
 }
 
 .main__add-friends .friends-section .friends-list .list__item {
@@ -1042,6 +1042,37 @@ body main {
 
 .main__add-friends .friends-section .friends-list .list__item .list__info .list__last-seen {
   color: #aaaaaa;
+}
+
+.main__add-friends .friends-section .friends-list .list__item .list__add-friend {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-left: 200px;
+  font-size: 24px;
+  cursor: pointer;
+  border-radius: 3000px;
+  width: 50px;
+  height: 50px;
+}
+
+.main__add-friends .friends-section .friends-list .list__item .list__add-friend:hover {
+  background-color: #26313f;
+}
+
+.main__add-friends .friends-section .friends-list .list__item .list__add-friend .fas {
+  font-size: 24px;
+}
+
+.main__add-friends .friends-section .friends-list .list__item .list__add-friend .fa-user-check {
+  pointer-events: none;
+  cursor: none;
 }
 
 .main__navbar-section {

@@ -67,7 +67,7 @@ export function useLoginHelper() {
         try {
             await axios.post('http://localhost:3001/users/register', user).then(res => {
                 setLoading(false);
-                localStorage.setItem('userLogged', res.data);
+                localStorage.setItem('userLogged', JSON.stringify(res.data));
                 history.push("/");
             })
         } catch (error) {

@@ -4,7 +4,6 @@ const userController = {};
 userController.findExistingUser = async (userData) => {
     const userName = userData.displayName
     const userPhoneNumber = userData.phoneNumber
-    console.log(userName, userPhoneNumber)
     const userCosa = User.findOne({
         'phoneNumber': userPhoneNumber,
         'username': userName
@@ -19,8 +18,14 @@ userController.findUserByPhoneNumber = async (userData) => {
 }
 
 userController.findUsersByName = async (userName) => {
-    const usersName = User.find({'username': userName})
+    const usersName = User.find({
+        "username" : {'$regex' : '^' + userName + '', '$options' : 'i'
+    }}).populate({
+            path: 'friends',
+            model: 'User'
+        })
     return usersName
+    // {"username" : {$regex : userName}}
 }
 
 userController.createUser = async (userData) => {
@@ -31,6 +36,23 @@ userController.createUser = async (userData) => {
     })
     await newUser.save()
     return newUser
+}
+
+userController.addNewFriend = async (userId, newFriendId) => {
+    await User.findOneAndUpdate({ _id: userId },
+        {
+            $push: {
+                friends: newFriendId
+            }
+        }
+    )
+    await User.findOneAndUpdate({ _id: newFriendId },
+        {
+            $push: {
+                friends: userId
+            }
+        }
+    )
 }
 
 module.exports = userController;
