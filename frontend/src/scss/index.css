@@ -394,7 +394,6 @@ body main {
 }
 
 .main__content-section {
-  width: 480px;
   height: 100%;
   border-left: 2px solid black;
 }
@@ -402,12 +401,6 @@ body main {
 .main__content-section .main__contacts {
   height: 1080px;
   overflow: auto;
-}
-
-.main__content-section .main__contacts::-webkit-scrollbar-thumb {
-  background-color: #acacac;
-  border-radius: 50px;
-  height: 120px;
 }
 
 .main__content-section .main__contacts .main__contacts-list {
@@ -424,13 +417,10 @@ body main {
 }
 
 .main__content-section .main__contacts .main__contacts-list .list__item {
-  display: -ms-grid;
-  display: grid;
-  -ms-grid-columns: 40px 270px 90px;
-      grid-template-columns: 40px 270px 90px;
-  -ms-grid-rows: 80px;
-      grid-template-rows: 80px;
-  gap: 18px;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
   padding-left: 8px;
   -webkit-box-align: center;
       -ms-flex-align: center;
@@ -452,6 +442,8 @@ body main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  width: 100%;
+  margin-left: 20px;
 }
 
 .main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__username {
@@ -464,16 +456,7 @@ body main {
 }
 
 .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
-  position: fixed;
-  right: 0;
-  margin-right: 20px;
-  z-index: 1000;
-}
-
-.main__content-section .main__contacts .main__contacts-list .list__divisor {
-  width: 100%;
-  height: 1px;
-  border-color: #26313f;
+  width: 100px;
 }
 
 .main__content-section .main__add-friends {
@@ -495,7 +478,6 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-left: 390px;
   margin-bottom: 20px;
   bottom: 0;
   width: 65px;
@@ -504,6 +486,8 @@ body main {
   border-radius: 300px;
   z-index: 1000;
   cursor: pointer;
+  right: 0;
+  margin-right: 10px;
 }
 
 .main__content-section .main__add-friend-button.active {
@@ -520,12 +504,49 @@ body main {
   font-size: 24px;
 }
 
-.main__content-section .main__burger-menu {
+@media screen and (min-width: 1201px) {
+  .main .main__content-section .main__contacts .main__contacts-list .list__item {
+    height: 80px;
+  }
+  .main .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
+    position: inherit;
+  }
+  .main .main__content-section .main_add-friends-container {
+    position: absolute;
+    bottom: 0;
+    margin-top: 90px;
+    width: 460px;
+    height: 65px;
+    pointer-events: none;
+  }
+  .main .main__content-section .main_add-friends-container .main__add-friend-button {
+    position: absolute;
+    bottom: 0;
+    pointer-events: initial;
+  }
+  .main .main__content-section .main_add-friends-container .main__add-friend-button.active {
+    visibility: hidden;
+  }
+  .main .main__content-section .main_add-friends-container .main__add-friend-button:hover {
+    -webkit-transition: .25s;
+    transition: .25s;
+    background-color: #5297e8;
+  }
+  .main .main__content-section .main_add-friends-container .main__add-friend-button .fa-user-plus {
+    font-size: 24px;
+  }
+}
+
+.main__navbar-section {
+  height: 60px;
+}
+
+.main__navbar-section .main__burger-menu {
   position: absolute;
   visibility: hidden;
 }
 
-.main__content-section .main__burger-menu.active {
+.main__navbar-section .main__burger-menu.active {
   visibility: visible;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -534,14 +555,12 @@ body main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  margin-top: 90px;
-  margin-left: 30px;
   width: 360px;
   height: 430px;
   border-radius: 15px;
 }
 
-.main__content-section .main__burger-menu .burger__user-info {
+.main__navbar-section .main__burger-menu .burger__user-info {
   height: 155px;
   background-color: #172029;
   padding: 20px;
@@ -560,26 +579,26 @@ body main {
           justify-content: center;
 }
 
-.main__content-section .main__burger-menu .burger__user-info .burger__user-avatar {
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar {
   width: 62px;
   height: auto;
 }
 
-.main__content-section .main__burger-menu .burger__user-info .burger__user-name {
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-name {
   line-height: 0;
   margin-bottom: 10px;
 }
 
-.main__content-section .main__burger-menu .burger__user-info .burger__user-number {
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-number {
   line-height: 0;
   color: #aaaaaa;
 }
 
-.main__content-section .main__burger-menu .burger__settings-section {
+.main__navbar-section .main__burger-menu .burger__settings-section {
   background-color: #26313f;
 }
 
-.main__content-section .main__burger-menu .burger__settings-section .burger__setting-list {
+.main__navbar-section .main__burger-menu .burger__settings-section .burger__setting-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -591,7 +610,7 @@ body main {
   list-style: none;
 }
 
-.main__content-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item {
+.main__navbar-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -601,48 +620,15 @@ body main {
   cursor: pointer;
 }
 
-.main__content-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item .list-avatar {
+.main__navbar-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item .list-avatar {
   font-size: 25px;
   width: 30px;
 }
 
-.main__content-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item .list-title {
+.main__navbar-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item .list-title {
   margin-left: 20px;
   font-size: 13px;
   line-height: 0;
-}
-
-@media screen and (min-width: 481px) and (max-width: 1200px) {
-  .main .main__left-section .main__content-section .main__contacts .main__contacts-list .list__item {
-    -ms-grid-columns: 50px 320px 92px;
-        grid-template-columns: 50px 320px 92px;
-    gap: 18px;
-  }
-  .main .main__left-section .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
-    position: fixed;
-    right: 0;
-    margin-right: 20px;
-  }
-}
-
-@media screen and (min-width: 1201px) {
-  .main .main__content-section .main__contacts .main__contacts-list .list__item {
-    -ms-grid-columns: 58px 320px 92px;
-        grid-template-columns: 58px 320px 92px;
-    gap: 14px;
-    padding-left: 8px;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
-    margin-top: 5px;
-  }
-  .main .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
-    position: inherit;
-  }
-}
-
-.main__navbar-section {
-  height: 60px;
 }
 
 .main__navbar-section .main__navbar {
@@ -709,19 +695,6 @@ body main {
 
 .main__navbar-section .main__navbar .main__search:hover {
   background-color: #37465a;
-}
-
-@media screen and (min-width: 481px) and (max-width: 1200px) {
-  .main .main__left-section .main__content-section .main__contacts .main__contacts-list .list__item {
-    -ms-grid-columns: 50px 320px 92px;
-        grid-template-columns: 50px 320px 92px;
-    gap: 18px;
-  }
-  .main .main__left-section .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
-    position: fixed;
-    right: 0;
-    margin-right: 20px;
-  }
 }
 
 @media screen and (min-width: 1201px) {
@@ -1086,6 +1059,96 @@ body main {
   height: 60px;
 }
 
+.main__navbar-section .main__burger-menu {
+  position: absolute;
+  visibility: hidden;
+}
+
+.main__navbar-section .main__burger-menu.active {
+  visibility: visible;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 360px;
+  height: 430px;
+  border-radius: 15px;
+}
+
+.main__navbar-section .main__burger-menu .burger__user-info {
+  height: 155px;
+  background-color: #172029;
+  padding: 20px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 15px 0 0 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar {
+  width: 62px;
+  height: auto;
+}
+
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-name {
+  line-height: 0;
+  margin-bottom: 10px;
+}
+
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-number {
+  line-height: 0;
+  color: #aaaaaa;
+}
+
+.main__navbar-section .main__burger-menu .burger__settings-section {
+  background-color: #26313f;
+}
+
+.main__navbar-section .main__burger-menu .burger__settings-section .burger__setting-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 20px;
+  list-style: none;
+}
+
+.main__navbar-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.main__navbar-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item .list-avatar {
+  font-size: 25px;
+  width: 30px;
+}
+
+.main__navbar-section .main__burger-menu .burger__settings-section .burger__setting-list .list__item .list-title {
+  margin-left: 20px;
+  font-size: 13px;
+  line-height: 0;
+}
+
 .main__navbar-section .main__navbar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1150,19 +1213,6 @@ body main {
 
 .main__navbar-section .main__navbar .main__search:hover {
   background-color: #37465a;
-}
-
-@media screen and (min-width: 481px) and (max-width: 1200px) {
-  .main .main__left-section .main__content-section .main__contacts .main__contacts-list .list__item {
-    -ms-grid-columns: 50px 320px 92px;
-        grid-template-columns: 50px 320px 92px;
-    gap: 18px;
-  }
-  .main .main__left-section .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
-    position: fixed;
-    right: 0;
-    margin-right: 20px;
-  }
 }
 
 @media screen and (min-width: 1201px) {

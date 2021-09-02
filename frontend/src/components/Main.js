@@ -5,7 +5,7 @@ import MainContacts from './MainContacts'
 import AddFriendsMenu from "../contexts/AddFriendsMenu";
 
 const Main = (props) => {
-    const [ active, setActive ] = useState()
+    const [ active, setActive ] = useState(false)
     const { addFriendsMenu, setAddFriendsMenu } = useContext(AddFriendsMenu)
 
     return(
@@ -21,13 +21,6 @@ const Main = (props) => {
                             <i className="fas fa-search"></i>
                         </div>
                     </nav>
-                </section>
-                <section className="main__content-section">
-                    {addFriendsMenu ? <AddFriend /> : <MainContacts />}
-                    <div className={addFriendsMenu ? "main__add-friend-button active" : "main__add-friend-button" } onClick={() => {setAddFriendsMenu(true)}}>
-                        <i className="fas fa-user-plus"></i>
-                    </div>
-                    {/* FIJATE COMO OBTENER LAS VARIABLES DE ACA DE LAS HORAS Y METERLAS EN SASS */}
                     <div className={active ? "main__burger-menu burger active" : "main__burger-menu burger"}>
                         <section className="burger__user-info">
                             <img className="burger__user-avatar" src={avatar} alt="user-avatar" />
@@ -59,6 +52,15 @@ const Main = (props) => {
                             </ul>
                         </section>
                     </div>
+                </section>
+                <section className="main__content-section">
+                    {addFriendsMenu ? <AddFriend /> : <MainContacts />}
+                    <div className="main_add-friends-container">
+                        <div className={addFriendsMenu ? "main__add-friend-button active" : "main__add-friend-button" } onClick={() => {setAddFriendsMenu(true)}}>
+                            <i className="fas fa-user-plus"></i>
+                        </div>
+                    </div>
+                    
                 </section>
             </section>
             <section className="main__chat-section">

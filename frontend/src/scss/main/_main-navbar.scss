@@ -1,5 +1,62 @@
 .main__navbar-section{
     height: 60px;
+    .main__burger-menu {
+        position: absolute;
+        visibility: hidden;
+        &.active {
+            visibility: visible;
+            display: flex;
+            flex-direction: column;
+            width: 360px;
+            height: 430px;
+            border-radius: 15px;
+        }
+        .burger__user-info {
+            height: 155px;
+            background-color: $second-alpha-color;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 15px 0 0 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            .burger__user-avatar {
+                width: 62px;
+                height: auto;
+            }
+            .burger__user-name {
+                line-height: 0;
+                margin-bottom: 10px;
+            }
+            .burger__user-number {
+                line-height: 0;
+                color: $gray-color;
+            }
+        }
+        .burger__settings-section {
+            background-color: $second-color;
+            .burger__setting-list {
+                display: flex;
+                flex-direction: column;
+                padding-left: 20px;
+                list-style: none;
+                .list__item {
+                    display: flex;
+                    align-items: center;
+                    cursor: pointer;
+                    .list-avatar {
+                        font-size: 25px;
+                        width: 30px;
+                    }
+                    .list-title {
+                        margin-left: 20px;
+                        font-size: $h5;
+                        line-height: 0;
+                    }
+                }
+            }
+        }
+    }
     .main__navbar {
         display: flex;
         justify-content: space-between;
@@ -29,28 +86,6 @@
                  background-color: $hover-color;
             }
             .fa-search {
-            }
-        }
-    }
-}
-
-@media screen and (min-width: 481px) and (max-width: 1200px) {
-    .main {
-        .main__left-section {
-            .main__content-section {
-                .main__contacts {
-                    .main__contacts-list {
-                        .list__item {
-                            grid-template-columns: 50px 320px 92px;
-                            gap: 18px;
-                            .list__time-ago {
-                                position: fixed;
-                                right: 0;
-                                margin-right: 20px;
-                            }
-                        }
-                    }
-                }
             }
         }
     }
