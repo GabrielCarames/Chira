@@ -1,6 +1,17 @@
 import avatar from '../images/avatar.png'
-
+import socket from './Socket'
+import { useState, useEffect } from 'react'
 const Chat = () => {
+
+    useEffect(() => {
+        socket.emit('connected', 'hola tdesde aca')
+    }, [])
+    
+
+    const messageInput = (message) => {
+        console.log(message)
+    }
+
     return(
         <section className="main__chat-section">
                 <nav className="main__chat-navbar navbar">
@@ -25,7 +36,7 @@ const Chat = () => {
 
                 </div>
                 <div className="main__input-section">
-                    <input className="main__input" type="text" name="message" id="" placeholder="Escribe un mensaje aquí" autoComplete="off"/>
+                    <input className="main__input" type="text" name="message" id="" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => messageInput(e.target.value)} />
                 </div>
             </section>
     )
