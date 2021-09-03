@@ -4,9 +4,11 @@
 
 // recibe la variable io
 module.exports = (io) => {
+  let user
   io.on('connection', (socket) => {
-    socket.on('connected', async (userLogged, chatId) => {
-      console.log("usuarir contartdaaaao")
+    socket.on('connected', async (userLogged) => {
+      user = userLogged
+      console.log("Usuario conectado", user, user.username)
       // currentlyChatId = chatId
       // userRepeat = users.find(user => {
       //   return user == userLogged.name
@@ -18,8 +20,21 @@ module.exports = (io) => {
       // }
       // var messages = await chatController.getAllMessages(currentlyChatId);
       // socket.emit("chathistory", currentlyChatId, messages)
-    
     })
+
+    socket.on("mensaje", (username, message) => {
+      //io.emit manda el mensaje a todos los clientes conectados al chat
+      console.log("soymensnaej", username, message)
+      io.emit("mensajes", { username, message });
+    });
+  
+    socket.on("disconnect", () => {
+      console.log("se fue al carajo", user.username)
+      io.emit("mensajes", {
+        servidor: "Servidor",
+        mensaje: `${user} ha abandonado la sala`,
+      });
+    });
 
     // // Recibe y envia al cliente el mensaje del usuario
     // socket.on('message', async (data) => {
@@ -38,8 +53,8 @@ module.exports = (io) => {
 
     // // Recibe y envia que un usuario se desconecto
 
-    // socket.on('disconnect', () => {
-    //   io.emit('userdisconnect', socket.name)
-    // })
+    socket.on('disconnect', () => {
+      io.emit('userdisconnect', socket.name)
+    })
   });
 }

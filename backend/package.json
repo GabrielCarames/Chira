@@ -24,7 +24,8 @@
     "express": "^4.17.1",
     "mongoose": "^5.13.8",
     "node-localstorage": "^2.2.1",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "mpath": ">=0.8.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.12"

@@ -85,6 +85,61 @@
 
 @media screen and (min-width: 1201px) {
     .main__chat-section {
-        width: 1200px;    
+        width: 1200px;
+        .cosa {
+            
+            .messages-message-container {
+                display: inline-block;
+                // position: relative;
+                // min-width: min-content;
+                background-color: $second-color;
+                word-break: break-word;
+                text-align: left;
+                margin: 50px 0 0 60px;
+                padding: 10px 20px 0 20px;
+                border-radius: 10px;
+                max-width: 500px;
+                .messages__username {
+                    color: $first-alpha-color;
+                }
+                .messages__message {
+                    line-height: 0;
+                    font-weight: 400px;
+                }    
+                .messages__timeago {
+                    text-align: right;
+                    line-height: 0;
+                    color: $gray-color;
+                }
+            }
+        }
+        .cosa-malvada {
+            
+            .messages-message-container {
+                display: inline-block;
+                // position: relative;
+                // min-width: min-content;
+                margin-left: calc(80% - 240px);
+                background-color: $first-color;
+                word-break: break-word;
+                text-align: right;
+                margin: 50px 0 0 calc(100% - 150px);;
+                padding: 10px 20px 0 20px;
+                border-radius: 10px;
+                max-width: 500px;
+                .messages__username {
+                    color: $first-alpha-color;
+                }
+                .messages__message {
+                    line-height: 0;
+                    font-weight: 400px;
+                }    
+                .messages__timeago {
+                    text-align: right;
+                    line-height: 0;
+                    color: $gray-color;
+                }
+            }
+        }
     }
 }
