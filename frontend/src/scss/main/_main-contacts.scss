@@ -1,14 +1,14 @@
 .main__content-section{
     // width: 480px;
-    height: 100%;
+    height: 90vh;
     border-left: 2px solid rgb(0, 0, 0);
     .main__contacts {
-        height: 1080px;
+        height: 100%;
         overflow: auto;
         .main__contacts-list {
             display: flex;
             flex-direction: column;
-            width: 100%;
+            width: 98%;
             padding: 0;
             margin: 0;
             .list__item {

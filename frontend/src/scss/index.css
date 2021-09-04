@@ -12,7 +12,6 @@ body {
   background-color: #172029;
   font-family: "Poppins", sans-serif;
   margin: 0;
-  overflow-y: hidden;
 }
 
 body main {
@@ -384,6 +383,7 @@ body main {
   }
   .main .main__left-section {
     width: 480px;
+    height: 100vh;
   }
   .main .main__left-section .main__navbar-section {
     height: 90px;
@@ -394,12 +394,12 @@ body main {
 }
 
 .main__content-section {
-  height: 100%;
+  height: 90vh;
   border-left: 2px solid black;
 }
 
 .main__content-section .main__contacts {
-  height: 1080px;
+  height: 100%;
   overflow: auto;
 }
 
@@ -411,7 +411,7 @@ body main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 100%;
+  width: 98%;
   padding: 0;
   margin: 0;
 }
@@ -868,29 +868,28 @@ body main {
   .main__chat-section {
     width: 1200px;
   }
-  .main__chat-section .cosa .messages-message-container {
+  .main__chat-section .messages-user-logged-messages .messages-message-container {
     display: inline-block;
     background-color: #26313f;
-    word-break: break-word;
     text-align: left;
     margin: 50px 0 0 60px;
     padding: 10px 20px 0 20px;
     border-radius: 10px;
     max-width: 500px;
   }
-  .main__chat-section .cosa .messages-message-container .messages__username {
+  .main__chat-section .messages-user-logged-messages .messages-message-container .messages__username {
     color: #5297e8;
   }
-  .main__chat-section .cosa .messages-message-container .messages__message {
-    line-height: 0;
+  .main__chat-section .messages-user-logged-messages .messages-message-container .messages__message {
     font-weight: 400px;
+    word-break: break-word;
   }
-  .main__chat-section .cosa .messages-message-container .messages__timeago {
+  .main__chat-section .messages-user-logged-messages .messages-message-container .messages__timeago {
     text-align: right;
     line-height: 0;
     color: #aaaaaa;
   }
-  .main__chat-section .cosa-malvada .messages-message-container {
+  .main__chat-section .messages-contact-messages .messages-message-container {
     display: inline-block;
     margin-left: calc(80% - 240px);
     background-color: #1975e0;
@@ -901,14 +900,14 @@ body main {
     border-radius: 10px;
     max-width: 500px;
   }
-  .main__chat-section .cosa-malvada .messages-message-container .messages__username {
+  .main__chat-section .messages-contact-messages .messages-message-container .messages__username {
     color: #5297e8;
   }
-  .main__chat-section .cosa-malvada .messages-message-container .messages__message {
+  .main__chat-section .messages-contact-messages .messages-message-container .messages__message {
     line-height: 0;
     font-weight: 400px;
   }
-  .main__chat-section .cosa-malvada .messages-message-container .messages__timeago {
+  .main__chat-section .messages-contact-messages .messages-message-container .messages__timeago {
     text-align: right;
     line-height: 0;
     color: #aaaaaa;
