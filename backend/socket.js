@@ -1,14 +1,16 @@
 // const messageController = require('./controllers/messageController')
-// const chatController = require('./controllers/chatController')
+const chatController = require('./controllers/chatController')
 // const userController = require('./controllers/userController');
 
 // recibe la variable io
+
 module.exports = (io) => {
   let user
   io.on('connection', (socket) => {
+    console.log("TOMACAPITO", socket.id)
     socket.on('connected', async (userLogged) => {
       user = userLogged
-      console.log("Usuario conectado", user, user.username)
+      console.log("Usuario conectado", user.username)
       // currentlyChatId = chatId
       // userRepeat = users.find(user => {
       //   return user == userLogged.name
@@ -22,18 +24,21 @@ module.exports = (io) => {
       // socket.emit("chathistory", currentlyChatId, messages)
     })
 
-    socket.on("mensaje", (username, message) => {
+    socket.on("mensaje", async (user, message) => {
       //io.emit manda el mensaje a todos los clientes conectados al chat
+      console.log("eh", user, message, typeof message)
+      const { username } = user
+      await chatController.saveMessages(user, message)
       console.log("soymensnaej", username, message)
       io.emit("mensajes", { username, message });
     });
   
     socket.on("disconnect", () => {
-      console.log("se fue al carajo", user.username)
-      io.emit("mensajes", {
-        servidor: "Servidor",
-        mensaje: `${user} ha abandonado la sala`,
-      });
+      // console.log("se fue al carajo", user.username)
+      // io.emit("mensajes", {
+      //   servidor: "Servidor",
+      //   mensaje: `${user} ha abandonado la sala`,
+      // });
     });
 
     // // Recibe y envia al cliente el mensaje del usuario

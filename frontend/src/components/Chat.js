@@ -25,8 +25,7 @@ const Chat = () => {
     
     
     const messageInput = (message) => {
-        socket.emit("mensaje", username, message);
-        // setMensaje("");
+        socket.emit("mensaje", user, message);
     };
 
     useEffect(() => {

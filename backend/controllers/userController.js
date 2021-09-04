@@ -7,6 +7,9 @@ userController.findExistingUser = async (userData) => {
     const userCosa = User.findOne({
         'phoneNumber': userPhoneNumber,
         'username': userName
+    }).populate({
+        path: 'friends',
+        model: 'User'
     })
     return userCosa
 }
