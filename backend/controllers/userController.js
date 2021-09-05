@@ -4,19 +4,18 @@ const userController = {};
 userController.findExistingUser = async (userData) => {
     const userName = userData.displayName
     const userPhoneNumber = userData.phoneNumber
-    const userCosa = User.findOne({
+    const user = User.findOne({
         'phoneNumber': userPhoneNumber,
         'username': userName
     }).populate({
         path: 'friends',
         model: 'User'
     })
-    return userCosa
+    return user
 }
 
-userController.findUserByPhoneNumber = async (userData) => {
-    const userPhoneNumber = userData.phoneNumber
-    const userRegistered = User.findOne({'phoneNumber': userPhoneNumber})
+userController.findUserByPhoneNumber = async (phoneNumber) => {
+    const userRegistered = User.findOne({'phoneNumber': phoneNumber})
     return userRegistered
 }
 

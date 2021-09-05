@@ -19,7 +19,6 @@ const ShowFriends = ({friendSearch}) => {
                 if(friendSearch !== undefined){
                     const results = await onSearchSubmit(friendSearch)
                     setLoader(false)
-                    console.log("reusltados", results)
                     if(results.length >= 1) setShowFriends(results)
                     else setShowFriends('')
                 }

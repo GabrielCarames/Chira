@@ -4,7 +4,6 @@ import socket from './Socket'
 const MainContacts = () => {
     
     const user = JSON.parse(localStorage.getItem('userLogged'))
-    console.log("estodefriendnotienenada", user)
     const goToChat = (friendId) => {
         const userId = user._id
         socket.emit('goToChat', userId, friendId)
@@ -16,7 +15,6 @@ const MainContacts = () => {
                 <ul className="main__contacts-list list">
                     {user && 
                         user.friends.map((friend) => {
-                            console.log("friend", friend)
                             return (
                                 <li className="list__item" onClick={() => goToChat(friend._id)}>
                                     <img className="list__avatar" src={avatar} alt="user-avatar" />

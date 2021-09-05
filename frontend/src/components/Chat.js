@@ -2,6 +2,7 @@ import avatar from '../images/avatar.png'
 import socket from './Socket'
 import { useState, useEffect } from 'react'
 import ReactScrolleableFeed from 'react-scrollable-feed'
+import ChatMessages from './ChatMessages'
 
 const Chat = () => {
     const [messages, setMessages] = useState("");
@@ -22,7 +23,6 @@ const Chat = () => {
         socket.on("mensajes", (newMessage) => {
           setMessages([...messages, newMessage]);
         });
-    
         return () => {
           socket.off();
         };
@@ -33,8 +33,6 @@ const Chat = () => {
             setChat(chat);
         });
     })
-
-    
 
     useEffect(() => {
         const listener = event => {
@@ -57,39 +55,38 @@ const Chat = () => {
 
     return(
         <section className="main__chat-section">
-                <nav className="main__chat-navbar navbar">
-                    <div className="navbar__contact">
-                        <img className="navbar__avatar" src={avatar} alt="contact-avatar" />
-                        <div className="navbar__info">
-                            <p className="navbar__username">Contacto1</p>
-                            <p className="navbar__timeago">Ultima vez hace 3032</p>
-                        </div>
+            <nav className="main__chat-navbar navbar">
+                <div className="navbar__contact">
+                    <img className="navbar__avatar" src={avatar} alt="contact-avatar" />
+                    <div className="navbar__info">
+                        <p className="navbar__username">Contacto1</p>
+                        <p className="navbar__timeago">Ultima vez hace 3032</p>
                     </div>
-                    <div className="navbar__tools">
-                        <div className="navbar__search">
-                            <i className="fas fa-search"></i>
+                </div>
+                <div className="navbar__tools">
+                    <div className="navbar__search">
+                        <i className="fas fa-search"></i>
 
-                        </div>
-                        <div className="navbar__settings">
-                            <i className="fas fa-ellipsis-v"></i>
-                        </div>
                     </div>
-                </nav>
-                <div className="main__messages-section messages">
-                    {
-                        chat && chat[0].messages.map((message) => {
-                            console.log("pantereando", message)
-                            return (
-                                <div className="messages-user-logged-messages">
-                                    <div className="messages-message-container">
-                                        <span className="messages__username">{message.user.username}</span>
-                                        <p className="messages__message">{message.message}</p>
-                                        <h6 className="messages__timeago">30:43hs</h6>
-                                    </div>
+                    <div className="navbar__settings">
+                        <i className="fas fa-ellipsis-v"></i>
+                    </div>
+                </div>
+            </nav>
+            {/* <div className="main__messages-section messages">
+                {
+                    chat && chat[0].messages.map((message) => {
+                        return (
+                            <div className="messages-user-logged-messages">
+                                <div className="messages-message-container">
+                                    <span className="messages__username">{message.user.username}</span>
+                                    <p className="messages__message">{message.message}</p>
+                                    <h6 className="messages__timeago">30:43hs</h6>
                                 </div>
-                            )
-                        })
-                    }
+                            </div>
+                        )
+                    })
+                }
                 <ReactScrolleableFeed>
                     {messages && messages.map((message) => {
                         return (
@@ -111,12 +108,13 @@ const Chat = () => {
                             </div>
                         )
                     })}
-                    </ReactScrolleableFeed>
-                </div>
-                <div className="main__input-section" >
-                    <input className="main__input" id="cosa" type="text" name="message" id="" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} />
-                </div>
-            </section>
+                </ReactScrolleableFeed>
+            </div> */}
+            <ChatMessages />
+            {/* <div className="main__input-section" >
+                <input className="main__input" id="cosa" type="text" name="message" id="" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} />
+            </div> */}
+        </section>
     )
 }
 

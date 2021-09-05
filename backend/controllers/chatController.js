@@ -4,35 +4,25 @@ const User = require('../models/User')
 const chatController = {}
 
 chatController.saveMessages = async (user, message) => {
-    const newMessage = new Message (
-        {
-            message,
-            user
-        }
-        )
-        await newMessage.save()
-        console.log("pinocho", newMessage, newMessage._id)
+    const newMessage = new Message ({
+        message,
+        user
+    })
+    await newMessage.save()
     const completeMessage = chatController.findMessageById(newMessage._id)
     return completeMessage
 }
 
 chatController.createChat = async (user, friend, type) => {
-    console.log("members", user, friend)
-    const newChat = await new Chat(
-        {
-            type: type, 
-            users: [
-                user, friend
-            ]
-        }
-    );
+    const newChat = await new Chat({
+        type: type, 
+        users: [user, friend]
+    });
     await newChat.save()
 }
 
 chatController.findChatByFriendId = async (userId, friendId) => {
-    const chatFound = await Chat.find({
-        "users": {$in: [friendId, userId]} //Se fija en el campo de users del chat a ver si existe un chat entre el usuario logueado y el amigo
-    }).populate({
+    const chatFound = await Chat.find({"users": {$in: [friendId, userId]}}).populate({ //Se fija en el campo de users del chat a ver si existe un chat entre el usuario logueado y el amigo
         path: 'messages',
         model: 'Message',
             populate: {
@@ -56,9 +46,9 @@ chatController.findMessageById = async (messageId) => {
 
 chatController.insertMessageInChat = async (fullMessage, currentlyChatId) => {
     await Chat.findOneAndUpdate({_id: currentlyChatId}, 
-        {
-            $push: {
-                messages: fullMessage
+    {
+        $push: {
+            messages: fullMessage
         }
     })
 }
