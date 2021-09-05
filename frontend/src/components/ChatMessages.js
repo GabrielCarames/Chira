@@ -2,17 +2,13 @@ import avatar from '../images/avatar.png'
 import socket from './Socket'
 import { useState, useEffect } from 'react'
 import ReactScrolleableFeed from 'react-scrollable-feed'
+import moment from 'moment'
 
-const ChatMessages = () => {
+const ChatMessages = ({chat, setChat, messages, setMessages}) => {
     const [inputMessage, setInputMessage] = useState("")
-    const [messages, setMessages] = useState("");
-    const [ chat, setChat ] = useState()
+    // const [messages, setMessages] = useState("");
+    // const [ chat, setChat ] = useState()
     const user = JSON.parse(localStorage.getItem('userLogged'))
-    useEffect(() => {
-        socket.on("chatFound", (chat) => {
-            setChat(chat);
-        });
-    })
 
     useEffect(() => {
         socket.on("mensajes", (newMessage) => {
@@ -49,42 +45,52 @@ const ChatMessages = () => {
     return (
         <>
             <div className="main__messages-section messages">
+                <ReactScrolleableFeed>
                     {
                         chat && chat[0].messages.map((message) => {
+                            console.log(message, message.user.username, user.username)
                             return (
+                                message.user.username === user.username ?
                                 <div className="messages-user-logged-messages">
                                     <div className="messages-message-container">
                                         <span className="messages__username">{message.user.username}</span>
                                         <p className="messages__message">{message.message}</p>
-                                        <h6 className="messages__timeago">30:43hs</h6>
+                                        <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
                                     </div>
                                 </div>
+                            : 
+                            <div className="messages-contact-messages">
+                                <div className="messages-message-container">
+                                    <span className="messages__username">{message.user.username}</span>
+                                    <p className="messages__message">{message.message}</p>
+                                    <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
+                                </div>
+                            </div>
                             )
                         })
                     }
-                    <ReactScrolleableFeed>
-                        {messages && messages.map((message) => {
-                            return (
-                                message.username === user.username ?
-                                    <div className="messages-user-logged-messages">
-                                        <div className="messages-message-container">
-                                            <span className="messages__username">{message.username}</span>
-                                            <p className="messages__message">{message.message}</p>
-                                            <h6 className="messages__timeago">30:43hs</h6>
-                                        </div>
-                                    </div>
-                                : 
-                                <div className="messages-contact-messages">
+                    {messages && messages.map((message) => {
+                        return (
+                            message.username === user.username ?
+                                <div className="messages-user-logged-messages">
                                     <div className="messages-message-container">
                                         <span className="messages__username">{message.username}</span>
                                         <p className="messages__message">{message.message}</p>
                                         <h6 className="messages__timeago">30:43hs</h6>
                                     </div>
                                 </div>
-                            )
-                        })}
-                    </ReactScrolleableFeed>
-                </div>
+                            : 
+                            <div className="messages-contact-messages">
+                                <div className="messages-message-container">
+                                    <span className="messages__username">{message.username}</span>
+                                    <p className="messages__message">{message.message}</p>
+                                    <h6 className="messages__timeago">30:43hs</h6>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </ReactScrolleableFeed>
+            </div>
             <div className="main__input-section" >
                 <input className="main__input" id="cosa" type="text" name="message" id="" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} />
             </div>

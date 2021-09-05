@@ -8,7 +8,9 @@ app.set('port', process.env.PORT || 3001)
 app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded());
+
 app.use('/users', require('./routes/users'))
+app.use('/chat', require('./routes/chat'))
 
 const server = app.listen(app.get('port'))
 console.log('Server on port', app.get('port'))

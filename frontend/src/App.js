@@ -13,7 +13,7 @@ const App = () => {
 
   const checkLogIn = () => {
     const userLogged = localStorage.getItem('userLogged')
-    if(userLogged) return <Main props={{"userLoggedMain": userLoggedMain, setUserLoggedMain}}/>
+    if(userLogged) return <Main setUserLoggedMain={setUserLoggedMain}/>
     else return <Login />
   }
 

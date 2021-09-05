@@ -5,9 +5,10 @@ import AddFriendsMenu from "../contexts/AddFriendsMenu";
 import BurgerMenu from './BurgerMenu';
 import Chat from './Chat';
 
-const Main = () => {
+const Main = ({setUserLoggedMain}) => {
     const [ active, setActive ] = useState(false)
     const { addFriendsMenu, setAddFriendsMenu } = useContext(AddFriendsMenu)
+    const [messages, setMessages] = useState("");
 
     return(
         <section className="main">
@@ -22,10 +23,10 @@ const Main = () => {
                             <i className="fas fa-search"></i>
                         </div>
                     </nav>
-                    <BurgerMenu active={active}/>
+                    <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain}/>
                 </section>
                 <section className="main__content-section">
-                    {addFriendsMenu ? <AddFriend /> : <MainContacts />}
+                    {addFriendsMenu ? <AddFriend /> : <MainContacts messages={messages} setMessages={setMessages}/>}
                     <div className="main_add-friends-container">
                         <div className={addFriendsMenu ? "main__add-friend-button active" : "main__add-friend-button" } onClick={() => {setAddFriendsMenu(true)}}>
                             <i className="fas fa-user-plus"></i>
@@ -33,7 +34,7 @@ const Main = () => {
                     </div>
                 </section>
             </section>
-            <Chat />
+            <Chat messages={messages} setMessages={setMessages}/>
         </section>
     )
 }

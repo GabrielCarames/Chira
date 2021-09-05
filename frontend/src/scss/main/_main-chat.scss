@@ -1,3 +1,9 @@
+.main__no-chat {
+    width: 1200px;
+    background-color: $second-color;
+    border-right: 2px solid #000;
+    border-left: 1px solid #000;
+}
 .main__chat-section {
     display: flex;
     flex-direction: column;
@@ -59,7 +65,7 @@
     .main__messages-section {
         height: 81vh;
         width: 100%;
-        background: rgba(90, 141, 141, 0.75);
+        background-color: #1976e080;
         box-shadow: inset 226px 260px 250px rgba(0, 0, 0, 0.25);
     }
     .main__input-section {
@@ -92,16 +98,19 @@
                 display: inline-block;
                 background-color: $second-color;
                 text-align: left;
-                margin: 50px 0 0 60px;
-                padding: 10px 20px 0 20px;
+                margin: 5px 0 20px 60px;
+                padding: 0px 10px 0 10px;
                 border-radius: 10px;
                 max-width: 500px;
                 .messages__username {
                     color: $first-alpha-color;
+                    font-size: $h5;
                 }
                 .messages__message {
                     font-weight: 400px;
+                    line-height: 1.2;
                     word-break: break-word;
+                    font-size: $h5;
                 }    
                 .messages__timeago {
                     text-align: right;
@@ -111,25 +120,29 @@
             }
         }
         .messages-contact-messages {
-            
+            display: flex;
+            justify-content: right;
+            padding: 20px;
             .messages-message-container {
                 display: inline-block;
-                // position: relative;
-                // min-width: min-content;
-                margin-left: calc(80% - 240px);
-                background-color: $first-color;
-                word-break: break-word;
+                background-color: $second-alpha-color;
                 text-align: right;
-                margin: 50px 0 0 calc(100% - 150px);;
+                // margin-left: calc(80% - 240px);
+                // margin: 50px 0 0 calc(100% - 150px);
+                // margin-left: 500px;
                 padding: 10px 20px 0 20px;
                 border-radius: 10px;
                 max-width: 500px;
                 .messages__username {
-                    color: $first-alpha-color;
+                    font-weight: 700px;
+                    color: $first-color;
+                    font-size: $h5;
                 }
                 .messages__message {
-                    line-height: 0;
-                    font-weight: 400px;
+                    font-weight: 500px;
+                    word-break: break-word;
+                    line-height: 1.2;
+                    font-size: $h5;
                 }    
                 .messages__timeago {
                     text-align: right;

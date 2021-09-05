@@ -411,7 +411,7 @@ body main {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  width: 98%;
+  width: 97%;
   padding: 0;
   margin: 0;
 }
@@ -421,7 +421,7 @@ body main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  padding-left: 8px;
+  padding-left: 15px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -706,6 +706,13 @@ body main {
   }
 }
 
+.main__no-chat {
+  width: 1200px;
+  background-color: #26313f;
+  border-right: 2px solid #000;
+  border-left: 1px solid #000;
+}
+
 .main__chat-section {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -832,7 +839,7 @@ body main {
 .main__chat-section .main__messages-section {
   height: 81vh;
   width: 100%;
-  background: rgba(90, 141, 141, 0.75);
+  background-color: #1976e080;
   -webkit-box-shadow: inset 226px 260px 250px rgba(0, 0, 0, 0.25);
           box-shadow: inset 226px 260px 250px rgba(0, 0, 0, 0.25);
 }
@@ -872,40 +879,53 @@ body main {
     display: inline-block;
     background-color: #26313f;
     text-align: left;
-    margin: 50px 0 0 60px;
-    padding: 10px 20px 0 20px;
+    margin: 5px 0 20px 60px;
+    padding: 0px 10px 0 10px;
     border-radius: 10px;
     max-width: 500px;
   }
   .main__chat-section .messages-user-logged-messages .messages-message-container .messages__username {
     color: #5297e8;
+    font-size: 13px;
   }
   .main__chat-section .messages-user-logged-messages .messages-message-container .messages__message {
     font-weight: 400px;
+    line-height: 1.2;
     word-break: break-word;
+    font-size: 13px;
   }
   .main__chat-section .messages-user-logged-messages .messages-message-container .messages__timeago {
     text-align: right;
     line-height: 0;
     color: #aaaaaa;
   }
+  .main__chat-section .messages-contact-messages {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: right;
+        -ms-flex-pack: right;
+            justify-content: right;
+    padding: 20px;
+  }
   .main__chat-section .messages-contact-messages .messages-message-container {
     display: inline-block;
-    margin-left: calc(80% - 240px);
-    background-color: #1975e0;
-    word-break: break-word;
+    background-color: #172029;
     text-align: right;
-    margin: 50px 0 0 calc(100% - 150px);
     padding: 10px 20px 0 20px;
     border-radius: 10px;
     max-width: 500px;
   }
   .main__chat-section .messages-contact-messages .messages-message-container .messages__username {
-    color: #5297e8;
+    font-weight: 700px;
+    color: #1975e0;
+    font-size: 13px;
   }
   .main__chat-section .messages-contact-messages .messages-message-container .messages__message {
-    line-height: 0;
-    font-weight: 400px;
+    font-weight: 500px;
+    word-break: break-word;
+    line-height: 1.2;
+    font-size: 13px;
   }
   .main__chat-section .messages-contact-messages .messages-message-container .messages__timeago {
     text-align: right;

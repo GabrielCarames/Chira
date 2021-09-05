@@ -23,6 +23,7 @@ module.exports = (io) => {
 
     socket.on("goToChat", async (userId, friendId) => {
       currentlyChat = await chatController.findChatByFriendId(userId, friendId)
+      console.log("este es el chat requerido", currentlyChat)
       io.emit("chatFound", currentlyChat);
     });
   
