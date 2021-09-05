@@ -6,6 +6,7 @@ import ReactScrolleableFeed from 'react-scrollable-feed'
 const Chat = () => {
     const [messages, setMessages] = useState("");
     const [inputMessage, setInputMessage] = useState("")
+    const [ chat, setChat ] = useState()
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const { _id, username, phoneNumber } = user
 
@@ -13,6 +14,10 @@ const Chat = () => {
         socket.emit('connected', user)
     }, [])
     
+    const messageInput = (message) => {
+        socket.emit("mensaje", user, message);
+    };
+
     useEffect(() => {
         socket.on("mensajes", (newMessage) => {
           setMessages([...messages, newMessage]);
@@ -23,10 +28,13 @@ const Chat = () => {
         };
     }, [messages]);
     
+    useEffect(() => {
+        socket.on("chatFound", (chat) => {
+            setChat(chat);
+        });
+    })
+
     
-    const messageInput = (message) => {
-        socket.emit("mensaje", user, message);
-    };
 
     useEffect(() => {
         const listener = event => {
@@ -68,6 +76,20 @@ const Chat = () => {
                     </div>
                 </nav>
                 <div className="main__messages-section messages">
+                    {
+                        chat && chat[0].messages.map((message) => {
+                            console.log("pantereando", message)
+                            return (
+                                <div className="messages-user-logged-messages">
+                                    <div className="messages-message-container">
+                                        <span className="messages__username">{message.user.username}</span>
+                                        <p className="messages__message">{message.message}</p>
+                                        <h6 className="messages__timeago">30:43hs</h6>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
                 <ReactScrolleableFeed>
                     {messages && messages.map((message) => {
                         return (

@@ -34,8 +34,11 @@ router.post('/addfriend', async function (req, res) {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const userId = user._id
     await userController.addNewFriend(userId, friendId)
+    const updatedUser = JSON.stringify(await userController.findUserById(userId))
+    localStorage.setItem('userLogged', updatedUser)
+    const updatedUserLogged = JSON.parse(localStorage.getItem('userLogged'))
     await chatController.createChat(user, friend, 'private')
-    res.sendStatus(201)
+    res.send(updatedUserLogged)
 })
 
 module.exports = router;

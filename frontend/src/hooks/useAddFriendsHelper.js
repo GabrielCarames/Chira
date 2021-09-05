@@ -22,6 +22,7 @@ export function useAddFriendsHelper() {
         try {
             const res = await axios.post('http://localhost:3001/users/addfriend', {friend})
             console.log("ganaste", res.data)
+            localStorage.setItem('userLogged', JSON.stringify(res.data))
         } catch (error) {
             if(error.response) setFlashMessage({type: 'failure', error: error.response.data})
             else setFlashMessage({type: 'failure', error: error})

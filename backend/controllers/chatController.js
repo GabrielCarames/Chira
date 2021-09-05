@@ -1,19 +1,22 @@
 const Chat = require('../models/Chat')
 const Message = require('../models/Message')
-const userController = {}
+const User = require('../models/User')
+const chatController = {}
 
-userController.saveMessages = async (user, message) => {
-    console.log("dale loco soy oy", user, message)
+chatController.saveMessages = async (user, message) => {
     const newMessage = new Message (
         {
             message,
-            user 
+            user
         }
-    )
-    await newMessage.save()
+        )
+        await newMessage.save()
+        console.log("pinocho", newMessage, newMessage._id)
+    const completeMessage = chatController.findMessageById(newMessage._id)
+    return completeMessage
 }
 
-userController.createChat = async (user, friend, type) => {
+chatController.createChat = async (user, friend, type) => {
     console.log("members", user, friend)
     const newChat = await new Chat(
         {
@@ -24,7 +27,40 @@ userController.createChat = async (user, friend, type) => {
         }
     );
     await newChat.save()
-    console.log("chat supuestamente ya creado")
 }
 
-module.exports = userController;
+chatController.findChatByFriendId = async (userId, friendId) => {
+    const chatFound = await Chat.find({
+        "users": {$in: [friendId, userId]} //Se fija en el campo de users del chat a ver si existe un chat entre el usuario logueado y el amigo
+    }).populate({
+        path: 'messages',
+        model: 'Message',
+            populate: {
+                path: 'user',
+                model: 'User'
+            }
+    }).populate({
+        path: 'users',
+        model: 'User'
+    })
+    return chatFound
+}
+
+chatController.findMessageById = async (messageId) => {
+    const message = await Message.findOne({_id: messageId}).populate({
+        path: 'user',
+        model: 'User'
+    })
+    return message
+}
+
+chatController.insertMessageInChat = async (fullMessage, currentlyChatId) => {
+    await Chat.findOneAndUpdate({_id: currentlyChatId}, 
+        {
+            $push: {
+                messages: fullMessage
+        }
+    })
+}
+
+module.exports = chatController;

@@ -20,6 +20,14 @@ userController.findUserByPhoneNumber = async (userData) => {
     return userRegistered
 }
 
+userController.findUserById = async (userId) => {
+    const user = User.findOne({_id: userId}).populate({
+        path: 'friends',
+        model: 'User'
+    })
+    return user
+}
+
 userController.findUsersByName = async (userName) => {
     const usersName = User.find({
         "username" : {'$regex' : '^' + userName + '', '$options' : 'i'
