@@ -48,10 +48,9 @@ const ChatMessages = ({chat, setChat, messages, setMessages}) => {
                 <ReactScrolleableFeed>
                     {
                         chat && chat[0].messages.map((message) => {
-                            console.log(message, message.user.username, user.username)
                             return (
                                 message.user.username === user.username ?
-                                <div className="messages-user-logged-messages">
+                                <div className="messages-user-logged-messages" key={message._id}>
                                     <div className="messages-message-container">
                                         <span className="messages__username">{message.user.username}</span>
                                         <p className="messages__message">{message.message}</p>
