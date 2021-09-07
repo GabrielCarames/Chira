@@ -11,6 +11,7 @@ module.exports = (io) => {
     socket.on('connected', async (userLogged) => {
       user = userLogged
       console.log("Usuario conectado", user.username)
+      socket.broadcast.emit('userConnected')
     })
 
     socket.on("mensaje", async (user, message) => {
@@ -18,22 +19,22 @@ module.exports = (io) => {
       const { username } = user
       const fullMessage = await chatController.saveMessages(user, message) // ojo que aca se crea el mensaje pero devuelve el id del user y no el objeto arregla eso y anda todo
       await chatController.insertMessageInChat(fullMessage, currentlyChat[0]._id)
-      io.emit("mensajes", { username, message });
+      socket.emit("mensajes", { username, message });
     });
 
     socket.on("goToChat", async (userId, friendId) => {
       currentlyChat = await chatController.findChatByFriendId(userId, friendId)
       console.log("este es el chat requerido", currentlyChat)
-      io.emit("chatFound", currentlyChat);
+      socket.emit("chatFound", currentlyChat);
     });
   
-    socket.on("disconnect", () => {
-      // console.log("se fue al carajo", user.username)
-      // io.emit("mensajes", {
-      //   servidor: "Servidor",
-      //   mensaje: `${user} ha abandonado la sala`,
-      // });
-    });
+    // socket.on("disconnect", () => {
+    //   // console.log("se fue al carajo", user.username)
+    //   // io.emit("mensajes", {
+    //   //   servidor: "Servidor",
+    //   //   mensaje: `${user} ha abandonado la sala`,
+    //   // });
+    // });
 
     // // Recibe y envia que un usuario esta escribiendo
     // socket.on('typing', (data) => {
@@ -41,6 +42,7 @@ module.exports = (io) => {
     // });
 
     socket.on('disconnect', () => {
+      socket.broadcast.emit('userDisconnected')
       io.emit('userdisconnect', socket.name)
     })
   });

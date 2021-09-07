@@ -7,12 +7,15 @@ const Chat = ({messages, setMessages}) => {
     const [ chat, setChat ] = useState()
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const { _id, username, phoneNumber } = user
+    const [userConnected, setUserConnected] = useState(false)
 
     useEffect(() => {
         socket.emit('connected', user)
     }, [])
 
     useEffect(() => {
+        socket.on('userConnected', () => {setUserConnected('En Linea')})
+        socket.on('userDisconnected', () => {setUserConnected(false)})
         socket.on("chatFound", (chat) => {
             setChat(chat);
         });
@@ -25,7 +28,7 @@ const Chat = ({messages, setMessages}) => {
                     <img className="navbar__avatar" src={avatar} alt="contact-avatar" />
                     <div className="navbar__info">
                         <p className="navbar__username">{chat[0].users[1].username}</p>
-                        <p className="navbar__timeago">Ultima vez hace 3032</p>
+                        <p className="navbar__timeago">{userConnected ? userConnected : 'Ultima vez hace 3032'}</p>
                     </div>
                 </div>
                 <div className="navbar__tools">

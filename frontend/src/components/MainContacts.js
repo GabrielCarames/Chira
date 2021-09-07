@@ -14,7 +14,8 @@ const MainContacts = ({messages, setMessages}) => {
     }
         
     useEffect(async () => {
-        setLastMessage(messages)
+        console.log("esoyyreloco", messages)
+        messages && setLastMessage(messages)
         const data = await axios.get('http://localhost:3001/chat/allchats')
         let chats = data.data
         setChats(chats)
@@ -25,27 +26,29 @@ const MainContacts = ({messages, setMessages}) => {
         <>
             <main className="main__contacts">
                 <ul className="main__contacts-list list">
-                    {user && 
+                    {user &&
                         user.friends.map((friend) => {
                             return (
-                                <li className="list__item" key={friend._id} onClick={() => goToChat(friend._id)}>
+                                <li className="list__item" onClick={() => goToChat(friend._id)}>
                                     <img className="list__avatar" src={avatar} alt="user-avatar" />
                                     {
-                                        chats && chats.map((chat) => {
+                                        chats ? chats.map((chat) => {
+                                            console.log("soyicar", chat)
                                             return chat.users.map((user) => {
                                                 if(user._id === friend._id) {
                                                     return (
                                                         <>
                                                             <div className="list__info">
                                                                 <p className="list__username">{friend.username}</p>{/*abajo si el mensaje del input se envia, arriba lo toma y realiza un re render en donde llega aca y se fija si messages fue actualizado para mostrar el ultimo mensaje actualizado */}
-                                                                <p className="list__messages">{messages ? chat.messages[chat.messages.length -1].message : chat.messages[chat.messages.length -1].message}</p>
-                                                            </div>
-                                                            <h6 className="list__time-ago">{moment(chat.messages[chat.messages.length -1].createdAt).format("LT")}</h6>
+                                                                <p className="list__messages">{chat.messages.length !== 0 ? (messages ? chat.messages[chat.messages.length -1].message : chat.messages[chat.messages.length -1].message) : ""}</p>
+                                                            </div>{/*ambos se fijan PRIMERO SI, hay un "historiaL" de mensajes?, caso falso no muestra nada, caso verdadero se pregunta SEGUNDO SI, se envió algun mensaje ahora mismo? y forzosamente muestra el ultimo mensaje / hora de ultiam vez */}
+                                                            <h6 className="list__time-ago">{chat.messages.length !== 0 ? (messages ? moment(chat.messages[chat.messages.length -1].createdAt).format("LT") : moment(chat.messages[chat.messages.length -1].createdAt).format("LT")) : ""}</h6>
                                                         </>
                                                     )
-                                                } 
+                                                }
                                             })
                                         })
+                                        : <div>puto</div>
                                     }
                                 </li>
                             )
