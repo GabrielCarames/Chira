@@ -1,13 +1,12 @@
-import avatar from '../images/avatar.png'
+import send from '../images/send.png'
 import socket from './Socket'
 import { useState, useEffect } from 'react'
 import ReactScrolleableFeed from 'react-scrollable-feed'
 import moment from 'moment'
+import axios from 'axios'
 
 const ChatMessages = ({chat, setChat, messages, setMessages}) => {
     const [inputMessage, setInputMessage] = useState("")
-    // const [messages, setMessages] = useState("");
-    // const [ chat, setChat ] = useState()
     const user = JSON.parse(localStorage.getItem('userLogged'))
 
     useEffect(() => {
@@ -23,16 +22,15 @@ const ChatMessages = ({chat, setChat, messages, setMessages}) => {
         socket.emit("mensaje", user, message);
     };
 
+
     useEffect(() => {
         const listener = event => {
             if (event.code === "Enter" || event.code === "NumpadEnter") {
                 const input = document.getElementsByClassName('main__input');
                 if (input[0] === document.activeElement) {
                     event.preventDefault();
-                    if(inputMessage!== '') {
-                        messageInput(inputMessage)
-                        input[0].value = ''
-                    }
+                    verifyAndSendInputValue(input[0].value)
+                    input[0].value = ''
                 }
             }
         };
@@ -40,8 +38,20 @@ const ChatMessages = ({chat, setChat, messages, setMessages}) => {
         return () => {
             document.removeEventListener("keydown", listener);
         };
-      }, [inputMessage]);
+    }, [inputMessage]);
 
+    const verifyAndSendInputValue = (input) => {
+        if(input !== '') {
+            messageInput(input)
+        }
+    }
+
+    const inputOnSubmit = (e) => {
+        e.preventDefault()
+        const inputValue = e.target[0].value
+        verifyAndSendInputValue(inputValue)
+        e.target[0].value = ''
+    }
     return (
         <>
             <div className="main__messages-section messages">
@@ -90,9 +100,12 @@ const ChatMessages = ({chat, setChat, messages, setMessages}) => {
                     })}
                 </ReactScrolleableFeed>
             </div>
-            <div className="main__input-section" >
+            <form className="main__input-section" onSubmit={(e) => inputOnSubmit(e)}>
                 <input className="main__input" id="cosa" type="text" name="message" id="" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} />
-            </div>
+                <button className="main__send-message" type="submit">
+                    <img className="main__send-image" src={send} alt="" />
+                </button>
+            </form>
         </>
     )
 }

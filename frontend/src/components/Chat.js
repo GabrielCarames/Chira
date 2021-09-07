@@ -28,7 +28,7 @@ const Chat = ({messages, setMessages}) => {
                     <img className="navbar__avatar" src={avatar} alt="contact-avatar" />
                     <div className="navbar__info">
                         <p className="navbar__username">{chat[0].users[1].username}</p>
-                        <p className="navbar__timeago">{userConnected ? userConnected : 'Ultima vez hace 3032'}</p>
+                        <p className="navbar__timeago">{userConnected && userConnected}</p>
                     </div>
                 </div>
                 <div className="navbar__tools">
