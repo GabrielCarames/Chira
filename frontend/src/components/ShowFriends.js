@@ -26,7 +26,7 @@ const ShowFriends = ({friendSearch}) => {
             return () => clearTimeout(timer);
         }
     }, [friendSearch])// eslint-disable-line react-hooks/exhaustive-deps
-
+    
     var alreadyFriends
     if(loader) {
         return <Loader type="Oval" color="#00BFFF" className="friends__loader" height={60} width={60} />
@@ -39,7 +39,7 @@ const ShowFriends = ({friendSearch}) => {
                             showFriends.map(friend => {
                                 alreadyFriends = friend.friends.filter((friend) => user._id === friend._id )
                                 return (
-                                    <li className="list__item" key={friend._id}>     
+                                    <li className="list__item" key={friend._id}>    
                                         <img className="list__avatar" src={avatar} alt="user-avatar" />
                                         <div className="list__info">
                                             <p className="list__username">{friend.username}</p>

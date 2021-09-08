@@ -29,6 +29,7 @@ router.post('/friendsearch', async function (req, res) {
 router.post('/addfriend', async function (req, res) {
     const friend = req.body.friend
     const friendId = friend._id
+    console.log("ESTE ES EL USUARIO AL QUE QUERES AGREGAR COMO CONTACTO: ", friendId)
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const userId = user._id
     await userController.addNewFriend(userId, friendId)

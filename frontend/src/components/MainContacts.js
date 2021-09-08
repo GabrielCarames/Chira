@@ -14,7 +14,6 @@ const MainContacts = ({messages, setMessages}) => {
     }
         
     useEffect(async () => {
-        console.log("esoyyreloco", messages)
         messages && setLastMessage(messages)
         const data = await axios.get('http://localhost:3001/chat/allchats')
         let chats = data.data
@@ -33,7 +32,7 @@ const MainContacts = ({messages, setMessages}) => {
                                     <img className="list__avatar" src={avatar} alt="user-avatar" />
                                     {
                                         chats ? chats.map((chat) => {
-                                            console.log("soyicar", chat)
+                                            console.log("chats.users", chat.users)
                                             return chat.users.map((user) => {
                                                 if(user._id === friend._id) {
                                                     return (

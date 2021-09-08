@@ -7,6 +7,7 @@ import axios from 'axios'
 
 const ChatMessages = ({chat, setChat, messages, setMessages}) => {
     const [inputMessage, setInputMessage] = useState("")
+    const [userTyping, setUsertyping] = useState(false)
     const user = JSON.parse(localStorage.getItem('userLogged'))
 
     useEffect(() => {
@@ -22,8 +23,8 @@ const ChatMessages = ({chat, setChat, messages, setMessages}) => {
         socket.emit("mensaje", user, message);
     };
 
-
     useEffect(() => {
+        if(inputMessage) socket.emit('typing', user.username)
         const listener = event => {
             if (event.code === "Enter" || event.code === "NumpadEnter") {
                 const input = document.getElementsByClassName('main__input');
@@ -52,6 +53,11 @@ const ChatMessages = ({chat, setChat, messages, setMessages}) => {
         verifyAndSendInputValue(inputValue)
         e.target[0].value = ''
     }
+
+    useEffect(() => {
+        socket.on('typing', (username) => {console.log("aaaaaaaaaaaaaaaaaaaaaaa", username); setUsertyping(username)})
+    })
+
     return (
         <>
             <div className="main__messages-section messages">
@@ -98,6 +104,7 @@ const ChatMessages = ({chat, setChat, messages, setMessages}) => {
                             </div>
                         )
                     })}
+            <div>{userTyping && `${userTyping} está escribiendo`} </div>
                 </ReactScrolleableFeed>
             </div>
             <form className="main__input-section" onSubmit={(e) => inputOnSubmit(e)}>

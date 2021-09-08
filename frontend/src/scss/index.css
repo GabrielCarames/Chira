@@ -771,7 +771,7 @@ body main {
   margin-left: 20px;
 }
 
-.main__chat-section .main__chat-navbar .navbar__contact .navbar__info .navbar__timeago {
+.main__chat-section .main__chat-navbar .navbar__contact .navbar__info .navbar__connected {
   font-size: 13px;
   color: #aaaaaa;
 }
@@ -929,7 +929,7 @@ body main {
     word-break: break-word;
     font-size: 13px;
   }
-  .main__chat-section .messages-user-logged-messages .messages-message-container .messages__timeago {
+  .main__chat-section .messages-user-logged-messages .messages-message-container .messages__connected {
     text-align: right;
     line-height: 0;
     color: #aaaaaa;
@@ -962,7 +962,7 @@ body main {
     line-height: 1.2;
     font-size: 13px;
   }
-  .main__chat-section .messages-contact-messages .messages-message-container .messages__timeago {
+  .main__chat-section .messages-contact-messages .messages-message-container .messages__connected {
     text-align: right;
     line-height: 0;
     color: #aaaaaa;

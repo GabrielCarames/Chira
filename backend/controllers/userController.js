@@ -31,9 +31,9 @@ userController.findUsersByName = async (userName) => {
     const usersName = User.find({
         "username" : {'$regex' : '^' + userName + '', '$options' : 'i'
     }}).populate({
-            path: 'friends',
-            model: 'User'
-        })
+        path: 'friends',
+        model: 'User'
+    })
     return usersName
     // {"username" : {$regex : userName}}
 }
