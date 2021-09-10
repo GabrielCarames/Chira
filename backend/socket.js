@@ -1,4 +1,5 @@
-const chatController = require('./controllers/chatController')
+const chatController = require('./controllers/chatController');
+const userController = require('./controllers/userController');
 
 module.exports = (io) => {
   let currentlyChat
@@ -13,13 +14,21 @@ module.exports = (io) => {
     currentlyUsers = currentlyUsers.filter((user) => user.socketId !== socketId);
   };
   
-  const getUserLoggedFromList = (userLoggedId) => {
-    return currentlyUsers.find((user) => currentlyUsers.userLoggedId === userLoggedId);
+  const getUserLoggedFromList = (socketId) => {
+    let user = currentlyUsers.filter((user) => user.socketId === socketId)
+    return user
   };
 
   io.on('connection', (socket) => {
     socket.on('connected', async (userLogged) => {
-      addUserLoggedToList(userLogged._id, socket.id);
+      console.log(getUserLoggedFromList(socket.id))
+      if(getUserLoggedFromList(socket.id).length === 0) {
+        await userController.addSocketIdToUser(userLogged._id, socket.id)
+        const updatedUserLogged = await userController.findUserById(userLogged._id)
+        localStorage.setItem('userLogged', JSON.stringify(updatedUserLogged));
+        socket.emit('userLogged', updatedUserLogged)
+        addUserLoggedToList(updatedUserLogged[0]._id, socket.id);
+      }
       io.emit("getUsersConnected", currentlyUsers);
     })
 
@@ -39,7 +48,14 @@ module.exports = (io) => {
       socket.broadcast.emit('typing', username)
     });
 
-    socket.on('disconnect', () => {
+    // socket.on('update', async (userLogged, friend) => {
+    //   userToUpdate = await userController.findUserById(userLogged._id)
+    //   friendToUpdate = await userController.findUserById(friend._id)
+    //   socket.to(friendToUpdate[0].socketId[0]).emit('latenesadentro')
+    // })
+
+    socket.on('disconnect', async () => {
+      await userController.removeSocketIdFromUserBySocketId(socket.id)
       removeUserLoggedFromList(socket.id)
       io.emit("getUsersConnected", currentlyUsers);
     })

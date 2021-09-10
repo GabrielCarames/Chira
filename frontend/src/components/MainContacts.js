@@ -6,48 +6,76 @@ import moment from 'moment'
 
 const MainContacts = ({messages, setMessages}) => {
     const [ chats, setChats ] = useState()
+    const [ contactChat, setContactChat ] = useState()
     const [ lastMessage, setLastMessage ] = useState()
     const user = JSON.parse(localStorage.getItem('userLogged'))
+    const [ contactData, setContactData ] = useState(false)
+    const [ chatEvent, setChatEvent ] = useState(false)
+
     const goToChat = (friendId) => {
         const userId = user._id
         socket.emit('goToChat', userId, friendId)
     }
         
+    useEffect(() => {
+        // socket.on('latenesadentro', () => {
+        //     console.log("EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE")
+        //     setChatEvent('reloadContacts')
+        // })
+    }, [])
+
     useEffect(async () => {
         messages && setLastMessage(messages)
         const data = await axios.get('http://localhost:3001/chat/allchats')
         let chats = data.data
-        setChats(chats)
-        console.log("chats", chats)
+        chats && setChats(chats)
     }, [messages])
+
+    const algo = (friend) => {
+        
+        if(chats){
+            var contactToShow
+            chats.map((chat) => {
+                contactToShow = chat.users.filter((user) => user._id === friend._id)
+            })
+            const hola = chats.filter((chat) => {
+                return chat.users.filter((user) => user._id === friend._id)
+            })
+            setContactChat(hola[0])
+            setContactData(contactToShow[0])
+        }
+    }
+
+    const showCurrentLastMessage = () => {
+        if(lastMessage) return lastMessage[lastMessage.length -1].message 
+        else return false
+    }
+
+    const showHistoryLastMessage = () => {
+        console.log("contactChat", contactChat)
+        if(contactChat.messages.length !== 0) return contactChat.messages[contactChat.messages.length -1].message
+        else return false
+    }
 
     return(
         <>
             <main className="main__contacts">
                 <ul className="main__contacts-list list">
-                    {user &&
+                    {user.friends && 
                         user.friends.map((friend) => {
+                            !contactData && algo(friend)
                             return (
-                                <li className="list__item" onClick={() => goToChat(friend._id)}>
+                                <li className="list__item" onClick={() => goToChat(friend._id)} key={friend}>
                                     <img className="list__avatar" src={avatar} alt="user-avatar" />
                                     {
-                                        chats ? chats.map((chat) => {
-                                            console.log("chats.users", chat.users)
-                                            return chat.users.map((user) => {
-                                                if(user._id === friend._id) {
-                                                    return (
-                                                        <>
-                                                            <div className="list__info">
-                                                                <p className="list__username">{friend.username}</p>{/*abajo si el mensaje del input se envia, arriba lo toma y realiza un re render en donde llega aca y se fija si messages fue actualizado para mostrar el ultimo mensaje actualizado */}
-                                                                <p className="list__messages">{chat.messages.length !== 0 ? (messages ? chat.messages[chat.messages.length -1].message : chat.messages[chat.messages.length -1].message) : ""}</p>
-                                                            </div>{/*ambos se fijan PRIMERO SI, hay un "historiaL" de mensajes?, caso falso no muestra nada, caso verdadero se pregunta SEGUNDO SI, se envió algun mensaje ahora mismo? y forzosamente muestra el ultimo mensaje / hora de ultiam vez */}
-                                                            <h6 className="list__time-ago">{chat.messages.length !== 0 ? (messages ? moment(chat.messages[chat.messages.length -1].createdAt).format("LT") : moment(chat.messages[chat.messages.length -1].createdAt).format("LT")) : ""}</h6>
-                                                        </>
-                                                    )
-                                                }
-                                            })
-                                        })
-                                        : <div>puto</div>
+                                        contactData && 
+                                        <>
+                                            <div className="list__info">
+                                                <p className="list__username">{contactData && contactData.username}</p>{/*abajo si el mensaje del input se envia, arriba lo toma y realiza un re render en donde llega aca y se fija si messages fue actualizado para mostrar el ultimo mensaje actualizado */}
+                                                <p className="list__messages">{showCurrentLastMessage() ? showCurrentLastMessage() : showHistoryLastMessage() ? showHistoryLastMessage() : ''}</p>
+                                            </div>{/*ambos se fijan PRIMERO SI, se envio un mensaje ahora mismo?, caso falso no muestra nada, caso verdadero se pregunta SEGUNDO SI, hay un "historiaL" de mensajes?y forzosamente muestra el ultimo mensaje / hora de ultiam vez */}
+                                            <h6 className="list__time-ago">{contactChat.messages.length !== 0 ? (messages ? moment(contactChat.messages[contactChat.messages.length -1].createdAt).format("LT") : moment(contactChat.messages[contactChat.messages.length -1].createdAt).format("LT")) : ""}</h6>
+                                        </>
                                     }
                                 </li>
                             )
@@ -59,4 +87,7 @@ const MainContacts = ({messages, setMessages}) => {
     )
 }
 
+
+{/* <p className="list__messages">{contactChat.messages.length !== 0 ? (messages ? messages[0].message : contactChat.messages[contactChat.messages.length -1].message) : ""}</p> */}
+{/* <h6 className="list__time-ago">{contactChat.messages.length !== 0 ? (messages ? moment(contactChat.messages[contactChat.messages.length -1].createdAt).format("LT") : moment(contactChat.messages[contactChat.messages.length -1].createdAt).format("LT")) : ""}</h6> */}
 export default MainContacts

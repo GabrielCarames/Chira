@@ -2,24 +2,24 @@ import avatar from '../images/avatar.png'
 import socket from './Socket'
 import { useState, useEffect } from 'react'
 import ChatMessages from './ChatMessages'
+import axios from 'axios'
 
 const Chat = ({messages, setMessages}) => {
     const [ chat, setChat ] = useState()
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-    const { _id, username, phoneNumber } = userLogged
     const contact = chat && chat[0].users.filter((user) => user.username !== userLogged.username)[0]
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [connectedContact, setConnectedContact] = useState([]);
+    console.log("USURARIO LOGUEADO SUPUESTAMNETE", userLogged)
+    console.log("contacto", contact)
 
     useEffect(() => {
-        socket.emit('connected', userLogged)
         socket.on("getUsersConnected", (users) => {
+            console.log("usuarios conectados", users)
             setOnlineUsers(users)
             if(chat) {
                 setConnectedContact(onlineUsers.filter((user) => user.userLoggedId === contact._id))
             }
-            
-            
         });
         socket.on("chatFound", (chat) => {
             setChat(chat);
@@ -28,7 +28,7 @@ const Chat = ({messages, setMessages}) => {
 
     useEffect(() => {
         if(chat) {
-            console.log('contactId: ', contact._id)
+            console.log("MASTODONTE GRANDE", onlineUsers)
             console.log("cosa", onlineUsers.filter((user) => user.userLoggedId === contact._id))
             setConnectedContact(onlineUsers.filter((user) => user.userLoggedId === contact._id))
         }

@@ -43,7 +43,6 @@ const ShowFriends = ({friendSearch}) => {
                                         <img className="list__avatar" src={avatar} alt="user-avatar" />
                                         <div className="list__info">
                                             <p className="list__username">{friend.username}</p>
-                                            <p className="list__last-seen">Hace 39 horas</p>
                                         </div>
                                         <div className="list__add-friend" >
                                             {

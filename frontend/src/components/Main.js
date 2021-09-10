@@ -1,14 +1,23 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import AddFriend from './AddFriend'
 import MainContacts from './MainContacts'
 import AddFriendsMenu from "../contexts/AddFriendsMenu";
 import BurgerMenu from './BurgerMenu';
 import Chat from './Chat';
+import socket from './Socket'
 
 const Main = ({setUserLoggedMain}) => {
     const [ active, setActive ] = useState(false)
     const { addFriendsMenu, setAddFriendsMenu } = useContext(AddFriendsMenu)
     const [messages, setMessages] = useState("");
+    const userLogged = JSON.parse(localStorage.getItem('userLogged'))
+
+    useEffect(() => {
+        socket.emit('connected', userLogged) // ver forma de actualizar el usuario solo cuando lo quiero + la primera vez que logueas
+        socket.on("userLogged", (userLoggede) => {
+            localStorage.setItem('userLogged', JSON.stringify(userLoggede[0]));
+        });
+    })
 
     return(
         <section className="main">

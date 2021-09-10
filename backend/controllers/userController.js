@@ -20,7 +20,7 @@ userController.findUserByPhoneNumber = async (phoneNumber) => {
 }
 
 userController.findUserById = async (userId) => {
-    const user = User.findOne({_id: userId}).populate({
+    const user = await User.find({_id: userId}).populate({
         path: 'friends',
         model: 'User'
     })
@@ -60,6 +60,26 @@ userController.addNewFriend = async (userId, newFriendId) => {
         {
             $push: {
                 friends: userId
+            }
+        }
+    )
+}
+
+userController.addSocketIdToUser = async (userId, socketId) => {
+    await User.findOneAndUpdate({ _id: userId },
+        {
+            $push: {
+                socketId: socketId
+            }
+        }
+    )
+}
+
+userController.removeSocketIdFromUserBySocketId = async (socketId) => {
+    await User.findOneAndUpdate({ socketId: socketId },
+        {
+            $pull: {
+                socketId: socketId
             }
         }
     )

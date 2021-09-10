@@ -12,7 +12,8 @@ router.post('/register', async function (req, res) {
     const userData = req.body
     const existingUser = await userController.findExistingUser(userData)
     if(existingUser) {
-        localStorage.setItem('userLogged', JSON.stringify(existingUser));
+        // localStorage.setItem('userLogged', JSON.stringify(existingUser));
+        console.log("me encontro")
         res.send(existingUser)
     } else {
         const newUser = await userController.createUser(userData)
@@ -29,12 +30,12 @@ router.post('/friendsearch', async function (req, res) {
 router.post('/addfriend', async function (req, res) {
     const friend = req.body.friend
     const friendId = friend._id
-    console.log("ESTE ES EL USUARIO AL QUE QUERES AGREGAR COMO CONTACTO: ", friendId)
     const user = JSON.parse(localStorage.getItem('userLogged'))
-    const userId = user._id
+    const userId = user[0]._id
+    console.log("cosa a", userId, "cosa b", friendId)
     await userController.addNewFriend(userId, friendId)
     const updatedUserLogged = await updateUserLogged(userId)
-    await chatController.createChat(user, friend, 'private')
+    await chatController.createChat(user[0], friend, 'private')
     res.send(updatedUserLogged)
 })
 
@@ -44,5 +45,12 @@ const updateUserLogged = async (userId) => {
     const updatedUserLogged = JSON.parse(localStorage.getItem('userLogged'))
     return updatedUserLogged
 }
+
+router.post('/updateuser', async function (req, res) {
+    const userLogged = req.body.userLogged
+    const requestUser = await userController.findUsersByName(userLogged.username)
+    console.log("este es el usuarioi a updatear", requestUser)
+    // res.send(requestUser)
+})
 
 module.exports = router;

@@ -48,7 +48,7 @@ const Login = () => {
                 </button>
                 <button type="submit" className={active ? loading ? "form__otp-button active loading" :"form__otp-button active" : "form__otp-button"}>
                     <p className="form__text-button">
-                         {loading ? <Loader type="Oval" color="#00BFFF" height={40} width={65} /> : "Registrarse"}
+                         {loading ? <Loader type="Oval" color="#00BFFF" height={40} width={65} /> : "Entrar"}
                         </p>
                 </button>
                 <div id="sign-in-button"></div>

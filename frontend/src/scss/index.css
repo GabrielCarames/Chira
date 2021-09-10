@@ -929,7 +929,7 @@ body main {
     word-break: break-word;
     font-size: 13px;
   }
-  .main__chat-section .messages-user-logged-messages .messages-message-container .messages__connected {
+  .main__chat-section .messages-user-logged-messages .messages-message-container .messages__timeago {
     text-align: right;
     line-height: 0;
     color: #aaaaaa;
@@ -962,7 +962,7 @@ body main {
     line-height: 1.2;
     font-size: 13px;
   }
-  .main__chat-section .messages-contact-messages .messages-message-container .messages__connected {
+  .main__chat-section .messages-contact-messages .messages-message-container .messages__timeago {
     text-align: right;
     line-height: 0;
     color: #aaaaaa;
@@ -1089,7 +1089,7 @@ body main {
       -ms-flex-direction: column;
           flex-direction: column;
   list-style: none;
-  padding-left: 10px;
+  padding-left: 20px;
   margin: 0;
 }
 
@@ -1130,7 +1130,7 @@ body main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-left: 200px;
+  margin-left: 270px;
   font-size: 24px;
   border-radius: 3000px;
   width: 50px;
@@ -1150,7 +1150,7 @@ body main {
   cursor: none;
 }
 
-.main__add-friends .friends-section .friends-list .list__item .list__add-friend .fa-plus {
+.main__add-friends .friends-section .friends-list .list__item .list__add-friend .fa-user-plus {
   cursor: pointer;
 }
 
