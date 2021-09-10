@@ -39,8 +39,8 @@ module.exports = (io) => {
       socket.emit("mensajes", { username, message });
     });
 
-    socket.on("goToChat", async (userId, friendId) => {
-      currentlyChat = await chatController.findChatByFriendId(userId, friendId)
+    socket.on("goToChat", async (userId, contactId) => {
+      currentlyChat = await chatController.findChatByContactId(userId, contactId)
       socket.emit("chatFound", currentlyChat);
     });
 
@@ -48,10 +48,10 @@ module.exports = (io) => {
       socket.broadcast.emit('typing', username)
     });
 
-    // socket.on('update', async (userLogged, friend) => {
+    // socket.on('update', async (userLogged, contact) => {
     //   userToUpdate = await userController.findUserById(userLogged._id)
-    //   friendToUpdate = await userController.findUserById(friend._id)
-    //   socket.to(friendToUpdate[0].socketId[0]).emit('latenesadentro')
+    //   contactToUpdate = await userController.findUserById(contact._id)
+    //   socket.to(contactToUpdate[0].socketId[0]).emit('latenesadentro')
     // })
 
     socket.on('disconnect', async () => {

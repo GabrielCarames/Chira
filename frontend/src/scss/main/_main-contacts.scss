@@ -43,10 +43,10 @@
             }
         }
     }
-    .main__add-friends {
+    .main__add-contacts {
         width: 100%;
     }
-    .main__add-friend-button {
+    .main__add-contact-button {
         position: absolute;
         display: flex;
         flex-direction: column;
@@ -116,14 +116,14 @@
                     }
                 }
             }
-            .main_add-friends-container {
+            .main_add-contacts-container {
                 position: absolute;
                 bottom: 0;
                 margin-top: 90px;
                 width: 460px;
                 height: 65px;
                 pointer-events: none;
-                .main__add-friend-button {
+                .main__add-contact-button {
                     position: absolute;
                     bottom: 0;
                     pointer-events:initial;

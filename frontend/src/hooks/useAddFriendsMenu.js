@@ -1,4 +1,4 @@
 import { useContext } from "react";
-import AddFriendsMenu from "../contexts/AddFriendsMenu";
+import AddContactsMenu from "../contexts/AddContactsMenu";
 
-export default () => useContext(AddFriendsMenu);
+export default () => useContext(AddContactsMenu);

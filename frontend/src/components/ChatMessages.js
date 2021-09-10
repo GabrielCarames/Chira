@@ -3,7 +3,6 @@ import socket from './Socket'
 import { useState, useEffect } from 'react'
 import ReactScrolleableFeed from 'react-scrollable-feed'
 import moment from 'moment'
-import axios from 'axios'
 
 const ChatMessages = ({chat, setChat, messages, setMessages}) => {
     const [inputMessage, setInputMessage] = useState("")

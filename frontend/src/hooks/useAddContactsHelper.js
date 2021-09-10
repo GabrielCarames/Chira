@@ -4,13 +4,13 @@ import _ from 'lodash';
 import FlashContext from '../contexts/FlashContext'
 import socket from '../components/Socket'
 
-export function useAddFriendsHelper() {
+export function useAddContactsHelper() {
   const { setFlashMessage } = useContext(FlashContext)
   const userLogged = JSON.parse(localStorage.getItem('userLogged'))
 
   const onSearchSubmit = _.memoize(async term => {
     try {
-        const res = await axios.post('http://localhost:3001/users/friendsearch', {term})
+        const res = await axios.post('http://localhost:3001/users/contactsearch', {term})
         const contactsFiltered = res.data.filter((user) => user._id !== userLogged._id)
         return contactsFiltered
     } catch (error) {
@@ -19,10 +19,10 @@ export function useAddFriendsHelper() {
     }
   });
 
-  const addFriend = async friend => {
+  const addContact = async contact => {
     try {
-        const res = await axios.post('http://localhost:3001/users/addfriend', {friend})
-        socket.emit('update', userLogged, friend)
+        const res = await axios.post('http://localhost:3001/users/addcontact', {contact})
+        socket.emit('update', userLogged, contact)
         // localStorage.setItem('userLogged', JSON.stringify(res.data))
     } catch (error) {
         if(error.response) setFlashMessage({type: 'failure', error: error.response.data})
@@ -32,8 +32,8 @@ export function useAddFriendsHelper() {
   
   return {
     onSearchSubmit,
-    addFriend
+    addContact
   }
 }
 
-export default useAddFriendsHelper
+export default useAddContactsHelper

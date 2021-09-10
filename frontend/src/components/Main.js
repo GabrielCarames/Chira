@@ -1,15 +1,15 @@
 import { useState, useContext, useEffect } from 'react'
-import AddFriend from './AddFriend'
+import AddContact from './AddContact'
 import MainContacts from './MainContacts'
-import AddFriendsMenu from "../contexts/AddFriendsMenu";
+import AddContactsMenu from "../contexts/AddContactsMenu";
 import BurgerMenu from './BurgerMenu';
 import Chat from './Chat';
 import socket from './Socket'
 
 const Main = ({setUserLoggedMain}) => {
     const [ active, setActive ] = useState(false)
-    const { addFriendsMenu, setAddFriendsMenu } = useContext(AddFriendsMenu)
-    const [messages, setMessages] = useState("");
+    const { addContactsMenu, setAddContactsMenu } = useContext(AddContactsMenu)
+    const [ messages, setMessages ] = useState("");
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
 
     useEffect(() => {
@@ -35,9 +35,9 @@ const Main = ({setUserLoggedMain}) => {
                     <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain}/>
                 </section>
                 <section className="main__content-section">
-                    {addFriendsMenu ? <AddFriend /> : <MainContacts messages={messages} setMessages={setMessages}/>}
-                    <div className="main_add-friends-container">
-                        <div className={addFriendsMenu ? "main__add-friend-button active" : "main__add-friend-button" } onClick={() => {setAddFriendsMenu(true)}}>
+                    {addContactsMenu ? <AddContact /> : <MainContacts messages={messages} setMessages={setMessages}/>}
+                    <div className="main_add-contacts-container">
+                        <div className={addContactsMenu ? "main__add-contact-button active" : "main__add-contact-button" } onClick={() => {setAddContactsMenu(true)}}>
                             <i className="fas fa-user-plus"></i>
                         </div>
                     </div>

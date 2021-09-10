@@ -1,14 +1,14 @@
-.main__add-friends {
+.main__add-contacts {
     background-color: $second-alpha-color;
     height: 100%;
-    .add-friends__navbar {
+    .add-contacts__navbar {
         display: flex;
         align-items: center;
         justify-content: center;
         height: 70px;
         font-size: $h3;
         border-bottom: 2px solid #26313f;
-        .add-friends__back {
+        .add-contacts__back {
             @include icons-div-styles;
             &:hover {
                 background-color: #37465a;
@@ -17,7 +17,7 @@
                 cursor: pointer;
             }
         }
-        .add-friends__input-container {
+        .add-contacts__input-container {
             width: 380px;
             height: 40px;
             border-radius: 3000px;
@@ -34,7 +34,7 @@
             .fa-search {
                 margin-left: 10px;
             }
-            .add-friends__input {
+            .add-contacts__input {
                 width: 331px;
                 height: 38px;
                 border: none;
@@ -47,21 +47,21 @@
             }
         }
     }
-    .friends-section {
+    .contacts-section {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        .friends-suggestion {
+        .contacts-suggestion {
             text-align: center;
         }
-        .friends-not-found {
+        .contacts-not-found {
             text-align: center;
         }
-        .friends__loader {
+        .contacts__loader {
             margin-top: 50%;
             text-align: center;
         }
-        .friends-list {
+        .contacts-list {
             display: flex;
             flex-direction: column;
             list-style: none;
@@ -87,7 +87,7 @@
                         color: $gray-color;
                     }
                 }
-                .list__add-friend {
+                .list__add-contact {
                     display: flex;
                     align-items: center;
                     justify-content: center;

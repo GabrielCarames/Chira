@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ShowFlashMessages from './components/ShowFlashMessages';
 import FlashContext from './contexts/FlashContext';
-import AddFriendsMenu from './contexts/AddFriendsMenu';
+import AddContactsMenu from './contexts/AddContactsMenu';
 
 const App = () => {
   const [ flashMessage, setFlashMessage ] = useState(false)
-  const [ addFriendsMenu, setAddFriendsMenu ] = useState(false)
+  const [ addContactsMenu, setAddContactsMenu ] = useState(false)
   const [ userLoggedMain, setUserLoggedMain ] = useState(true)
 
 
@@ -21,7 +21,7 @@ const App = () => {
   return (
     <main>
       <FlashContext.Provider value={{flashMessage, setFlashMessage}}>
-          <AddFriendsMenu.Provider value={{addFriendsMenu, setAddFriendsMenu}}>
+          <AddContactsMenu.Provider value={{addContactsMenu, setAddContactsMenu}}>
             <ShowFlashMessages delay={3000}/>
             <BrowserRouter>
               <Switch>
@@ -30,7 +30,7 @@ const App = () => {
                   <Route path="*" component={checkLogIn} />
               </Switch>
             </BrowserRouter>
-          </AddFriendsMenu.Provider>
+          </AddContactsMenu.Provider>
       </FlashContext.Provider>
     </main>
   );

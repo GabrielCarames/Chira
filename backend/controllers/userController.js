@@ -8,7 +8,7 @@ userController.findExistingUser = async (userData) => {
         'phoneNumber': userPhoneNumber,
         'username': userName
     }).populate({
-        path: 'friends',
+        path: 'contacts',
         model: 'User'
     })
     return user
@@ -21,7 +21,7 @@ userController.findUserByPhoneNumber = async (phoneNumber) => {
 
 userController.findUserById = async (userId) => {
     const user = await User.find({_id: userId}).populate({
-        path: 'friends',
+        path: 'contacts',
         model: 'User'
     })
     return user
@@ -31,7 +31,7 @@ userController.findUsersByName = async (userName) => {
     const usersName = User.find({
         "username" : {'$regex' : '^' + userName + '', '$options' : 'i'
     }}).populate({
-        path: 'friends',
+        path: 'contacts',
         model: 'User'
     })
     return usersName
@@ -48,18 +48,18 @@ userController.createUser = async (userData) => {
     return newUser
 }
 
-userController.addNewFriend = async (userId, newFriendId) => {
+userController.addNewContact = async (userId, newContactId) => {
     await User.findOneAndUpdate({ _id: userId },
         {
             $push: {
-                friends: newFriendId
+                contacts: newContactId
             }
         }
     )
-    await User.findOneAndUpdate({ _id: newFriendId },
+    await User.findOneAndUpdate({ _id: newContactId },
         {
             $push: {
-                friends: userId
+                contacts: userId
             }
         }
     )

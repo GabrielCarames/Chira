@@ -21,21 +21,20 @@ router.post('/register', async function (req, res) {
     }
 })
 
-router.post('/friendsearch', async function (req, res) {
+router.post('/contactsearch', async function (req, res) {
     const userName = req.body.term
     const requestUser = await userController.findUsersByName(userName)
     res.send(requestUser)
 })
 
-router.post('/addfriend', async function (req, res) {
-    const friend = req.body.friend
-    const friendId = friend._id
+router.post('/addcontact', async function (req, res) {
+    const contact = req.body.contact
+    const contactId = contact._id
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const userId = user[0]._id
-    console.log("cosa a", userId, "cosa b", friendId)
-    await userController.addNewFriend(userId, friendId)
+    await userController.addNewContact(userId, contactId)
     const updatedUserLogged = await updateUserLogged(userId)
-    await chatController.createChat(user[0], friend, 'private')
+    await chatController.createChat(user[0], contact, 'private')
     res.send(updatedUserLogged)
 })
 

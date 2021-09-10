@@ -459,11 +459,11 @@ body main {
   width: 100px;
 }
 
-.main__content-section .main__add-friends {
+.main__content-section .main__add-contacts {
   width: 100%;
 }
 
-.main__content-section .main__add-friend-button {
+.main__content-section .main__add-contact-button {
   position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -490,17 +490,17 @@ body main {
   margin-right: 10px;
 }
 
-.main__content-section .main__add-friend-button.active {
+.main__content-section .main__add-contact-button.active {
   visibility: hidden;
 }
 
-.main__content-section .main__add-friend-button:hover {
+.main__content-section .main__add-contact-button:hover {
   -webkit-transition: .25s;
   transition: .25s;
   background-color: #5297e8;
 }
 
-.main__content-section .main__add-friend-button .fa-user-plus {
+.main__content-section .main__add-contact-button .fa-user-plus {
   font-size: 24px;
 }
 
@@ -511,7 +511,7 @@ body main {
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
     position: inherit;
   }
-  .main .main__content-section .main_add-friends-container {
+  .main .main__content-section .main_add-contacts-container {
     position: absolute;
     bottom: 0;
     margin-top: 90px;
@@ -519,20 +519,20 @@ body main {
     height: 65px;
     pointer-events: none;
   }
-  .main .main__content-section .main_add-friends-container .main__add-friend-button {
+  .main .main__content-section .main_add-contacts-container .main__add-contact-button {
     position: absolute;
     bottom: 0;
     pointer-events: initial;
   }
-  .main .main__content-section .main_add-friends-container .main__add-friend-button.active {
+  .main .main__content-section .main_add-contacts-container .main__add-contact-button.active {
     visibility: hidden;
   }
-  .main .main__content-section .main_add-friends-container .main__add-friend-button:hover {
+  .main .main__content-section .main_add-contacts-container .main__add-contact-button:hover {
     -webkit-transition: .25s;
     transition: .25s;
     background-color: #5297e8;
   }
-  .main .main__content-section .main_add-friends-container .main__add-friend-button .fa-user-plus {
+  .main .main__content-section .main_add-contacts-container .main__add-contact-button .fa-user-plus {
     font-size: 24px;
   }
 }
@@ -969,12 +969,12 @@ body main {
   }
 }
 
-.main__add-friends {
+.main__add-contacts {
   background-color: #172029;
   height: 100%;
 }
 
-.main__add-friends .add-friends__navbar {
+.main__add-contacts .add-contacts__navbar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -989,7 +989,7 @@ body main {
   border-bottom: 2px solid #26313f;
 }
 
-.main__add-friends .add-friends__navbar .add-friends__back {
+.main__add-contacts .add-contacts__navbar .add-contacts__back {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1008,15 +1008,15 @@ body main {
   transition: .2s;
 }
 
-.main__add-friends .add-friends__navbar .add-friends__back:hover {
+.main__add-contacts .add-contacts__navbar .add-contacts__back:hover {
   background-color: #37465a;
 }
 
-.main__add-friends .add-friends__navbar .add-friends__back .fa-arrow-left {
+.main__add-contacts .add-contacts__navbar .add-contacts__back .fa-arrow-left {
   cursor: pointer;
 }
 
-.main__add-friends .add-friends__navbar .add-friends__input-container {
+.main__add-contacts .add-contacts__navbar .add-contacts__input-container {
   width: 380px;
   height: 40px;
   border-radius: 3000px;
@@ -1030,19 +1030,19 @@ body main {
           align-items: center;
 }
 
-.main__add-friends .add-friends__navbar .add-friends__input-container:focus-within {
+.main__add-contacts .add-contacts__navbar .add-contacts__input-container:focus-within {
   border-color: #1975e0;
 }
 
-.main__add-friends .add-friends__navbar .add-friends__input-container:hover {
+.main__add-contacts .add-contacts__navbar .add-contacts__input-container:hover {
   border-color: #1975e0;
 }
 
-.main__add-friends .add-friends__navbar .add-friends__input-container .fa-search {
+.main__add-contacts .add-contacts__navbar .add-contacts__input-container .fa-search {
   margin-left: 10px;
 }
 
-.main__add-friends .add-friends__navbar .add-friends__input-container .add-friends__input {
+.main__add-contacts .add-contacts__navbar .add-contacts__input-container .add-contacts__input {
   width: 331px;
   height: 38px;
   border: none;
@@ -1054,7 +1054,7 @@ body main {
   font-family: 'Poppins';
 }
 
-.main__add-friends .friends-section {
+.main__add-contacts .contacts-section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1067,20 +1067,20 @@ body main {
           justify-content: center;
 }
 
-.main__add-friends .friends-section .friends-suggestion {
+.main__add-contacts .contacts-section .contacts-suggestion {
   text-align: center;
 }
 
-.main__add-friends .friends-section .friends-not-found {
+.main__add-contacts .contacts-section .contacts-not-found {
   text-align: center;
 }
 
-.main__add-friends .friends-section .friends__loader {
+.main__add-contacts .contacts-section .contacts__loader {
   margin-top: 50%;
   text-align: center;
 }
 
-.main__add-friends .friends-section .friends-list {
+.main__add-contacts .contacts-section .contacts-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1093,7 +1093,7 @@ body main {
   margin: 0;
 }
 
-.main__add-friends .friends-section .friends-list .list__item {
+.main__add-contacts .contacts-section .contacts-list .list__item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1104,7 +1104,7 @@ body main {
   border-bottom: 2px solid #26313f;
 }
 
-.main__add-friends .friends-section .friends-list .list__item .list__info {
+.main__add-contacts .contacts-section .contacts-list .list__item .list__info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1116,11 +1116,11 @@ body main {
   line-height: 0;
 }
 
-.main__add-friends .friends-section .friends-list .list__item .list__info .list__last-seen {
+.main__add-contacts .contacts-section .contacts-list .list__item .list__info .list__last-seen {
   color: #aaaaaa;
 }
 
-.main__add-friends .friends-section .friends-list .list__item .list__add-friend {
+.main__add-contacts .contacts-section .contacts-list .list__item .list__add-contact {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1137,20 +1137,20 @@ body main {
   height: 50px;
 }
 
-.main__add-friends .friends-section .friends-list .list__item .list__add-friend:hover {
+.main__add-contacts .contacts-section .contacts-list .list__item .list__add-contact:hover {
   background-color: #26313f;
 }
 
-.main__add-friends .friends-section .friends-list .list__item .list__add-friend .fas {
+.main__add-contacts .contacts-section .contacts-list .list__item .list__add-contact .fas {
   font-size: 24px;
 }
 
-.main__add-friends .friends-section .friends-list .list__item .list__add-friend .fa-user-check {
+.main__add-contacts .contacts-section .contacts-list .list__item .list__add-contact .fa-user-check {
   pointer-events: none;
   cursor: none;
 }
 
-.main__add-friends .friends-section .friends-list .list__item .list__add-friend .fa-user-plus {
+.main__add-contacts .contacts-section .contacts-list .list__item .list__add-contact .fa-user-plus {
   cursor: pointer;
 }
 

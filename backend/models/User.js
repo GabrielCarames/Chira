@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose')
 const User = new Schema({
     username:  String,
     phoneNumber: String,
-    friends: [
+    contacts: [
         {
             type: Schema.Types.ObjectId,
             ref: 'User',

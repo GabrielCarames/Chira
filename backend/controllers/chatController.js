@@ -13,16 +13,16 @@ chatController.saveMessages = async (user, message) => {
     return completeMessage
 }
 
-chatController.createChat = async (user, friend, type) => {
+chatController.createChat = async (user, contact, type) => {
     const newChat = await new Chat({
         type: type, 
-        users: [user, friend]
+        users: [user, contact]
     });
     await newChat.save()
 }
 
-chatController.findChatByFriendId = async (userId, friendId) => {
-    const chatFound = await Chat.find({"users": {$all: [userId, friendId]}}).populate({ //Se fija en el campo de users del chat a ver si existe un chat entre el usuario logueado y el amigo
+chatController.findChatByContactId = async (userId, contactId) => {
+    const chatFound = await Chat.find({"users": {$all: [userId, contactId]}}).populate({ //Se fija en el campo de users del chat a ver si existe un chat entre el usuario logueado y el amigo
         path: 'messages',
         model: 'Message',
             populate: {
@@ -34,7 +34,6 @@ chatController.findChatByFriendId = async (userId, friendId) => {
         model: 'User'
     })
     return chatFound
-    // {"users": {$eq: [friendId, userId]}}
 }
 
 chatController.findMessageById = async (messageId) => {

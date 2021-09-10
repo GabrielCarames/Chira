@@ -12,9 +12,9 @@ const MainContacts = ({messages, setMessages}) => {
     const [ contactData, setContactData ] = useState(false)
     const [ chatEvent, setChatEvent ] = useState(false)
 
-    const goToChat = (friendId) => {
+    const goToChat = (contactId) => {
         const userId = user._id
-        socket.emit('goToChat', userId, friendId)
+        socket.emit('goToChat', userId, contactId)
     }
         
     useEffect(() => {
@@ -31,15 +31,15 @@ const MainContacts = ({messages, setMessages}) => {
         chats && setChats(chats)
     }, [messages])
 
-    const algo = (friend) => {
+    const algo = (contact) => {
         
         if(chats){
             var contactToShow
             chats.map((chat) => {
-                contactToShow = chat.users.filter((user) => user._id === friend._id)
+                contactToShow = chat.users.filter((user) => user._id === contact._id)
             })
             const hola = chats.filter((chat) => {
-                return chat.users.filter((user) => user._id === friend._id)
+                return chat.users.filter((user) => user._id === contact._id)
             })
             setContactChat(hola[0])
             setContactData(contactToShow[0])
@@ -61,11 +61,11 @@ const MainContacts = ({messages, setMessages}) => {
         <>
             <main className="main__contacts">
                 <ul className="main__contacts-list list">
-                    {user.friends && 
-                        user.friends.map((friend) => {
-                            !contactData && algo(friend)
+                    {user.contacts && 
+                        user.contacts.map((contact) => {
+                            !contactData && algo(contact)
                             return (
-                                <li className="list__item" onClick={() => goToChat(friend._id)} key={friend}>
+                                <li className="list__item" onClick={() => goToChat(contact._id)} key={contact}>
                                     <img className="list__avatar" src={avatar} alt="user-avatar" />
                                     {
                                         contactData && 
