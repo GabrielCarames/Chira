@@ -5,8 +5,8 @@ import ReactScrolleableFeed from 'react-scrollable-feed'
 import moment from 'moment'
 
 const ChatMessages = ({chat, setChat, messages, setMessages}) => {
-    const [inputMessage, setInputMessage] = useState("")
-    const [userTyping, setUsertyping] = useState(false)
+    const [ inputMessage, setInputMessage ] = useState("")
+    const [ userTyping, setUsertyping ] = useState(false)
     const user = JSON.parse(localStorage.getItem('userLogged'))
 
     useEffect(() => {
@@ -53,10 +53,18 @@ const ChatMessages = ({chat, setChat, messages, setMessages}) => {
         e.target[0].value = ''
     }
 
-    useEffect(() => {
-        socket.on('typing', (username) => {console.log("aaaaaaaaaaaaaaaaaaaaaaa", username); setUsertyping(username)})
-    })
+    function timeoutFunction() {
+        setUsertyping(false)
+    }
 
+    useEffect(() => {
+        let timeout;
+        socket.on('typing', (username) => {
+            setUsertyping(username)
+            clearTimeout(timeout);
+            timeout = setTimeout(timeoutFunction, 2000); //Basicamente el clear es retardar a la ejecucion del setTimeOut
+        })
+    })
     return (
         <>
             <div className="main__messages-section messages">
@@ -103,8 +111,8 @@ const ChatMessages = ({chat, setChat, messages, setMessages}) => {
                             </div>
                         )
                     })}
-            <div>{userTyping && `${userTyping} está escribiendo`} </div>
                 </ReactScrolleableFeed>
+                    <div className="messages__typing">{userTyping && `${userTyping} está escribiendo`} </div>
             </div>
             <form className="main__input-section" onSubmit={(e) => inputOnSubmit(e)}>
                 <input className="main__input" id="cosa" type="text" name="message" id="" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} />

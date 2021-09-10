@@ -8,7 +8,7 @@ const BurgerMenu = ({active, setUserLoggedMain}) => {
             <section className="burger__user-info">
                 <img className="burger__user-avatar" src={avatar} alt="user-avatar" />
                 <h4 className="burger__user-name">{user.username}</h4>
-                <p className="burger__user-number">+54 11 3915 3265</p>
+                <p className="burger__user-number">{user.phoneNumber}</p>
             </section>
             <section className="burger__settings-section">
                 <ul className="burger__setting-list list">

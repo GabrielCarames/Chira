@@ -38,10 +38,10 @@ const MainContacts = ({messages, setMessages}) => {
             chats.map((chat) => {
                 contactToShow = chat.users.filter((user) => user._id === contact._id)
             })
-            const hola = chats.filter((chat) => {
+            const chatToShow = chats.filter((chat) => {
                 return chat.users.filter((user) => user._id === contact._id)
             })
-            setContactChat(hola[0])
+            setContactChat(chatToShow[0])
             setContactData(contactToShow[0])
         }
     }

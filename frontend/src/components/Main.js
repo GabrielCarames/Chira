@@ -19,6 +19,12 @@ const Main = ({setUserLoggedMain}) => {
         });
     })
 
+    window.onclick = (event) => {
+        if(active && event.target.className !== 'burger__user-info' && event.target.className !== 'main__settings' && event.target.className !== 'fas fa-bars') {
+            setActive(false)
+        }
+    }
+
     return(
         <section className="main">
             <section className="main__left-section">

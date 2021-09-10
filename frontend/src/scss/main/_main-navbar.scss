@@ -44,6 +44,9 @@
                     display: flex;
                     align-items: center;
                     cursor: pointer;
+                    &:hover {
+                        opacity: 0.6;
+                    }
                     .list-avatar {
                         font-size: 25px;
                         width: 30px;

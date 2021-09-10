@@ -21,7 +21,6 @@ module.exports = (io) => {
 
   io.on('connection', (socket) => {
     socket.on('connected', async (userLogged) => {
-      console.log(getUserLoggedFromList(socket.id))
       if(getUserLoggedFromList(socket.id).length === 0) {
         await userController.addSocketIdToUser(userLogged._id, socket.id)
         const updatedUserLogged = await userController.findUserById(userLogged._id)
