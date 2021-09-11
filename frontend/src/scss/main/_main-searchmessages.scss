@@ -1,0 +1,115 @@
+.main__search-messages {
+    width: 400px;
+    border-right: 2px solid black;
+    .search__navbar-section {
+        height: 90px;
+        background-color: $second-color;
+        border-left: 2px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: $h3;
+        .search-messages__back {
+            @include icons-div-styles;
+            &:hover {
+                background-color: #37465a;
+            }
+            .fa-arrow-left {
+                cursor: pointer;
+            }
+        }
+        .search-messages__input-container {
+            width: 280px;
+            height: 40px;
+            border-radius: 3000px;
+            background-color: $second-color;
+            border: 1px solid $second-alpha-color;
+            display: flex;
+            align-items: center;
+            &:focus-within {
+                border-color: $first-color;
+            }
+            &:hover {
+                border-color: $first-color;
+            }
+            .fa-search {
+                margin-left: 10px;
+            }
+            .search-messages__input {
+                width: 231px;
+                height: 38px;
+                border: none;
+                background-color: $second-color;
+                border-radius: 3000px;
+                outline: none;
+                color: $white-color;
+                padding-left: 15px;
+                font-family: 'Poppins';
+            }
+        }
+    }
+    .search__results-section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: auto;
+        .messages-suggestion {
+            text-align: center;
+        }
+        .messages-not-found {
+            text-align: center;
+        }
+        .messages__loader {
+            margin-top: 50%;
+            text-align: center;
+        }
+        .messages {
+            margin-top: 50%;
+            text-align: center;
+        }
+        .messages-list {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            padding-left: 20px;
+            margin: 0;
+            .list__item {
+                display: flex;
+                align-items: center;
+                height: 82px;
+                border-bottom: 2px solid #26313f;
+                cursor: pointer;
+                &:hover {
+                    opacity: 0.8;
+                }
+                .list__avatar {
+
+                }
+                .list__info {
+                    display: flex;
+                    flex-direction: column;
+                    margin-left: 30px;
+                    line-height: 0;
+                    width: 70%;
+                    .list__username {
+
+                    }
+                    .list__message-container {
+                        width:fit-content;
+                        background-color: $first-color;
+                        padding: 2px;
+                        border-radius: 10px;
+                        .list__message {
+                            // color: $gray-color;
+                        }
+                    }
+                }
+                .list__date-message {
+                    margin-right: 10px;
+                    width: 60px;
+                    font-size: $h5;
+                }
+            }
+        }
+    }
+}

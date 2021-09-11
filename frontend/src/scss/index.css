@@ -728,6 +728,10 @@ body main {
   border-right: 2px solid #000;
 }
 
+.main__chat-section.search {
+  width: 800px;
+}
+
 .main__chat-section .main__chat-navbar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1174,6 +1178,181 @@ body main {
 
 .main__add-contacts .contacts-section .contacts-list .list__item .list__add-contact .fa-user-plus {
   cursor: pointer;
+}
+
+.main__search-messages {
+  width: 400px;
+  border-right: 2px solid black;
+}
+
+.main__search-messages .search__navbar-section {
+  height: 90px;
+  background-color: #26313f;
+  border-left: 2px solid black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 18px;
+}
+
+.main__search-messages .search__navbar-section .search-messages__back {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 300px;
+  margin-right: 15px;
+  cursor: pointer;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.main__search-messages .search__navbar-section .search-messages__back:hover {
+  background-color: #37465a;
+}
+
+.main__search-messages .search__navbar-section .search-messages__back .fa-arrow-left {
+  cursor: pointer;
+}
+
+.main__search-messages .search__navbar-section .search-messages__input-container {
+  width: 280px;
+  height: 40px;
+  border-radius: 3000px;
+  background-color: #26313f;
+  border: 1px solid #172029;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main__search-messages .search__navbar-section .search-messages__input-container:focus-within {
+  border-color: #1975e0;
+}
+
+.main__search-messages .search__navbar-section .search-messages__input-container:hover {
+  border-color: #1975e0;
+}
+
+.main__search-messages .search__navbar-section .search-messages__input-container .fa-search {
+  margin-left: 10px;
+}
+
+.main__search-messages .search__navbar-section .search-messages__input-container .search-messages__input {
+  width: 231px;
+  height: 38px;
+  border: none;
+  background-color: #26313f;
+  border-radius: 3000px;
+  outline: none;
+  color: white;
+  padding-left: 15px;
+  font-family: 'Poppins';
+}
+
+.main__search-messages .search__results-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: auto;
+}
+
+.main__search-messages .search__results-section .messages-suggestion {
+  text-align: center;
+}
+
+.main__search-messages .search__results-section .messages-not-found {
+  text-align: center;
+}
+
+.main__search-messages .search__results-section .messages__loader {
+  margin-top: 50%;
+  text-align: center;
+}
+
+.main__search-messages .search__results-section .messages {
+  margin-top: 50%;
+  text-align: center;
+}
+
+.main__search-messages .search__results-section .messages-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  list-style: none;
+  padding-left: 20px;
+  margin: 0;
+}
+
+.main__search-messages .search__results-section .messages-list .list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 82px;
+  border-bottom: 2px solid #26313f;
+  cursor: pointer;
+}
+
+.main__search-messages .search__results-section .messages-list .list__item:hover {
+  opacity: 0.8;
+}
+
+.main__search-messages .search__results-section .messages-list .list__item .list__info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-left: 30px;
+  line-height: 0;
+  width: 70%;
+}
+
+.main__search-messages .search__results-section .messages-list .list__item .list__info .list__message-container {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: #1975e0;
+  padding: 2px;
+  border-radius: 10px;
+}
+
+.main__search-messages .search__results-section .messages-list .list__item .list__date-message {
+  margin-right: 10px;
+  width: 60px;
+  font-size: 13px;
 }
 
 .main__navbar-section {

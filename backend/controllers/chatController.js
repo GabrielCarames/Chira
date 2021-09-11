@@ -44,6 +44,16 @@ chatController.findMessageById = async (messageId) => {
     return message
 }
 
+chatController.findMessageByMessage = async (message) => {
+    const messageFound = await Message.find({
+        "message" : {'$regex' : '^' + message + '', '$options' : 'i'
+    }}).populate({
+        path: 'user',
+        model: 'User'
+    })
+    return messageFound
+}
+
 chatController.findAllChats = async () => {
     const chat = await Chat.find().populate({ //Se fija en el campo de users del chat a ver si existe un chat entre el usuario logueado y el amigo
         path: 'messages',

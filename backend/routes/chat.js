@@ -8,6 +8,13 @@ router.get('/allchats', async function (req, res) {
     res.send(chats)
 })
 
+router.post('/searchmessages', async function (req, res) {
+    const messageToFind = req.body.message
+    console.log("messageaencontrar", messageToFind)
+    const message = await chatController.findMessageByMessage(messageToFind)
+    console.log("message encontrados", message)
+    res.send(message)
+})
 
 
 
