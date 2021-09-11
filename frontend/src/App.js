@@ -5,12 +5,12 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ShowFlashMessages from './components/ShowFlashMessages';
 import FlashContext from './contexts/FlashContext';
 import AddContactsMenu from './contexts/AddContactsMenu';
-
+import TestContext from './contexts/TestContext';
 const App = () => {
   const [ flashMessage, setFlashMessage ] = useState(false)
   const [ addContactsMenu, setAddContactsMenu ] = useState(false)
   const [ userLoggedMain, setUserLoggedMain ] = useState(true)
-
+  const [ chat, setChat ] = useState()
 
   const checkLogIn = () => {
     const userLogged = localStorage.getItem('userLogged')
@@ -20,18 +20,20 @@ const App = () => {
 
   return (
     <main>
-      <FlashContext.Provider value={{flashMessage, setFlashMessage}}>
-          <AddContactsMenu.Provider value={{addContactsMenu, setAddContactsMenu}}>
-            <ShowFlashMessages delay={3000}/>
-            <BrowserRouter>
-              <Switch>
-                  <Route exact path="/" component={checkLogIn} />
-                  <Route exact path="/login" component={Login} />
-                  <Route path="*" component={checkLogIn} />
-              </Switch>
-            </BrowserRouter>
-          </AddContactsMenu.Provider>
-      </FlashContext.Provider>
+      <TestContext.Provider value={{chat, setChat}}>
+        <FlashContext.Provider value={{flashMessage, setFlashMessage}}>
+            <AddContactsMenu.Provider value={{addContactsMenu, setAddContactsMenu}}>
+              <ShowFlashMessages delay={3000}/>
+              <BrowserRouter>
+                <Switch>
+                    <Route exact path="/" component={checkLogIn} />
+                    <Route exact path="/login" component={Login} />
+                    <Route path="*" component={checkLogIn} />
+                </Switch>
+              </BrowserRouter>
+            </AddContactsMenu.Provider>
+        </FlashContext.Provider>
+      </TestContext.Provider>
     </main>
   );
 }

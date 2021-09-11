@@ -52,7 +52,6 @@ const MainContacts = ({messages, setMessages}) => {
     }
 
     const showHistoryLastMessage = () => {
-        console.log("contactChat", contactChat)
         if(contactChat.messages.length !== 0) return contactChat.messages[contactChat.messages.length -1].message
         else return false
     }

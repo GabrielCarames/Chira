@@ -1,11 +1,11 @@
 import avatar from '../images/avatar.png'
 import socket from './Socket'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import ChatMessages from './ChatMessages'
 import SearchMessages from './SearchMessages'
-
+import TestContext from "../contexts/TestContext";
 const Chat = ({messages, setMessages}) => {
-    const [ chat, setChat ] = useState()
+    const { chat, setChat } = useContext(TestContext)
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const contact = chat && chat[0].users.filter((user) => user.username !== userLogged.username)[0]
     const [ onlineUsers, setOnlineUsers ] = useState([]);
@@ -13,6 +13,8 @@ const Chat = ({messages, setMessages}) => {
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
     const [ goToMessage, setGoToMessage ] = useState(false)
 
+
+     
     useEffect(() => {
         socket.on("getUsersConnected", (users) => {
             setOnlineUsers(users)
