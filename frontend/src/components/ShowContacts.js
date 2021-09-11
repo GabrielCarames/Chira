@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useAddContactsHelper } from '../hooks/useAddContactsHelper'
 import avatar from '../images/avatar.png'
 import Loader from "react-loader-spinner";
-
+import socket from './Socket'
 const ShowContacts = ({contactSearch}) => {
     const { addContact, onSearchSubmit } = useAddContactsHelper();
     const [ showContacts, setShowContacts ] = useState();
@@ -27,6 +27,11 @@ const ShowContacts = ({contactSearch}) => {
         }
     }, [contactSearch])// eslint-disable-line react-hooks/exhaustive-deps
     
+    const goToChat = (contactId) => {
+        const userId = user._id
+        socket.emit('goToChat', userId, contactId)
+    }
+
     var alreadyContacts
     if(loader) {
         return <Loader type="Oval" color="#00BFFF" className="contacts__loader" height={60} width={60} />
@@ -39,7 +44,7 @@ const ShowContacts = ({contactSearch}) => {
                             showContacts.map(contact => {
                                 alreadyContacts = contact.contacts.filter((contact) => user._id === contact._id )
                                 return (
-                                    <li className="list__item" key={contact._id}>    
+                                    <li className="list__item" key={contact._id} onClick={() => alreadyContacts[0] && goToChat(contact._id)}>   
                                         <img className="list__avatar" src={avatar} alt="user-avatar" />
                                         <div className="list__info">
                                             <p className="list__username">{contact.username}</p>

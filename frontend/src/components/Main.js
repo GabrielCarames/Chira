@@ -34,7 +34,7 @@ const Main = ({setUserLoggedMain}) => {
                             <i className="fas fa-bars"></i>
                         </div>
                         <h3 className="navbar__title">Chira</h3>
-                        <div className="main__search">
+                        <div className="main__search" onClick={() => setAddContactsMenu(true)}>
                             <i className="fas fa-search"></i>
                         </div>
                     </nav>

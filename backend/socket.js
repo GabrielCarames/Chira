@@ -51,11 +51,6 @@ module.exports = (io) => {
     //   userToUpdate = await userController.findUserById(userLogged._id)
     //   contactToUpdate = await userController.findUserById(contact._id)
     //   socket.to(contactToUpdate[0].socketId[0]).emit('latenesadentro')
-  // promesas son todo lo que nesitoce en la vida para progresar si, eso haré xD
-  // A ver decime una frase en español que te la traduzco
-  // Let's see, tell me one prhase in Spanish i will trastale it.
-  // Ayer estaba en mi cama desnudo cuando el mueble se me vino abajo y me rompió toda la verga.
-  // Yesterday i was in my bed naked when the forniture fell down and broke all my dick
     // })
 
     socket.on('disconnect', async () => {

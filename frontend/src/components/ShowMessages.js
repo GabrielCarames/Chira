@@ -28,9 +28,7 @@ const ShowMessages = ({messageSearch, goToMessage , setGoToMessage}) => {
     const scrollToMessage = (messageId) => {
         console.log("message", messageId)
         let messageItem = document.getElementById(messageId)
-        console.log(messageItem)
         setGoToMessage(messageId)
-        // messageItem.classList.add('active')
         messageItem.scrollIntoView({behavior: "smooth"})
     }
 
