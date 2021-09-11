@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import ReactScrolleableFeed from 'react-scrollable-feed'
 import moment from 'moment'
 
-const ChatMessages = ({chat, setChat, messages, setMessages}) => {
+const ChatMessages = ({chat, setChat, messages, setMessages, goToMessage}) => {
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
     const user = JSON.parse(localStorage.getItem('userLogged'))
@@ -65,15 +65,21 @@ const ChatMessages = ({chat, setChat, messages, setMessages}) => {
             timeout = setTimeout(timeoutFunction, 2000); //Basicamente el clear es retardar a la ejecucion del setTimeOut
         })
     })
+
+    useEffect(() => {
+        goToMessage &&
+        console.log("pedazo de puto", goToMessage)
+    }, [goToMessage])
+
     return (
         <>
-            <div className="main__messages-section messages">
-                <ReactScrolleableFeed>
+            <div className="main__messages-section messages" id="list-messages">
+                <ReactScrolleableFeed className="messages__scroll">
                     {
                         chat && chat[0].messages.map((message) => {
                             return (
                                 message.user.username === user.username ?
-                                <div className="messages-user-logged-messages" key={message._id}>
+                                <div className={goToMessage === message._id ? 'messages-user-logged-messages active' : 'messages-user-logged-messages'} key={message._id} id={message._id}>
                                     <div className="messages-message-container">
                                         <span className="messages__username">{message.user.username}</span>
                                         <p className="messages__message">{message.message}</p>
@@ -81,20 +87,20 @@ const ChatMessages = ({chat, setChat, messages, setMessages}) => {
                                     </div>
                                 </div>
                             : 
-                            <div className="messages-contact-messages">
-                                <div className="messages-message-container">
-                                    <span className="messages__username">{message.user.username}</span>
-                                    <p className="messages__message">{message.message}</p>
-                                    <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
+                                <div className={goToMessage === message._id ? 'messages-contact-messages active' : 'messages-contact-messages'} id={message._id}>
+                                    <div className="messages-message-container">
+                                        <span className="messages__username">{message.user.username}</span>
+                                        <p className="messages__message">{message.message}</p>
+                                        <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
+                                    </div>
                                 </div>
-                            </div>
                             )
                         })
                     }
                     {messages && messages.map((message) => {
                         return (
                             message.username === user.username ?
-                                <div className="messages-user-logged-messages">
+                                <div className={goToMessage === message._id ? 'messages-user-logged-messages active' : 'messages-user-logged-messages'} id={message._id}>
                                     <div className="messages-message-container">
                                         <span className="messages__username">{message.username}</span>
                                         <p className="messages__message">{message.message}</p>
@@ -102,13 +108,14 @@ const ChatMessages = ({chat, setChat, messages, setMessages}) => {
                                     </div>
                                 </div>
                             : 
-                            <div className="messages-contact-messages">
-                                <div className="messages-message-container">
-                                    <span className="messages__username">{message.username}</span>
-                                    <p className="messages__message">{message.message}</p>
-                                    <h6 className="messages__timeago">30:43hs</h6>
+                                <div className={goToMessage === message._id ? 'messages-contact-messages active' : 'messages-contact-messages'} id={message._id}>
+                                    <div className="messages-message-container">
+                                        <span className="messages__username">{message.username}</span>
+                                        
+                                        <p className="messages__message">{message.message}</p>
+                                        <h6 className="messages__timeago">30:43hs</h6>
+                                    </div>
                                 </div>
-                            </div>
                         )
                     })}
                 </ReactScrolleableFeed>

@@ -118,7 +118,18 @@
         .main__messages-section{
             display: flex;
             flex-direction: column;
+            .messages__scroll::-webkit-scrollbar {
+                width: 10px;
+            }
+            .messages__scroll::-webkit-scrollbar-thumb {
+                height: 10px;
+                background-color: $first-color;
+                box-shadow: 3px solid black;
+            }  
             .messages-user-logged-messages {
+                &.active {
+                    background-color: $first-color;
+                }
                 .messages-message-container {
                     display: inline-block;
                     background-color: $second-color;
@@ -136,6 +147,9 @@
                         line-height: 1.2;
                         word-break: break-word;
                         font-size: $h5;
+                        &.active {
+                            color: red;
+                        }
                     }    
                     .messages__timeago {
                         text-align: right;
@@ -148,6 +162,9 @@
                 display: flex;
                 justify-content: right;
                 padding: 20px;
+                &.active {
+                    background-color: $first-color;
+                }
                 .messages-message-container {
                     display: inline-block;
                     background-color: $second-alpha-color;

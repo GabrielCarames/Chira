@@ -1,18 +1,13 @@
-import send from '../images/send.png'
-import socket from './Socket'
-import { useState, useEffect } from 'react'
-import ReactScrolleableFeed from 'react-scrollable-feed'
-import moment from 'moment'
+import { useState } from 'react'
 import ShowMessages from './ShowMessages'
 
-const SearchMessages = ({setShowSearchMessages}) => {
+const SearchMessages = ({setShowSearchMessages, goToMessage , setGoToMessage}) => {
     const [ messageSearch, setMessageSearch ] = useState();
-    
 
     return (
         <section className="main__search-messages search">
             <div className="search__navbar-section">
-                <div className="search-messages__back" onClick={() => { setShowSearchMessages(false) }}>
+                <div className="search-messages__back" onClick={() => { setShowSearchMessages(false); setGoToMessage(false)}}>
                         <i className="fas fa-arrow-left"></i>
                 </div>
                 <div className="search-messages__input-container">
@@ -21,7 +16,7 @@ const SearchMessages = ({setShowSearchMessages}) => {
                 </div>
             </div>
             <div className="search__results-section">
-                <ShowMessages messageSearch={messageSearch}/>
+                <ShowMessages messageSearch={messageSearch} goToMessage={goToMessage} setGoToMessage={setGoToMessage}/>
             </div>
         </section>
     )

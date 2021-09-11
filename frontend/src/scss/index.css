@@ -930,6 +930,18 @@ body main {
         -ms-flex-direction: column;
             flex-direction: column;
   }
+  .main__chat-section .main__messages-section .messages__scroll::-webkit-scrollbar {
+    width: 10px;
+  }
+  .main__chat-section .main__messages-section .messages__scroll::-webkit-scrollbar-thumb {
+    height: 10px;
+    background-color: #1975e0;
+    -webkit-box-shadow: 3px solid black;
+            box-shadow: 3px solid black;
+  }
+  .main__chat-section .main__messages-section .messages-user-logged-messages.active {
+    background-color: #1975e0;
+  }
   .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container {
     display: inline-block;
     background-color: #26313f;
@@ -949,6 +961,9 @@ body main {
     word-break: break-word;
     font-size: 13px;
   }
+  .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__message.active {
+    color: red;
+  }
   .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__timeago {
     text-align: right;
     line-height: 0;
@@ -962,6 +977,9 @@ body main {
         -ms-flex-pack: right;
             justify-content: right;
     padding: 20px;
+  }
+  .main__chat-section .main__messages-section .messages-contact-messages.active {
+    background-color: #1975e0;
   }
   .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container {
     display: inline-block;

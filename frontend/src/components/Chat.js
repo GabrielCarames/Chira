@@ -11,6 +11,7 @@ const Chat = ({messages, setMessages}) => {
     const [ onlineUsers, setOnlineUsers ] = useState([]);
     const [ connectedContact, setConnectedContact ] = useState([]);
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
+    const [ goToMessage, setGoToMessage ] = useState(false)
 
     useEffect(() => {
         socket.on("getUsersConnected", (users) => {
@@ -50,9 +51,9 @@ const Chat = ({messages, setMessages}) => {
                         </div>
                     </div>
                 </nav>
-                <ChatMessages chat={chat} setChat={setChat} messages={messages} setMessages={setMessages}/>
+                <ChatMessages chat={chat} setChat={setChat} messages={messages} setMessages={setMessages} goToMessage={goToMessage}/>
             </section>
-            {showSearchMessages && <SearchMessages setShowSearchMessages={setShowSearchMessages}/>}
+            {showSearchMessages && <SearchMessages setShowSearchMessages={setShowSearchMessages} goToMessage={goToMessage} setGoToMessage={setGoToMessage}/>}
         </>
     : <div className="main__no-chat"></div>
 }

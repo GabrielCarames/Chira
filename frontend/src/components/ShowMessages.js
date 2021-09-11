@@ -4,13 +4,10 @@ import avatar from '../images/avatar.png'
 import Loader from "react-loader-spinner";
 import moment from 'moment'
 
-const ShowMessages = ({messageSearch}) => {
-    const { addContact, onSearchSubmit } = useShowMessagesHelper();
+const ShowMessages = ({messageSearch, goToMessage , setGoToMessage}) => {
+    const { onSearchSubmit } = useShowMessagesHelper();
     const [ showMessages, setShowMessages ] = useState();
     const [ loader, setLoader ] = useState();
-    const [ contactAdded, setContactAdded ] = useState();
-    const stringUser = localStorage.getItem('userLogged');
-    const user = JSON.parse(stringUser)
 
     useEffect(() => {
         if(messageSearch === '') setLoader(false)
@@ -20,7 +17,6 @@ const ShowMessages = ({messageSearch}) => {
                 if(messageSearch !== undefined){
                     const results = await onSearchSubmit(messageSearch)
                     setLoader(false)
-                    console.log("results", results)
                     if(results.length >= 1) setShowMessages(results)
                     else setShowMessages('')
                 }
@@ -28,7 +24,16 @@ const ShowMessages = ({messageSearch}) => {
             return () => clearTimeout(timer);
         }
     }, [messageSearch])// eslint-disable-line react-hooks/exhaustive-deps
-    
+
+    const scrollToMessage = (messageId) => {
+        console.log("message", messageId)
+        let messageItem = document.getElementById(messageId)
+        console.log(messageItem)
+        setGoToMessage(messageId)
+        // messageItem.classList.add('active')
+        messageItem.scrollIntoView({behavior: "smooth"})
+    }
+
     if(loader) {
         return <Loader type="Oval" color="#00BFFF" className="messages__loader" height={60} width={60} />
     } else {
@@ -39,14 +44,13 @@ const ShowMessages = ({messageSearch}) => {
                         { 
                             showMessages.map(message => {
                                 return (
-                                    <li className="list__item" key={message._id}>    
+                                    <li className="list__item" key={message._id} onClick={() => scrollToMessage(message._id)}>
                                         <img className="list__avatar" src={avatar} alt="user-avatar" />
                                         <div className="list__info">
                                             <p className="list__username">{message.user.username}</p>
                                             <div className="list__message-container">
                                                 <p className="list__message">{message.message}</p>
                                             </div>
-                                            {/* meter el date aca created at */}
                                         </div>
                                         <p className="list__date-message" >
                                             {moment(message.createdAt).format('LT')}
