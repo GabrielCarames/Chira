@@ -459,7 +459,7 @@ body main {
   width: 100px;
 }
 
-.main__content-section .main__add-contacts {
+.main__content-section .main__search-contacts {
   width: 100%;
 }
 
@@ -1013,12 +1013,12 @@ body main {
   }
 }
 
-.main__add-contacts {
+.main__search-contacts {
   background-color: #172029;
   height: 100%;
 }
 
-.main__add-contacts .add-contacts__navbar {
+.main__search-contacts .search-contacts__navbar {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1033,7 +1033,7 @@ body main {
   border-bottom: 2px solid #26313f;
 }
 
-.main__add-contacts .add-contacts__navbar .add-contacts__back {
+.main__search-contacts .search-contacts__navbar .search-contacts__back {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1052,15 +1052,15 @@ body main {
   transition: .2s;
 }
 
-.main__add-contacts .add-contacts__navbar .add-contacts__back:hover {
+.main__search-contacts .search-contacts__navbar .search-contacts__back:hover {
   background-color: #37465a;
 }
 
-.main__add-contacts .add-contacts__navbar .add-contacts__back .fa-arrow-left {
+.main__search-contacts .search-contacts__navbar .search-contacts__back .fa-arrow-left {
   cursor: pointer;
 }
 
-.main__add-contacts .add-contacts__navbar .add-contacts__input-container {
+.main__search-contacts .search-contacts__navbar .search-contacts__input-container {
   width: 380px;
   height: 40px;
   border-radius: 3000px;
@@ -1074,19 +1074,19 @@ body main {
           align-items: center;
 }
 
-.main__add-contacts .add-contacts__navbar .add-contacts__input-container:focus-within {
+.main__search-contacts .search-contacts__navbar .search-contacts__input-container:focus-within {
   border-color: #1975e0;
 }
 
-.main__add-contacts .add-contacts__navbar .add-contacts__input-container:hover {
+.main__search-contacts .search-contacts__navbar .search-contacts__input-container:hover {
   border-color: #1975e0;
 }
 
-.main__add-contacts .add-contacts__navbar .add-contacts__input-container .fa-search {
+.main__search-contacts .search-contacts__navbar .search-contacts__input-container .fa-search {
   margin-left: 10px;
 }
 
-.main__add-contacts .add-contacts__navbar .add-contacts__input-container .add-contacts__input {
+.main__search-contacts .search-contacts__navbar .search-contacts__input-container .search-contacts__input {
   width: 331px;
   height: 38px;
   border: none;
@@ -1098,7 +1098,7 @@ body main {
   font-family: 'Poppins';
 }
 
-.main__add-contacts .contacts-section {
+.main__search-contacts .contacts-section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1111,20 +1111,20 @@ body main {
           justify-content: center;
 }
 
-.main__add-contacts .contacts-section .contacts-suggestion {
+.main__search-contacts .contacts-section .contacts-suggestion {
   text-align: center;
 }
 
-.main__add-contacts .contacts-section .contacts-not-found {
+.main__search-contacts .contacts-section .contacts-not-found {
   text-align: center;
 }
 
-.main__add-contacts .contacts-section .contacts__loader {
+.main__search-contacts .contacts-section .contacts__loader {
   margin-top: 50%;
   text-align: center;
 }
 
-.main__add-contacts .contacts-section .contacts-list {
+.main__search-contacts .contacts-section .contacts-list {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1137,7 +1137,7 @@ body main {
   margin: 0;
 }
 
-.main__add-contacts .contacts-section .contacts-list .list__item {
+.main__search-contacts .contacts-section .contacts-list .list__item {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1150,11 +1150,11 @@ body main {
   padding-left: 15px;
 }
 
-.main__add-contacts .contacts-section .contacts-list .list__item:hover {
+.main__search-contacts .contacts-section .contacts-list .list__item:hover {
   background-color: #26313f;
 }
 
-.main__add-contacts .contacts-section .contacts-list .list__item .list__info {
+.main__search-contacts .contacts-section .contacts-list .list__item .list__info {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1166,11 +1166,11 @@ body main {
   line-height: 0;
 }
 
-.main__add-contacts .contacts-section .contacts-list .list__item .list__info .list__last-seen {
+.main__search-contacts .contacts-section .contacts-list .list__item .list__info .list__last-seen {
   color: #aaaaaa;
 }
 
-.main__add-contacts .contacts-section .contacts-list .list__item .list__add-contact {
+.main__search-contacts .contacts-section .contacts-list .list__item .list__add-contact {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1187,24 +1187,24 @@ body main {
   height: 50px;
 }
 
-.main__add-contacts .contacts-section .contacts-list .list__item .list__add-contact:hover {
+.main__search-contacts .contacts-section .contacts-list .list__item .list__add-contact:hover {
   background-color: #26313f;
 }
 
-.main__add-contacts .contacts-section .contacts-list .list__item .list__add-contact .fas {
+.main__search-contacts .contacts-section .contacts-list .list__item .list__add-contact .fas {
   font-size: 24px;
 }
 
-.main__add-contacts .contacts-section .contacts-list .list__item .list__add-contact .fa-user-check {
+.main__search-contacts .contacts-section .contacts-list .list__item .list__add-contact .fa-user-check {
   pointer-events: none;
   cursor: none;
 }
 
-.main__add-contacts .contacts-section .contacts-list .list__item .list__add-contact .fa-user-plus {
+.main__search-contacts .contacts-section .contacts-list .list__item .list__add-contact .fa-user-plus {
   cursor: pointer;
 }
 
-.main__add-contacts .contacts-section .contacts-list .list__item .list__add-contact .fa-user-plus:hover {
+.main__search-contacts .contacts-section .contacts-list .list__item .list__add-contact .fa-user-plus:hover {
   color: #aaaaaa;
 }
 

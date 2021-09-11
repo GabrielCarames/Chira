@@ -1,5 +1,5 @@
 import { useState, useContext, useEffect } from 'react'
-import AddContact from './AddContact'
+import SearchContacts from './SearchContacts'
 import MainContacts from './MainContacts'
 import AddContactsMenu from "../contexts/AddContactsMenu";
 import BurgerMenu from './BurgerMenu';
@@ -41,7 +41,7 @@ const Main = ({setUserLoggedMain}) => {
                     <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain}/>
                 </section>
                 <section className="main__content-section">
-                    {addContactsMenu ? <AddContact /> : <MainContacts messages={messages} setMessages={setMessages}/>}
+                    {addContactsMenu ? <SearchContacts /> : <MainContacts messages={messages} setMessages={setMessages}/>}
                     <div className="main_add-contacts-container">
                         <div className={addContactsMenu ? "main__add-contact-button active" : "main__add-contact-button" } onClick={() => {setAddContactsMenu(true)}}>
                             <i className="fas fa-user-plus"></i>
