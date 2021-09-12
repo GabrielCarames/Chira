@@ -41,7 +41,7 @@ const Main = ({setUserLoggedMain}) => {
                     <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain}/>
                 </section>
                 <section className="main__content-section">
-                    {addContactsMenu ? <SearchContacts /> : <MainContacts messages={messages} setMessages={setMessages}/>}
+                    {addContactsMenu ? <SearchContacts /> : <MainContacts messages={messages}/>}
                     <div className="main_add-contacts-container">
                         <div className={addContactsMenu ? "main__add-contact-button active" : "main__add-contact-button" } onClick={() => {setAddContactsMenu(true)}}>
                             <i className="fas fa-user-plus"></i>

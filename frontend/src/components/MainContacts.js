@@ -4,13 +4,12 @@ import socket from './Socket'
 import axios from 'axios'
 import moment from 'moment'
 
-const MainContacts = ({messages, setMessages}) => {
+const MainContacts = ({messages}) => {
     const [ chats, setChats ] = useState()
     const [ contactChat, setContactChat ] = useState()
     const [ lastMessage, setLastMessage ] = useState()
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ contactData, setContactData ] = useState(false)
-    const [ chatEvent, setChatEvent ] = useState(false)
 
     const goToChat = (contactId) => {
         const userId = user._id
@@ -24,18 +23,20 @@ const MainContacts = ({messages, setMessages}) => {
         // })
     }, [])
 
-    useEffect(async () => {
-        messages && setLastMessage(messages)
-        const data = await axios.get('http://localhost:3001/chat/allchats')
-        let chats = data.data
-        chats && setChats(chats)
+    useEffect(() => {
+        const getChats = async () => {
+            messages && setLastMessage(messages)
+            const data = await axios.get('http://localhost:3001/chat/allchats')
+            let chats = data.data
+            chats && setChats(chats)
+        }
+        getChats()
     }, [messages])
 
     const algo = (contact) => {
-        
         if(chats){
             var contactToShow
-            chats.map((chat) => {
+            chats.forEach((chat) => {
                 contactToShow = chat.users.filter((user) => user._id === contact._id)
             })
             const chatToShow = chats.filter((chat) => {
@@ -86,7 +87,4 @@ const MainContacts = ({messages, setMessages}) => {
     )
 }
 
-
-{/* <p className="list__messages">{contactChat.messages.length !== 0 ? (messages ? messages[0].message : contactChat.messages[contactChat.messages.length -1].message) : ""}</p> */}
-{/* <h6 className="list__time-ago">{contactChat.messages.length !== 0 ? (messages ? moment(contactChat.messages[contactChat.messages.length -1].createdAt).format("LT") : moment(contactChat.messages[contactChat.messages.length -1].createdAt).format("LT")) : ""}</h6> */}
 export default MainContacts

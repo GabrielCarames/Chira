@@ -21,7 +21,7 @@ export function useAddContactsHelper() {
 
   const addContact = async contact => {
     try {
-        const res = await axios.post('http://localhost:3001/users/addcontact', {contact})
+        await axios.post('http://localhost:3001/users/addcontact', {contact})
         socket.emit('update', userLogged, contact)
         // localStorage.setItem('userLogged', JSON.stringify(res.data))
     } catch (error) {

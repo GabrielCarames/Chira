@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import firebase from '../firebase'
 import axios from 'axios'
 import FlashContext from '../contexts/FlashContext'
-import socket from '../components/Socket'
+
 export function useLoginHelper() {
     const [ active, setActive ] = useState()
     const [ loading, setLoading ] = useState()

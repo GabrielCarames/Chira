@@ -4,6 +4,7 @@ import { useState, useEffect, useContext } from 'react'
 import ChatMessages from './ChatMessages'
 import SearchMessages from './SearchMessages'
 import TestContext from "../contexts/TestContext";
+
 const Chat = ({messages, setMessages}) => {
     const { chat, setChat } = useContext(TestContext)
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
@@ -12,8 +13,6 @@ const Chat = ({messages, setMessages}) => {
     const [ connectedContact, setConnectedContact ] = useState([]);
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
     const [ goToMessage, setGoToMessage ] = useState(false)
-
-
      
     useEffect(() => {
         socket.on("getUsersConnected", (users) => {
@@ -25,12 +24,13 @@ const Chat = ({messages, setMessages}) => {
         socket.on("chatFound", (chat) => {
             setChat(chat);
         });
-    }, [])
+    })
 
     useEffect(() => {
         if(chat) {
             setConnectedContact(onlineUsers.filter((user) => user.userLoggedId === contact._id))
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [chat, onlineUsers])
 
     return chat ? 
@@ -53,7 +53,7 @@ const Chat = ({messages, setMessages}) => {
                         </div>
                     </div>
                 </nav>
-                <ChatMessages chat={chat} setChat={setChat} messages={messages} setMessages={setMessages} goToMessage={goToMessage}/>
+                <ChatMessages chat={chat} messages={messages} setMessages={setMessages} goToMessage={goToMessage}/>
             </section>
             {showSearchMessages && <SearchMessages setShowSearchMessages={setShowSearchMessages} goToMessage={goToMessage} setGoToMessage={setGoToMessage}/>}
         </>

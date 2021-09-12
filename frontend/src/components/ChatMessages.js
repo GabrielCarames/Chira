@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import ReactScrolleableFeed from 'react-scrollable-feed'
 import moment from 'moment'
 
-const ChatMessages = ({chat, setChat, messages, setMessages, goToMessage}) => {
+const ChatMessages = ({chat, messages, setMessages, goToMessage}) => {
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
     const user = JSON.parse(localStorage.getItem('userLogged'))
@@ -16,6 +16,7 @@ const ChatMessages = ({chat, setChat, messages, setMessages, goToMessage}) => {
         return () => {
           socket.off();
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [messages]);    
 
     const messageInput = (message) => {
@@ -38,6 +39,7 @@ const ChatMessages = ({chat, setChat, messages, setMessages, goToMessage}) => {
         return () => {
             document.removeEventListener("keydown", listener);
         };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputMessage]);
 
     const verifyAndSendInputValue = (input) => {
@@ -87,7 +89,7 @@ const ChatMessages = ({chat, setChat, messages, setMessages, goToMessage}) => {
                                     </div>
                                 </div>
                             : 
-                                <div className={goToMessage === message._id ? 'messages-contact-messages active' : 'messages-contact-messages'} id={message._id}>
+                                <div className={goToMessage === message._id ? 'messages-contact-messages active' : 'messages-contact-messages'} key={message._id} id={message._id}>
                                     <div className="messages-message-container">
                                         <span className="messages__username">{message.user.username}</span>
                                         <p className="messages__message">{message.message}</p>
@@ -122,7 +124,7 @@ const ChatMessages = ({chat, setChat, messages, setMessages, goToMessage}) => {
                     <div className="messages__typing">{userTyping && `${userTyping} está escribiendo`} </div>
             </div>
             <form className="main__input-section" onSubmit={(e) => inputOnSubmit(e)}>
-                <input className="main__input" id="cosa" type="text" name="message" id="" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} />
+                <input className="main__input" id="cosa" type="text" name="message" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} />
                 <button className="main__send-message" type="submit">
                     <img className="main__send-image" src={send} alt="" />
                 </button>

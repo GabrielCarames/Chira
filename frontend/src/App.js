@@ -1,6 +1,6 @@
 import Login from './components/Login'
 import Main from './components/Main';
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ShowFlashMessages from './components/ShowFlashMessages';
 import FlashContext from './contexts/FlashContext';
@@ -9,7 +9,7 @@ import TestContext from './contexts/TestContext';
 const App = () => {
   const [ flashMessage, setFlashMessage ] = useState(false)
   const [ addContactsMenu, setAddContactsMenu ] = useState(false)
-  const [ userLoggedMain, setUserLoggedMain ] = useState(true)
+  const [ setUserLoggedMain ] = useState(true)
   const [ chat, setChat ] = useState()
 
   const checkLogIn = () => {
