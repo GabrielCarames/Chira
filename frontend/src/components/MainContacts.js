@@ -7,7 +7,7 @@ import moment from 'moment'
 const MainContacts = ({messages, lastMessage, setLastMessage, showIcon, setShowIcon}) => {
     const [ chats, setChats ] = useState()
     const [ contactChat, setContactChat ] = useState()
-    // const [ lastMessage, setLastMessage ] = useState()
+    const [ lastMessageToShow, setLastMessageToShow ] = useState()
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ contactData, setContactData ] = useState(false)
     // const [ showIcon, setShowIcon ] = useState(false)
@@ -61,7 +61,7 @@ const MainContacts = ({messages, lastMessage, setLastMessage, showIcon, setShowI
     useEffect(() => {
         socket.on("newNotification", (newMessage, receptorUser) => {
             console.log("soynofiticaicon", newMessage, receptorUser, user)
-            // setLastMessage(newMessage) //y este tambien, proba usando un nuevo useState
+            setLastMessageToShow(newMessage) //y este tambien, proba usando un nuevo useState
             if(receptorUser[0].username === user.username) setShowIcon(true)
         });
     }, [])
@@ -71,14 +71,13 @@ const MainContacts = ({messages, lastMessage, setLastMessage, showIcon, setShowI
         // if(messages) console.log("soymessage", messages)
         // if(lastMessage) console.log(lastMessage[lastMessage.length -1])
         // if(lastMessage[lastMessage.length -1].username !== user.username)
-        console.log("tengo que ser lastmessage", lastMessage) ///////////////aca hay maldad para arreglar
-        if(Array.isArray(lastMessage)) {
-            if(lastMessage) return lastMessage[lastMessage.length -1].message
-            else return false
-        } else {
-            if(lastMessage) return lastMessage.message
-            else return false
+        console.log("tengo que ser lastmessage", lastMessageToShow) ///////////////aca hay maldad para arreglar
+        if(messages) {
+            return messages[messages.length -1].message
+        } else if(lastMessageToShow){ 
+            return lastMessageToShow.message
         }
+        else return false
         // if(lastMessage) return lastMessage[lastMessage.length -1].message
         // else return false
     }

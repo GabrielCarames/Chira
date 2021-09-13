@@ -58,8 +58,8 @@ module.exports = (io) => {
     });
 
     socket.on('newMessageNotification', async (message, receptorUser) => {
-      console.log("receptoruser", receptorUser[0].socketId[0])
-      socket.to(receptorUser[0].socketId[0]).emit('newNotification', message, receptorUser)
+      const updatedUser = await userController.findUserById(receptorUser[0]._id)
+      socket.to(updatedUser[0].socketId[0]).emit('newNotification', message, receptorUser)
     });
 
     // socket.on('update', async (userLogged, contact) => {

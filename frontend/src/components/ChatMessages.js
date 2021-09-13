@@ -11,8 +11,7 @@ const ChatMessages = ({chat, messages, setMessages, goToMessage, lastMessage, se
     const [ seen, setSeen ] = useState(false)
 
     useEffect(() => {
-        socket.on("mensajes", (newMessage) => {
-            console.log("SOYYYYYYYYYYYYYYYYYYYYYYYYYYYYY")
+        socket.on("mensajes", async (newMessage) => {
             const receptorUser = chat[0].users.filter((userInChat) => userInChat._id !== user._id)
             if(newMessage.username === user.username) socket.emit('newMessageNotification', newMessage, receptorUser)
             setMessages([...messages, newMessage]);

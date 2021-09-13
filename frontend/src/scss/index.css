@@ -538,6 +538,16 @@ body main {
   .main .main__content-section .main__contacts .main__contacts-list .list__item {
     height: 80px;
   }
+  .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info {
+    width: 320px;
+  }
+  .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__messages {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 1;
+    margin: 5px 0 0 0;
+  }
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
     position: inherit;
   }
