@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from 'react'
+import AddContactsMenu from "../contexts/AddContactsMenu";
 import SearchContacts from './SearchContacts'
 import MainContacts from './MainContacts'
-import AddContactsMenu from "../contexts/AddContactsMenu";
 import BurgerMenu from './BurgerMenu';
 import Chat from './Chat';
 import socket from './Socket'
@@ -46,7 +46,7 @@ const Main = ({setUserLoggedMain}) => {
                     <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain}/>
                 </section>
                 <section className="main__content-section">
-                    {addContactsMenu ? <SearchContacts /> : <MainContacts messages={messages} lastMessage={lastMessage} setLastMessage={setLastMessage} showIcon={showIcon} setShowIcon={setShowIcon} />}
+                    {addContactsMenu ? <SearchContacts /> : <MainContacts messages={messages} setLastMessage={setLastMessage} showIcon={showIcon} setShowIcon={setShowIcon} />}
                     <div className="main_add-contacts-container">
                         <div className={addContactsMenu ? "main__add-contact-button active" : "main__add-contact-button" } onClick={() => {setAddContactsMenu(true)}}>
                             <i className="fas fa-user-plus"></i>
@@ -54,7 +54,7 @@ const Main = ({setUserLoggedMain}) => {
                     </div>
                 </section>
             </section>
-            <Chat messages={messages} setMessages={setMessages} lastMessage={lastMessage} setLastMessage={setLastMessage} showIcon={showIcon} setShowIcon={setShowIcon}/>
+            <Chat messages={messages} setMessages={setMessages} setShowIcon={setShowIcon}/>
         </section>
     )
 }

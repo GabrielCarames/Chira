@@ -1,14 +1,13 @@
-import send from '../images/send.png'
-import socket from './Socket'
 import { useState, useEffect } from 'react'
 import ReactScrolleableFeed from 'react-scrollable-feed'
+import send from '../images/send.png'
+import socket from './Socket'
 import moment from 'moment'
 
-const ChatMessages = ({chat, messages, setMessages, goToMessage, lastMessage, setLastMessage, showIcon, setShowIcon}) => {
+const ChatMessages = ({chat, messages, setMessages, goToMessage, setShowIcon}) => {
+    const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
-    const user = JSON.parse(localStorage.getItem('userLogged'))
-    const [ seen, setSeen ] = useState(false)
 
     useEffect(() => {
         socket.on("mensajes", async (newMessage) => {
@@ -20,15 +19,9 @@ const ChatMessages = ({chat, messages, setMessages, goToMessage, lastMessage, se
           socket.off();
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [messages]);    
+    }, []);    
 
-    useEffect(() => {
-        console.log("hagamos latan no prueba de fuego", messages)
-    }, [messages])
-
-    const messageInput = (message) => {
-        socket.emit("mensaje", user, message);
-    };
+    const messageInput = message => socket.emit("mensaje", user, message)
 
     useEffect(() => {
         if(inputMessage) socket.emit('typing', user.username)
@@ -49,11 +42,7 @@ const ChatMessages = ({chat, messages, setMessages, goToMessage, lastMessage, se
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [inputMessage]);
 
-    const verifyAndSendInputValue = (input) => {
-        if(input !== '') {
-            messageInput(input)
-        }
-    }
+    const verifyAndSendInputValue = input => input !== '' && messageInput(input)
 
     const inputOnSubmit = (e) => {
         e.preventDefault()
@@ -62,9 +51,7 @@ const ChatMessages = ({chat, messages, setMessages, goToMessage, lastMessage, se
         e.target[0].value = ''
     }
 
-    function timeoutFunction() {
-        setUsertyping(false)
-    }
+    const timeoutFunction = () => setUsertyping(false)
 
     useEffect(() => {
         let timeout;
@@ -75,15 +62,14 @@ const ChatMessages = ({chat, messages, setMessages, goToMessage, lastMessage, se
         })
     }, [])
 
-    useEffect(() => {
-        goToMessage &&
-        console.log("p", goToMessage)
-    }, [goToMessage])
-
     const seenMessages = () => {
-        console.log("me viste")
-        setShowIcon(false)
-        socket.emit('seenMessage')
+        messages && console.log("me viste", messages[0].username, user.username)
+        chat && console.log("chat", chat[0].messages[chat[0].messages.length -1].user.username, user.username)
+        if(chat && chat[0].messages[chat[0].messages.length -1].user._id !== user._id) {
+            const userToAdviseSeenMessage = chat[0].messages[chat[0].messages.length -1].user
+            setShowIcon(false)
+            socket.emit('seenMessage', userToAdviseSeenMessage)
+        }
     }
 
     return (
@@ -98,7 +84,10 @@ const ChatMessages = ({chat, messages, setMessages, goToMessage, lastMessage, se
                                     <div className="messages-message-container">
                                         <span className="messages__username">{message.user.username}</span>
                                         <p className="messages__message">{message.message}</p>
-                                        <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
+                                        <div className="message__info">
+                                            <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
+                                            {message.seen === true ? <i class="fas fa-check-double"></i> : <i class="fas fa-check"></i>  }
+                                        </div>
                                     </div>
                                 </div>
                             : 
@@ -106,7 +95,10 @@ const ChatMessages = ({chat, messages, setMessages, goToMessage, lastMessage, se
                                     <div className="messages-message-container">
                                         <span className="messages__username">{message.user.username}</span>
                                         <p className="messages__message">{message.message}</p>
-                                        <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
+                                        <div className="message__info">
+                                            <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
+                                            {message.seen === true ? <i class="fas fa-check-double"></i> : <i class="fas fa-check"></i>  }
+                                        </div>
                                     </div>
                                 </div>
                             )
@@ -119,16 +111,21 @@ const ChatMessages = ({chat, messages, setMessages, goToMessage, lastMessage, se
                                     <div className="messages-message-container">
                                         <span className="messages__username">{message.username}</span>
                                         <p className="messages__message">{message.message}</p>
-                                        <h6 className="messages__timeago">30:43hs</h6>
+                                        <div className="message__info">
+                                            <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
+                                            {message.seen === true ? <i class="fas fa-check-double"></i> : <i class="fas fa-check"></i>  }
+                                        </div>
                                     </div>
                                 </div>
                             : 
                                 <div className={goToMessage === message._id ? 'messages-contact-messages active' : 'messages-contact-messages'} id={message._id} key={message._id}>
                                     <div className="messages-message-container">
                                         <span className="messages__username">{message.username}</span>
-                                        
                                         <p className="messages__message">{message.message}</p>
-                                        <h6 className="messages__timeago">30:43hs</h6>
+                                        <div className="message__info">
+                                            <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
+                                            {message.seen === true ? <i class="fas fa-check-double"></i> : <i class="fas fa-check"></i>  }
+                                        </div>
                                     </div>
                                 </div>
                         )

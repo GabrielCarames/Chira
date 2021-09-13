@@ -33,14 +33,10 @@ module.exports = (io) => {
 
     socket.on("mensaje", async (user, message) => {
       const { username } = user
-      const fullMessage = await chatController.saveMessages(user, message) // ojo que aca se crea el mensaje pero devuelve el id del user y no el objeto arregla eso y anda todo
-      // console.log(currentlyChat)
+      const fullMessage = await chatController.saveMessages(user, message)
+      const seen = fullMessage.seen
       await chatController.insertMessageInChat(fullMessage, currentlyChat[0]._id)
-      // console.log("fukllmessage", fullMessage)
-      const userLogged = JSON.parse(localStorage.getItem('userLogged'));
-      console.log("userloged", userLogged[0].socketId[0])
-      console.log("quecarajohacesaquipendejo")
-      io.emit("mensajes", { username, message });
+      io.emit("mensajes", { username, message, seen });
     });
 
     socket.on("goToChat", async (userId, contactId) => {
@@ -52,9 +48,10 @@ module.exports = (io) => {
       socket.broadcast.emit('typing', username)
     });
 
-    socket.on('seenMessage', async () => {
-      console.log('viendomensajes')
+    socket.on('seenMessage', async (userToAdviseSeenMessage) => {
+      console.log('viendomensajes', userToAdviseSeenMessage)
       await chatController.updateSeenMessages()
+      socket.to(userToAdviseSeenMessage.socketId[0]).emit('messageAlreadySeen')
     });
 
     socket.on('newMessageNotification', async (message, receptorUser) => {

@@ -150,11 +150,25 @@
                         &.active {
                             color: red;
                         }
-                    }    
-                    .messages__timeago {
-                        text-align: right;
-                        line-height: 0;
-                        color: $gray-color;
+                    }
+                    .message__info {
+                        display: flex;
+                        justify-content: right;
+                        align-items: center;
+                        .messages__timeago {
+                            text-align: right;
+                            line-height: 0;
+                            color: $gray-color;
+                            margin-right: 10px;
+                        }
+                        .fas {
+                        }
+                        .fa-check {
+                            color: $first-alpha-color;
+                        }
+                        .fa-check-double {
+                            color: $first-color;
+                        }
                     }
                 }
             }
@@ -183,11 +197,25 @@
                         word-break: break-word;
                         line-height: 1.2;
                         font-size: $h5;
-                    }    
-                    .messages__timeago {
-                        text-align: right;
-                        line-height: 0;
-                        color: $gray-color;
+                    }
+                    .message__info {
+                        display: flex;
+                        justify-content: right;
+                        align-items: center;
+                        .messages__timeago {
+                            text-align: right;
+                            line-height: 0;
+                            color: $gray-color;
+                            margin-right: 10px;
+                        }
+                        .fas {
+                        }
+                        .fa-check {
+                            color: $first-alpha-color;
+                        }
+                        .fa-check-double {
+                            color: $first-color;
+                        }
                     }
                 }
             }

@@ -1,19 +1,20 @@
+import { useState, useEffect, useContext } from 'react'
+import TestContext from "../contexts/TestContext";
+import SearchMessages from './SearchMessages'
+import ChatMessages from './ChatMessages'
 import avatar from '../images/avatar.png'
 import socket from './Socket'
-import { useState, useEffect, useContext } from 'react'
-import ChatMessages from './ChatMessages'
-import SearchMessages from './SearchMessages'
-import TestContext from "../contexts/TestContext";
 
-const Chat = ({messages, setMessages, lastMessage, setLastMessage, showIcon, setShowIcon}) => {
-    const { chat, setChat } = useContext(TestContext)
+const Chat = ({messages, setMessages, setShowIcon}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-    const contact = chat && chat[0].users.filter((user) => user.username !== userLogged.username)[0]
-    const [ onlineUsers, setOnlineUsers ] = useState([]);
-    const [ connectedContact, setConnectedContact ] = useState([]);
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
+    const [ connectedContact, setConnectedContact ] = useState([]);
     const [ goToMessage, setGoToMessage ] = useState(false)
-
+    const [ onlineUsers, setOnlineUsers ] = useState([]);
+    const { chat, setChat } = useContext(TestContext)
+    
+    const contact = chat && chat[0].users.filter((user) => user.username !== userLogged.username)[0]
+    
     useEffect(() => {
         socket.on("getUsersConnected", (users) => {
             setOnlineUsers(users)
@@ -53,7 +54,7 @@ const Chat = ({messages, setMessages, lastMessage, setLastMessage, showIcon, set
                         </div>
                     </div>
                 </nav>
-                <ChatMessages chat={chat} messages={messages} setMessages={setMessages} goToMessage={goToMessage} lastMessage={lastMessage} setLastMessage={setLastMessage} showIcon={showIcon} setShowIcon={setShowIcon}/>
+                <ChatMessages chat={chat} messages={messages} setMessages={setMessages} goToMessage={goToMessage} setShowIcon={setShowIcon}/>
             </section>
             {showSearchMessages && <SearchMessages setShowSearchMessages={setShowSearchMessages} goToMessage={goToMessage} setGoToMessage={setGoToMessage}/>}
         </>

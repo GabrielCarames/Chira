@@ -551,12 +551,23 @@ body main {
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info {
     max-width: 300px;
   }
-  .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__messages {
+  .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__message-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__message-container .list__messages {
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
     line-height: 1;
     margin: 5px 0 0 0;
+  }
+  .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__message-container .fas {
+    margin: 5px 5px 0 0;
   }
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__message-info .list__time-ago {
     position: inherit;
@@ -1014,10 +1025,28 @@ body main {
   .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__message.active {
     color: red;
   }
-  .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__timeago {
+  .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .message__info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: right;
+        -ms-flex-pack: right;
+            justify-content: right;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .message__info .messages__timeago {
     text-align: right;
     line-height: 0;
     color: #aaaaaa;
+    margin-right: 10px;
+  }
+  .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .message__info .fa-check {
+    color: #5297e8;
+  }
+  .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .message__info .fa-check-double {
+    color: #1975e0;
   }
   .main__chat-section .main__messages-section .messages-contact-messages {
     display: -webkit-box;
@@ -1051,10 +1080,28 @@ body main {
     line-height: 1.2;
     font-size: 13px;
   }
-  .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__timeago {
+  .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .message__info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: right;
+        -ms-flex-pack: right;
+            justify-content: right;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .message__info .messages__timeago {
     text-align: right;
     line-height: 0;
     color: #aaaaaa;
+    margin-right: 10px;
+  }
+  .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .message__info .fa-check {
+    color: #5297e8;
+  }
+  .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .message__info .fa-check-double {
+    color: #1975e0;
   }
   .main__chat-section .messages__typing {
     background-color: #f0f8ff00;
