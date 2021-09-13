@@ -455,7 +455,33 @@ body main {
   line-height: 0;
 }
 
-.main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
+.main__content-section .main__contacts .main__contacts-list .list__item .list__message-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100px;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item .list__message-info .fa-comment-dots {
+  visibility: hidden;
+  position: absolute;
+  color: #1975e0;
+  font-size: 32px;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item .list__message-info .fa-comment-dots:hover {
+  color: #5297e8;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item .list__message-info .fa-comment-dots.active {
+  visibility: visible;
+  position: inherit;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item .list__message-info .list__time-ago {
   width: 150px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -471,22 +497,6 @@ body main {
       -ms-flex-align: center;
           align-items: center;
   margin-right: 10px;
-}
-
-.main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago .fa-comment-dots {
-  visibility: hidden;
-  position: absolute;
-  color: #1975e0;
-  font-size: 32px;
-}
-
-.main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago .fa-comment-dots:hover {
-  color: #5297e8;
-}
-
-.main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago .fa-comment-dots.active {
-  visibility: visible;
-  position: inherit;
 }
 
 .main__content-section .main__search-contacts {
@@ -539,7 +549,7 @@ body main {
     height: 80px;
   }
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info {
-    width: 320px;
+    max-width: 300px;
   }
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__messages {
     text-overflow: ellipsis;
@@ -548,7 +558,7 @@ body main {
     line-height: 1;
     margin: 5px 0 0 0;
   }
-  .main .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
+  .main .main__content-section .main__contacts .main__contacts-list .list__item .list__message-info .list__time-ago {
     position: inherit;
   }
   .main .main__content-section .main_add-contacts-container {

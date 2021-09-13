@@ -122,7 +122,10 @@ const MainContacts = ({messages, lastMessage, setLastMessage, showIcon, setShowI
                                                 <p className="list__username">{contactData && contactData.username}</p>{/*abajo si el mensaje del input se envia, arriba lo toma y realiza un re render en donde llega aca y se fija si messages fue actualizado para mostrar el ultimo mensaje actualizado */}
                                                 <p className="list__messages">{showCurrentLastMessage() ? showCurrentLastMessage() : showHistoryLastMessage() ? showHistoryLastMessage() : ''}</p>
                                             </div>{/*ambos se fijan PRIMERO SI, se envio un mensaje ahora mismo?, caso falso no muestra nada, caso verdadero se pregunta SEGUNDO SI, hay un "historiaL" de mensajes?y forzosamente muestra el ultimo mensaje / hora de ultiam vez */}
-                                            <h6 className="list__time-ago" id="notification">{contactChat.messages.length !== 0 ? (messages && messages[0].username !== user.username ? showNotification() : moment(contactChat.messages[contactChat.messages.length -1].createdAt).format("LT")) : ""} <i className={showIcon ? 'far fa-comment-dots active' : 'far fa-comment-dots'}></i></h6>
+                                            <div className="list__message-info">
+                                                <i className={showIcon ? 'far fa-comment-dots active' : 'far fa-comment-dots'}></i>
+                                                <h6 className="list__time-ago" id="notification">{contactChat.messages.length !== 0 ? (messages && messages[0].username !== user.username ? showNotification() : moment(contactChat.messages[contactChat.messages.length -1].createdAt).format("LT")) : ""} </h6>
+                                            </div>
                                         </>
                                     }
                                 </li>
