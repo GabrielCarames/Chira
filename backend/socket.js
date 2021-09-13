@@ -34,8 +34,13 @@ module.exports = (io) => {
     socket.on("mensaje", async (user, message) => {
       const { username } = user
       const fullMessage = await chatController.saveMessages(user, message) // ojo que aca se crea el mensaje pero devuelve el id del user y no el objeto arregla eso y anda todo
+      // console.log(currentlyChat)
       await chatController.insertMessageInChat(fullMessage, currentlyChat[0]._id)
-      socket.emit("mensajes", { username, message });
+      // console.log("fukllmessage", fullMessage)
+      const userLogged = JSON.parse(localStorage.getItem('userLogged'));
+      console.log("userloged", userLogged[0].socketId[0])
+      console.log("quecarajohacesaquipendejo")
+      io.emit("mensajes", { username, message });
     });
 
     socket.on("goToChat", async (userId, contactId) => {
@@ -45,6 +50,16 @@ module.exports = (io) => {
 
     socket.on('typing', (username) => {
       socket.broadcast.emit('typing', username)
+    });
+
+    socket.on('seenMessage', async () => {
+      console.log('viendomensajes')
+      await chatController.updateSeenMessages()
+    });
+
+    socket.on('newMessageNotification', async (message, receptorUser) => {
+      console.log("receptoruser", receptorUser[0].socketId[0])
+      socket.to(receptorUser[0].socketId[0]).emit('newNotification', message, receptorUser)
     });
 
     // socket.on('update', async (userLogged, contact) => {

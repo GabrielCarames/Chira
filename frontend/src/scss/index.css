@@ -456,7 +456,37 @@ body main {
 }
 
 .main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago {
-  width: 100px;
+  width: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 10px;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago .fa-comment-dots {
+  visibility: hidden;
+  position: absolute;
+  color: #1975e0;
+  font-size: 32px;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago .fa-comment-dots:hover {
+  color: #5297e8;
+}
+
+.main__content-section .main__contacts .main__contacts-list .list__item .list__time-ago .fa-comment-dots.active {
+  visibility: visible;
+  position: inherit;
 }
 
 .main__content-section .main__search-contacts {

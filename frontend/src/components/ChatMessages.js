@@ -4,20 +4,28 @@ import { useState, useEffect } from 'react'
 import ReactScrolleableFeed from 'react-scrollable-feed'
 import moment from 'moment'
 
-const ChatMessages = ({chat, messages, setMessages, goToMessage}) => {
+const ChatMessages = ({chat, messages, setMessages, goToMessage, lastMessage, setLastMessage, showIcon, setShowIcon}) => {
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
     const user = JSON.parse(localStorage.getItem('userLogged'))
+    const [ seen, setSeen ] = useState(false)
 
     useEffect(() => {
         socket.on("mensajes", (newMessage) => {
-          setMessages([...messages, newMessage]);
+            console.log("SOYYYYYYYYYYYYYYYYYYYYYYYYYYYYY")
+            const receptorUser = chat[0].users.filter((userInChat) => userInChat._id !== user._id)
+            if(newMessage.username === user.username) socket.emit('newMessageNotification', newMessage, receptorUser)
+            setMessages([...messages, newMessage]);
         });
         return () => {
           socket.off();
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [messages]);    
+
+    useEffect(() => {
+        console.log("hagamos latan no prueba de fuego", messages)
+    }, [messages])
 
     const messageInput = (message) => {
         socket.emit("mensaje", user, message);
@@ -66,12 +74,18 @@ const ChatMessages = ({chat, messages, setMessages, goToMessage}) => {
             clearTimeout(timeout);
             timeout = setTimeout(timeoutFunction, 2000); //Basicamente el clear es retardar a la ejecucion del setTimeOut
         })
-    })
+    }, [])
 
     useEffect(() => {
         goToMessage &&
-        console.log("pedazo de puto", goToMessage)
+        console.log("p", goToMessage)
     }, [goToMessage])
+
+    const seenMessages = () => {
+        console.log("me viste")
+        setShowIcon(false)
+        socket.emit('seenMessage')
+    }
 
     return (
         <>
@@ -102,7 +116,7 @@ const ChatMessages = ({chat, messages, setMessages, goToMessage}) => {
                     {messages && messages.map((message) => {
                         return (
                             message.username === user.username ?
-                                <div className={goToMessage === message._id ? 'messages-user-logged-messages active' : 'messages-user-logged-messages'} id={message._id}>
+                                <div className={goToMessage === message._id ? 'messages-user-logged-messages active' : 'messages-user-logged-messages'} id={message._id} key={message._id}>
                                     <div className="messages-message-container">
                                         <span className="messages__username">{message.username}</span>
                                         <p className="messages__message">{message.message}</p>
@@ -110,7 +124,7 @@ const ChatMessages = ({chat, messages, setMessages, goToMessage}) => {
                                     </div>
                                 </div>
                             : 
-                                <div className={goToMessage === message._id ? 'messages-contact-messages active' : 'messages-contact-messages'} id={message._id}>
+                                <div className={goToMessage === message._id ? 'messages-contact-messages active' : 'messages-contact-messages'} id={message._id} key={message._id}>
                                     <div className="messages-message-container">
                                         <span className="messages__username">{message.username}</span>
                                         
@@ -124,7 +138,7 @@ const ChatMessages = ({chat, messages, setMessages, goToMessage}) => {
                     <div className="messages__typing">{userTyping && `${userTyping} está escribiendo`} </div>
             </div>
             <form className="main__input-section" onSubmit={(e) => inputOnSubmit(e)}>
-                <input className="main__input" id="cosa" type="text" name="message" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} />
+                <input className="main__input" id="cosa" type="text" name="message" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} onClick={() => {seenMessages(true)}}/>
                 <button className="main__send-message" type="submit">
                     <img className="main__send-image" src={send} alt="" />
                 </button>

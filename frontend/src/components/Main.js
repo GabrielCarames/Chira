@@ -10,14 +10,19 @@ const Main = ({setUserLoggedMain}) => {
     const [ active, setActive ] = useState(false)
     const { addContactsMenu, setAddContactsMenu } = useContext(AddContactsMenu)
     const [ messages, setMessages ] = useState("");
+    const [ lastMessage, setLastMessage ] = useState()
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-
+    const [ contactChat, setContactChat ] = useState()
+    const [ showIcon, setShowIcon ] = useState(false)
+    
     useEffect(() => {
         socket.emit('connected', userLogged) // ver forma de actualizar el usuario solo cuando lo quiero + la primera vez que logueas
         socket.on("userLogged", (userLoggede) => {
             localStorage.setItem('userLogged', JSON.stringify(userLoggede[0]));
         });
-    })
+    }, [])
+
+    
 
     window.onclick = (event) => {
         if(active && event.target.className !== 'burger__user-info' && event.target.className !== 'main__settings' && event.target.className !== 'fas fa-bars') {
@@ -41,7 +46,7 @@ const Main = ({setUserLoggedMain}) => {
                     <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain}/>
                 </section>
                 <section className="main__content-section">
-                    {addContactsMenu ? <SearchContacts /> : <MainContacts messages={messages}/>}
+                    {addContactsMenu ? <SearchContacts /> : <MainContacts messages={messages} lastMessage={lastMessage} setLastMessage={setLastMessage} showIcon={showIcon} setShowIcon={setShowIcon} />}
                     <div className="main_add-contacts-container">
                         <div className={addContactsMenu ? "main__add-contact-button active" : "main__add-contact-button" } onClick={() => {setAddContactsMenu(true)}}>
                             <i className="fas fa-user-plus"></i>
@@ -49,7 +54,7 @@ const Main = ({setUserLoggedMain}) => {
                     </div>
                 </section>
             </section>
-            <Chat messages={messages} setMessages={setMessages}/>
+            <Chat messages={messages} setMessages={setMessages} lastMessage={lastMessage} setLastMessage={setLastMessage} showIcon={showIcon} setShowIcon={setShowIcon}/>
         </section>
     )
 }

@@ -38,7 +38,26 @@
                     }
                 }
                 .list__time-ago {
-                    width: 100px;
+                    width: 150px;
+                    display: flex;
+                    flex-direction: row-reverse;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-right: 10px;
+                    .fa-comment-dots {
+                        visibility: hidden;
+                        position: absolute;
+                        color: $first-color;
+                        font-size: $h1;
+                        
+                        &:hover {
+                            color: $first-alpha-color;
+                        }
+                    }
+                    .fa-comment-dots.active {
+                        visibility: visible;
+                        position:inherit;
+                    }
                 }
             }
         }

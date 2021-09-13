@@ -9,7 +9,7 @@ chatController.saveMessages = async (user, message) => {
         user
     })
     await newMessage.save()
-    const completeMessage = chatController.findMessageById(newMessage._id)
+    const completeMessage = await chatController.findMessageById(newMessage._id)
     return completeMessage
 }
 
@@ -38,6 +38,14 @@ chatController.findChatByContactId = async (userId, contactId) => {
 
 chatController.findMessageById = async (messageId) => {
     const message = await Message.findOne({_id: messageId}).populate({
+        path: 'user',
+        model: 'User'
+    })
+    return message
+}
+
+chatController.findMessageByUsername = async (username) => {
+    const message = await Message.findOne({username: username}).populate({
         path: 'user',
         model: 'User'
     })
@@ -76,6 +84,10 @@ chatController.insertMessageInChat = async (fullMessage, currentlyChatId) => {
             messages: fullMessage
         }
     })
+}
+
+chatController.updateSeenMessages = async () => {
+    await Message.updateMany({"seen": false}, {"$set":{"seen": true}})
 }
 
 module.exports = chatController;

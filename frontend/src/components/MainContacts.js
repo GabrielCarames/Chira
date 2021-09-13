@@ -4,12 +4,13 @@ import socket from './Socket'
 import axios from 'axios'
 import moment from 'moment'
 
-const MainContacts = ({messages}) => {
+const MainContacts = ({messages, lastMessage, setLastMessage, showIcon, setShowIcon}) => {
     const [ chats, setChats ] = useState()
     const [ contactChat, setContactChat ] = useState()
-    const [ lastMessage, setLastMessage ] = useState()
+    // const [ lastMessage, setLastMessage ] = useState()
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ contactData, setContactData ] = useState(false)
+    // const [ showIcon, setShowIcon ] = useState(false)
 
     const goToChat = (contactId) => {
         const userId = user._id
@@ -23,6 +24,12 @@ const MainContacts = ({messages}) => {
         // })
     }, [])
 
+    // useEffect(() => {
+    //     notification &&
+    //         console.log("soynofiticaicon", notification)
+    //         if(notification.username !== user.username)
+    // }, [notification])
+
     useEffect(() => {
         const getChats = async () => {
             messages && setLastMessage(messages)
@@ -31,6 +38,10 @@ const MainContacts = ({messages}) => {
             chats && setChats(chats)
         }
         getChats()
+    }, [messages])
+
+    useEffect(() => {
+        console.log("hagamos la prueba de fuego", messages)
     }, [messages])
 
     const algo = (contact) => {
@@ -47,15 +58,53 @@ const MainContacts = ({messages}) => {
         }
     }
 
+    useEffect(() => {
+        socket.on("newNotification", (newMessage, receptorUser) => {
+            console.log("soynofiticaicon", newMessage, receptorUser, user)
+            // setLastMessage(newMessage) //y este tambien, proba usando un nuevo useState
+            if(receptorUser[0].username === user.username) setShowIcon(true)
+        });
+    }, [])
+    
+
     const showCurrentLastMessage = () => {
-        if(lastMessage) return lastMessage[lastMessage.length -1].message 
-        else return false
+        // if(messages) console.log("soymessage", messages)
+        // if(lastMessage) console.log(lastMessage[lastMessage.length -1])
+        // if(lastMessage[lastMessage.length -1].username !== user.username)
+        console.log("tengo que ser lastmessage", lastMessage) ///////////////aca hay maldad para arreglar
+        if(Array.isArray(lastMessage)) {
+            if(lastMessage) return lastMessage[lastMessage.length -1].message
+            else return false
+        } else {
+            if(lastMessage) return lastMessage.message
+            else return false
+        }
+        // if(lastMessage) return lastMessage[lastMessage.length -1].message
+        // else return false
     }
 
     const showHistoryLastMessage = () => {
         if(contactChat.messages.length !== 0) return contactChat.messages[contactChat.messages.length -1].message
         else return false
     }
+
+    const showNotification = () => {
+        // if(notification.username !== user.username) return <i className="far fa-comment-dots"></i>
+    }
+
+    useEffect(() => {
+        console.log("jonhfsu", lastMessage)
+    }, [lastMessage])
+    
+
+    // useEffect(() => {
+    //     socket.on("newNotification", (newMessage) => {
+    //         console.log("soynofiticaicon", newMessage)
+    //         const notificationContainer = document.getElementById('notification')
+    //         if(newMessage.username !== user.username) setShowIcon(true)
+    //     });
+    //         // if(notification.username !== user.username)
+    // }, [])
 
     return(
         <>
@@ -74,7 +123,7 @@ const MainContacts = ({messages}) => {
                                                 <p className="list__username">{contactData && contactData.username}</p>{/*abajo si el mensaje del input se envia, arriba lo toma y realiza un re render en donde llega aca y se fija si messages fue actualizado para mostrar el ultimo mensaje actualizado */}
                                                 <p className="list__messages">{showCurrentLastMessage() ? showCurrentLastMessage() : showHistoryLastMessage() ? showHistoryLastMessage() : ''}</p>
                                             </div>{/*ambos se fijan PRIMERO SI, se envio un mensaje ahora mismo?, caso falso no muestra nada, caso verdadero se pregunta SEGUNDO SI, hay un "historiaL" de mensajes?y forzosamente muestra el ultimo mensaje / hora de ultiam vez */}
-                                            <h6 className="list__time-ago">{contactChat.messages.length !== 0 ? (messages ? moment(contactChat.messages[contactChat.messages.length -1].createdAt).format("LT") : moment(contactChat.messages[contactChat.messages.length -1].createdAt).format("LT")) : ""}</h6>
+                                            <h6 className="list__time-ago" id="notification">{contactChat.messages.length !== 0 ? (messages && messages[0].username !== user.username ? showNotification() : moment(contactChat.messages[contactChat.messages.length -1].createdAt).format("LT")) : ""} <i className={showIcon ? 'far fa-comment-dots active' : 'far fa-comment-dots'}></i></h6>
                                         </>
                                     }
                                 </li>

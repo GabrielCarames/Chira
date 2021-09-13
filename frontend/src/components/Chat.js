@@ -5,7 +5,7 @@ import ChatMessages from './ChatMessages'
 import SearchMessages from './SearchMessages'
 import TestContext from "../contexts/TestContext";
 
-const Chat = ({messages, setMessages}) => {
+const Chat = ({messages, setMessages, lastMessage, setLastMessage, showIcon, setShowIcon}) => {
     const { chat, setChat } = useContext(TestContext)
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const contact = chat && chat[0].users.filter((user) => user.username !== userLogged.username)[0]
@@ -13,7 +13,7 @@ const Chat = ({messages, setMessages}) => {
     const [ connectedContact, setConnectedContact ] = useState([]);
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
     const [ goToMessage, setGoToMessage ] = useState(false)
-     
+
     useEffect(() => {
         socket.on("getUsersConnected", (users) => {
             setOnlineUsers(users)
@@ -24,7 +24,7 @@ const Chat = ({messages, setMessages}) => {
         socket.on("chatFound", (chat) => {
             setChat(chat);
         });
-    })
+    }, [])
 
     useEffect(() => {
         if(chat) {
@@ -53,7 +53,7 @@ const Chat = ({messages, setMessages}) => {
                         </div>
                     </div>
                 </nav>
-                <ChatMessages chat={chat} messages={messages} setMessages={setMessages} goToMessage={goToMessage}/>
+                <ChatMessages chat={chat} messages={messages} setMessages={setMessages} goToMessage={goToMessage} lastMessage={lastMessage} setLastMessage={setLastMessage} showIcon={showIcon} setShowIcon={setShowIcon}/>
             </section>
             {showSearchMessages && <SearchMessages setShowSearchMessages={setShowSearchMessages} goToMessage={goToMessage} setGoToMessage={setGoToMessage}/>}
         </>
