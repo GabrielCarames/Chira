@@ -1,6 +1,5 @@
 const Chat = require('../models/Chat')
 const Message = require('../models/Message')
-const Notification = require('../models/Notification')
 const chatController = {}
 
 chatController.createNotification = async (user, contact, type) => {

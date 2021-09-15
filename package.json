@@ -4,10 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"npm run frontend\" \"npm run backend\"",
     "frontend": "npm run start --prefix frontend",
-    "backend": "cd backend && npm run dev",
-    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
+    "backend": "cd backend && npm run dev"
   },
   "repository": {
     "type": "git",
