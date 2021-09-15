@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently \"npm run frontend\" \"npm run backend\"",
     "frontend": "npm run start --prefix frontend",
-    "backend": "cd backend && npm run dev",
+    "backend": "cd backend && npm start",
     "heroku-postbuild": "concurrently \"npm run frontend\" \"npm run backend\""
   },
   "repository": {
