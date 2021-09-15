@@ -3,8 +3,9 @@ const userController = require("../controllers/userController");
 const chatController = require("../controllers/chatController");
 const router = Router();
 
-router.get('/allchats', async function (req, res) {
-    const chats = await chatController.findAllChats()
+router.post('/allchatsfromuserlogged', async function (req, res) {
+    const userLogged = req.body.userLogged
+    const chats = await chatController.findAllChatsByUserId(userLogged._id)
     res.send(chats)
 })
 

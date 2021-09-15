@@ -1,9 +1,17 @@
 const Chat = require('../models/Chat')
 const Message = require('../models/Message')
-const User = require('../models/User')
+const Notification = require('../models/Notification')
 const chatController = {}
 
-chatController.saveMessages = async (user, message) => {
+chatController.createNotification = async (user, contact, type) => {
+    const newChat = await new Chat({
+        type: type, 
+        users: [user, contact]
+    });
+    await newChat.save()
+}
+
+chatController.saveMessagesAndReturnFullMessage = async (user, message) => {
     const newMessage = new Message ({
         message,
         user
@@ -19,6 +27,36 @@ chatController.createChat = async (user, contact, type) => {
         users: [user, contact]
     });
     await newChat.save()
+}
+
+chatController.findAllChatById = async (chatId) => {
+    const chat = await Chat.findOne({"_id": chatId}).populate({
+        path: 'messages',
+        model: 'Message',
+            populate: {
+                path: 'user',
+                model: 'User'
+            }
+    }).populate({
+        path: 'users',
+        model: 'User'
+    })
+    return chat
+}
+
+chatController.findAllChatsByUserId = async (userId) => {
+    const chat = await Chat.find({"users": userId}).populate({
+        path: 'messages',
+        model: 'Message',
+            populate: {
+                path: 'user',
+                model: 'User'
+            }
+    }).populate({
+        path: 'users',
+        model: 'User'
+    })
+    return chat
 }
 
 chatController.findChatByContactId = async (userId, contactId) => {

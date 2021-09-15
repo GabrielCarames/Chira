@@ -4,121 +4,94 @@ import socket from './Socket'
 import moment from 'moment'
 import axios from 'axios'
 
-const MainContacts = ({messages, setLastMessage, showIcon, setShowIcon}) => {
-    const user = JSON.parse(localStorage.getItem('userLogged'))
+const MainContacts = ({messagesSent, setLastMessage, showNewMessageNotification, setShowNewMessageNotification}) => {
+    const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ messageAlreadySeen, setMessageAlreadySeen ] = useState(false)
-    const [ lastMessageToShow, setLastMessageToShow ] = useState()
-    const [ contactData, setContactData ] = useState(false)
-    const [ contactChat, setContactChat ] = useState()
+    const [ lastRecentMessage, setLastRecentMessage ] = useState()
     const [ chats, setChats ] = useState()
+    //lastRecentMessage es para mensajes recientes al contacto unicamente, mas no para todos
+    //messagesSent es para todos
 
-    const goToChat = contactId => socket.emit('goToChat', user._id, contactId)
+    const goToChat = users => {
+        const contactId = users.filter((user) => user._id !== userLogged._id)[0]._id        
+        socket.emit('goToChat', userLogged._id, contactId)
+    }
 
     useEffect(() => {
         const getAllChats = async () => {
-            messages && setLastMessage(messages)
-            const data = await axios.get('http://localhost:3001/chat/allchats')
-            let chats = data.data
+            messagesSent && setLastMessage(messagesSent)
+            const res = await axios.post('http://localhost:3001/chat/allchatsfromuserlogged', {userLogged})
+            const chats = res.data
             chats && setChats(chats)
         }
         getAllChats()
-    }, [messages])
-
-    const algo = (contact) => {
-        if(chats){
-            var contactToShow
-            chats.forEach((chat) => {
-                contactToShow = chat.users.filter((user) => user._id === contact._id)
-            })
-            const chatToShow = chats.filter((chat) => {
-                return chat.users.filter((user) => user._id === contact._id)
-            })
-            setContactChat(chatToShow[0])
-            setContactData(contactToShow[0])
-        }
-    }
-
-    const showNotification = () => {
-        // if(notification.username !== user.username) return <i className="far fa-comment-dots"></i>
-    }
+    }, [messagesSent])
 
     useEffect(() => {
-        socket.on("newNotification", (newMessage, receptorUser) => {
-            setLastMessageToShow(newMessage)
-            if(receptorUser[0].username === user.username) setShowIcon(true)
+        socket.on("newNotification", (newMessage, contactChat) => {
+            document.getElementById(contactChat[0]._id).children[2].children[0].classList = 'far fa-comment-dots active' //Activa la visibilidad del icono de notificacion de mensaje
+            document.getElementById(contactChat[0]._id).children[1].children[1].textContent 
+            = contactChat[0].messages[contactChat[0].messages.length -1].message //Agarra el ultimo mensaje actual desactualizado de tal chat, y lo actualiza con el mensaje actualziado unicamente a el
+            setLastRecentMessage(newMessage)
         });
     }, [])
     
-
-    const showCurrentLastMessage = () => {
-        if(messages) {
-            return messages[messages.length -1].message
-        } else if(lastMessageToShow){ 
-            return lastMessageToShow.message
+    const activeMessageNotificationIcon = (chat) => {
+        if(chat.messages.length !== 0) {
+            if(!chat.messages[chat.messages.length -1].seen && chat.messages[chat.messages.length -1].user.username !== userLogged.username) {
+                return 'far fa-comment-dots active'
+            } else return 'far fa-comment-dots'
         }
-        else return false
     }
 
-    const showHistoryLastMessage = () => {
-        if(contactChat.messages.length !== 0) return contactChat.messages[contactChat.messages.length -1].message
-        else return false
+    const showHistoryLastMessage = (messages) => {
+        if(messages.length !== 0) return messages[messages.length -1].message
     }
 
-    const showSeenIcon = () => {
-        console.log("armageddon", contactChat && contactChat.messages[contactChat.messages.length -1].user._id, user._id)
-        if(messages){
-            console.log("mensajejerererer", messages)
-        //     if(messages.seen === true) {
-        //         return <i class="fas fa-check-double"></i>
-        //    } else {
-               return <i class="fas fa-check"></i>
-        //    }
-        } 
-            
-            // if(contactChat.messages[contactChat.messages.length -1].seen === true) {
-            // } else {
-            //     return <i class="fas fa-check"></i>
-            // }
-        
+    const showTimeAgoMessage = (messages) => {
+        return lastRecentMessage //Si el userLogged recibió un mensaje para EL
+            ? moment(lastRecentMessage.createdAt).format("LT")
+            : messagesSent //Si el userLogged envió un mensaje para un contacto y lo tiene que visualizar el mismo
+                ? moment(messagesSent.createdAt).format("LT") 
+                : messages.length !== 0
+                    ? moment(messages[messages.length -1].createdAt).format("LT") 
+                    : ''
     }
 
     socket.on('messageAlreadySeen', () => {
         setMessageAlreadySeen(true)
-        return <i class="fas fa-check-double"></i>
     })
+
+    const contactUsername = (users) => {
+        return users.filter((user) => user._id !== userLogged._id)[0].username
+    }
 
     return(
         <>
             <main className="main__contacts">
                 <ul className="main__contacts-list list">
-                    {user.contacts && 
-                        user.contacts.map((contact) => {
-                            !contactData && algo(contact)
+                    {chats && 
+                        chats.map((chat) => {
                             return (
-                                <li className="list__item" onClick={() => goToChat(contact._id)} key={contact}>
+                                <li className="list__item" onClick={() => goToChat(chat.users)} key={chat._id} id={chat._id}>
                                     <img className="list__avatar" src={avatar} alt="user-avatar" />
-                                    {
-                                        contactData && 
-                                        <>
-                                            <div className="list__info">
-                                                <p className="list__username">{contactData && contactData.username}</p>{/*abajo si el mensaje del input se envia, arriba lo toma y realiza un re render en donde llega aca y se fija si messages fue actualizado para mostrar el ultimo mensaje actualizado */}
-                                                <div className="list__message-container">
-                                                    {contactChat.messages[contactChat.messages.length -1].user._id === user._id && (messageAlreadySeen ? <i class="fas fa-check-double"></i> : <i class="fas fa-check"></i>) }
-                                                    <p className="list__messages">{showCurrentLastMessage() ? showCurrentLastMessage() : showHistoryLastMessage() ? showHistoryLastMessage() : ''}</p>
-                                                </div>
-                                            </div>{/*ambos se fijan PRIMERO SI, se envio un mensaje ahora mismo?, caso falso no muestra nada, caso verdadero se pregunta SEGUNDO SI, hay un "historiaL" de mensajes?y forzosamente muestra el ultimo mensaje / hora de ultiam vez */}
-                                            <div className="list__message-info">
-                                                <i className={showIcon ? 'far fa-comment-dots active' : 'far fa-comment-dots'}></i>
-                                                <h6 className="list__time-ago" id="notification">{contactChat.messages.length !== 0 ? (messages && messages[0].username !== user.username ? showNotification() : moment(contactChat.messages[contactChat.messages.length -1].createdAt).format("LT")) : ""} </h6>
+                                        <div className="list__info">
+                                            <p className="list__username">{contactUsername(chat.users)}</p>
+                                            <div className="list__message-container">
+                                                {/* {showSeenIcon() } */}
+                                                <p className="list__messages">{ showHistoryLastMessage(chat.messages) ? showHistoryLastMessage(chat.messages) : ''}</p>
                                             </div>
-                                        </>
-                                    }
+                                        </div>
+                                        <div className="list__message-info">
+                                            <i className={activeMessageNotificationIcon(chat)}></i>
+                                            <h6 className="list__time-ago" id="notification">{ showTimeAgoMessage(chat.messages)} </h6>
+                                        </div>
                                 </li>
                             )
                         })
                     }
                 </ul>
-            </main>   
+            </main>
         </>
     )
 }

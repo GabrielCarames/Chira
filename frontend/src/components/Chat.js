@@ -5,37 +5,27 @@ import ChatMessages from './ChatMessages'
 import avatar from '../images/avatar.png'
 import socket from './Socket'
 
-const Chat = ({messages, setMessages, setShowIcon}) => {
+const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
     const [ connectedContact, setConnectedContact ] = useState([]);
     const [ goToMessage, setGoToMessage ] = useState(false)
-    const [ onlineUsers, setOnlineUsers ] = useState([]);
     const { chat, setChat } = useContext(TestContext)
     
-    const contact = chat && chat[0].users.filter((user) => user.username !== userLogged.username)[0]
-    
-    useEffect(() => {
-        socket.on("getUsersConnected", (users) => {
-            setOnlineUsers(users)
-            if(chat) {
-                setConnectedContact(onlineUsers.filter((user) => user.userLoggedId === contact._id))
-            }
-        });
-        socket.on("chatFound", (chat) => {
-            setChat(chat);
-        });
-    }, [])
+    const contact = chat && chat.users.filter((user) => user.username !== userLogged.username)[0]
+    const setConnectedContactState = (users) => setConnectedContact(users.filter((user) => user.userLoggedId === contact._id))
 
-    useEffect(() => {
-        if(chat) {
-            setConnectedContact(onlineUsers.filter((user) => user.userLoggedId === contact._id))
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [chat, onlineUsers])
+    socket.on("getUsersConnected", (users) => {
+        chat && setConnectedContactState(users)
+    });
+
+    socket.on("chatFound", (chat) => {
+        setChat(chat);
+    });
 
     return chat ? 
         <>
+        {console.log("ptuo")}
             <section className={showSearchMessages ? 'main__chat-section search' : 'main__chat-section'}>
                 <nav className="main__chat-navbar navbar">
                     <div className="navbar__contact">
@@ -54,7 +44,7 @@ const Chat = ({messages, setMessages, setShowIcon}) => {
                         </div>
                     </div>
                 </nav>
-                <ChatMessages chat={chat} messages={messages} setMessages={setMessages} goToMessage={goToMessage} setShowIcon={setShowIcon}/>
+                <ChatMessages setChat={setChat} chat={chat} messagesSent={messagesSent} setMessagesSent={setMessagesSent} goToMessage={goToMessage} setShowNewMessageNotification={setShowNewMessageNotification}/>
             </section>
             {showSearchMessages && <SearchMessages setShowSearchMessages={setShowSearchMessages} goToMessage={goToMessage} setGoToMessage={setGoToMessage}/>}
         </>

@@ -9,11 +9,11 @@ import socket from './Socket'
 const Main = ({setUserLoggedMain}) => {
     const [ active, setActive ] = useState(false)
     const { addContactsMenu, setAddContactsMenu } = useContext(AddContactsMenu)
-    const [ messages, setMessages ] = useState("");
+    const [ messagesSent, setMessagesSent ] = useState("");
     const [ lastMessage, setLastMessage ] = useState()
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ contactChat, setContactChat ] = useState()
-    const [ showIcon, setShowIcon ] = useState(false)
+    const [ showNewMessageNotification, setShowNewMessageNotification ] = useState(false)
     
     useEffect(() => {
         socket.emit('connected', userLogged) // ver forma de actualizar el usuario solo cuando lo quiero + la primera vez que logueas
@@ -46,7 +46,7 @@ const Main = ({setUserLoggedMain}) => {
                     <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain}/>
                 </section>
                 <section className="main__content-section">
-                    {addContactsMenu ? <SearchContacts /> : <MainContacts messages={messages} setLastMessage={setLastMessage} showIcon={showIcon} setShowIcon={setShowIcon} />}
+                    {addContactsMenu ? <SearchContacts /> : <MainContacts messagesSent={messagesSent} setLastMessage={setLastMessage} showNewMessageNotification={showNewMessageNotification} setShowNewMessageNotification={setShowNewMessageNotification} />}
                     <div className="main_add-contacts-container">
                         <div className={addContactsMenu ? "main__add-contact-button active" : "main__add-contact-button" } onClick={() => {setAddContactsMenu(true)}}>
                             <i className="fas fa-user-plus"></i>
@@ -54,7 +54,7 @@ const Main = ({setUserLoggedMain}) => {
                     </div>
                 </section>
             </section>
-            <Chat messages={messages} setMessages={setMessages} setShowIcon={setShowIcon}/>
+            <Chat messagesSent={messagesSent} setMessagesSent={setMessagesSent} setShowNewMessageNotification={setShowNewMessageNotification}/>
         </section>
     )
 }

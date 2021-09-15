@@ -31,32 +31,33 @@ module.exports = (io) => {
       io.emit("getUsersConnected", currentlyUsers);
     })
 
-    socket.on("mensaje", async (user, message) => {
-      const { username } = user
-      const fullMessage = await chatController.saveMessages(user, message)
-      const seen = fullMessage.seen
-      await chatController.insertMessageInChat(fullMessage, currentlyChat[0]._id)
-      io.emit("mensajes", { username, message, seen });
-    });
-
     socket.on("goToChat", async (userId, contactId) => {
       currentlyChat = await chatController.findChatByContactId(userId, contactId)
-      socket.emit("chatFound", currentlyChat);
+      socket.emit("chatFound", currentlyChat[0]);
+    });
+
+    socket.on("sendMessage", async (user, message) => {
+      const fullMessage = await chatController.saveMessagesAndReturnFullMessage(user, message)
+      const seen = fullMessage.seen
+      await chatController.insertMessageInChat(fullMessage, currentlyChat[0]._id)
+      const updatedChat = await chatController.findAllChatById(currentlyChat[0]._id)
+      io.emit("messageSent", { user, message, seen, updatedChat });
     });
 
     socket.on('typing', (username) => {
       socket.broadcast.emit('typing', username)
     });
 
-    socket.on('seenMessage', async (userToAdviseSeenMessage) => {
-      console.log('viendomensajes', userToAdviseSeenMessage)
+    socket.on('seenMessage', async (contactToAdviseSeenMessage) => {
       await chatController.updateSeenMessages()
-      socket.to(userToAdviseSeenMessage.socketId[0]).emit('messageAlreadySeen')
+      socket.to(contactToAdviseSeenMessage.socketId[0]).emit('messageAlreadySeen')
     });
 
-    socket.on('newMessageNotification', async (message, receptorUser) => {
-      const updatedUser = await userController.findUserById(receptorUser[0]._id)
-      socket.to(updatedUser[0].socketId[0]).emit('newNotification', message, receptorUser)
+    socket.on('newMessageNotification', async (message, user, contact) => {
+      const updatedUser = await userController.findUserById(contact[0]._id)
+      const contactChat = await chatController.findChatByContactId(user._id, contact[0]._id)
+      console.log("updateduser?", contactChat[0].messages)
+      socket.to(updatedUser[0].socketId[0]).emit('newNotification', message, contactChat)
     });
 
     // socket.on('update', async (userLogged, contact) => {
