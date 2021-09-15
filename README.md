@@ -5,10 +5,6 @@ Chira
 
 <br />
 
-## Imágenes
-
-<br />
-
 ## Tecnologías
 
 <br />
