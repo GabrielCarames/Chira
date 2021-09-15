@@ -1,20 +1,19 @@
 {
-  "name": "Chira",
+  "name": "chira",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"npm run frontend\" \"npm run backend\"",
-    "frontend": "npm run build --prefix frontend",
-    "backend": "cd backend && npm start",
+    "build": "cd frontend && npm run build",
     "install-frontend": "cd frontend && npm install",
-    "heroku-postbuild": "npm run install-frontend && npm run build"
+    "heroku-postbuild": "npm run install-frontend && npm run build",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/GabrielCarames/Chira.git"
   },
-  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
@@ -22,6 +21,15 @@
   },
   "homepage": "https://github.com/GabrielCarames/Chira#readme",
   "dependencies": {
-    "concurrently": "^6.2.1"
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.8",
+    "node-localstorage": "^2.2.1",
+    "socket.io": "^2.3.0",
+    "mpath": ">=0.8.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
   }
 }
