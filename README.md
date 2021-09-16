@@ -1,12 +1,18 @@
 Chira
 =============
 
-> Página web similar a "WhatsApp" o "Telegram".
+Página web similar a "WhatsApp" o "Telegram".
 <br />
 
+<div align="center">
+  
 ## Tecnologías
+  
+</div>
 
 <br />
+
+<div align="center">
 
 [![Mongodb](https://img.shields.io/badge/-Mongodb-lightblue?style=for-the-badge&logo=Mongodb)](https://www.mongodb.com/es)
 [![Express](https://img.shields.io/badge/-express-black?style=for-the-badge&logo=express)](https://expressjs.com/es/)
@@ -19,26 +25,31 @@ Chira
 [![Html](https://img.shields.io/badge/-html-black?style=for-the-badge&logo=html5)](https://developer.mozilla.org/es/docs/Web/HTML)
 [![Figma](https://img.shields.io/badge/-Figma-white?style=for-the-badge&logo=figma)](https://figma.com/)
 
-<br />
+</div>
 
+<br />
+<div align="center">
+  
 ## Funcionalidades
 
+</div>
+
 <br />
 
-> Chat en tiempo real
+## Chat en tiempo real
 * Contiene un chat en donde se pueden enviar, recibir y mostrar mensajes entre dos usuarios en tiempo real. Cada mensaje se muestra con su contenido, fecha de creación, y su ícono de "visto". ***Hecho con Socket.io***
 
-> Sistema de notificaciones
+## Sistema de notificaciones
 * Cada vez que un usuario envía a otro un mensaje nuevo, este último será ***notificado*** por un ícono de mensaje nuevo sin ver.
 
-> Sistema de "visto".
+## Sistema de "visto".
 * Si un usuario tiene mensajes sin leer, al acceder al chat correspondiente, colocará ***automáticamente un doble tick*** representando que vio el mensaje. Todo en ***tiempo real***.
 
-> Historial de mensajes
+## Historial de mensajes
 * Los mensajes son almacenados en una ***base de datos*** dentro de ***MongoDB***. Al ingresar dentro de un chat, se envía una petición a la tabla correspondiente y mostrará todos los ***mensajes*** del chat existente.
 
-> Registro e ingreso con autenticación por teléfono
+## Registro e ingreso con autenticación por teléfono
 * Al momento de crear una cuenta o ingresar a la misma, la página enviará un ***código de autenticación*** al ***número de celular*** ingresado en el formulario, el cual deberá ser ingresado para acceder a la misma. Proceso realizado con ***Firebase Auth***.
 
-> Sistema de notificaciones de errores
+## Sistema de notificaciones de errores
 * La página cuenta con un sistema de notificaciones que informará al usuario cuando haya algún ***error*** con la base de datos, api's, o simplemente su cuenta no sea correcta, etc.
