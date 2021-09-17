@@ -32,8 +32,12 @@ module.exports = (io) => {
     })
 
     socket.on("goToChat", async (userId, contactId) => {
+      socket.broadcast.emit('disconnectingFromAllChats')
       currentlyChat = await chatController.findChatByContactId(userId, contactId)
+      const updatedUser = await userController.findUserById(contactId)
       socket.emit("chatFound", currentlyChat[0]);
+      console.log("estoy viendo el pitulin de alguien", updatedUser)
+      socket.to(updatedUser[0].socketId).emit('contactSeeingChat')
     });
 
     socket.on("sendMessage", async (user, message) => {
@@ -48,16 +52,18 @@ module.exports = (io) => {
       socket.broadcast.emit('typing', username)
     });
 
-    socket.on('seenMessage', async (contactToAdviseSeenMessage) => {
+    socket.on('seenMessage', async (user, contactIdToAdviseSeenMessage) => {
       await chatController.updateSeenMessages()
-      socket.to(contactToAdviseSeenMessage.socketId[0]).emit('messageAlreadySeen')
+      const updatedUser = await userController.findUserById(contactIdToAdviseSeenMessage)
+      const contactChat = await chatController.findChatByContactId(user, contactIdToAdviseSeenMessage)
+      console.log("contacthcat", contactChat[0].messages)
+      io.to(updatedUser[0].socketId).emit('messageAlreadySeen', contactChat[0].messages)
     });
 
     socket.on('newMessageNotification', async (message, user, contact) => {
       const updatedUser = await userController.findUserById(contact[0]._id)
       const contactChat = await chatController.findChatByContactId(user._id, contact[0]._id)
-      console.log("updateduser?", contactChat[0].messages)
-      socket.to(updatedUser[0].socketId[0]).emit('newNotification', message, contactChat)
+      socket.to(updatedUser[0].socketId).emit('newNotification', message, contactChat)
     });
 
     // socket.on('update', async (userLogged, contact) => {
@@ -67,6 +73,7 @@ module.exports = (io) => {
     // })
 
     socket.on('disconnect', async () => {
+      socket.broadcast.emit('disconnectingFromAllChats')
       await userController.removeSocketIdFromUserBySocketId(socket.id)
       removeUserLoggedFromList(socket.id)
       io.emit("getUsersConnected", currentlyUsers);

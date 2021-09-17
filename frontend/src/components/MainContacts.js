@@ -20,7 +20,7 @@ const MainContacts = ({messagesSent, setLastMessage, showNewMessageNotification,
     useEffect(() => {
         const getAllChats = async () => {
             messagesSent && setLastMessage(messagesSent)
-            const res = await axios.post('/chat/allchatsfromuserlogged', {userLogged})
+            const res = await axios.post('http://localhost:3001/chat/allchatsfromuserlogged', {userLogged})
             const chats = res.data
             chats && setChats(chats)
         }
@@ -58,9 +58,10 @@ const MainContacts = ({messagesSent, setLastMessage, showNewMessageNotification,
                     : ''
     }
 
-    socket.on('messageAlreadySeen', () => {
-        setMessageAlreadySeen(true)
-    })
+    // socket.on('messageAlreadySeen', (messages) => {
+    //     console.log("fdale fpor favor", nessages)
+    //     setMessageAlreadySeen(true)
+    // })
 
     const contactUsername = (users) => {
         return users.filter((user) => user._id !== userLogged._id)[0].username

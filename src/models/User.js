@@ -10,7 +10,7 @@ const User = new Schema({
         }
     ],
     socketId: {
-        type: Array
+        type: String
     }
 });
 

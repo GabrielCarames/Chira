@@ -14,7 +14,8 @@ const Main = ({setUserLoggedMain}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ contactChat, setContactChat ] = useState()
     const [ showNewMessageNotification, setShowNewMessageNotification ] = useState(false)
-    
+    const [ messageAlreadySeen, setMessageAlreadySeen ] = useState(false)
+
     useEffect(() => {
         socket.emit('connected', userLogged) // ver forma de actualizar el usuario solo cuando lo quiero + la primera vez que logueas
         socket.on("userLogged", (userLoggede) => {
@@ -22,7 +23,10 @@ const Main = ({setUserLoggedMain}) => {
         });
     }, [])
 
-    
+    socket.on('messageAlreadySeen', (message) => {
+        // console.log('me dieron ayuda', message)
+        setMessageAlreadySeen(message)
+    })
 
     window.onclick = (event) => {
         if(active && event.target.className !== 'burger__user-info' && event.target.className !== 'main__settings' && event.target.className !== 'fas fa-bars') {
@@ -54,7 +58,8 @@ const Main = ({setUserLoggedMain}) => {
                     </div>
                 </section>
             </section>
-            <Chat messagesSent={messagesSent} setMessagesSent={setMessagesSent} setShowNewMessageNotification={setShowNewMessageNotification}/>
+            <Chat messagesSent={messagesSent} setMessagesSent={setMessagesSent} 
+            setShowNewMessageNotification={setShowNewMessageNotification} messageAlreadySeen={messageAlreadySeen} setMessageAlreadySeen={setMessageAlreadySeen}/>
         </section>
     )
 }

@@ -66,21 +66,14 @@ userController.addNewContact = async (userId, newContactId) => {
 }
 
 userController.addSocketIdToUser = async (userId, socketId) => {
-    await User.findOneAndUpdate({ _id: userId },
-        {
-            $push: {
-                socketId: socketId
-            }
-        }
+    await User.findOneAndUpdate({ _id: userId }, { socketId: socketId }
     )
 }
 
 userController.removeSocketIdFromUserBySocketId = async (socketId) => {
     await User.findOneAndUpdate({ socketId: socketId },
         {
-            $pull: {
-                socketId: socketId
-            }
+                socketId: ""
         }
     )
 }

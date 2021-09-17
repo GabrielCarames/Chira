@@ -1,26 +1,30 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback, memo } from 'react'
 import ReactScrolleableFeed from 'react-scrollable-feed'
 import send from '../images/send.png'
 import socket from './Socket'
 import moment from 'moment'
+import Cosa from './Cosa'
 
-const ChatMessages = ({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification}) => {
+const ChatMessages = memo((({setChat, chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, messageAlreadySeen, setMessageAlreadySeen, connectedContact, contactSeeingChat}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
-    const [ messageAlreadySeen, setMessageAlreadySeen ] = useState(false)
+    const [ cosaDos, setCosaDos ] = useState(false)
+    // const [ messageAlreadySeen, setMessageAlreadySeen ] = useState(false)
     
     useEffect(() => {
         socket.on("messageSent", async (newMessage) => {
             const contact = chat.users.filter((userInChat) => userInChat._id !== user._id)
             newMessage.user.username === user.username && socket.emit('newMessageNotification', newMessage, user, contact)
+            console.log("oro", newMessage.updatedChat)
+            setCosaDos(newMessage.updatedChat.messages)
             setMessagesSent([...messagesSent, newMessage]); //Representa los mensajes enviados ahora mismo en el chat, no el historial.
         });
         return () => {
           socket.off();
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [messagesSent]);    
+    }, [messagesSent]);
 
     const messageInput = message => socket.emit("sendMessage", user, message)
     const verifyAndSendInputValue = input => input !== '' && messageInput(input)
@@ -63,36 +67,34 @@ const ChatMessages = ({chat, messagesSent, setMessagesSent, goToMessage, setShow
     }, [])
 
     const seenMessages = () => {
-        if(chat.messages.length !== 0 && chat.messages[chat.messages.length -1].user._id !== user._id) {
-            console.log("acabo de ver un mensaje")
-            const contactToAdviseSeenMessage = chat.messages[chat.messages.length -1].user
+        if(messagesSent.length !== 0 && messagesSent[messagesSent.length -1].user._id !== user._id) {
+            const contactIdToAdviseSeenMessage = messagesSent[messagesSent.length -1].user._id
             document.getElementById(chat._id).children[2].children[0].classList = 'far fa-comment-dots'
             setShowNewMessageNotification(false)
-            socket.emit('seenMessage', contactToAdviseSeenMessage)
+            socket.emit('seenMessage', user, contactIdToAdviseSeenMessage)
+        }
+        else if(chat.messages.length !== 0 && chat.messages[chat.messages.length -1].user._id !== user._id) {
+            const contactIdToAdviseSeenMessage = chat.messages[chat.messages.length -1].user._id
+            document.getElementById(chat._id).children[2].children[0].classList = 'far fa-comment-dots'
+            setShowNewMessageNotification(false)
+            socket.emit('seenMessage', user, contactIdToAdviseSeenMessage)
         }
     }
 
-    socket.on('messageAlreadySeen', () => {
-        console.log('me dieron ayuda')
-        setMessageAlreadySeen(true)
-    })
-
-    const showSeenIconMessage = (seen, recientlyChat) => {
-        // console.log("mensaje visto", messageAlreadySeen)
-     console.log("soyreobob", recientlyChat)
+    const showSeenIconMessage = useCallback((seen) => {
+        
         if(!messageAlreadySeen) {
             if(seen) {
                 return <i className="fas fa-check-double"></i>
             } else return <i className="fas fa-check"></i>
         } else {
             // setMessageAlreadySeen(false)
-            return <i className="fas fa-check-double"></i>
-        }
-        
-        // message.seen === true ? <i class="fas fa-check-double"></i> : <i class="fas fa-check"></i>
-    }
 
-    const showChatMessages = (message, recientlyChat=false) => {
+                return <i className="fas fa-check-double"></i>
+        }
+    })
+
+    const showChatMessages = (message, i) => {
         return (
             message.user.username === user.username || message.username === user.username ?
             <div className={goToMessage === message._id ? 'messages-user-logged-messages active' : 'messages-user-logged-messages'} key={message._id} id={message._id}>
@@ -101,7 +103,8 @@ const ChatMessages = ({chat, messagesSent, setMessagesSent, goToMessage, setShow
                     <p className="messages__message">{message.message}</p>
                     <div className="message__info">
                         <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
-                        {showSeenIconMessage(message.seen, recientlyChat)}
+                        {/* {showSeenIconMessage(message.seen)} */}
+                        <Cosa cosaDos={cosaDos} setCosaDos={setCosaDos} message={message} messageAlreadySeen={messageAlreadySeen} connectedContact={connectedContact} contactSeeingChat={contactSeeingChat} i={i}/>
                     </div>
                 </div>
             </div>
@@ -123,8 +126,8 @@ const ChatMessages = ({chat, messagesSent, setMessagesSent, goToMessage, setShow
         <>
             <div className="main__messages-section messages" id="list-messages">
                 <ReactScrolleableFeed className="messages__scroll">
-                    {chat && chat.messages.map((message) => { console.log("me renderizo historial"); return showChatMessages(message)})}
-                    {messagesSent && messagesSent.map((message) => {console.log("me renderizo actual"); return showChatMessages(message, true)})}
+                    {chat && chat.messages.map((message, i) => {return showChatMessages(message, i)})}
+                    {messagesSent && messagesSent.map((message, i) => {return showChatMessages(message, i)})}
                 </ReactScrolleableFeed>
                 <div className="messages__typing">{userTyping && `${userTyping} está escribiendo`} </div>
             </div>
@@ -136,6 +139,6 @@ const ChatMessages = ({chat, messagesSent, setMessagesSent, goToMessage, setShow
             </form>
         </>
     )
-}
+}))
 
 export default ChatMessages
