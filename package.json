@@ -6,7 +6,7 @@
   "scripts": {
     "build": "cd frontend && npm run build",
     "install-frontend": "cd frontend && npm install",
-    "heroku-postbuild": "npm run install-frontend && npm run start",
+    "heroku-postbuild": "npm run install-frontend && npm run build",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },
