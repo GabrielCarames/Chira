@@ -33,6 +33,7 @@ body main {
   position: fixed;
   height: 100%;
   width: 100%;
+  overflow-y: auto;
 }
 
 .login .login__welcome {
@@ -617,6 +618,7 @@ body main {
     margin: 5px 0 0 0;
   }
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__message-container .fas {
+    color: #5297e8;
     margin: 5px 5px 0 0;
   }
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__message-info .list__time-ago {

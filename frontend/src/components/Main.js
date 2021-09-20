@@ -7,19 +7,20 @@ import Chat from './Chat';
 import socket from './Socket'
 
 const Main = ({setUserLoggedMain}) => {
+    const userLogged = JSON.parse(localStorage.getItem('userLogged'))
+    const [ setShowNewMessageNotification ] = useState(false)
+    const [ displayChat, setDisplayChat ] = useState(false)
+    const [ messagesSent, setMessagesSent ] = useState("");
+    const [ setLastMessage ] = useState()
     const [ active, setActive ] = useState(false)
     const { addContactsMenu, setAddContactsMenu } = useContext(AddContactsMenu)
-    const [ messagesSent, setMessagesSent ] = useState("");
-    const [ lastMessage, setLastMessage ] = useState()
-    const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-    const [ showNewMessageNotification, setShowNewMessageNotification ] = useState(false)
-    const [ displayChat, setDisplayChat ] = useState(false)
     
     useEffect(() => {
         socket.emit('connected', userLogged)
         socket.on("userLogged", (userLoggede) => {
             localStorage.setItem('userLogged', JSON.stringify(userLoggede[0]));
         });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     window.onclick = (event) => {
@@ -30,20 +31,15 @@ const Main = ({setUserLoggedMain}) => {
 
     useEffect(() => {
         if(displayChat) {
-            //Por que asi?, si lo hacia con estado normal como siempre, habia un problema con la re renderizacion
-            // setTimeout(() => {
-                // document.getElementById('main__left-section').classList = "main__left-section hidden"
-            // }, 200);
-        } else {
-            console.log("hola????????????????????????????????????")
-            document.getElementById('main__left-section').classList = "main__left-section"
-
+            setTimeout(() => {
+                document.getElementById('main__left-section').classList = "main__left-section hidden"
+            }, 200);
         }
     }, [displayChat])
 
     return(
         <section className="main">
-            <section className="main__left-section" id={'main__left-section'}>
+            <section className="main__left-section" id="main__left-section">
                 <section className="main__navbar-section">
                     <nav className="main__navbar navbar">
                         <div className="main__settings" onClick={() => active ? setActive(false) : setActive(true)}>

@@ -9,9 +9,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
-
-    document.getElementById('main__left-section').classList = "main__left-section hidden"
-
+    
     useEffect(() => {
         socket.on("messageSent", async (newMessage) => {
             const contact = chat.users.filter((userInChat) => userInChat._id !== user._id)

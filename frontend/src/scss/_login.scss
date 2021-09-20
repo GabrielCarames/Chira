@@ -38,6 +38,7 @@
     position: fixed;
     height: 100%;
     width: 100%;
+    overflow-y: auto;
     .login__welcome {
         display: flex;
         flex-direction: column;

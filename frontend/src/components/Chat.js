@@ -11,7 +11,6 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     const [ connectedContact, setConnectedContact ] = useState([]);
     const [ goToMessage, setGoToMessage ] = useState(false)
     const { chat, setChat } = useContext(TestContext)
-    
     const contact = chat && chat.users.filter((user) => user.username !== userLogged.username)[0]
     const setConnectedContactState = (users) => setConnectedContact(users.filter((user) => user.userLoggedId === contact._id))
 
@@ -25,7 +24,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
 
     useEffect(() => {
         if(displayChat && chat) document.getElementById('navbar__back').classList = "navbar__back display"
-    }, [displayChat])
+    }, [displayChat, chat])
 
     const backToMainContacts = () => {
         setChat(false)

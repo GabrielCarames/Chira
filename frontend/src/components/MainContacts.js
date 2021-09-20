@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, memo } from 'react'
 import avatar from '../images/avatar.png'
 import socket from './Socket'
 import moment from 'moment'
 import axios from 'axios'
 
-const MainContacts = ({messagesSent, setLastMessage, setDisplayChat}) => {
+const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ lastRecentMessage, setLastRecentMessage ] = useState()
     const [ chats, setChats ] = useState()
@@ -25,6 +25,7 @@ const MainContacts = ({messagesSent, setLastMessage, setDisplayChat}) => {
             chats && setChats(chats)
         }
         getAllChats()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [messagesSent])
 
     useEffect(() => {
@@ -62,6 +63,14 @@ const MainContacts = ({messagesSent, setLastMessage, setDisplayChat}) => {
         return users.filter((user) => user._id !== userLogged._id)[0].username
     }
 
+    const showSeenIcon = (lastMessage) => {
+        if(lastMessage.user.username === userLogged.username) {
+            if(lastMessage.seen) {
+                return <i className="fas fa-check-double"></i> 
+            } else return <i className="fas fa-check"></i>
+        }
+    }
+
     return(
         <>
             <main className="main__contacts">
@@ -74,7 +83,7 @@ const MainContacts = ({messagesSent, setLastMessage, setDisplayChat}) => {
                                         <div className="list__info">
                                             <p className="list__username">{contactUsername(chat.users)}</p>
                                             <div className="list__message-container">
-                                                {/* {showSeenIcon() } */}
+                                                {chat.messages.length !== 0 && showSeenIcon(chat.messages[chat.messages.length -1])}
                                                 <p className="list__messages">{ showHistoryLastMessage(chat.messages) ? showHistoryLastMessage(chat.messages) : ''}</p>
                                             </div>
                                         </div>
@@ -90,6 +99,6 @@ const MainContacts = ({messagesSent, setLastMessage, setDisplayChat}) => {
             </main>
         </>
     )
-}
+})
 
 export default MainContacts
