@@ -4,45 +4,36 @@ import SearchMessages from './SearchMessages'
 import ChatMessages from './ChatMessages'
 import avatar from '../images/avatar.png'
 import socket from './Socket'
-import MainContacts from './MainContacts';
-import { useHistory } from "react-router-dom";
 
-const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, displayChat, setDisplayChat }) => {
+const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, displayChat }) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
     const [ connectedContact, setConnectedContact ] = useState([]);
     const [ goToMessage, setGoToMessage ] = useState(false)
     const { chat, setChat } = useContext(TestContext)
+    
     const contact = chat && chat.users.filter((user) => user.username !== userLogged.username)[0]
     const setConnectedContactState = (users) => setConnectedContact(users.filter((user) => user.userLoggedId === contact._id))
-    let history = useHistory()
 
     socket.on("getUsersConnected", (users) => {
         chat && setConnectedContactState(users)
     });
 
     socket.on("chatFound", (chat) => {
-        console.log("chsty", chat)
         setChat(chat);
     });
 
     useEffect(() => {
-        if(displayChat && chat) {
-            
-                document.getElementById('navbar__back').classList = "navbar__back display"
-           
-        }
+        if(displayChat && chat) document.getElementById('navbar__back').classList = "navbar__back display"
     }, [displayChat])
 
     const backToMainContacts = () => {
-        console.log("hoal?")
-        // setDisplayChat(false)
         setChat(false)
     }
 
     return chat ?
         <>
-            <section className={showSearchMessages ? 'main__chat-section search' : 'main__chat-section' /*|| displayChat ? "main__chat-section display" : "main__chat-section"*/}>
+            <section className={showSearchMessages ? 'main__chat-section search' : 'main__chat-section'}>
                 <nav className="main__chat-navbar navbar">
                     <div className="navbar__back" id="navbar__back" onClick={() => backToMainContacts()}>
                         <i className="fas fa-arrow-left"></i>
@@ -63,8 +54,8 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                         </div>
                     </div>
                 </nav>
-                <ChatMessages setChat={setChat} chat={chat} messagesSent={messagesSent} setMessagesSent={setMessagesSent}
-                 goToMessage={goToMessage} setShowNewMessageNotification={setShowNewMessageNotification} connectedContact={connectedContact}
+                <ChatMessages chat={chat} messagesSent={messagesSent} setMessagesSent={setMessagesSent}
+                 goToMessage={goToMessage} setShowNewMessageNotification={setShowNewMessageNotification}
                  />
             </section>
             {showSearchMessages && <SearchMessages setShowSearchMessages={setShowSearchMessages} goToMessage={goToMessage} setGoToMessage={setGoToMessage}/>}

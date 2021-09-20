@@ -13,13 +13,11 @@
     border-right: 2px solid #000;
     width: 100%;
     height: 100vh;
-    &.display {
-        visibility: visible;
-        position: fixed;
-    }
     &.search {
-        width: 800px;
+        visibility: hidden;
+        position: absolute;
     }
+    
     .main__chat-navbar {
         display: flex;
         justify-content: space-between;
@@ -260,6 +258,11 @@
 @media screen and (min-width: 1201px) {
     .main__chat-section {
         width: 1200px;
+        &.search {
+            visibility: visible;
+            position: inherit;
+            width: 800px;
+        }
         .main__chat-navbar {
             display: flex;
             justify-content: space-between;

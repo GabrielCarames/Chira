@@ -4,7 +4,7 @@ import avatar from '../images/avatar.png'
 import Loader from "react-loader-spinner";
 import moment from 'moment'
 
-const ShowMessages = ({messageSearch, goToMessage , setGoToMessage}) => {
+const ShowMessages = ({messageSearch, goToMessage , setGoToMessage, setShowSearchMessages}) => {
     const { onSearchSubmit } = useShowMessagesHelper();
     const [ showMessages, setShowMessages ] = useState();
     const [ loader, setLoader ] = useState();
@@ -26,10 +26,12 @@ const ShowMessages = ({messageSearch, goToMessage , setGoToMessage}) => {
     }, [messageSearch])// eslint-disable-line react-hooks/exhaustive-deps
 
     const scrollToMessage = (messageId) => {
-        console.log("message", messageId)
-        let messageItem = document.getElementById(messageId)
-        setGoToMessage(messageId)
-        messageItem.scrollIntoView({behavior: "smooth"})
+        setShowSearchMessages(false)
+        setTimeout(() => {
+            let messageItem = document.getElementById(messageId)
+            setGoToMessage(messageId)
+            messageItem.scrollIntoView({behavior: "smooth"})
+        }, 400);
     }
 
     if(loader) {
@@ -39,7 +41,7 @@ const ShowMessages = ({messageSearch, goToMessage , setGoToMessage}) => {
             if(showMessages) {
                 return (
                     <ul className="messages-list list">
-                        { 
+                        {
                             showMessages.map(message => {
                                 return (
                                     <li className="list__item" key={message._id} onClick={() => scrollToMessage(message._id)}>

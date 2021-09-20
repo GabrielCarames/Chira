@@ -1,24 +1,21 @@
-import { useState, useEffect, useCallback, memo } from 'react'
+import { useState, useEffect, memo } from 'react'
 import ReactScrolleableFeed from 'react-scrollable-feed'
 import send from '../images/send.png'
 import socket from './Socket'
 import moment from 'moment'
 import DisplaySeenIcon from './DisplaySeenIcon'
 
-const ChatMessages = memo((({setChat, chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, messageAlreadySeen, setMessageAlreadySeen, connectedContact, contactSeeingChat}) => {
+const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
-    const [ cosaDos, setCosaDos ] = useState(false)
-    // const [ messageAlreadySeen, setMessageAlreadySeen ] = useState(false)
+
     document.getElementById('main__left-section').classList = "main__left-section hidden"
 
     useEffect(() => {
         socket.on("messageSent", async (newMessage) => {
             const contact = chat.users.filter((userInChat) => userInChat._id !== user._id)
             newMessage.user.username === user.username && socket.emit('newMessageNotification', newMessage, user, contact)
-            console.log("oro", newMessage.updatedChat)
-            setCosaDos(newMessage.updatedChat.messages)
             setMessagesSent([...messagesSent, newMessage]); //Representa los mensajes enviados ahora mismo en el chat, no el historial.
         });
         return () => {

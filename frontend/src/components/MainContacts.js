@@ -3,15 +3,14 @@ import avatar from '../images/avatar.png'
 import socket from './Socket'
 import moment from 'moment'
 import axios from 'axios'
-import { useHistory } from "react-router-dom";
-import Chat from './Chat'
-const MainContacts = ({messagesSent, setMessagesSent, setLastMessage, showNewMessageNotification, setShowNewMessageNotification, displayChat, setDisplayChat}) => {
+
+const MainContacts = ({messagesSent, setLastMessage, setDisplayChat}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ lastRecentMessage, setLastRecentMessage ] = useState()
     const [ chats, setChats ] = useState()
     //lastRecentMessage es para mensajes recientes al contacto unicamente, mas no para todos
     //messagesSent es para todos
-    let history = useHistory()
+
     const goToChat = users => {
         const contactId = users.filter((user) => user._id !== userLogged._id)[0]._id
         setDisplayChat(true)

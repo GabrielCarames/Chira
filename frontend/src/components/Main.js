@@ -57,12 +57,9 @@ const Main = ({setUserLoggedMain}) => {
                     <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain}/>
                 </section>
                 <section className="main__content-section">
-                    {addContactsMenu ? <SearchContacts /> : <MainContacts messagesSent={messagesSent} setMessagesSent={setMessagesSent} 
-                    setLastMessage={setLastMessage} 
-                    showNewMessageNotification={showNewMessageNotification} setShowNewMessageNotification={setShowNewMessageNotification} 
-                    displayChat={displayChat}
-                    setDisplayChat={setDisplayChat}
-                    
+                    {addContactsMenu ? <SearchContacts /> : <MainContacts messagesSent={messagesSent}
+                        setLastMessage={setLastMessage} 
+                        setDisplayChat={setDisplayChat}
                     />}
                     <div className="main_add-contacts-container add-contacts">
                         <div className="add-contacts__sub-container">
@@ -80,7 +77,7 @@ const Main = ({setUserLoggedMain}) => {
             </section>
             <Chat messagesSent={messagesSent} setMessagesSent={setMessagesSent} 
             setShowNewMessageNotification={setShowNewMessageNotification}
-            displayChat={displayChat} setDisplayChat={setDisplayChat}
+            displayChat={displayChat}
             />
         </section>
     )

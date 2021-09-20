@@ -16,7 +16,7 @@ const SearchMessages = ({setShowSearchMessages, goToMessage , setGoToMessage}) =
                 </div>
             </div>
             <div className="search__results-section">
-                <ShowMessages messageSearch={messageSearch} goToMessage={goToMessage} setGoToMessage={setGoToMessage}/>
+                <ShowMessages messageSearch={messageSearch} goToMessage={goToMessage} setGoToMessage={setGoToMessage} setShowSearchMessages={setShowSearchMessages}/>
             </div>
         </section>
     )
