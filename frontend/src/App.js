@@ -1,11 +1,13 @@
 import Login from './components/Login'
 import Main from './components/Main';
+import Chat from './components/Chat';
 import { useState } from 'react'
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import ShowFlashMessages from './components/ShowFlashMessages';
 import FlashContext from './contexts/FlashContext';
 import AddContactsMenu from './contexts/AddContactsMenu';
 import TestContext from './contexts/TestContext';
+
 const App = () => {
   const [ flashMessage, setFlashMessage ] = useState(false)
   const [ addContactsMenu, setAddContactsMenu ] = useState(false)
@@ -28,6 +30,7 @@ const App = () => {
                 <Switch>
                     <Route exact path="/" component={checkLogIn} />
                     <Route exact path="/login" component={Login} />
+                    <Route exact path="/chat" component={Chat} />
                     <Route path="*" component={checkLogIn} />
                 </Switch>
               </BrowserRouter>

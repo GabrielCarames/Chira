@@ -12,21 +12,15 @@ const Main = ({setUserLoggedMain}) => {
     const [ messagesSent, setMessagesSent ] = useState("");
     const [ lastMessage, setLastMessage ] = useState()
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-    const [ contactChat, setContactChat ] = useState()
     const [ showNewMessageNotification, setShowNewMessageNotification ] = useState(false)
-    const [ messageAlreadySeen, setMessageAlreadySeen ] = useState(false)
-
+    const [ displayChat, setDisplayChat ] = useState(false)
+    
     useEffect(() => {
-        socket.emit('connected', userLogged) // ver forma de actualizar el usuario solo cuando lo quiero + la primera vez que logueas
+        socket.emit('connected', userLogged)
         socket.on("userLogged", (userLoggede) => {
             localStorage.setItem('userLogged', JSON.stringify(userLoggede[0]));
         });
     }, [])
-
-    socket.on('messageAlreadySeen', (message) => {
-        // console.log('me dieron ayuda', message)
-        setMessageAlreadySeen(message)
-    })
 
     window.onclick = (event) => {
         if(active && event.target.className !== 'burger__user-info' && event.target.className !== 'main__settings' && event.target.className !== 'fas fa-bars') {
@@ -34,9 +28,22 @@ const Main = ({setUserLoggedMain}) => {
         }
     }
 
+    useEffect(() => {
+        if(displayChat) {
+            //Por que asi?, si lo hacia con estado normal como siempre, habia un problema con la re renderizacion
+            // setTimeout(() => {
+                // document.getElementById('main__left-section').classList = "main__left-section hidden"
+            // }, 200);
+        } else {
+            console.log("hola????????????????????????????????????")
+            document.getElementById('main__left-section').classList = "main__left-section"
+
+        }
+    }, [displayChat])
+
     return(
         <section className="main">
-            <section className="main__left-section">
+            <section className="main__left-section" id={'main__left-section'}>
                 <section className="main__navbar-section">
                     <nav className="main__navbar navbar">
                         <div className="main__settings" onClick={() => active ? setActive(false) : setActive(true)}>
@@ -50,16 +57,31 @@ const Main = ({setUserLoggedMain}) => {
                     <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain}/>
                 </section>
                 <section className="main__content-section">
-                    {addContactsMenu ? <SearchContacts /> : <MainContacts messagesSent={messagesSent} setLastMessage={setLastMessage} showNewMessageNotification={showNewMessageNotification} setShowNewMessageNotification={setShowNewMessageNotification} />}
-                    <div className="main_add-contacts-container">
-                        <div className={addContactsMenu ? "main__add-contact-button active" : "main__add-contact-button" } onClick={() => {setAddContactsMenu(true)}}>
-                            <i className="fas fa-user-plus"></i>
+                    {addContactsMenu ? <SearchContacts /> : <MainContacts messagesSent={messagesSent} setMessagesSent={setMessagesSent} 
+                    setLastMessage={setLastMessage} 
+                    showNewMessageNotification={showNewMessageNotification} setShowNewMessageNotification={setShowNewMessageNotification} 
+                    displayChat={displayChat}
+                    setDisplayChat={setDisplayChat}
+                    
+                    />}
+                    <div className="main_add-contacts-container add-contacts">
+                        <div className="add-contacts__sub-container">
+                            <div className="add-contacts__left-side">
+                                <div className={addContactsMenu ? "add-contacts__button active" : "add-contacts__button" } onClick={() => {setAddContactsMenu(true)}}>
+                                    <i className="fas fa-user-plus"></i>
+                                </div>
+                            </div>
+                            <div className="add-contacts__right-side">
+
+                            </div>
                         </div>
                     </div>
                 </section>
             </section>
             <Chat messagesSent={messagesSent} setMessagesSent={setMessagesSent} 
-            setShowNewMessageNotification={setShowNewMessageNotification} messageAlreadySeen={messageAlreadySeen} setMessageAlreadySeen={setMessageAlreadySeen}/>
+            setShowNewMessageNotification={setShowNewMessageNotification}
+            displayChat={displayChat} setDisplayChat={setDisplayChat}
+            />
         </section>
     )
 }

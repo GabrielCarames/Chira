@@ -3,17 +3,18 @@ import avatar from '../images/avatar.png'
 import socket from './Socket'
 import moment from 'moment'
 import axios from 'axios'
-
-const MainContacts = ({messagesSent, setLastMessage, showNewMessageNotification, setShowNewMessageNotification}) => {
+import { useHistory } from "react-router-dom";
+import Chat from './Chat'
+const MainContacts = ({messagesSent, setMessagesSent, setLastMessage, showNewMessageNotification, setShowNewMessageNotification, displayChat, setDisplayChat}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-    const [ messageAlreadySeen, setMessageAlreadySeen ] = useState(false)
     const [ lastRecentMessage, setLastRecentMessage ] = useState()
     const [ chats, setChats ] = useState()
     //lastRecentMessage es para mensajes recientes al contacto unicamente, mas no para todos
     //messagesSent es para todos
-
+    let history = useHistory()
     const goToChat = users => {
-        const contactId = users.filter((user) => user._id !== userLogged._id)[0]._id        
+        const contactId = users.filter((user) => user._id !== userLogged._id)[0]._id
+        setDisplayChat(true)
         socket.emit('goToChat', userLogged._id, contactId)
     }
 
@@ -57,11 +58,6 @@ const MainContacts = ({messagesSent, setLastMessage, showNewMessageNotification,
                     ? moment(messages[messages.length -1].createdAt).format("LT") 
                     : ''
     }
-
-    // socket.on('messageAlreadySeen', (messages) => {
-    //     console.log("fdale fpor favor", nessages)
-    //     setMessageAlreadySeen(true)
-    // })
 
     const contactUsername = (users) => {
         return users.filter((user) => user._id !== userLogged._id)[0].username

@@ -3,7 +3,7 @@ import ReactScrolleableFeed from 'react-scrollable-feed'
 import send from '../images/send.png'
 import socket from './Socket'
 import moment from 'moment'
-import Cosa from './Cosa'
+import DisplaySeenIcon from './DisplaySeenIcon'
 
 const ChatMessages = memo((({setChat, chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, messageAlreadySeen, setMessageAlreadySeen, connectedContact, contactSeeingChat}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
@@ -11,7 +11,8 @@ const ChatMessages = memo((({setChat, chat, messagesSent, setMessagesSent, goToM
     const [ userTyping, setUsertyping ] = useState(false)
     const [ cosaDos, setCosaDos ] = useState(false)
     // const [ messageAlreadySeen, setMessageAlreadySeen ] = useState(false)
-    
+    document.getElementById('main__left-section').classList = "main__left-section hidden"
+
     useEffect(() => {
         socket.on("messageSent", async (newMessage) => {
             const contact = chat.users.filter((userInChat) => userInChat._id !== user._id)
@@ -81,20 +82,7 @@ const ChatMessages = memo((({setChat, chat, messagesSent, setMessagesSent, goToM
         }
     }
 
-    const showSeenIconMessage = useCallback((seen) => {
-        
-        if(!messageAlreadySeen) {
-            if(seen) {
-                return <i className="fas fa-check-double"></i>
-            } else return <i className="fas fa-check"></i>
-        } else {
-            // setMessageAlreadySeen(false)
-
-                return <i className="fas fa-check-double"></i>
-        }
-    })
-
-    const showChatMessages = (message, i) => {
+    const showChatMessages = (message) => {
         return (
             message.user.username === user.username || message.username === user.username ?
             <div className={goToMessage === message._id ? 'messages-user-logged-messages active' : 'messages-user-logged-messages'} key={message._id} id={message._id}>
@@ -103,8 +91,7 @@ const ChatMessages = memo((({setChat, chat, messagesSent, setMessagesSent, goToM
                     <p className="messages__message">{message.message}</p>
                     <div className="message__info">
                         <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
-                        {/* {showSeenIconMessage(message.seen)} */}
-                        <Cosa cosaDos={cosaDos} setCosaDos={setCosaDos} message={message} messageAlreadySeen={messageAlreadySeen} connectedContact={connectedContact} contactSeeingChat={contactSeeingChat} i={i}/>
+                        <DisplaySeenIcon message={message}/>
                     </div>
                 </div>
             </div>
@@ -115,7 +102,6 @@ const ChatMessages = memo((({setChat, chat, messagesSent, setMessagesSent, goToM
                     <p className="messages__message">{message.message}</p>
                     <div className="message__info">
                         <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
-                        {/* {message.seen === true ? <i class="fas fa-check-double"></i> : <i class="fas fa-check"></i>  } */}
                     </div>
                 </div>
             </div>
@@ -126,8 +112,8 @@ const ChatMessages = memo((({setChat, chat, messagesSent, setMessagesSent, goToM
         <>
             <div className="main__messages-section messages" id="list-messages">
                 <ReactScrolleableFeed className="messages__scroll">
-                    {chat && chat.messages.map((message, i) => {return showChatMessages(message, i)})}
-                    {messagesSent && messagesSent.map((message, i) => {return showChatMessages(message, i)})}
+                    {chat && chat.messages.map((message) => {return showChatMessages(message)})}
+                    {messagesSent && messagesSent.map((message) => {return showChatMessages(message)})}
                 </ReactScrolleableFeed>
                 <div className="messages__typing">{userTyping && `${userTyping} está escribiendo`} </div>
             </div>

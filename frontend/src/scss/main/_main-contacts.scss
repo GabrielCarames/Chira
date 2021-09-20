@@ -1,6 +1,6 @@
 .main__content-section{
     // width: 480px;
-    height: 90vh;
+    height: 100%;
     border-left: 2px solid rgb(0, 0, 0);
     .main__contacts {
         height: 100%;
@@ -13,6 +13,7 @@
             margin: 0;
             .list__item {
                 width: 100%;
+                height: 80px;
                 display: flex;
                 padding-left: 15px;
                 align-items: center;
@@ -70,31 +71,53 @@
     .main__search-contacts {
         width: 100%;
     }
-    .main__add-contact-button {
+    .main_add-contacts-container {
         position: absolute;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 20px;
         bottom: 0;
-        width: 65px;
+        margin-top: 90px;
         height: 65px;
-        background-color: $first-color;
-        border-radius: 300px;
-        z-index: 1000;
-        cursor: pointer;
-        right: 0;
-        margin-right: 10px;
-        &.active {
-            visibility: hidden;
-        }
-        &:hover{
-            transition: .25s;
-            background-color: $first-alpha-color;
-        }
-        .fa-user-plus {
-            font-size: $h2;
+        pointer-events: none;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 20px;
+        .add-contacts__sub-container {
+            display: flex;
+            width: 100%;
+            .add-contacts__left-side {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: right;
+                .add-contacts__button {
+                    position: absolute;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 65px;
+                    height: 65px;
+                    background-color: $first-color;
+                    border-radius: 300px;
+                    z-index: 1000;
+                    cursor: pointer;
+                    margin-right: 20px;
+                    &.active {
+                        visibility: hidden;
+                    }
+                    &:hover{
+                        transition: .25s;
+                        background-color: $first-alpha-color;
+                    }
+                    .fa-user-plus {
+                        font-size: $h2;
+                    }
+                }
+            }
+            .add-contacts__right-side {
+                width: 0;
+                height: 100%
+            }
         }
     }
 }
@@ -169,25 +192,23 @@
                 }
             }
             .main_add-contacts-container {
-                position: absolute;
-                bottom: 0;
-                margin-top: 90px;
-                width: 460px;
-                height: 65px;
-                pointer-events: none;
-                .main__add-contact-button {
-                    position: absolute;
-                    bottom: 0;
-                    pointer-events:initial;
-                    &.active {
-                        visibility: hidden;
+
+                .add-contacts__sub-container {
+                    
+                    .add-contacts__left-side {
+                        width: 480px;
+                        .add-contacts__button {
+                            margin-right: 10px;
+                            &.active {
+                            }
+                            &:hover{
+                            }
+                            .fa-user-plus {
+                            }
+                        }
                     }
-                    &:hover{
-                        transition: .25s;
-                        background-color: $first-alpha-color;
-                    }
-                    .fa-user-plus {
-                        font-size: $h2;
+                    .add-contacts__right-side {
+                        width: 1200px;
                     }
                 }
             }

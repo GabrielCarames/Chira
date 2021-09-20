@@ -36,7 +36,6 @@ module.exports = (io) => {
       currentlyChat = await chatController.findChatByContactId(userId, contactId)
       const updatedUser = await userController.findUserById(contactId)
       socket.emit("chatFound", currentlyChat[0]);
-      console.log("estoy viendo el pitulin de alguien", updatedUser)
       socket.to(updatedUser[0].socketId).emit('contactSeeingChat')
     });
 
@@ -56,7 +55,6 @@ module.exports = (io) => {
       await chatController.updateSeenMessages()
       const updatedUser = await userController.findUserById(contactIdToAdviseSeenMessage)
       const contactChat = await chatController.findChatByContactId(user, contactIdToAdviseSeenMessage)
-      console.log("contacthcat", contactChat[0].messages)
       io.to(updatedUser[0].socketId).emit('messageAlreadySeen', contactChat[0].messages)
     });
 
@@ -65,12 +63,6 @@ module.exports = (io) => {
       const contactChat = await chatController.findChatByContactId(user._id, contact[0]._id)
       socket.to(updatedUser[0].socketId).emit('newNotification', message, contactChat)
     });
-
-    // socket.on('update', async (userLogged, contact) => {
-    //   userToUpdate = await userController.findUserById(userLogged._id)
-    //   contactToUpdate = await userController.findUserById(contact._id)
-    //   socket.to(contactToUpdate[0].socketId[0]).emit('latenesadentro')
-    // })
 
     socket.on('disconnect', async () => {
       socket.broadcast.emit('disconnectingFromAllChats')

@@ -4,42 +4,49 @@ import SearchMessages from './SearchMessages'
 import ChatMessages from './ChatMessages'
 import avatar from '../images/avatar.png'
 import socket from './Socket'
+import MainContacts from './MainContacts';
+import { useHistory } from "react-router-dom";
 
-const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, messageAlreadySeen, setMessageAlreadySeen}) => {
+const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, displayChat, setDisplayChat }) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
     const [ connectedContact, setConnectedContact ] = useState([]);
     const [ goToMessage, setGoToMessage ] = useState(false)
     const { chat, setChat } = useContext(TestContext)
-    // const [ userConnected, setGoToMessage ] = useState(false)
     const contact = chat && chat.users.filter((user) => user.username !== userLogged.username)[0]
     const setConnectedContactState = (users) => setConnectedContact(users.filter((user) => user.userLoggedId === contact._id))
-    const [ contactSeeingChat, setContactSeeingChat ] = useState(false)
+    let history = useHistory()
+
     socket.on("getUsersConnected", (users) => {
         chat && setConnectedContactState(users)
     });
 
-    useEffect(() => {
-        socket.on("disconnectingFromAllChats", () => {
-            console.log("el contacto se fue al re carajo de este chat")
-            setContactSeeingChat(false)
-            // setMessageAlreadySeen(false)
-        });
-        socket.on("contactSeeingChat", () => {
-            console.log("el contacto me esta viendo el pitulind")
-            setContactSeeingChat(true)
-        });
-    }, [])
-    
-
     socket.on("chatFound", (chat) => {
+        console.log("chsty", chat)
         setChat(chat);
     });
 
-    return chat ? 
+    useEffect(() => {
+        if(displayChat && chat) {
+            
+                document.getElementById('navbar__back').classList = "navbar__back display"
+           
+        }
+    }, [displayChat])
+
+    const backToMainContacts = () => {
+        console.log("hoal?")
+        // setDisplayChat(false)
+        setChat(false)
+    }
+
+    return chat ?
         <>
-            <section className={showSearchMessages ? 'main__chat-section search' : 'main__chat-section'}>
+            <section className={showSearchMessages ? 'main__chat-section search' : 'main__chat-section' /*|| displayChat ? "main__chat-section display" : "main__chat-section"*/}>
                 <nav className="main__chat-navbar navbar">
+                    <div className="navbar__back" id="navbar__back" onClick={() => backToMainContacts()}>
+                        <i className="fas fa-arrow-left"></i>
+                    </div>
                     <div className="navbar__contact">
                         <img className="navbar__avatar" src={avatar} alt="contact-avatar" />
                         <div className="navbar__info">
@@ -57,9 +64,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, mes
                     </div>
                 </nav>
                 <ChatMessages setChat={setChat} chat={chat} messagesSent={messagesSent} setMessagesSent={setMessagesSent}
-                 goToMessage={goToMessage} setShowNewMessageNotification={setShowNewMessageNotification}
-                 messageAlreadySeen={messageAlreadySeen} setMessageAlreadySeen={setMessageAlreadySeen} connectedContact={connectedContact}
-                 contactSeeingChat={contactSeeingChat}
+                 goToMessage={goToMessage} setShowNewMessageNotification={setShowNewMessageNotification} connectedContact={connectedContact}
                  />
             </section>
             {showSearchMessages && <SearchMessages setShowSearchMessages={setShowSearchMessages} goToMessage={goToMessage} setGoToMessage={setGoToMessage}/>}

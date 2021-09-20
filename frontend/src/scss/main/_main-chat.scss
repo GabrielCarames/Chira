@@ -5,9 +5,18 @@
     border-left: 1px solid #000;
 }
 .main__chat-section {
+    visibility: visible;
+    // visibility: hidden;
+    // position: absolute;
     display: flex;
     flex-direction: column;
     border-right: 2px solid #000;
+    width: 100%;
+    height: 100vh;
+    &.display {
+        visibility: visible;
+        position: fixed;
+    }
     &.search {
         width: 800px;
     }
@@ -16,20 +25,39 @@
         justify-content: space-between;
         align-items: center;
         background-color: $second-color;
-        height: 90px;
+        height: 60px;
         width: 100%;
         border-left: 2px solid #000;
         cursor: pointer;
+        .navbar__back {
+            visibility: visible;
+            // visibility: hidden;
+            // position: absolute;
+            @include icons-div-styles;
+            margin-right: 0;
+            font-size: 18px;
+            width: 50px;
+            height: 50px;
+            &:hover {
+                background-color: $hover-color;
+            }
+            &.display {
+                visibility: visible;
+                position: initial;
+            }
+            .fa-arrow-left {
+
+            }
+        }
         .navbar__contact {
             display: flex;
-            // justify-content: space-evenly;
             align-items: center;
-            width: 300px;
+            width: 80%;
             height: 100%;
-            margin-left: 30px;
+            margin-left: 10px;
             .navbar__avatar {
-                width: 66px;
-                height: 66px;
+                width: 43px;
+                height: 43px;
             }
             .navbar__info {
                 display: flex;
@@ -49,17 +77,21 @@
         .navbar__tools {
             display: flex;
             justify-content: right;
-            width: 200px;
-            margin-right: 10px;
-            font-size: 21px;
+            width: 120px;
+            margin-right: 0px;
+            font-size: 18px;
             .navbar__search {
                 @include icons-div-styles;
+                width: 100px;
+                height: 50px;
                 &:hover {
                     background-color: $hover-color;
                 }
             }
             .navbar__settings {
                 @include icons-div-styles;
+                width: 100px;
+                height: 50px;
                 &:hover {
                     background-color: $hover-color;
                 }
@@ -67,24 +99,136 @@
         }
     }
     .main__messages-section {
-        height: 81vh;
+        height: 85%;
         width: 100%;
         background-color: #1976e080;
         box-shadow: inset 226px 260px 250px rgba(0, 0, 0, 0.25);
+        display: flex;
+            flex-direction: column;
+            .messages__scroll {
+                height: 100%;
+            }
+            .messages__scroll::-webkit-scrollbar {
+                width: 10px;
+            }
+            .messages__scroll::-webkit-scrollbar-thumb {
+                height: 10px;
+                background-color: $first-color;
+                box-shadow: 3px solid black;
+            }  
+            .messages-user-logged-messages {
+                &.active {
+                    background-color: $first-color;
+                }
+                .messages-message-container {
+                    display: inline-block;
+                    background-color: $second-color;
+                    text-align: left;
+                    margin: 20px 0 20px 20px;
+                    padding: 0px 10px 0 10px;
+                    border-radius: 10px;
+                    max-width: 500px;
+                    .messages__username {
+                        color: $first-alpha-color;
+                        font-size: $h5;
+                    }
+                    .messages__message {
+                        font-weight: 400px;
+                        line-height: 1.2;
+                        word-break: break-word;
+                        font-size: $h5;
+                        &.active {
+                            color: red;
+                        }
+                    }
+                    .message__info {
+                        display: flex;
+                        justify-content: right;
+                        align-items: center;
+                        .messages__timeago {
+                            text-align: right;
+                            line-height: 0;
+                            color: $gray-color;
+                            margin-right: 10px;
+                        }
+                        .fas {
+                        }
+                        .fa-check {
+                            color: $first-alpha-color;
+                        }
+                        .fa-check-double {
+                            color: $first-color;
+                        }
+                    }
+                }
+            }
+            .messages-contact-messages {
+                display: flex;
+                justify-content: right;
+                padding: 20px;
+                &.active {
+                    background-color: $first-color;
+                }
+                .messages-message-container {
+                    display: inline-block;
+                    background-color: $second-alpha-color;
+                    text-align: right;
+                    margin: 20px 10px 20px 0;
+                    padding: 10px 20px 0 20px;
+                    border-radius: 10px;
+                    max-width: 500px;
+                    .messages__username {
+                        font-weight: 700px;
+                        color: $first-color;
+                        font-size: $h5;
+                    }
+                    .messages__message {
+                        font-weight: 500px;
+                        word-break: break-word;
+                        line-height: 1.2;
+                        font-size: $h5;
+                    }
+                    .message__info {
+                        display: flex;
+                        justify-content: right;
+                        align-items: center;
+                        .messages__timeago {
+                            text-align: right;
+                            line-height: 0;
+                            color: $gray-color;
+                            margin-right: 10px;
+                        }
+                        .fas {
+                        }
+                        .fa-check {
+                            color: $first-alpha-color;
+                        }
+                        .fa-check-double {
+                            color: $first-color;
+                        }
+                    }
+                }
+            }
+        .messages__typing {
+            background-color: #f0f8ff00;
+            margin-left: 10px;
+            margin-bottom: 10px;
+        }
     }
     .main__input-section {
         background-color: $second-alpha-color;
-        height: 90px;
+        // height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
+        padding: 10px;
         .main__input {
             color: $gray-color;
             background-color: $second-color;
             border: none;
             border-radius: 30px;
             padding-left: 20px;
-            height: 45px;
+            height: 35px;
             width: 90%;
             font-size: $h5;
             font-family: 'Poppins', sans-serif;
@@ -93,14 +237,15 @@
         .main__send-message {
             @include icons-div-styles;
             margin-left: 20px;
+            margin-right: 0;
             width: 50px;
-            height: 50px;
+            height: 35px;
             justify-content: right;
             background-color: rgba(255, 0, 0, 0);
             border: none;
         }
         .main__send-image {
-            width: 40px;
+            width: 35px;
             height: auto;
             color: white;
             cursor: pointer;
@@ -115,9 +260,69 @@
 @media screen and (min-width: 1201px) {
     .main__chat-section {
         width: 1200px;
+        .main__chat-navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: $second-color;
+            height: 100px;
+            width: 100%;
+            border-left: 2px solid #000;
+            cursor: pointer;
+            .navbar__back {
+                visibility: hidden;
+                position: absolute;
+            }
+            .navbar__contact {
+                display: flex;
+                // justify-content: space-evenly;
+                align-items: center;
+                width: 80%;
+                height: 100%;
+                margin-left: 30px;
+                .navbar__avatar {
+                    width: 66px;
+                    height: 66px;
+                }
+                .navbar__info {
+                    display: flex;
+                    flex-direction: column;
+                    line-height: 0;
+                    text-align: start;
+                    margin-left: 20px;
+                    .navbar__username {
+    
+                    }
+                    .navbar__connected {
+                        font-size: $h5;
+                        color: $gray-color;
+                    }
+                }
+            }
+            .navbar__tools {
+                display: flex;
+                justify-content: right;
+                width: 200px;
+                margin-right: 10px;
+                font-size: 21px;
+                .navbar__search {
+                    @include icons-div-styles;
+                    &:hover {
+                        background-color: $hover-color;
+                    }
+                }
+                .navbar__settings {
+                    @include icons-div-styles;
+                    &:hover {
+                        background-color: $hover-color;
+                    }
+                }
+            }
+        }
         .main__messages-section{
             display: flex;
             flex-direction: column;
+            height: 80%;
             .messages__scroll::-webkit-scrollbar {
                 width: 10px;
             }
@@ -224,7 +429,16 @@
             background-color: #f0f8ff00;
             margin-left: 10px;
             margin-bottom: 10px;
-            
+        }
+        .main__input-section {
+            height: 90px;
+            .main__input {
+                height: 45px;
+            }
+            .main__send-message {
+            }
+            .main__send-image {
+            }
         }
     }
 }
