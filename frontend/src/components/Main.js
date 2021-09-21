@@ -11,7 +11,7 @@ const Main = memo(({setUserLoggedMain}) => {
     const [ setShowNewMessageNotification ] = useState(false)
     // const [ displayChat, setDisplayChat ] = useState(false)
     const [ messagesSent, setMessagesSent ] = useState("");
-    const [ setLastMessage ] = useState()
+    const [ lastMessage, setLastMessage ] = useState()
     const [ active, setActive ] = useState(false)
     const { addContactsMenu, setAddContactsMenu } = useContext(AddContactsMenu)
     const { displayChat, setDisplayChat } = useContext(DisplayChatContext)
@@ -29,7 +29,6 @@ const Main = memo(({setUserLoggedMain}) => {
             setActive(false)
         }
     }
-    console.log("SOYDEMENTIRA")
 
     useEffect(() => {
         if(displayChat) {

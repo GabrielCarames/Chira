@@ -11,7 +11,6 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
     //messagesSent es para todos
 
     const goToChat = users => {
-        console.log("METOCARON")
         const contactId = users.filter((user) => user._id !== userLogged._id)[0]._id
         setDisplayChat(true)
         socket.emit('goToChat', userLogged._id, contactId)

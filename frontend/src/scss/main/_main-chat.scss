@@ -254,6 +254,7 @@
         .main__emoji-container {
             @include icons-div-styles;
             font-size: 30px;
+            margin-left: 10px;
             &:hover {
                 background-color: $hover-color;
             }
@@ -480,6 +481,7 @@
                 height: 45px;
             }
             .main__send-message {
+                margin-right: 20px;
             }
             .main__send-image {
             }

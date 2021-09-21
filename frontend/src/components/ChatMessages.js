@@ -5,11 +5,14 @@ import socket from './Socket'
 import moment from 'moment'
 import DisplaySeenIcon from './DisplaySeenIcon'
 import EmojiPicker from 'emoji-picker-react';
+import EmojisPicker from './EmojisPicker'
 const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
     const [ showEmojiPicker, setShowEmojiPicker ] = useState(false)
+    const [ chosenEmoji, setChosenEmoji ] = useState(null);
+
     useEffect(() => {
         socket.on("messageSent", async (newMessage) => {
             const contact = chat.users.filter((userInChat) => userInChat._id !== user._id)
@@ -31,9 +34,12 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
             if (event.code === "Enter" || event.code === "NumpadEnter") {
                 const input = document.getElementsByClassName('main__input');
                 if (input[0] === document.activeElement) {
+                    console.log("input?", input[0])
                     event.preventDefault();
                     verifyAndSendInputValue(input[0].value)
                     input[0].value = ''
+                    input[0].defaultValue = ''
+                    setChosenEmoji(null)
                 }
             }
         };
@@ -49,6 +55,8 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
         const inputValue = e.target[0].value
         verifyAndSendInputValue(inputValue)
         e.target[0].value = ''
+        e.target[0].defaultValue = ''
+        setChosenEmoji(null)
     }
 
     const timeOutFunction = () => setUsertyping(false)
@@ -77,9 +85,11 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
         }
     }
 
-    const onEmojiClick = (event, emojiObject) => {
-        console.log("emokjiclicl", emojiObject)
-      };
+    window.onclick = (event) => {
+        if(showEmojiPicker && !document.getElementsByClassName('emoji-picker-react')[0].contains(event.target) && event.target.className !== 'far fa-grin' && event.target.className !== 'main__emoji-container') {
+            setShowEmojiPicker(false)
+        }
+    }
 
     const showChatMessages = (message) => {
         return (
@@ -115,15 +125,15 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                     {messagesSent && messagesSent.map((message) => {return showChatMessages(message)})}
                 </ReactScrolleableFeed>
                 <div className="messages__typing">
-                    {userTyping && `${userTyping} está escribiendo`} 
-                    {showEmojiPicker && <EmojiPicker className="main__emoji-picker" onEmojiClick={onEmojiClick} />}
+                    {userTyping && `${userTyping} está escribiendo`}
+                    {showEmojiPicker && <EmojisPicker chosenEmoji={chosenEmoji} setChosenEmoji={setChosenEmoji}/>}
                 </div>
             </div>
             <form className="main__input-section" onSubmit={(e) => inputOnSubmit(e)}>
-                <div className="main__emoji-container" onClick={() => setShowEmojiPicker(true)}>
+                <div className="main__emoji-container" onClick={() => showEmojiPicker ? setShowEmojiPicker(false) : setShowEmojiPicker(true)}>
                     <i className="far fa-grin"></i>
                 </div>
-                <input className="main__input" id="cosa" type="text" name="message" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} onClick={() => {seenMessages()}}/>
+                <input className="main__input" id="cosa" value={chosenEmoji} type="text" name="message" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} onClick={() => {seenMessages()}}/>
                 <button className="main__send-message" type="submit">
                     <img className="main__send-image" src={send} alt="" />
                 </button>

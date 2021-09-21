@@ -1208,6 +1208,7 @@ body main {
   margin-right: 15px;
   cursor: pointer;
   font-size: 30px;
+  margin-left: 10px;
 }
 
 .main__chat-section .main__input-section .main__emoji-container:hover {
@@ -1507,6 +1508,9 @@ body main {
   }
   .main__chat-section .main__input-section .main__input {
     height: 45px;
+  }
+  .main__chat-section .main__input-section .main__send-message {
+    margin-right: 20px;
   }
 }
 
