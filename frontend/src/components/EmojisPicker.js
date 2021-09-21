@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import EmojiPicker from 'emoji-picker-react';
 
-const EmojisPicker = memo((({chosenEmoji, setChosenEmoji}) => {
+const EmojisPicker = memo((({chosenEmoji, setChosenEmoji }) => {
 
     const onEmojiClick = (event, emojiObject) => {
         if(chosenEmoji) {

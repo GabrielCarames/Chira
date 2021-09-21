@@ -5,6 +5,7 @@ import socket from './Socket'
 import EmojisPicker from './EmojisPicker'
 import DisplayMessages from './DisplayMessages'
 import useSeenMessageHelper from '../hooks/useSeenMessageHelper'
+import useInputSubmitHelper from '../hooks/useInputSubmitHelper'
 
 const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
@@ -13,6 +14,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
     const { seeMessage } = useSeenMessageHelper()
+    const { inputOnSubmit } = useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping)
 
     useEffect(() => {
         socket.on("messageSent", async (newMessage) => {
@@ -25,51 +27,6 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [messagesSent]);
-
-    const messageInput = message => socket.emit("sendMessage", user, message)
-    const verifyAndSendInputValue = input => input !== '' && messageInput(input)
-    
-    useEffect(() => {
-        if(inputMessage) socket.emit('typing', user.username)
-        const listener = event => {
-            if (event.code === "Enter" || event.code === "NumpadEnter") {
-                const input = document.getElementsByClassName('main__input');
-                if (input[0] === document.activeElement) {
-                    console.log("input?", input[0])
-                    event.preventDefault();
-                    verifyAndSendInputValue(input[0].value)
-                    input[0].value = ''
-                    input[0].defaultValue = ''
-                    setChosenEmoji(null)
-                }
-            }
-        };
-        document.addEventListener("keydown", listener);
-        return () => {
-            document.removeEventListener("keydown", listener);
-        };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [inputMessage]);
-
-    const inputOnSubmit = (e) => {
-        e.preventDefault()
-        const inputValue = e.target[0].value
-        verifyAndSendInputValue(inputValue)
-        e.target[0].value = ''
-        e.target[0].defaultValue = ''
-        setChosenEmoji(null)
-    }
-
-    const timeOutFunction = () => setUsertyping(false)
-
-    useEffect(() => {
-        let timeout;
-        socket.on('typing', (username) => {
-            setUsertyping(username)
-            clearTimeout(timeout);
-            timeout = setTimeout(timeOutFunction, 2000); //Basicamente el clear es retardar a la ejecucion del setTimeOut
-        })
-    }, [])
 
     window.onclick = (event) => {
         if(showEmojiPicker && !document.getElementsByClassName('emoji-picker-react')[0].contains(event.target) && event.target.className !== 'far fa-grin' && event.target.className !== 'main__emoji-container') {
@@ -89,7 +46,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                     {showEmojiPicker && <EmojisPicker chosenEmoji={chosenEmoji} setChosenEmoji={setChosenEmoji}/>}
                 </div>
             </div>
-            <form className="main__input-section" onSubmit={(e) => inputOnSubmit(e)}>
+            <form className="main__input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji )}>
                 <div className="main__emoji-container" onClick={() => showEmojiPicker ? setShowEmojiPicker(false) : setShowEmojiPicker(true)}>
                     <i className="far fa-grin"></i>
                 </div>
