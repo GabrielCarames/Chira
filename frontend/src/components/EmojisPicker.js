@@ -1,4 +1,4 @@
-import {  memo } from 'react'
+import { memo } from 'react'
 import EmojiPicker from 'emoji-picker-react';
 
 const EmojisPicker = memo((({chosenEmoji, setChosenEmoji}) => {

@@ -2,10 +2,11 @@ import { useState, useEffect, memo } from 'react'
 import ReactScrolleableFeed from 'react-scrollable-feed'
 import send from '../images/send.png'
 import socket from './Socket'
-import moment from 'moment'
-import DisplaySeenIcon from './DisplaySeenIcon'
+
+
 import EmojiPicker from 'emoji-picker-react';
 import EmojisPicker from './EmojisPicker'
+import DisplayMessages from './DisplayMessages'
 const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ inputMessage, setInputMessage ] = useState("")
@@ -91,38 +92,12 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
         }
     }
 
-    const showChatMessages = (message) => {
-        return (
-            message.user.username === user.username || message.username === user.username ?
-            <div className={goToMessage === message._id ? 'messages-user-logged-messages active' : 'messages-user-logged-messages'} key={message._id} id={message._id}>
-                <div className="messages-message-container">
-                    <span className="messages__username">{message.user.username}</span>
-                    <p className="messages__message">{message.message}</p>
-                    <div className="message__info">
-                        <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
-                        <DisplaySeenIcon message={message}/>
-                    </div>
-                </div>
-            </div>
-        : 
-            <div className={goToMessage === message._id ? 'messages-contact-messages active' : 'messages-contact-messages'} key={message._id} id={message._id}>
-                <div className="messages-message-container">
-                    <span className="messages__username">{message.user.username}</span>
-                    <p className="messages__message">{message.message}</p>
-                    <div className="message__info">
-                        <h6 className="messages__timeago">{moment(message.createdAt).format('LT')}</h6>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-
     return (
         <>
             <div className="main__messages-section messages" id="list-messages">
                 <ReactScrolleableFeed className="messages__scroll">
-                    {chat && chat.messages.map((message) => {return showChatMessages(message)})}
-                    {messagesSent && messagesSent.map((message) => {return showChatMessages(message)})}
+                    {chat && chat.messages.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage}/>)}
+                    {messagesSent && messagesSent.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} />)}
                 </ReactScrolleableFeed>
                 <div className="messages__typing">
                     {userTyping && `${userTyping} está escribiendo`}
