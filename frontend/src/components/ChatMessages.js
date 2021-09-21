@@ -2,17 +2,17 @@ import { useState, useEffect, memo } from 'react'
 import ReactScrolleableFeed from 'react-scrollable-feed'
 import send from '../images/send.png'
 import socket from './Socket'
-
-
-import EmojiPicker from 'emoji-picker-react';
 import EmojisPicker from './EmojisPicker'
 import DisplayMessages from './DisplayMessages'
+import useSeenMessageHelper from '../hooks/useSeenMessageHelper'
+
 const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
-    const [ inputMessage, setInputMessage ] = useState("")
-    const [ userTyping, setUsertyping ] = useState(false)
     const [ showEmojiPicker, setShowEmojiPicker ] = useState(false)
     const [ chosenEmoji, setChosenEmoji ] = useState(null);
+    const [ inputMessage, setInputMessage ] = useState("")
+    const [ userTyping, setUsertyping ] = useState(false)
+    const { seeMessage } = useSeenMessageHelper()
 
     useEffect(() => {
         socket.on("messageSent", async (newMessage) => {
@@ -71,21 +71,6 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
         })
     }, [])
 
-    const seenMessages = () => {
-        if(messagesSent.length !== 0 && messagesSent[messagesSent.length -1].user._id !== user._id) {
-            const contactIdToAdviseSeenMessage = messagesSent[messagesSent.length -1].user._id
-            document.getElementById(chat._id).children[2].children[0].classList = 'far fa-comment-dots'
-            setShowNewMessageNotification(false)
-            socket.emit('seenMessage', user, contactIdToAdviseSeenMessage)
-        }
-        else if(chat.messages.length !== 0 && chat.messages[chat.messages.length -1].user._id !== user._id) {
-            const contactIdToAdviseSeenMessage = chat.messages[chat.messages.length -1].user._id
-            document.getElementById(chat._id).children[2].children[0].classList = 'far fa-comment-dots'
-            setShowNewMessageNotification(false)
-            socket.emit('seenMessage', user, contactIdToAdviseSeenMessage)
-        }
-    }
-
     window.onclick = (event) => {
         if(showEmojiPicker && !document.getElementsByClassName('emoji-picker-react')[0].contains(event.target) && event.target.className !== 'far fa-grin' && event.target.className !== 'main__emoji-container') {
             setShowEmojiPicker(false)
@@ -108,7 +93,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                 <div className="main__emoji-container" onClick={() => showEmojiPicker ? setShowEmojiPicker(false) : setShowEmojiPicker(true)}>
                     <i className="far fa-grin"></i>
                 </div>
-                <input className="main__input" id="cosa" value={chosenEmoji} type="text" name="message" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} onClick={() => {seenMessages()}}/>
+                <input className="main__input" id="cosa" value={chosenEmoji} type="text" name="message" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} onClick={() => {seeMessage(messagesSent, user, chat, setShowNewMessageNotification)}}/>
                 <button className="main__send-message" type="submit">
                     <img className="main__send-image" src={send} alt="" />
                 </button>

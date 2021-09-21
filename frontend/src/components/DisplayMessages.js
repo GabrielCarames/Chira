@@ -1,8 +1,7 @@
-import moment from 'moment'
 import DisplaySeenIcon from './DisplaySeenIcon'
+import moment from 'moment'
 
 const DisplayMessages = (({message, user, goToMessage}) => {
-
     return (
         message.user.username === user.username || message.username === user.username ?
         <div className={goToMessage === message._id ? 'messages-user-logged-messages active' : 'messages-user-logged-messages'} key={message._id} id={message._id}>

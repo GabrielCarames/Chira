@@ -8,7 +8,7 @@ import socket from './Socket'
 import DisplayChatContext from "../contexts/DisplayChatContext";
 const Main = memo(({setUserLoggedMain}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-    const [ setShowNewMessageNotification ] = useState(false)
+    const [ showNewMessageNotification, setShowNewMessageNotification ] = useState(false)
     // const [ displayChat, setDisplayChat ] = useState(false)
     const [ messagesSent, setMessagesSent ] = useState("");
     const [ lastMessage, setLastMessage ] = useState()
