@@ -34,8 +34,26 @@
                         line-height: 0;
                         font-size: $h5;
                     }
-                    .list__messages {
-                        line-height: 0;
+                    .list__message-container {
+                        display: flex;
+                        align-items: center;
+                        .list__messages {
+                            text-overflow: ellipsis;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            line-height:1;
+                            margin: 5px 0 0 0;
+                        }
+                        .fas {
+                            color: $first-alpha-color;
+                            margin: 5px 5px 0 0;
+                        }
+                        .fa-check {
+                            
+                        }
+                        .fa-check-double {
+
+                        }
                     }
                 }
                 .list__message-info {

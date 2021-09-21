@@ -3,7 +3,7 @@ const socket = require('socket.io')
 const app = express()
 const cors = require('cors')
 
-app.set('port', process.env.PORT || 3000)
+app.set('port', process.env.PORT || 3001)
 
 app.use(cors());
 app.use(express.json())

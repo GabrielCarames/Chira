@@ -3,7 +3,6 @@ import avatar from '../images/avatar.png'
 import socket from './Socket'
 import moment from 'moment'
 import axios from 'axios'
-
 const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ lastRecentMessage, setLastRecentMessage ] = useState()
@@ -12,6 +11,7 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
     //messagesSent es para todos
 
     const goToChat = users => {
+        console.log("METOCARON")
         const contactId = users.filter((user) => user._id !== userLogged._id)[0]._id
         setDisplayChat(true)
         socket.emit('goToChat', userLogged._id, contactId)
@@ -20,13 +20,14 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
     useEffect(() => {
         const getAllChats = async () => {
             messagesSent && setLastMessage(messagesSent)
-            const res = await axios.post('/chat/allchatsfromuserlogged', {userLogged})
+            const res = await axios.post('http://localhost:3001/chat/allchatsfromuserlogged', {userLogged})
             const chats = res.data
             chats && setChats(chats)
         }
         getAllChats()
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [messagesSent])
+
 
     useEffect(() => {
         socket.on("newNotification", (newMessage, contactChat) => {

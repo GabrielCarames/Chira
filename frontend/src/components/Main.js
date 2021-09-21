@@ -1,20 +1,21 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState, useContext, useEffect, memo } from 'react'
 import AddContactsMenu from "../contexts/AddContactsMenu";
 import SearchContacts from './SearchContacts'
 import MainContacts from './MainContacts'
 import BurgerMenu from './BurgerMenu';
 import Chat from './Chat';
 import socket from './Socket'
-
-const Main = ({setUserLoggedMain}) => {
+import DisplayChatContext from "../contexts/DisplayChatContext";
+const Main = memo(({setUserLoggedMain}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ setShowNewMessageNotification ] = useState(false)
-    const [ displayChat, setDisplayChat ] = useState(false)
+    // const [ displayChat, setDisplayChat ] = useState(false)
     const [ messagesSent, setMessagesSent ] = useState("");
     const [ setLastMessage ] = useState()
     const [ active, setActive ] = useState(false)
     const { addContactsMenu, setAddContactsMenu } = useContext(AddContactsMenu)
-    
+    const { displayChat, setDisplayChat } = useContext(DisplayChatContext)
+
     useEffect(() => {
         socket.emit('connected', userLogged)
         socket.on("userLogged", (userLoggede) => {
@@ -28,12 +29,13 @@ const Main = ({setUserLoggedMain}) => {
             setActive(false)
         }
     }
+    console.log("SOYDEMENTIRA")
 
     useEffect(() => {
         if(displayChat) {
-            setTimeout(() => {
+           
                 document.getElementById('main__left-section').classList = "main__left-section hidden"
-            }, 200);
+           
         }
     }, [displayChat])
 
@@ -73,10 +75,10 @@ const Main = ({setUserLoggedMain}) => {
             </section>
             <Chat messagesSent={messagesSent} setMessagesSent={setMessagesSent} 
             setShowNewMessageNotification={setShowNewMessageNotification}
-            displayChat={displayChat}
+            displayChat={displayChat} setDisplayChat={setDisplayChat}
             />
         </section>
     )
-}
+})
 
 export default Main

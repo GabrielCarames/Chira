@@ -10,7 +10,7 @@ export function useAddContactsHelper() {
 
   const onSearchSubmit = _.memoize(async term => {
     try {
-        const res = await axios.post('/users/contactsearch', {term})
+        const res = await axios.post('http://localhost:3001/users/contactsearch', {term})
         const contactsFiltered = res.data.filter((user) => user._id !== userLogged._id)
         return contactsFiltered
     } catch (error) {
@@ -21,7 +21,7 @@ export function useAddContactsHelper() {
 
   const addContact = async contact => {
     try {
-        await axios.post('/users/addcontact', {contact})
+        await axios.post('http://localhost:3001/users/addcontact', {contact})
         socket.emit('update', userLogged, contact)
         // localStorage.setItem('userLogged', JSON.stringify(res.data))
     } catch (error) {

@@ -9,7 +9,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
-    
+
     useEffect(() => {
         socket.on("messageSent", async (newMessage) => {
             const contact = chat.users.filter((userInChat) => userInChat._id !== user._id)
@@ -78,6 +78,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
     }
 
     const showChatMessages = (message) => {
+        
         return (
             message.user.username === user.username || message.username === user.username ?
             <div className={goToMessage === message._id ? 'messages-user-logged-messages active' : 'messages-user-logged-messages'} key={message._id} id={message._id}>

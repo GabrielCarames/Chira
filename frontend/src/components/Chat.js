@@ -5,7 +5,7 @@ import ChatMessages from './ChatMessages'
 import avatar from '../images/avatar.png'
 import socket from './Socket'
 
-const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, displayChat }) => {
+const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, displayChat, setDisplayChat }) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
     const [ connectedContact, setConnectedContact ] = useState([]);
@@ -18,9 +18,12 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
         chat && setConnectedContactState(users)
     });
 
-    socket.on("chatFound", (chat) => {
-        setChat(chat);
-    });
+    useEffect(() => {
+        socket.on("chatFound", (chat) => {
+            setChat(chat);
+        });
+    }, [])
+    
 
     useEffect(() => {
         if(displayChat && chat) document.getElementById('navbar__back').classList = "navbar__back display"
@@ -28,6 +31,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
 
     const backToMainContacts = () => {
         setChat(false)
+        // setDisplayChat(false)
     }
 
     return chat ?
