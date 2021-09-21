@@ -4,12 +4,12 @@ import send from '../images/send.png'
 import socket from './Socket'
 import moment from 'moment'
 import DisplaySeenIcon from './DisplaySeenIcon'
-
+import EmojiPicker from 'emoji-picker-react';
 const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
-
+    const [ showEmojiPicker, setShowEmojiPicker ] = useState(false)
     useEffect(() => {
         socket.on("messageSent", async (newMessage) => {
             const contact = chat.users.filter((userInChat) => userInChat._id !== user._id)
@@ -77,8 +77,11 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
         }
     }
 
+    const onEmojiClick = (event, emojiObject) => {
+        console.log("emokjiclicl", emojiObject)
+      };
+
     const showChatMessages = (message) => {
-        
         return (
             message.user.username === user.username || message.username === user.username ?
             <div className={goToMessage === message._id ? 'messages-user-logged-messages active' : 'messages-user-logged-messages'} key={message._id} id={message._id}>
@@ -111,9 +114,15 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                     {chat && chat.messages.map((message) => {return showChatMessages(message)})}
                     {messagesSent && messagesSent.map((message) => {return showChatMessages(message)})}
                 </ReactScrolleableFeed>
-                <div className="messages__typing">{userTyping && `${userTyping} está escribiendo`} </div>
+                <div className="messages__typing">
+                    {userTyping && `${userTyping} está escribiendo`} 
+                    {showEmojiPicker && <EmojiPicker className="main__emoji-picker" onEmojiClick={onEmojiClick} />}
+                </div>
             </div>
             <form className="main__input-section" onSubmit={(e) => inputOnSubmit(e)}>
+                <div className="main__emoji-container" onClick={() => setShowEmojiPicker(true)}>
+                    <i className="far fa-grin"></i>
+                </div>
                 <input className="main__input" id="cosa" type="text" name="message" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} onClick={() => {seenMessages()}}/>
                 <button className="main__send-message" type="submit">
                     <img className="main__send-image" src={send} alt="" />

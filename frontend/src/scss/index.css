@@ -1146,6 +1146,38 @@ body main {
   margin-bottom: 10px;
 }
 
+.main__chat-section .main__messages-section .messages__typing .emoji-picker-react {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 110px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  background-color: #172029;
+}
+
+.main__chat-section .main__messages-section .messages__typing .emoji-picker-react .emoji-group::before {
+  background-color: #172029;
+}
+
+.main__chat-section .main__messages-section .messages__typing .emoji-picker-react .emoji-categories {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main__chat-section .main__messages-section .messages__typing .emoji-picker-react .emoji-categories button {
+  background-color: #1975e0;
+  border-radius: 3000000px;
+  height: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.main__chat-section .main__messages-section .messages__typing .emoji-picker-react .emoji-search {
+  background-color: #172029;
+  color: white;
+}
+
 .main__chat-section .main__input-section {
   background-color: #172029;
   display: -webkit-box;
@@ -1158,6 +1190,28 @@ body main {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 10px;
+}
+
+.main__chat-section .main__input-section .main__emoji-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 300px;
+  margin-right: 15px;
+  cursor: pointer;
+  font-size: 30px;
+}
+
+.main__chat-section .main__input-section .main__emoji-container:hover {
+  background-color: #37465a;
 }
 
 .main__chat-section .main__input-section .main__input {

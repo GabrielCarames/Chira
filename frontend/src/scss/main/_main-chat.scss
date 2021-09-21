@@ -211,6 +211,37 @@
             background-color: #f0f8ff00;
             margin-left: 10px;
             margin-bottom: 10px;
+            .emoji-picker-react {
+                position: absolute;
+                bottom: 0;
+                margin-bottom: 110px;
+                box-shadow: none;
+                background-color: $second-alpha-color;
+                & .emoji-group::before {
+                    background-color: $second-alpha-color;
+                }
+                .emoji-categories {
+                    align-items: center;
+                    & button{
+                        background-color: $first-color;
+                        border-radius: 3000000px;
+                        height: 20px;
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                    }
+                }
+                .emoji-search {
+                    background-color: $second-alpha-color;
+                    color: white;
+                }
+                .content-wrapper {
+                    .emoji-scroll-wrapper {
+
+                        .emoji-group {
+                        }
+                    }
+                }
+            }
         }
     }
     .main__input-section {
@@ -220,6 +251,16 @@
         align-items: center;
         justify-content: center;
         padding: 10px;
+        .main__emoji-container {
+            @include icons-div-styles;
+            font-size: 30px;
+            &:hover {
+                background-color: $hover-color;
+            }
+            .fa-grin {
+
+            }
+        }
         .main__input {
             color: $gray-color;
             background-color: $second-color;
