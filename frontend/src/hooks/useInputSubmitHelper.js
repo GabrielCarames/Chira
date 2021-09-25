@@ -1,8 +1,7 @@
+import { useEffect } from 'react'
 import socket from '../components/Socket'
-import { useEffect} from 'react'
 
 export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping) {
-  
   const messageInput = message => socket.emit("sendMessage", user, message)
   const verifyAndSendInputValue = input => input !== '' && messageInput(input)
     

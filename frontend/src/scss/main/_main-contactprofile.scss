@@ -1,0 +1,115 @@
+.main__contact-profile {
+    width: 100%;
+    border-right: 2px solid black;
+    .profile__navbar-section {
+        display: flex;
+        align-items: center;
+        background-color: $second-color;
+        height: 90px;
+        border-left: 2px solid black;
+        .profile__back {
+            margin-left: 20px;
+            @include icons-div-styles;
+            width: 70px;
+            font-size: 21px;
+            &:hover {
+                background-color: $hover-color;
+            }
+            .fa-arrow-left {
+
+            }
+        }
+        .profile__username {
+            width: 100%;
+        }
+        .profile__edit {
+            margin-right: 20px;
+            @include icons-div-styles;
+            width: 70px;
+            font-size: 21px;
+            &:hover {
+                background-color: $hover-color;
+            }
+            .fa-edit {
+                
+            }
+        }
+    }
+    .profile__user-info {
+        display: flex;
+        flex-direction: column;
+        .info__avatar-container {
+            width: 100%;
+            height: 500px;
+            .info__avatar{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .info__phone-number-section {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 90px;
+            border-bottom: 2px solid black;
+            .fa-phone-alt {
+                margin-left: 20px;
+                font-size: 21px;
+            }
+            .info__phone-number {
+                margin-left: 20px;
+            }
+        }
+    }
+    .profile__edit-contact {
+        margin-top: 20px;
+        color: $gray-color;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .form__name-section {
+            @include form-section-styles;
+            .form__label {
+                margin-left: 10px;
+            }
+            .form__input {
+                @include input-styles
+            }
+        }
+        .form__button {
+            margin-top: 30px;
+            height: 100%;
+            width: 250px;
+            border-radius: 15px;
+            background-color: $first-color;
+            border-width: 0;
+            display: flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items: center;
+            cursor: pointer;
+            padding: 5px;
+            &:hover {
+                transition: .25s;
+                opacity: .5;
+            }
+            .form__text-button {
+                color: $white-color;
+                font-family: $poppins;
+                font-size: $h5;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 17px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1201px) {
+    .main__contact-profile {
+        width: 400px;
+        border-right: 2px solid black;
+        
+    }
+}

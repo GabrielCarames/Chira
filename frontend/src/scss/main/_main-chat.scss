@@ -13,7 +13,7 @@
     border-right: 2px solid #000;
     width: 100%;
     height: 100vh;
-    &.search {
+    &.compressed {
         visibility: hidden;
         position: absolute;
     }
@@ -33,7 +33,7 @@
             // position: absolute;
             @include icons-div-styles;
             margin-right: 0;
-            font-size: 18px;
+            font-size: 21px;
             width: 50px;
             height: 50px;
             &:hover {
@@ -300,7 +300,7 @@
 @media screen and (min-width: 1201px) {
     .main__chat-section {
         width: 1200px;
-        &.search {
+        &.compressed {
             visibility: visible;
             position: inherit;
             width: 800px;

@@ -34,6 +34,26 @@ $little-text: 11px;
     cursor: pointer;
 }
 
+@mixin input-styles() {
+    background-color: $gray-dark-color;
+    color: $white-color;
+    height: 40px;
+    width: 100%;
+    border: 1px solid #AAAAAA;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-family: $poppins;
+    padding-left: 10px;
+    outline: none;
+    &:hover {
+        border-color: $first-color;
+        transition: .2s;
+    }
+    &:focus {
+        border-color: $first-color;
+    }
+}
+
 html {
     box-sizing: border-box;
     &*, *::before, *::after {

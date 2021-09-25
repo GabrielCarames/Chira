@@ -1,15 +1,15 @@
 import { useState, useContext, useEffect, memo } from 'react'
+import DisplayChatContext from "../contexts/DisplayChatContext";
 import AddContactsMenu from "../contexts/AddContactsMenu";
 import SearchContacts from './SearchContacts'
 import MainContacts from './MainContacts'
 import BurgerMenu from './BurgerMenu';
 import Chat from './Chat';
 import socket from './Socket'
-import DisplayChatContext from "../contexts/DisplayChatContext";
+
 const Main = memo(({setUserLoggedMain}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ showNewMessageNotification, setShowNewMessageNotification ] = useState(false)
-    // const [ displayChat, setDisplayChat ] = useState(false)
     const [ messagesSent, setMessagesSent ] = useState("");
     const [ lastMessage, setLastMessage ] = useState()
     const [ active, setActive ] = useState(false)
@@ -31,11 +31,7 @@ const Main = memo(({setUserLoggedMain}) => {
     }
 
     useEffect(() => {
-        if(displayChat) {
-           
-                document.getElementById('main__left-section').classList = "main__left-section hidden"
-           
-        }
+        if(displayChat) document.getElementById('main__left-section').classList = "main__left-section hidden"
     }, [displayChat])
 
     return(

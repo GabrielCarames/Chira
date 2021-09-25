@@ -1,11 +1,11 @@
 import { useState, useEffect, memo } from 'react'
-import ReactScrolleableFeed from 'react-scrollable-feed'
-import send from '../images/send.png'
-import socket from './Socket'
-import EmojisPicker from './EmojisPicker'
-import DisplayMessages from './DisplayMessages'
 import useSeenMessageHelper from '../hooks/useSeenMessageHelper'
 import useInputSubmitHelper from '../hooks/useInputSubmitHelper'
+import ReactScrolleableFeed from 'react-scrollable-feed'
+import DisplayMessages from './DisplayMessages'
+import EmojisPicker from './EmojisPicker'
+import send from '../images/send.png'
+import socket from './Socket'
 
 const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
@@ -13,8 +13,8 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
     const [ chosenEmoji, setChosenEmoji ] = useState(null);
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
-    const { seeMessage } = useSeenMessageHelper()
     const { inputOnSubmit } = useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping)
+    const { seeMessage } = useSeenMessageHelper()
 
     useEffect(() => {
         socket.on("messageSent", async (newMessage) => {

@@ -52,4 +52,16 @@ router.post('/updateuser', async function (req, res) {
     // res.send(requestUser)
 })
 
+router.post('/editusername', async function (req, res) {
+    const originalUserName = req.body.originalUserName
+    const newUserName = req.body.newUserName
+    const userLoggedId = JSON.parse(localStorage.getItem('userLogged'))[0]._id
+    console.log("userloggedid", userLoggedId)
+    // const userLogged = JSON.parse(localStorage.getItem('userLogged'))[0]
+    // console.log("sosd", userLogged.contacts.filter((contact) => contact.username === originalUserName))
+    // const contactFromUserLoggedContacts = userLogged.contacts.filter((contact) => contact.username === originalUserName)
+    // const userLoggedContact = userLogged.contacts
+    await userController.editUserNameByUserName(userLoggedId, originalUserName, newUserName)
+})
+
 module.exports = router;
