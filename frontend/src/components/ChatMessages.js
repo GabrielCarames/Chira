@@ -6,13 +6,15 @@ import DisplayMessages from './DisplayMessages'
 import EmojisPicker from './EmojisPicker'
 import send from '../images/send.png'
 import socket from './Socket'
+import UploadImage from './UploadImage'
 
-const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification}) => {
+const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification,images, setImages, setDisplayPreviousImage}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ showEmojiPicker, setShowEmojiPicker ] = useState(false)
     const [ chosenEmoji, setChosenEmoji ] = useState(null);
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
+    
     const { inputOnSubmit } = useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping)
     const { seeMessage } = useSeenMessageHelper()
 
@@ -50,6 +52,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                 <div className="main__emoji-container" onClick={() => showEmojiPicker ? setShowEmojiPicker(false) : setShowEmojiPicker(true)}>
                     <i className="far fa-grin"></i>
                 </div>
+                <UploadImage images={images} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage}/>
                 <input className="main__input" id="cosa" value={chosenEmoji} type="text" name="message" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} onClick={() => {seeMessage(messagesSent, user, chat, setShowNewMessageNotification)}}/>
                 <button className="main__send-message" type="submit">
                     <img className="main__send-image" src={send} alt="" />

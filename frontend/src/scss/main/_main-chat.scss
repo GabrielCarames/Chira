@@ -258,8 +258,12 @@
             &:hover {
                 background-color: $hover-color;
             }
-            .fa-grin {
-
+        }
+        .main__upload-image-container {
+            @include icons-div-styles;
+            font-size: 26px;
+            &:hover {
+                background-color: $hover-color;
             }
         }
         .main__input {

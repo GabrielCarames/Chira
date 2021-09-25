@@ -5,6 +5,7 @@ import ChatMessages from './ChatMessages'
 import avatar from '../images/avatar.png'
 import socket from './Socket'
 import ContactProfile from './ContactProfile';
+import DisplayPreviousImage from './DisplayPreviousImage';
 
 const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, displayChat, setDisplayChat }) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
@@ -13,6 +14,8 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     const [ connectedContact, setConnectedContact ] = useState([]);
     const [ goToMessage, setGoToMessage ] = useState(false)
     const { chat, setChat } = useContext(TestContext)
+    const [ displayPreviousImage, setDisplayPreviousImage ] = useState()
+    const [images, setImages] = useState([]);
     const contact = chat && chat.users.filter((user) => user.username !== userLogged.username)[0]
     const setConnectedContactState = (users) => setConnectedContact(users.filter((user) => user.userLoggedId === contact._id))
 
@@ -58,9 +61,14 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                         </div>
                     </div>
                 </nav>
-                <ChatMessages chat={chat} messagesSent={messagesSent} setMessagesSent={setMessagesSent}
-                 goToMessage={goToMessage} setShowNewMessageNotification={setShowNewMessageNotification}
-                 />
+                {
+                    displayPreviousImage 
+                    ? <DisplayPreviousImage images={images} setDisplayPreviousImage={setDisplayPreviousImage}/> 
+                    : <ChatMessages chat={chat} messagesSent={messagesSent} setMessagesSent={setMessagesSent}
+                        goToMessage={goToMessage} setShowNewMessageNotification={setShowNewMessageNotification}
+                        images={images} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage}
+                      />
+                }
             </section>
             {displayContactProfile && <ContactProfile setDisplayContactProfile={setDisplayContactProfile} contact={contact}/>}
             {showSearchMessages && <SearchMessages setShowSearchMessages={setShowSearchMessages} goToMessage={goToMessage} setGoToMessage={setGoToMessage}/>}

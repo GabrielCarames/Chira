@@ -19,18 +19,7 @@ export function useEditUserNameHelper() {
     };
 
     const editUserName = async (e, originalUserName) => {
-        e.preventDefault()
-        const newUserName = form.username
-        console.log("aca", newUserName)
-        try {
-            await axios.post('http://localhost:3001/users/editusername', {originalUserName, newUserName}).then(res => {
 
-                console.log("lohi ciste capo")
-            })
-        } catch (error) {
-            if(error.response) setFlashMessage({type: 'failure', error: error.response.data})
-            else setFlashMessage({type: 'failure', error: error})
-        }
     }
 
 

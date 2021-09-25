@@ -38,25 +38,6 @@ userController.findUsersByName = async (userName) => {
     // {"username" : {$regex : userName}}
 }
 
-userController.editUserNameByUserName = async (userLoggedId, originalUserName, newUserName) => {
-    console.log("original", userLoggedId,originalUserName)
-    const rer = await User.find().populate({
-        path: 'contacts',
-        model: 'User'
-    })
-    console.log("rer", rer)
-    // users: {$in: friendId} { "$match": { "value.D": "B" } }
-    // console.log("ueasdasdasdsr",  await User.aggregate([{ "$match": { 'contacts.username': originalUserName}}]))
-    console.log("ueasdasdasdsr",  await User.find({contacts: {$elemMatch:{'username': originalUserName}}}))
-    // .then(async (userLogged) => {
-    //     await userLogged.contacts.findOneAndUpdate({ username: originalUserName },
-    //         {
-    //             username: newUserName
-    //         }
-    //     )
-    // })
-}
-
 userController.createUser = async (userData) => {
     const { displayName, phoneNumber } = userData
     const newUser = new User ({
