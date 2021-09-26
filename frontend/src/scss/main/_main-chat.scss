@@ -401,6 +401,10 @@
                         line-height: 1.2;
                         word-break: break-word;
                         font-size: $h5;
+                        .messages__image {
+                            width: 500px;
+                            height: auto;
+                        }
                         &.active {
                             color: red;
                         }

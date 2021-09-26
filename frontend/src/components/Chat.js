@@ -63,7 +63,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                 </nav>
                 {
                     displayPreviousImage 
-                    ? <DisplayPreviousImage images={images} setDisplayPreviousImage={setDisplayPreviousImage}/> 
+                    ? <DisplayPreviousImage images={images} setDisplayPreviousImage={setDisplayPreviousImage} setMessagesSent={setMessagesSent}/> 
                     : <ChatMessages chat={chat} messagesSent={messagesSent} setMessagesSent={setMessagesSent}
                         goToMessage={goToMessage} setShowNewMessageNotification={setShowNewMessageNotification}
                         images={images} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage}

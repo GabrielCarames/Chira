@@ -1,6 +1,16 @@
 import send from '../images/send.png'
+import socket from '../components/Socket'
 
-const DisplayPreviousImage = ({images, setDisplayPreviousImage}) => {
+const DisplayPreviousImage = ({images, setDisplayPreviousImage, setMessagesSent}) => {
+    const user = JSON.parse(localStorage.getItem('userLogged'))
+
+    const uploadImage = () => {
+        const imageUrl = images[0].data_url
+        console.log(imageUrl)
+        socket.emit("sendMessage", user, imageUrl)
+        setDisplayPreviousImage(false)
+    }
+
     return (
         <div className="main__previous-image previous">
             <div className="previous__close" onClick={() => setDisplayPreviousImage(false)}>
@@ -14,7 +24,7 @@ const DisplayPreviousImage = ({images, setDisplayPreviousImage}) => {
                 ))}
             </div>
             <div className="previous__bottom-container">
-                <button className="previous__send-image" type="submit">
+                <button className="previous__send-image" type="submit" onClick={() => uploadImage()}>
                     <img className="previous__send-image-image" src={send} alt="" />
                 </button>
             </div>

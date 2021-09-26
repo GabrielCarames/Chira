@@ -8,7 +8,7 @@ import send from '../images/send.png'
 import socket from './Socket'
 import UploadImage from './UploadImage'
 
-const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification,images, setImages, setDisplayPreviousImage}) => {
+const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ showEmojiPicker, setShowEmojiPicker ] = useState(false)
     const [ chosenEmoji, setChosenEmoji ] = useState(null);
@@ -40,8 +40,8 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
         <>
             <div className="main__messages-section messages" id="list-messages">
                 <ReactScrolleableFeed className="messages__scroll">
-                    {chat && chat.messages.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage}/>)}
-                    {messagesSent && messagesSent.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} />)}
+                    {chat && chat.messages.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} images={images} />)}
+                    {messagesSent && messagesSent.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} images={images} />)}
                 </ReactScrolleableFeed>
                 <div className="messages__typing">
                     {userTyping && `${userTyping} está escribiendo`}

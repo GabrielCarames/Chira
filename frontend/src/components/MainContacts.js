@@ -46,7 +46,13 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
     }
 
     const showHistoryLastMessage = (messages) => {
-        if(messages.length !== 0) return messages[messages.length -1].message
+        if(messages.length !== 0) {
+            const lastMessage = messages[messages.length -1].message
+            if(lastMessage.search("image") >= 1) {
+                return 'Foto'
+            }
+            else return lastMessage
+        }
     }
 
     const showTimeAgoMessage = (messages) => {

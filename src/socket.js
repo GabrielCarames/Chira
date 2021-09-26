@@ -40,12 +40,12 @@ module.exports = (io) => {
     });
 
     socket.on("sendMessage", async (user, message) => {
-      console.log("Mensaje", message)
+      // console.log("Mensaje", message)
       const fullMessage = await chatController.saveMessagesAndReturnFullMessage(user, message)
       const seen = fullMessage.seen
       await chatController.insertMessageInChat(fullMessage, currentlyChat[0]._id)
       const updatedChat = await chatController.findAllChatById(currentlyChat[0]._id)
-      console.log("updatechat", updatedChat)
+      // console.log("updatechat", updatedChat)
       io.emit("messageSent", { user, message, seen, updatedChat });
     });
 
