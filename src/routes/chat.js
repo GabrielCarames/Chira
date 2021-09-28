@@ -2,6 +2,9 @@ const { Router } = require("express");
 const userController = require("../controllers/userController");
 const chatController = require("../controllers/chatController");
 const router = Router();
+const multer = require("multer");
+
+const upload = multer();
 
 router.post('/allchatsfromuserlogged', async function (req, res) {
     const userLogged = req.body.userLogged
@@ -15,7 +18,11 @@ router.post('/searchmessages', async function (req, res) {
     res.send(message)
 })
 
-
+router.post("/upload", async function(req, res, next) {
+    const imageData = req.file
+    const newImage = await chatController.createImage(imageData)
+    res.send(newImage)
+});
 
 
 module.exports = router;

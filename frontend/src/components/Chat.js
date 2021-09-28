@@ -9,13 +9,14 @@ import DisplayPreviousImage from './DisplayPreviousImage';
 
 const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, displayChat, setDisplayChat }) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-    const [ showSearchMessages, setShowSearchMessages ] = useState(false)
     const [ displayContactProfile, setDisplayContactProfile ] = useState(false)
+    const [ showSearchMessages, setShowSearchMessages ] = useState(false)
+    const [ displayPreviousImage, setDisplayPreviousImage ] = useState()
     const [ connectedContact, setConnectedContact ] = useState([]);
     const [ goToMessage, setGoToMessage ] = useState(false)
-    const { chat, setChat } = useContext(TestContext)
-    const [ displayPreviousImage, setDisplayPreviousImage ] = useState()
     const [images, setImages] = useState([]);
+    const { chat, setChat } = useContext(TestContext)
+    
     const contact = chat && chat.users.filter((user) => user.username !== userLogged.username)[0]
     const setConnectedContactState = (users) => setConnectedContact(users.filter((user) => user.userLoggedId === contact._id))
 

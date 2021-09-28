@@ -1006,6 +1006,7 @@ body main {
 
 .main__chat-section .main__messages-section .messages__scroll {
   height: 100%;
+  overflow-y: auto;
 }
 
 .main__chat-section .main__messages-section .messages__scroll::-webkit-scrollbar {
@@ -1215,7 +1216,7 @@ body main {
   background-color: #37465a;
 }
 
-.main__chat-section .main__input-section .main__upload-image-container {
+.main__chat-section .main__input-section .main__input-image-section .main__image-label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1233,8 +1234,13 @@ body main {
   font-size: 26px;
 }
 
-.main__chat-section .main__input-section .main__upload-image-container:hover {
+.main__chat-section .main__input-section .main__input-image-section .main__image-label:hover {
   background-color: #37465a;
+}
+
+.main__chat-section .main__input-section .main__input-image-section .main__image-input {
+  visibility: hidden;
+  position: absolute;
 }
 
 .main__chat-section .main__input-section .main__input {
@@ -1315,6 +1321,10 @@ body main {
     cursor: pointer;
   }
   .main__chat-section .main__chat-navbar .navbar__back {
+    visibility: hidden;
+    position: absolute;
+  }
+  .main__chat-section .main__chat-navbar .navbar__back.display {
     visibility: hidden;
     position: absolute;
   }
@@ -1439,11 +1449,15 @@ body main {
     word-break: break-word;
     font-size: 13px;
   }
-  .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__message .messages__image {
+  .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__message.active {
+    color: red;
+  }
+  .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__image {
     width: 500px;
     height: auto;
+    overflow: auto;
   }
-  .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__message.active {
+  .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__image.active {
     color: red;
   }
   .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .message__info {

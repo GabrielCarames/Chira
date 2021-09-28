@@ -105,6 +105,7 @@
             flex-direction: column;
             .messages__scroll {
                 height: 100%;
+                overflow-y: auto;
             }
             .messages__scroll::-webkit-scrollbar {
                 width: 10px;
@@ -259,11 +260,17 @@
                 background-color: $hover-color;
             }
         }
-        .main__upload-image-container {
-            @include icons-div-styles;
-            font-size: 26px;
-            &:hover {
-                background-color: $hover-color;
+        .main__input-image-section {
+            .main__image-label {
+                @include icons-div-styles;
+                font-size: 26px;
+                &:hover {
+                    background-color: $hover-color;
+                }
+            }
+            .main__image-input {
+                visibility: hidden; 
+                position: absolute;
             }
         }
         .main__input {
@@ -321,6 +328,10 @@
             .navbar__back {
                 visibility: hidden;
                 position: absolute;
+                &.display {
+                    visibility: hidden;
+                    position: absolute;
+                }
             }
             .navbar__contact {
                 display: flex;
@@ -401,10 +412,14 @@
                         line-height: 1.2;
                         word-break: break-word;
                         font-size: $h5;
-                        .messages__image {
-                            width: 500px;
-                            height: auto;
+                        &.active {
+                            color: red;
                         }
+                    }
+                    .messages__image {
+                        width:500px;
+                        height:auto;
+                        overflow:auto;
                         &.active {
                             color: red;
                         }

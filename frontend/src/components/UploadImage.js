@@ -1,31 +1,19 @@
-import ImageUploading from "react-images-uploading";
-
 const UploadImage = ({images, setImages, setDisplayPreviousImage}) => {
-    const maxNumber = 69;
-    const onChange = (imageList, addUpdateIndex) => {
-        console.log(imageList, addUpdateIndex);
-        setImages(imageList);
+    
+    const verifyImage = (e) => {
+        const imageData = e.target.files[0]
+        console.log("soy", imageData)
+        setImages([URL.createObjectURL(imageData), imageData]);
         setDisplayPreviousImage(true)
     };
 
     return (
-        <ImageUploading
-            multiple
-            value={images}
-            onChange={onChange}
-            maxNumber={maxNumber}
-            dataURLKey="data_url"
-        >
-        {
-            ({ onImageUpload }) => (
-                <div className="upload__image-wrapper">
-                    <div className="main__upload-image-container" onClick={onImageUpload}>
-                        <i className="fas fa-paperclip"></i>
-                    </div>
-                </div>
-            )
-        }
-        </ImageUploading>
+        <div className="main__input-image-section">
+            <label for="main__image-input" className="main__image-label">
+                <i className="fas fa-paperclip"></i>
+            </label>
+            <input type="file" name="file" id="main__image-input" className="main__image-input" onChange={(e) => verifyImage(e)}/>
+        </div>
     )
 }
 

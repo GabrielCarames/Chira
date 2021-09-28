@@ -1,5 +1,6 @@
 const Chat = require('../models/Chat')
 const Message = require('../models/Message')
+const Image = require('../models/Image')
 const chatController = {}
 
 chatController.createNotification = async (user, contact, type) => {
@@ -10,6 +11,34 @@ chatController.createNotification = async (user, contact, type) => {
     await newChat.save()
 }
 
+
+
+
+
+
+// chatController.insertMessageInChat = async (fullMessage, currentlyChatId) => {
+//     await Chat.findOneAndUpdate({_id: currentlyChatId}, 
+//     {
+//         $push: {
+//             messages: fullMessage
+//         }
+//     })
+// }
+
+
+
+
+
+chatController.saveImageMessageAndReturnFullMessage = async (user, image) => {
+    const newMessage = new Message ({
+        image,
+        user
+    })
+    await newMessage.save()
+    const completeMessage = await chatController.findMessageById(newMessage._id)
+    return completeMessage
+}
+
 chatController.saveMessagesAndReturnFullMessage = async (user, message) => {
     const newMessage = new Message ({
         message,
@@ -18,6 +47,18 @@ chatController.saveMessagesAndReturnFullMessage = async (user, message) => {
     await newMessage.save()
     const completeMessage = await chatController.findMessageById(newMessage._id)
     return completeMessage
+}
+
+chatController.createImage = async (imageData) => {
+    const { originalname, path, mimetype, size } = imageData
+    const newImage = new Image ({
+        title: originalname,
+        path,
+        mimetype,
+        size
+    })
+    await newImage.save()
+    return newImage
 }
 
 chatController.createChat = async (user, contact, type) => {
