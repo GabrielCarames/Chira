@@ -12,6 +12,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     const [ displayContactProfile, setDisplayContactProfile ] = useState(false)
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
     const [ displayPreviousImage, setDisplayPreviousImage ] = useState()
+    const [ displayChatSettings, setDisplayChatSettings ] = useState()
     const [ connectedContact, setConnectedContact ] = useState([]);
     const [ goToMessage, setGoToMessage ] = useState(false)
     const [images, setImages] = useState([]);
@@ -30,20 +31,20 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
         });
     }, [])
 
-    useEffect(() => {
-        if(displayChat && chat) document.getElementById('navbar__back').classList = "navbar__back display"
-    }, [displayChat, chat])
+    // useEffect(() => {
+    //     if(displayChat && chat) document.getElementById('navbar__back').classList = "navbar__back display"
+    // }, [displayChat, chat])
 
     const backToMainContacts = () => {
         setChat(false)
-        // setDisplayChat(false)
+        setDisplayChat(false)
     }
 
     return chat ?
         <>
             <section className={showSearchMessages || displayContactProfile ? 'main__chat-section compressed' : 'main__chat-section'}>
                 <nav className="main__chat-navbar navbar">
-                    <div className="navbar__back" id="navbar__back" onClick={() => backToMainContacts()}>
+                    <div className={displayChat && chat && !showSearchMessages && !displayContactProfile ? 'navbar__back display' : 'navbar__back'} id="navbar__back" onClick={() => backToMainContacts()}>
                         <i className="fas fa-arrow-left"></i>
                     </div>
                     <div className="navbar__contact" onClick={() => {setShowSearchMessages(false); setDisplayContactProfile(true)}}>
@@ -57,7 +58,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                         <div className="navbar__search" onClick={() => {setDisplayContactProfile(false); setShowSearchMessages(true)}}>
                             <i className="fas fa-search"></i>
                         </div>
-                        <div className="navbar__settings">
+                        <div className="navbar__settings" onClick={() => {displayChatSettings ? setDisplayChatSettings(false) : setDisplayChatSettings(true)}}> 
                             <i className="fas fa-ellipsis-v"></i>
                         </div>
                     </div>
@@ -68,6 +69,8 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                     : <ChatMessages chat={chat} messagesSent={messagesSent} setMessagesSent={setMessagesSent}
                         goToMessage={goToMessage} setShowNewMessageNotification={setShowNewMessageNotification}
                         images={images} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage}
+                        displayChatSettings={displayChatSettings} setDisplayChatSettings={setDisplayChatSettings}
+                        setDisplayContactProfile={setDisplayContactProfile} contact={contact}
                       />
                 }
             </section>

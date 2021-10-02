@@ -1,0 +1,42 @@
+.main__configuration-section {
+    width: 400px;
+    height: 100%;
+    background-color: $second-alpha-color;
+    .config__navbar-section {
+        display: flex;
+        align-items: center;
+        margin-left: 20px;
+        .config__back {
+
+            .fa-arrow-left {
+
+            }
+        }
+        .config__title {
+            margin-left: 30%;
+        }
+    }
+    .config__options-section {
+        .config__list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            padding-left: 0px;
+            .list__item {
+                display: flex;
+                align-items: center;
+                cursor: pointer;
+                padding-left: 20px;
+                &:hover {
+                    background-color: $hover-color;
+                }
+                .fa-pen {
+                    width: 30px;
+                }
+                .list__option-name {
+
+                }
+            }
+        }
+    }
+}

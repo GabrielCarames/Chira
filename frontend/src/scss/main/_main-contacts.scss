@@ -5,6 +5,7 @@
     .main__contacts {
         height: 100%;
         overflow: auto;
+        overflow-x: hidden;
         .main__contacts-list {
             display: flex;
             flex-direction: column;
@@ -37,6 +38,8 @@
                     .list__message-container {
                         display: flex;
                         align-items: center;
+                        max-width: 220px;
+                        height: 25px;
                         .list__messages {
                             text-overflow: ellipsis;
                             white-space: nowrap;
@@ -180,7 +183,7 @@
                             }
                             .list__message-container {
                                 display: flex;
-                                align-items: center;
+                                align-items: inherit;
                                 .list__messages {
                                     text-overflow: ellipsis;
                                     white-space: nowrap;
@@ -216,7 +219,7 @@
                 .add-contacts__sub-container {
                     
                     .add-contacts__left-side {
-                        width: 480px;
+                        width: 400px;
                         .add-contacts__button {
                             margin-right: 10px;
                             &.active {

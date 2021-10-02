@@ -27,7 +27,6 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [messagesSent])
 
-
     useEffect(() => {
         socket.on("newNotification", (newMessage, contactChat) => {
             document.getElementById(contactChat[0]._id).children[2].children[0].classList = 'far fa-comment-dots active' //Activa la visibilidad del icono de notificacion de mensaje
@@ -47,7 +46,6 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
 
     const showHistoryLastMessage = (messages) => {
         if(messages.length !== 0) {
-            console.log("ar", messages)
             const lastMessage = messages[messages.length -1].message
             if(lastMessage === 'false') {
                 return 'Foto'

@@ -40,6 +40,7 @@ module.exports = (io) => {
     });
 
     socket.on("sendMessage", async (user, message) => {
+      console.log("hola??", message)
       let fullMessage
       if(message.mimetype) fullMessage = await chatController.saveImageMessageAndReturnFullMessage(user, message)
       else fullMessage = await chatController.saveMessagesAndReturnFullMessage(user, message)
@@ -62,6 +63,12 @@ module.exports = (io) => {
       const updatedUser = await userController.findUserById(contact[0]._id)
       const contactChat = await chatController.findChatByContactId(user._id, contact[0]._id)
       socket.to(updatedUser[0].socketId).emit('newNotification', message, contactChat)
+    });
+
+    socket.on('newImageProfile', async (userLoggedId, newImage) => {
+      await userController.changeProfileImage(userLoggedId, newImage)
+      const updatedUser = await userController.findUserById(userLoggedId)
+      socket.emit('newImageProfileUpdated', updatedUser)
     });
 
     socket.on('disconnect', async () => {

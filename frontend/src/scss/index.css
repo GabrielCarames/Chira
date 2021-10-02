@@ -390,7 +390,7 @@ body main {
             justify-content: center;
   }
   .main .main__left-section {
-    width: 480px;
+    width: 400px;
     height: 100vh;
   }
   .main .main__left-section.hidden {
@@ -414,6 +414,7 @@ body main {
 .main__content-section .main__contacts {
   height: 100%;
   overflow: auto;
+  overflow-x: hidden;
 }
 
 .main__content-section .main__contacts .main__contacts-list {
@@ -472,6 +473,8 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  max-width: 220px;
+  height: 25px;
 }
 
 .main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__message-container .list__messages {
@@ -624,9 +627,9 @@ body main {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-        -ms-flex-align: center;
-            align-items: center;
+    -webkit-box-align: inherit;
+        -ms-flex-align: inherit;
+            align-items: inherit;
   }
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__message-container .list__messages {
     text-overflow: ellipsis;
@@ -643,7 +646,7 @@ body main {
     position: inherit;
   }
   .main .main__content-section .main_add-contacts-container .add-contacts__sub-container .add-contacts__left-side {
-    width: 480px;
+    width: 400px;
   }
   .main .main__content-section .main_add-contacts-container .add-contacts__sub-container .add-contacts__left-side .add-contacts__button {
     margin-right: 10px;
@@ -677,7 +680,6 @@ body main {
 }
 
 .main__navbar-section .main__burger-menu .burger__user-info {
-  height: 155px;
   background-color: #172029;
   padding: 20px;
   -webkit-box-sizing: border-box;
@@ -693,11 +695,44 @@ body main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  border-radius: 3000px;
 }
 
-.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar {
-  width: 62px;
-  height: auto;
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar-container:hover .burger__user-avatar {
+  opacity: 0.6;
+}
+
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar-container:hover .fa-user-edit {
+  visibility: visible;
+}
+
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar-container .burger__user-avatar {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 3000px;
+}
+
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar-container .fa-user-edit {
+  visibility: hidden;
+  position: absolute;
+  font-size: 22px;
 }
 
 .main__navbar-section .main__burger-menu .burger__user-info .burger__user-name {
@@ -866,7 +901,8 @@ body main {
 }
 
 .main__chat-section .main__chat-navbar .navbar__back {
-  visibility: visible;
+  visibility: hidden;
+  position: absolute;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1031,7 +1067,7 @@ body main {
   margin: 20px 0 20px 20px;
   padding: 0px 10px 0 10px;
   border-radius: 10px;
-  max-width: 500px;
+  max-width: 200px;
 }
 
 .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__username {
@@ -1047,6 +1083,18 @@ body main {
 }
 
 .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__message.active {
+  color: red;
+}
+
+.main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__image {
+  max-width: 200px;
+  height: auto;
+  overflow: auto;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__image.active {
   color: red;
 }
 
@@ -1098,7 +1146,7 @@ body main {
   margin: 20px 10px 20px 0;
   padding: 10px 20px 0 20px;
   border-radius: 10px;
-  max-width: 500px;
+  max-width: 200px;
 }
 
 .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__username {
@@ -1112,6 +1160,18 @@ body main {
   word-break: break-word;
   line-height: 1.2;
   font-size: 13px;
+}
+
+.main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__image {
+  max-width: 200px;
+  height: auto;
+  overflow: auto;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__image.active {
+  color: red;
 }
 
 .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .message__info {
@@ -1193,7 +1253,18 @@ body main {
   padding: 10px;
 }
 
-.main__chat-section .main__input-section .main__emoji-container {
+.main__chat-section .main__input-section .main__input-tools {
+  background-color: #26313f;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 30px;
+}
+
+.main__chat-section .main__input-section .main__input-tools .main__emoji-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1208,15 +1279,15 @@ body main {
   border-radius: 300px;
   margin-right: 15px;
   cursor: pointer;
-  font-size: 30px;
-  margin-left: 10px;
+  font-size: 20px;
+  margin-right: 0;
 }
 
-.main__chat-section .main__input-section .main__emoji-container:hover {
+.main__chat-section .main__input-section .main__input-tools .main__emoji-container:hover {
   background-color: #37465a;
 }
 
-.main__chat-section .main__input-section .main__input-image-section .main__image-label {
+.main__chat-section .main__input-section .main__input-tools .main__input-image-section .main__image-label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1231,19 +1302,20 @@ body main {
   border-radius: 300px;
   margin-right: 15px;
   cursor: pointer;
-  font-size: 26px;
+  font-size: 20px;
+  margin-right: 0;
 }
 
-.main__chat-section .main__input-section .main__input-image-section .main__image-label:hover {
+.main__chat-section .main__input-section .main__input-tools .main__input-image-section .main__image-label:hover {
   background-color: #37465a;
 }
 
-.main__chat-section .main__input-section .main__input-image-section .main__image-input {
+.main__chat-section .main__input-section .main__input-tools .main__input-image-section .main__image-input {
   visibility: hidden;
   position: absolute;
 }
 
-.main__chat-section .main__input-section .main__input {
+.main__chat-section .main__input-section .main__input-tools .main__input {
   color: #aaaaaa;
   background-color: #26313f;
   border: none;
@@ -1295,9 +1367,127 @@ body main {
   opacity: .5;
 }
 
+.main__chat-section .main__desktop-input-section {
+  visibility: hidden;
+  position: absolute;
+  background-color: #172029;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px;
+}
+
+.main__chat-section .main__desktop-input-section .main__emoji-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 300px;
+  margin-right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.main__chat-section .main__desktop-input-section .main__emoji-container:hover {
+  background-color: #37465a;
+}
+
+.main__chat-section .main__desktop-input-section .main__input-image-section .main__image-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 300px;
+  margin-right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.main__chat-section .main__desktop-input-section .main__input-image-section .main__image-label:hover {
+  background-color: #37465a;
+}
+
+.main__chat-section .main__desktop-input-section .main__input-image-section .main__image-input {
+  visibility: hidden;
+  position: absolute;
+}
+
+.main__chat-section .main__desktop-input-section .main__input {
+  color: #aaaaaa;
+  background-color: #26313f;
+  border: none;
+  border-radius: 30px;
+  padding-left: 20px;
+  height: 35px;
+  width: 90%;
+  font-size: 13px;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+}
+
+.main__chat-section .main__desktop-input-section .main__send-message {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 300px;
+  margin-right: 15px;
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 0;
+  width: 50px;
+  height: 35px;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+  background-color: rgba(255, 0, 0, 0);
+  border: none;
+}
+
+.main__chat-section .main__desktop-input-section .main__send-image {
+  width: 35px;
+  height: auto;
+  color: white;
+  cursor: pointer;
+}
+
+.main__chat-section .main__desktop-input-section .main__send-image:hover {
+  -webkit-transform: scale(1.08);
+          transform: scale(1.08);
+  opacity: .5;
+}
+
 @media screen and (min-width: 1201px) {
   .main__chat-section {
     width: 1200px;
+    position: relative;
   }
   .main__chat-section.compressed {
     visibility: visible;
@@ -1336,7 +1526,7 @@ body main {
         -ms-flex-align: center;
             align-items: center;
     width: 80%;
-    height: 100%;
+    height: 90px;
     margin-left: 30px;
   }
   .main__chat-section .main__chat-navbar .navbar__contact .navbar__avatar {
@@ -1453,9 +1643,11 @@ body main {
     color: red;
   }
   .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__image {
-    width: 500px;
+    max-width: 500px;
     height: auto;
     overflow: auto;
+    margin-top: 10px;
+    cursor: pointer;
   }
   .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__image.active {
     color: red;
@@ -1510,10 +1702,23 @@ body main {
     font-size: 13px;
   }
   .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__message {
-    font-weight: 500px;
-    word-break: break-word;
+    font-weight: 400px;
     line-height: 1.2;
+    word-break: break-word;
     font-size: 13px;
+  }
+  .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__message.active {
+    color: red;
+  }
+  .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__image {
+    max-width: 500px;
+    height: auto;
+    overflow: auto;
+    margin-top: 10px;
+    cursor: pointer;
+  }
+  .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__image.active {
+    color: red;
   }
   .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .message__info {
     display: -webkit-box;
@@ -1544,12 +1749,63 @@ body main {
     margin-bottom: 10px;
   }
   .main__chat-section .main__input-section {
+    visibility: hidden;
+    position: absolute;
+  }
+  .main__chat-section .main__desktop-input-section {
+    visibility: visible;
+    position: initial;
     height: 90px;
   }
-  .main__chat-section .main__input-section .main__input {
+  .main__chat-section .main__desktop-input-section .main__emoji-container {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 300px;
+    margin-right: 15px;
+    cursor: pointer;
+    font-size: 30px;
+    margin-left: 10px;
+  }
+  .main__chat-section .main__desktop-input-section .main__emoji-container:hover {
+    background-color: #37465a;
+  }
+  .main__chat-section .main__desktop-input-section .main__input-image-section .main__image-label {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 300px;
+    margin-right: 15px;
+    cursor: pointer;
+    font-size: 26px;
+  }
+  .main__chat-section .main__desktop-input-section .main__input-image-section .main__image-label:hover {
+    background-color: #37465a;
+  }
+  .main__chat-section .main__desktop-input-section .main__input-image-section .main__image-input {
+    visibility: hidden;
+    position: absolute;
+  }
+  .main__chat-section .main__desktop-input-section .main__input {
     height: 45px;
   }
-  .main__chat-section .main__input-section .main__send-message {
+  .main__chat-section .main__desktop-input-section .main__send-message {
     margin-right: 20px;
   }
 }
@@ -1566,9 +1822,6 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   height: 70px;
   font-size: 18px;
   border-bottom: 2px solid #26313f;
@@ -1589,6 +1842,7 @@ body main {
   border-radius: 300px;
   margin-right: 15px;
   cursor: pointer;
+  margin-right: 0;
 }
 
 .main__search-contacts .search-contacts__navbar .search-contacts__back:hover {
@@ -1600,7 +1854,7 @@ body main {
 }
 
 .main__search-contacts .search-contacts__navbar .search-contacts__input-container {
-  width: 380px;
+  width: 80%;
   height: 40px;
   border-radius: 3000px;
   background-color: #26313f;
@@ -1626,7 +1880,7 @@ body main {
 }
 
 .main__search-contacts .search-contacts__navbar .search-contacts__input-container .search-contacts__input {
-  width: 331px;
+  width: 100%;
   height: 38px;
   border: none;
   background-color: #26313f;
@@ -1745,6 +1999,17 @@ body main {
 
 .main__search-contacts .contacts-section .contacts-list .list__item .list__add-contact .fa-user-plus:hover {
   color: #aaaaaa;
+}
+
+@media screen and (min-width: 1201px) {
+  .main__search-contacts .search-contacts__navbar {
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .main__search-contacts .search-contacts__navbar .search-contacts__input-container .search-contacts__input {
+    width: 331px;
+  }
 }
 
 .main__search-messages {
@@ -2300,7 +2565,6 @@ body main {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
-  height: 100%;
 }
 
 .main__previous-image .previous__close {
@@ -2396,6 +2660,318 @@ body main {
   opacity: .5;
 }
 
+.main__chat-settings {
+  position: absolute;
+  right: 0px;
+  margin-top: 60px;
+  width: 300px;
+  height: 180px;
+  background-color: #26313f;
+  color: white;
+}
+
+.main__chat-settings .main__chat-settings__list {
+  padding-left: 0px;
+}
+
+.main__chat-settings .main__chat-settings__list .list__item {
+  width: 100%;
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.main__chat-settings .main__chat-settings__list .list__item:hover {
+  background-color: #37465a;
+}
+
+.main__chat-settings .main__chat-settings__list .list__item .list__setting-title {
+  line-height: 0;
+}
+
+.main__chat-settings .main__chat-settings__list .list__item .fas {
+  width: 30px;
+  padding-left: 20px;
+}
+
+@media screen and (min-width: 1201px) {
+  .main__chat-settings {
+    right: 20px;
+    margin-top: 92px;
+  }
+}
+
+.main__configuration-section {
+  width: 400px;
+  height: 100%;
+  background-color: #172029;
+}
+
+.main__configuration-section .config__navbar-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 20px;
+}
+
+.main__configuration-section .config__navbar-section .config__title {
+  margin-left: 30%;
+}
+
+.main__configuration-section .config__options-section .config__list {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 0px;
+}
+
+.main__configuration-section .config__options-section .config__list .list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  padding-left: 20px;
+}
+
+.main__configuration-section .config__options-section .config__list .list__item:hover {
+  background-color: #37465a;
+}
+
+.main__configuration-section .config__options-section .config__list .list__item .fa-pen {
+  width: 30px;
+}
+
+.main__edit-profile {
+  width: 400px;
+  height: 100%;
+}
+
+.main__edit-profile .edit-profile__navbar-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-left: 15px;
+}
+
+.main__edit-profile .edit-profile__navbar-section .navbar__close-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 300px;
+  margin-right: 15px;
+  cursor: pointer;
+  width: 50px;
+  margin-right: 0;
+}
+
+.main__edit-profile .edit-profile__navbar-section .navbar__close-section:hover {
+  background-color: #37465a;
+}
+
+.main__edit-profile .edit-profile__navbar-section .navbar__title {
+  margin-left: 23%;
+}
+
+.main__edit-profile .edit-profile__main-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 20px;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-avatar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 200px;
+  height: 200px;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-avatar .edit-profile__image-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 3000px;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-avatar .edit-profile__image-label:hover .edit-profile__avatar {
+  opacity: .5;
+  cursor: pointer;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-avatar .edit-profile__image-label:hover .fa-camera {
+  visibility: visible;
+  cursor: pointer;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-avatar .edit-profile__image-label .edit-profile__avatar {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 3000px;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-avatar .edit-profile__image-label .fa-camera {
+  position: absolute;
+  visibility: hidden;
+  font-size: 25px;
+  opacity: .8;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-avatar .edit-profile__image-input {
+  visibility: hidden;
+  position: absolute;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-username {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 20px;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-username .edit-profile__username-section {
+  min-width: 230px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-username .edit-profile__username-section .form__label {
+  margin-left: 10px;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-username .edit-profile__username-section .form__input {
+  background-color: #212121;
+  color: white;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #AAAAAA;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  padding-left: 10px;
+  outline: none;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-username .edit-profile__username-section .form__input:hover {
+  border-color: #1975e0;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-username .edit-profile__username-section .form__input:focus {
+  border-color: #1975e0;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-username .form__button {
+  visibility: hidden;
+  position: absolute;
+  margin-top: 30px;
+  height: 100%;
+  width: 250px;
+  border-radius: 15px;
+  background-color: #1975e0;
+  border-width: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-username .form__button.display {
+  visibility: visible;
+  position: initial;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-username .form__button:hover {
+  -webkit-transition: .25s;
+  transition: .25s;
+  opacity: .5;
+}
+
+.main__edit-profile .edit-profile__main-content .edit-profile__change-username .form__button .form__text-button {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 17px;
+}
+
 .main__navbar-section {
   height: 60px;
 }
@@ -2420,7 +2996,6 @@ body main {
 }
 
 .main__navbar-section .main__burger-menu .burger__user-info {
-  height: 155px;
   background-color: #172029;
   padding: 20px;
   -webkit-box-sizing: border-box;
@@ -2436,11 +3011,44 @@ body main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  border-radius: 3000px;
 }
 
-.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar {
-  width: 62px;
-  height: auto;
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+}
+
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar-container:hover .burger__user-avatar {
+  opacity: 0.6;
+}
+
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar-container:hover .fa-user-edit {
+  visibility: visible;
+}
+
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar-container .burger__user-avatar {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 3000px;
+}
+
+.main__navbar-section .main__burger-menu .burger__user-info .burger__user-avatar-container .fa-user-edit {
+  visibility: hidden;
+  position: absolute;
+  font-size: 22px;
 }
 
 .main__navbar-section .main__burger-menu .burger__user-info .burger__user-name {

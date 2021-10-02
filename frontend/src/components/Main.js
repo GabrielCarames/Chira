@@ -6,15 +6,19 @@ import MainContacts from './MainContacts'
 import BurgerMenu from './BurgerMenu';
 import Chat from './Chat';
 import socket from './Socket'
+import Configuration from './Configuration';
+import EditProfile from './EditProfile';
 
 const Main = memo(({setUserLoggedMain}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ showNewMessageNotification, setShowNewMessageNotification ] = useState(false)
+    const [ displayConfiguration, setDisplayConfiguration ] = useState(false)
     const [ messagesSent, setMessagesSent ] = useState("");
     const [ lastMessage, setLastMessage ] = useState()
     const [ active, setActive ] = useState(false)
     const { addContactsMenu, setAddContactsMenu } = useContext(AddContactsMenu)
     const { displayChat, setDisplayChat } = useContext(DisplayChatContext)
+    const [ displayEditProfile, setDisplayEditProfile ] = useState()
 
     useEffect(() => {
         socket.emit('connected', userLogged)
@@ -34,6 +38,16 @@ const Main = memo(({setUserLoggedMain}) => {
         if(displayChat) document.getElementById('main__left-section').classList = "main__left-section hidden"
     }, [displayChat])
 
+    const displayLeftContent = () => {
+        if(addContactsMenu) {
+            return <SearchContacts />
+        } else if(displayConfiguration) {
+            return <Configuration setDisplayEditProfile={setDisplayEditProfile} setDisplayConfiguration={setDisplayConfiguration} />
+        } else if(displayEditProfile) {
+            return <EditProfile setDisplayEditProfile={setDisplayEditProfile} />
+        }else return <MainContacts messagesSent={messagesSent} setLastMessage={setLastMessage} setDisplayChat={setDisplayChat} />
+    }
+
     return(
         <section className="main">
             <section className="main__left-section" id="main__left-section">
@@ -47,13 +61,14 @@ const Main = memo(({setUserLoggedMain}) => {
                             <i className="fas fa-search"></i>
                         </div>
                     </nav>
-                    <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain}/>
+                    <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain} setDisplayConfiguration={setDisplayConfiguration} setDisplayEditProfile={setDisplayEditProfile} />
                 </section>
                 <section className="main__content-section">
-                    {addContactsMenu ? <SearchContacts /> : <MainContacts messagesSent={messagesSent}
+                    {displayLeftContent()}
+                    {/* {addContactsMenu ? <SearchContacts /> : displayConfiguration ? <Configuration setDisplayConfiguration={setDisplayConfiguration} /> : <MainContacts messagesSent={messagesSent}
                         setLastMessage={setLastMessage} 
                         setDisplayChat={setDisplayChat}
-                    />}
+                    />} */}
                     <div className="main_add-contacts-container add-contacts">
                         <div className="add-contacts__sub-container">
                             <div className="add-contacts__left-side">

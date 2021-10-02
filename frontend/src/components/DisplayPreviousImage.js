@@ -6,7 +6,6 @@ const DisplayPreviousImage = ({images, setDisplayPreviousImage, setMessagesSent}
     const user = JSON.parse(localStorage.getItem('userLogged'))
 
     const uploadImage = async () => {
-        console.log("RAR", images[1])
         const imageData = images[1]
         const data = new FormData()
         data.append("file", imageData)
@@ -25,11 +24,14 @@ const DisplayPreviousImage = ({images, setDisplayPreviousImage, setMessagesSent}
                     <img className="previous__image" src={images[0]} alt="" width="100" />
                 </div>
             </div>
-            <div className="previous__bottom-container">
-                <button className="previous__send-image" type="submit" onClick={() => uploadImage()}>
-                    <img className="previous__send-image-image" src={send} alt="" />
-                </button>
-            </div>
+            {
+                images[0].search('blob') !== -1 &&
+                    <div className="previous__bottom-container">
+                        <button className="previous__send-image" type="submit" onClick={() => uploadImage()}>
+                            <img className="previous__send-image-image" src={send} alt="" />
+                        </button>
+                    </div>
+            }
         </div>
     )
 }

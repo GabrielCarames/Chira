@@ -4,12 +4,12 @@
     .search-contacts__navbar {
         display: flex;
         align-items: center;
-        justify-content: center;
         height: 70px;
         font-size: $h3;
         border-bottom: 2px solid #26313f;
         .search-contacts__back {
             @include icons-div-styles;
+            margin-right: 0;
             &:hover {
                 background-color: #37465a;
             }
@@ -18,7 +18,7 @@
             }
         }
         .search-contacts__input-container {
-            width: 380px;
+            width: 80%;
             height: 40px;
             border-radius: 3000px;
             background-color: $second-color;
@@ -35,7 +35,7 @@
                 margin-left: 10px;
             }
             .search-contacts__input {
-                width: 331px;
+                width: 100%;
                 height: 38px;
                 border: none;
                 background-color: $second-color;
@@ -117,6 +117,19 @@
                             color: $gray-color;
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1201px) { 
+    .main__search-contacts {
+        .search-contacts__navbar {
+            justify-content: center;
+            .search-contacts__input-container {
+                .search-contacts__input {
+                    width: 331px;
                 }
             }
         }

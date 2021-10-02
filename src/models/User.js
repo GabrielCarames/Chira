@@ -11,6 +11,11 @@ const User = new Schema({
     ],
     socketId: {
         type: String
+    },
+    avatar: {
+        type: Object,
+        default: 'https://w7.pngwing.com/pngs/971/686/png-transparent-computer-icons-social-media-blog-avatar-material-service-logo-material.png',
+        required: false
     }
 });
 

@@ -10,12 +10,12 @@ export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUser
     const listener = event => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
         const input = document.getElementsByClassName('main__input');
-        if (input[0] === document.activeElement) {
-            console.log("input?", input[0])
+        console.log("input?", input[1], 'active', document.activeElement.classList[0])
+        if (document.activeElement.classList[0] === 'main__input') {
             event.preventDefault();
-            verifyAndSendInputValue(input[0].value)
-            input[0].value = ''
-            input[0].defaultValue = ''
+            verifyAndSendInputValue(document.activeElement.value)
+            document.activeElement.value = ''
+            document.activeElement.defaultValue = ''
             setChosenEmoji(null)
         }
       }
@@ -28,6 +28,7 @@ export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUser
   }, [inputMessage]);
 
   const inputOnSubmit = (e, setChosenEmoji) => {
+    console.log("aaaaaaaaa")
     e.preventDefault()
     const inputValue = e.target[0].value
     verifyAndSendInputValue(inputValue)

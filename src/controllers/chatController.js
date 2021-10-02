@@ -168,4 +168,8 @@ chatController.updateSeenMessages = async () => {
     await Message.updateMany({"seen": false}, {"$set":{"seen": true}})
 }
 
+chatController.deleteChatById = async (chatId) => {
+    await Chat.deleteOne({_id: chatId})
+}
+
 module.exports = chatController;

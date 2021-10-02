@@ -1,0 +1,37 @@
+.main__chat-settings {
+    position: absolute;
+    right: 0px;
+    margin-top: 60px;
+    width: 300px;
+    height: 180px;
+    background-color: $second-color;
+    color: white;
+    .main__chat-settings__list {
+        padding-left: 0px;
+        .list__item {
+            width: 100%;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            margin-top: 10px;
+            &:hover {
+                background-color: $hover-color;
+            }
+            .list__setting-title {
+                line-height: 0;
+            }
+            .fas {
+                width: 30px;
+                padding-left: 20px;
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1201px) {
+    .main__chat-settings {
+        right: 20px;
+        margin-top: 92px;
+    }
+}

@@ -29,7 +29,7 @@
         flex-direction: row;
         justify-content: center;
         .main__left-section {
-            width: 480px;
+            width: 400px;
             height: 100vh;
             &.hidden {
                 visibility: visible;
@@ -56,3 +56,6 @@
 @import "./main-searchmessages";
 @import "./main-contactprofile";
 @import "./main-displayPreviousImage";
+@import "./main-chatsettings";
+@import "./main-configuration";
+@import "./main-editprofile";

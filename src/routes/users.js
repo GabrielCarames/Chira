@@ -48,8 +48,15 @@ const updateUserLogged = async (userId) => {
 router.post('/updateuser', async function (req, res) {
     const userLogged = req.body.userLogged
     const requestUser = await userController.findUsersByName(userLogged.username)
-    console.log("este es el usuarioi a updatear", requestUser)
-    // res.send(requestUser)
+})
+
+router.post('/deletecontact', async function (req, res) {
+    const contact = req.body.contact
+    const userLogged = req.body.userLogged
+    const chat = req.body.chat
+    console.log("soyyoaaeliminar", contact.username, userLogged.username)
+    await userController.deleteContactById(userLogged._id, contact._id)
+    // await chatController.deleteChatById(chat._id)
 })
 
 module.exports = router;

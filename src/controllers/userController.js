@@ -78,4 +78,20 @@ userController.removeSocketIdFromUserBySocketId = async (socketId) => {
     )
 }
 
+userController.deleteContactById = async (userLoggedId, contactId) => {
+    console.log("'ids", userLoggedId, contactId)
+    console.log("user", await User.findOne({_id: userLoggedId}).populate({path: 'contacts'}))
+    console.log("paraeliminar", await User.findOne({_id: userLoggedId}).populate({
+        path: 'contacts'
+    }).select({'contacts._id': contactId})
+    )
+    // await User.findOneAndDelete({_id: userLoggedId}, {'contacts._id': contactId})
+}
+
+userController.changeProfileImage = async (userLoggedId, newImage) => {
+    await User.findOneAndUpdate({_id: userLoggedId}, {
+        avatar: newImage
+    })
+}
+
 module.exports = userController;

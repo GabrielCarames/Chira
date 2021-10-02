@@ -2,7 +2,7 @@ const UploadImage = ({images, setImages, setDisplayPreviousImage}) => {
     
     const verifyImage = (e) => {
         const imageData = e.target.files[0]
-        console.log("soy", imageData)
+        console.log("soy", imageData, "rarotravez", URL.createObjectURL(imageData))
         setImages([URL.createObjectURL(imageData), imageData]);
         setDisplayPreviousImage(true)
     };
@@ -12,7 +12,7 @@ const UploadImage = ({images, setImages, setDisplayPreviousImage}) => {
             <label for="main__image-input" className="main__image-label">
                 <i className="fas fa-paperclip"></i>
             </label>
-            <input type="file" name="file" id="main__image-input" className="main__image-input" onChange={(e) => verifyImage(e)}/>
+            <input type="file" name="file" accept="image/png, image/gif, image/jpeg" id="main__image-input" className="main__image-input" onChange={(e) => verifyImage(e)}/>
         </div>
     )
 }

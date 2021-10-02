@@ -13,7 +13,7 @@ import DisplayChatContext from './contexts/DisplayChatContext';
 const App = () => {
   const [ flashMessage, setFlashMessage ] = useState(false)
   const [ addContactsMenu, setAddContactsMenu ] = useState(false)
-  const [ setUserLoggedMain ] = useState(true)
+  const [ userLoggedMain, setUserLoggedMain ] = useState(true)
   const [ chat, setChat ] = useState()
   const [ displayChat, setDisplayChat ] = useState(false)
   const checkLogIn = () => {

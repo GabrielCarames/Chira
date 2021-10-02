@@ -6,8 +6,10 @@ import EmojisPicker from './EmojisPicker'
 import send from '../images/send.png'
 import socket from './Socket'
 import UploadImage from './UploadImage'
+import DisplayChatSettings from './DisplayChatSettings';
+import FormContent from './FormContent'
 
-const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage}) => {
+const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ showEmojiPicker, setShowEmojiPicker ] = useState(false)
     const [ chosenEmoji, setChosenEmoji ] = useState(null);
@@ -35,8 +37,8 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
         }
     }
       
-    const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    const scrollToBottom = () => { 
+    messagesEndRef.current?.scrollIntoView()
     }
 
     useEffect(() => {
@@ -47,8 +49,8 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
         <>
             <div className="main__messages-section messages" id="list-messages">
                 <div className="messages__scroll">
-                    {chat && chat.messages.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} />  )}
-                    {messagesSent && messagesSent.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} />)}
+                    {chat && chat.messages.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} />  )}
+                    {messagesSent && messagesSent.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} />)}
                     <div ref={messagesEndRef}></div>
                 </div>
                 <div className="messages__typing">
@@ -57,15 +59,20 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                 </div>
             </div>
             <form enctype="multipart/form-data" className="main__input-section" id="main__input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji )}>
-                <div className="main__emoji-container" onClick={() => showEmojiPicker ? setShowEmojiPicker(false) : setShowEmojiPicker(true)}>
-                    <i className="far fa-grin"></i>
-                </div>
-                <UploadImage images={images} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage}/>
-                <input className="main__input" id="cosa" value={chosenEmoji} type="text" name="message" placeholder="Escribe un mensaje aquí" autoComplete="off" onChange={(e) => setInputMessage(e.target.value)} onClick={() => {seeMessage(messagesSent, user, chat, setShowNewMessageNotification)}}/>
-                <button className="main__send-message" type="submit">
-                    <img className="main__send-image" src={send} alt="" />
-                </button>
+                <FormContent inputOnSubmit={inputOnSubmit} chosenEmoji={chosenEmoji} setChosenEmoji={setChosenEmoji} 
+                setInputMessage={setInputMessage} seeMessage={seeMessage} images={images} setImages={setImages}
+                showEmojiPicker={showEmojiPicker} setShowEmojiPicker={setShowEmojiPicker} setDisplayPreviousImage={setDisplayPreviousImage}
+                messagesSent={messagesSent} user={user} chat={chat} setShowNewMessageNotification={setShowNewMessageNotification} send={send}
+                />
             </form>
+            <form enctype="multipart/form-data" className="main__desktop-input-section" id="main__desktop-input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji )}>
+                <FormContent inputOnSubmit={inputOnSubmit} chosenEmoji={chosenEmoji} setChosenEmoji={setChosenEmoji} 
+                setInputMessage={setInputMessage} seeMessage={seeMessage} images={images} setImages={setImages}
+                showEmojiPicker={showEmojiPicker} setShowEmojiPicker={setShowEmojiPicker} setDisplayPreviousImage={setDisplayPreviousImage}
+                messagesSent={messagesSent} user={user} chat={chat} setShowNewMessageNotification={setShowNewMessageNotification} send={send}
+                />
+            </form>
+            {displayChatSettings && <DisplayChatSettings displayChatSettings={displayChatSettings} setDisplayChatSettings={setDisplayChatSettings} setDisplayContactProfile={setDisplayContactProfile} contact={contact} chat={chat} />}
         </>
     )
 }))

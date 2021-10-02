@@ -28,9 +28,8 @@
         border-left: 2px solid #000;
         cursor: pointer;
         .navbar__back {
-            visibility: visible;
-            // visibility: hidden;
-            // position: absolute;
+            visibility: hidden;
+            position: absolute;
             @include icons-div-styles;
             margin-right: 0;
             font-size: 21px;
@@ -126,7 +125,7 @@
                     margin: 20px 0 20px 20px;
                     padding: 0px 10px 0 10px;
                     border-radius: 10px;
-                    max-width: 500px;
+                    max-width: 200px;
                     .messages__username {
                         color: $first-alpha-color;
                         font-size: $h5;
@@ -136,6 +135,16 @@
                         line-height: 1.2;
                         word-break: break-word;
                         font-size: $h5;
+                        &.active {
+                            color: red;
+                        }
+                    }
+                    .messages__image {
+                        max-width: 200px;
+                        height:auto;
+                        overflow:auto;
+                        margin-top: 10px;
+                        cursor: pointer;
                         &.active {
                             color: red;
                         }
@@ -175,7 +184,7 @@
                     margin: 20px 10px 20px 0;
                     padding: 10px 20px 0 20px;
                     border-radius: 10px;
-                    max-width: 500px;
+                    max-width: 200px;
                     .messages__username {
                         font-weight: 700px;
                         color: $first-color;
@@ -186,6 +195,16 @@
                         word-break: break-word;
                         line-height: 1.2;
                         font-size: $h5;
+                    }
+                    .messages__image {
+                        max-width: 200px;
+                        height:auto;
+                        overflow:auto;
+                        margin-top: 10px;
+                        cursor: pointer;
+                        &.active {
+                            color: red;
+                        }
                     }
                     .message__info {
                         display: flex;
@@ -247,6 +266,75 @@
     }
     .main__input-section {
         background-color: $second-alpha-color;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        .main__input-tools {
+            background-color: $second-color;
+            display: flex;
+            align-items: center;
+            border-radius: 30px;
+            .main__emoji-container {
+                @include icons-div-styles;
+                font-size: 20px;
+                margin-right: 0;
+                &:hover {
+                    background-color: $hover-color;
+                }
+            }
+            .main__input-image-section {
+                .main__image-label {
+                    @include icons-div-styles;
+                    font-size: 20px;
+                    margin-right: 0;
+                    &:hover {
+                        background-color: $hover-color;
+                    }
+                }
+                .main__image-input {
+                    visibility: hidden; 
+                    position: absolute;
+                }
+            }
+            .main__input {
+                color: $gray-color;
+                background-color: $second-color;
+                border: none;
+                border-radius: 30px;
+                padding-left: 20px;
+                height: 35px;
+                width: 90%;
+                font-size: $h5;
+                font-family: 'Poppins', sans-serif;
+                outline: none;
+            }
+        }
+        .main__send-message {
+            @include icons-div-styles;
+            margin-left: 20px;
+            margin-right: 0;
+            width: 50px;
+            height: 35px;
+            justify-content: right;
+            background-color: rgba(255, 0, 0, 0);
+            border: none;
+        }
+        .main__send-image {
+            width: 35px;
+            height: auto;
+            color: white;
+            cursor: pointer;
+            &:hover {
+                transform: scale(1.08);
+                opacity: .5;
+            }
+        }
+    }
+    .main__desktop-input-section {
+        visibility: hidden;
+        position: absolute;
+        background-color: $second-alpha-color;
         // height: 100%;
         display: flex;
         align-items: center;
@@ -254,8 +342,7 @@
         padding: 10px;
         .main__emoji-container {
             @include icons-div-styles;
-            font-size: 30px;
-            margin-left: 10px;
+            font-size: 20px;
             &:hover {
                 background-color: $hover-color;
             }
@@ -263,7 +350,7 @@
         .main__input-image-section {
             .main__image-label {
                 @include icons-div-styles;
-                font-size: 26px;
+                font-size: 20px;
                 &:hover {
                     background-color: $hover-color;
                 }
@@ -311,6 +398,7 @@
 @media screen and (min-width: 1201px) {
     .main__chat-section {
         width: 1200px;
+        position: relative;
         &.compressed {
             visibility: visible;
             position: inherit;
@@ -338,7 +426,7 @@
                 // justify-content: space-evenly;
                 align-items: center;
                 width: 80%;
-                height: 100%;
+                height: 90px;
                 margin-left: 30px;
                 .navbar__avatar {
                     width: 66px;
@@ -417,9 +505,11 @@
                         }
                     }
                     .messages__image {
-                        width:500px;
+                        max-width:500px;
                         height:auto;
                         overflow:auto;
+                        margin-top: 10px;
+                        cursor: pointer;
                         &.active {
                             color: red;
                         }
@@ -466,10 +556,23 @@
                         font-size: $h5;
                     }
                     .messages__message {
-                        font-weight: 500px;
-                        word-break: break-word;
+                        font-weight: 400px;
                         line-height: 1.2;
+                        word-break: break-word;
                         font-size: $h5;
+                        &.active {
+                            color: red;
+                        }
+                    }
+                    .messages__image {
+                        max-width:500px;
+                        height:auto;
+                        overflow:auto;
+                        margin-top: 10px;
+                        cursor: pointer;
+                        &.active {
+                            color: red;
+                        }
                     }
                     .message__info {
                         display: flex;
@@ -499,7 +602,34 @@
             margin-bottom: 10px;
         }
         .main__input-section {
+            visibility: hidden;
+            position: absolute;
+        }
+        .main__desktop-input-section {
+            visibility: visible;
+            position: initial;
             height: 90px;
+            .main__emoji-container {
+                @include icons-div-styles;
+                font-size: 30px;
+                margin-left: 10px;
+                &:hover {
+                    background-color: $hover-color;
+                }
+            }
+            .main__input-image-section {
+                .main__image-label {
+                    @include icons-div-styles;
+                    font-size: 26px;
+                    &:hover {
+                        background-color: $hover-color;
+                    }
+                }
+                .main__image-input {
+                    visibility: hidden; 
+                    position: absolute;
+                }
+            }
             .main__input {
                 height: 45px;
             }

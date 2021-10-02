@@ -24,5 +24,12 @@ router.post("/upload", async function(req, res, next) {
     res.send(newImage)
 });
 
+router.post("/profileimage", async function(req, res, next) {
+    const imageData = req.file
+    console.log("IMADTETADATA", imageData)
+    const newImage = await chatController.createImage(imageData)
+    res.send(newImage)
+    // await userController.changeProfileImage(userLoggedId, newImage)
+});
 
 module.exports = router;
