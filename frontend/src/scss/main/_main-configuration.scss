@@ -5,15 +5,19 @@
     .config__navbar-section {
         display: flex;
         align-items: center;
-        margin-left: 20px;
         .config__back {
-
+            @include icons-div-styles;
+            margin-left: 15px;
+            font-size: 22px;
+            &:hover {
+                background-color: $hover-color;
+            }
             .fa-arrow-left {
 
             }
         }
         .config__title {
-            margin-left: 30%;
+            margin-left: 15%;
         }
     }
     .config__options-section {

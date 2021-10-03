@@ -8,6 +8,7 @@ import Chat from './Chat';
 import socket from './Socket'
 import Configuration from './Configuration';
 import EditProfile from './EditProfile';
+import CreateGroup from './CreateGroup';
 
 const Main = memo(({setUserLoggedMain}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
@@ -16,6 +17,7 @@ const Main = memo(({setUserLoggedMain}) => {
     const [ messagesSent, setMessagesSent ] = useState("");
     const [ lastMessage, setLastMessage ] = useState()
     const [ active, setActive ] = useState(false)
+    const [ displayCreateGroup, setDisplayCreateGroup ] = useState(false)
     const { addContactsMenu, setAddContactsMenu } = useContext(AddContactsMenu)
     const { displayChat, setDisplayChat } = useContext(DisplayChatContext)
     const [ displayEditProfile, setDisplayEditProfile ] = useState()
@@ -38,13 +40,19 @@ const Main = memo(({setUserLoggedMain}) => {
         if(displayChat) document.getElementById('main__left-section').classList = "main__left-section hidden"
     }, [displayChat])
 
+    useEffect(() => {
+        displayCreateGroup && console.log("hiA???????????????????????")
+    }, [displayCreateGroup])
+
     const displayLeftContent = () => {
         if(addContactsMenu) {
-            return <SearchContacts />
+            return <SearchContacts setDisplayCreateGroup={setDisplayCreateGroup} />
         } else if(displayConfiguration) {
             return <Configuration setDisplayEditProfile={setDisplayEditProfile} setDisplayConfiguration={setDisplayConfiguration} />
         } else if(displayEditProfile) {
             return <EditProfile setDisplayEditProfile={setDisplayEditProfile} />
+        } else if (displayCreateGroup) {
+            return <CreateGroup />
         }else return <MainContacts messagesSent={messagesSent} setLastMessage={setLastMessage} setDisplayChat={setDisplayChat} />
     }
 
@@ -60,8 +68,11 @@ const Main = memo(({setUserLoggedMain}) => {
                         <div className="main__search" onClick={() => setAddContactsMenu(true)}>
                             <i className="fas fa-search"></i>
                         </div>
+                        <div onClick={() => setDisplayCreateGroup(true)}>
+asdasdas
+                        </div>
                     </nav>
-                    <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain} setDisplayConfiguration={setDisplayConfiguration} setDisplayEditProfile={setDisplayEditProfile} />
+                    <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain} setDisplayConfiguration={setDisplayConfiguration} setDisplayEditProfile={setDisplayEditProfile} setAddContactsMenu={setAddContactsMenu} />
                 </section>
                 <section className="main__content-section">
                     {displayLeftContent()}

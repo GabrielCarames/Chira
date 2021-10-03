@@ -1,12 +1,9 @@
-import avatar from '../images/avatar.png'
-import { useState } from 'react'
-
-const BurgerMenu = ({active, setUserLoggedMain, setDisplayConfiguration, setDisplayEditProfile}) => {
+const BurgerMenu = ({active, setUserLoggedMain, setDisplayConfiguration, setDisplayEditProfile, setAddContactsMenu}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const url = 'http://localhost:3001/public/uploads/'
 
     const displayAvatar = () => {
-        if(typeof userLogged.avatar === String) {
+        if(userLogged.avatar.search('http') !== -1) {
             return userLogged.avatar
         } else return url + userLogged.avatar.title
     }
@@ -23,7 +20,7 @@ const BurgerMenu = ({active, setUserLoggedMain, setDisplayConfiguration, setDisp
             </section>
             <section className="burger__settings-section">
                 <ul className="burger__setting-list list">
-                    <li className="list__item">
+                    <li className="list__item" onClick={() => setAddContactsMenu('group')}>
                         <i className="list-avatar fas fa-users"></i>
                         <h6 className="list-title">Crear nuevo grupo</h6>
                     </li>
