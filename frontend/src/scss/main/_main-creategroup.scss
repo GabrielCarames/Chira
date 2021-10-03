@@ -1,5 +1,64 @@
 .main__create-group-section {
     width: 400px;
     height: 100%;
-    background-color: red;
+    .create-group__navbar {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        .create-group__upload-image-container {
+            display: flex;
+            flex-direction: column;
+            .create-group__image-label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                &:hover {
+                    .fa-camera {
+                        transform: scale(1.2);
+                    }
+                }
+                .create-group__image {
+                    width: 150px;
+                    height: auto;
+                }
+                .fa-camera {
+                    position: absolute;
+                    font-size: 25px;
+                }
+            }
+            .create-group__image-input {
+                visibility: hidden;
+                position: absolute;
+            }
+        }
+        .create-group__group-name-container {
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            .create-group__group-name-form {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .form__label {
+                    width: 200px;
+                }
+                .form__input {
+                    width: 200px;
+                }
+            }
+            .form__button {
+                .form__text-button {
+
+                }
+            }
+        }
+    }
+    .create-group__contacts-container {
+        .create-group__contact-list {
+            .list__item {
+                list-style: none;
+            }
+        }
+    }
 }

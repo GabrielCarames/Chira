@@ -1,13 +1,15 @@
+import { useState } from "react"
 
 export function useCreateGroupHelper () {
-    let groupContacts = []
+    const [ groupContacts, setGroupContacts ] = useState([])
 
     const addContactsToGroupList = (contact) => {
-        groupContacts.push(contact)
+        setGroupContacts([...groupContacts, contact]) 
     }
 
     return {
-        addContactsToGroupList
+        addContactsToGroupList,
+        groupContacts
     }
 }
 

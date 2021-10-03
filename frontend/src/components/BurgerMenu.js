@@ -32,7 +32,7 @@ const BurgerMenu = ({active, setUserLoggedMain, setDisplayConfiguration, setDisp
                         <i className="list-avatar fas fa-bookmark"></i>
                         <h6 className="list-title">Mensajes guardados</h6>
                     </li>
-                    <li className="list__item" onClick={() => setDisplayConfiguration(true)}>
+                    <li className="list__item" onClick={() => {setAddContactsMenu(false); setDisplayConfiguration(true)}}>
                         <i className="list-avatar fas fa-cog"></i>
                         <h6 className="list-title">Configuración</h6>
                     </li>

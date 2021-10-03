@@ -6,13 +6,11 @@ import Loader from "react-loader-spinner";
 import socket from './Socket'
 import AddContactsMenu from "../contexts/AddContactsMenu";
 
-const ShowContacts = ({contactSearch, setDisplayCreateGroup}) => {
-    const { addContactsMenu, setAddContactsMenu } = useContext(AddContactsMenu)
+const ShowContacts = ({contactSearch, setDisplayCreateGroup, addContactsMenu, setAddContactsMenu, contactAdded, setContactAdded}) => {
     const { addContact, onSearchSubmit } = useAddContactsHelper();
-    const { addContactsToGroupList } = useCreateGroupHelper();
+    const { addContactsToGroupList, groupContacts } = useCreateGroupHelper();
     const [ showContacts, setShowContacts ] = useState();
     const [ loader, setLoader ] = useState();
-    const [ contactAdded, setContactAdded ] = useState();
     const stringUser = localStorage.getItem('userLogged');
     const user = JSON.parse(stringUser)
 
@@ -36,14 +34,11 @@ const ShowContacts = ({contactSearch, setDisplayCreateGroup}) => {
         const userId = user._id
         socket.emit('goToChat', userId, contactId)
     }
-    console.log("parajitos", setDisplayCreateGroup)
 
-    const hola = () => {
-        // setAddContactsMenu(false)
-         setDisplayCreateGroup(true)
-    }
+    console.log("lista", groupContacts)
 
     var alreadyContacts
+    var alreadyGroupAdded
     if(loader) {
         return <Loader type="Oval" color="#00BFFF" className="contacts__loader" height={60} width={60} />
     } else {
@@ -55,6 +50,7 @@ const ShowContacts = ({contactSearch, setDisplayCreateGroup}) => {
                             { 
                                 showContacts.map(contact => {
                                     alreadyContacts = contact.contacts.filter((contact) => user._id === contact._id )
+                                    alreadyGroupAdded = groupContacts.filter((contactList) => contactList._id === contact._id)
                                     return (
                                         <li className="list__item" key={contact._id} onClick={() => alreadyContacts[0] && goToChat(contact._id)}>   
                                             <img className="list__avatar" src={avatar} alt="user-avatar" />
@@ -63,7 +59,7 @@ const ShowContacts = ({contactSearch, setDisplayCreateGroup}) => {
                                             </div>
                                             <div className="list__add-contact" >
                                                 {
-                                                    alreadyContacts[0]
+                                                    alreadyContacts[0] || alreadyGroupAdded[0]
                                                     ? <i className="fas fa-user-check"></i>
                                                     : <i className={contactAdded ? "fas fa-user-check" : "fas fa-user-plus"} onClick={() => {addContactsMenu === 'group' ? addContactsToGroupList(contact) : addContact(contact); setContactAdded(true)}}></i>
                                                 }
@@ -73,12 +69,12 @@ const ShowContacts = ({contactSearch, setDisplayCreateGroup}) => {
                                 })
                             }
                         </ul>
-                        {addContactsMenu === 'group' &&
+                        {addContactsMenu === 'group' && groupContacts.length >= 2 &&
                             <div className="add-contact-group-container add-group">
                                 <div className="add-group__sub-container">
                                     <div className="add-group__left-side">
-                                        <div className={addContactsMenu !== 'group' ? "add-group__button active" : "add-group__button" } onClick={() => {hola()}}>
-                                        <i className="fas fa-check"></i>
+                                        <div className={addContactsMenu !== 'group' ? "add-group__button active" : "add-group__button" } onClick={() => {setAddContactsMenu(false); setDisplayCreateGroup(true)}}>
+                                            <i className="fas fa-check"></i>
                                         </div>
                                     </div>
                                     <div className="add-group__right-side">

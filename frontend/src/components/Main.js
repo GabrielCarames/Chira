@@ -18,9 +18,9 @@ const Main = memo(({setUserLoggedMain}) => {
     const [ lastMessage, setLastMessage ] = useState()
     const [ active, setActive ] = useState(false)
     const [ displayCreateGroup, setDisplayCreateGroup ] = useState(false)
-    const { addContactsMenu, setAddContactsMenu } = useContext(AddContactsMenu)
     const { displayChat, setDisplayChat } = useContext(DisplayChatContext)
     const [ displayEditProfile, setDisplayEditProfile ] = useState()
+    const [ addContactsMenu, setAddContactsMenu ] = useState(false)
 
     useEffect(() => {
         socket.emit('connected', userLogged)
@@ -46,7 +46,7 @@ const Main = memo(({setUserLoggedMain}) => {
 
     const displayLeftContent = () => {
         if(addContactsMenu) {
-            return <SearchContacts setDisplayCreateGroup={setDisplayCreateGroup} />
+            return <SearchContacts setDisplayCreateGroup={setDisplayCreateGroup} addContactsMenu={addContactsMenu} setAddContactsMenu={setAddContactsMenu} />
         } else if(displayConfiguration) {
             return <Configuration setDisplayEditProfile={setDisplayEditProfile} setDisplayConfiguration={setDisplayConfiguration} />
         } else if(displayEditProfile) {
@@ -69,7 +69,6 @@ const Main = memo(({setUserLoggedMain}) => {
                             <i className="fas fa-search"></i>
                         </div>
                         <div onClick={() => setDisplayCreateGroup(true)}>
-asdasdas
                         </div>
                     </nav>
                     <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain} setDisplayConfiguration={setDisplayConfiguration} setDisplayEditProfile={setDisplayEditProfile} setAddContactsMenu={setAddContactsMenu} />

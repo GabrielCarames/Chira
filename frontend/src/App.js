@@ -12,7 +12,7 @@ import DisplayChatContext from './contexts/DisplayChatContext';
 
 const App = () => {
   const [ flashMessage, setFlashMessage ] = useState(false)
-  const [ addContactsMenu, setAddContactsMenu ] = useState(false)
+  // const [ addContactsMenu, setAddContactsMenu ] = useState(false)
   const [ userLoggedMain, setUserLoggedMain ] = useState(true)
   const [ chat, setChat ] = useState()
   const [ displayChat, setDisplayChat ] = useState(false)
@@ -27,7 +27,7 @@ const App = () => {
       <DisplayChatContext.Provider value={{displayChat, setDisplayChat}}>
         <TestContext.Provider value={{chat, setChat}}>
           <FlashContext.Provider value={{flashMessage, setFlashMessage}}>
-              <AddContactsMenu.Provider value={{addContactsMenu, setAddContactsMenu}}>
+              {/* <AddContactsMenu.Provider value={{addContactsMenu, setAddContactsMenu}}> */}
                 <ShowFlashMessages delay={3000}/>
                 <BrowserRouter>
                   <Switch>
@@ -37,7 +37,7 @@ const App = () => {
                     <Route path="*" component={checkLogIn} />
                   </Switch>
                 </BrowserRouter>
-              </AddContactsMenu.Provider>
+              {/* </AddContactsMenu.Provider> */}
           </FlashContext.Provider>
         </TestContext.Provider>
       </DisplayChatContext.Provider>

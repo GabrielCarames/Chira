@@ -1973,7 +1973,7 @@ body main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-left: 270px;
+  margin-left: 200px;
   font-size: 24px;
   border-radius: 3000px;
   width: 50px;
@@ -3087,7 +3087,97 @@ body main {
 .main__create-group-section {
   width: 400px;
   height: 100%;
-  background-color: red;
+}
+
+.main__create-group-section .create-group__navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 20px;
+}
+
+.main__create-group-section .create-group__navbar .create-group__upload-image-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-label:hover .fa-camera {
+  -webkit-transform: scale(1.2);
+          transform: scale(1.2);
+}
+
+.main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-label .create-group__image {
+  width: 150px;
+  height: auto;
+}
+
+.main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-label .fa-camera {
+  position: absolute;
+  font-size: 25px;
+}
+
+.main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-input {
+  visibility: hidden;
+  position: absolute;
+}
+
+.main__create-group-section .create-group__navbar .create-group__group-name-container {
+  margin-top: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form .form__label {
+  width: 200px;
+}
+
+.main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form .form__input {
+  width: 200px;
+}
+
+.main__create-group-section .create-group__contacts-container .create-group__contact-list .list__item {
+  list-style: none;
 }
 
 .main__navbar-section {

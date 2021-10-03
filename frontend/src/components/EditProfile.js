@@ -53,9 +53,9 @@ const EditProfile = ({setDisplayEditProfile}) => {
                         <label className="form__label" htmlFor="username">Nombre</label>
                         <input className="form__input" id="username" type="text" name="username" /*onChange={handleChange}*/  minLength="0" maxLength="18" pattern="[A-Za-z0-9]+"/>
                     </div>
-                        <button className="form__button" type="submit" /*className={active ? "form__button active" : loading ? "form__button loading" : "form__button"}*/>
-                            <p className="form__text-button">Editar nombre</p>
-                        </button>
+                    <button className="form__button" type="submit" /*className={active ? "form__button active" : loading ? "form__button loading" : "form__button"}*/>
+                        <p className="form__text-button">Editar nombre</p>
+                    </button>
                 </div>
             </div>
         </div>
