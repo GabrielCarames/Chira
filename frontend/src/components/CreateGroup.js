@@ -1,34 +1,49 @@
-import avatar from '../images/avatar.png'
+import { useEffect } from 'react'
+import { useCreateGroupHelper } from '../hooks/useCreateGroupHelper'
+const CreateGroup = ({ groupContacts, setGroupContacts}) => {
+    const { groupImage, setGroupImage, handleChange, createGroup } = useCreateGroupHelper();
 
-const CreateGroup = () => {
+    useEffect(() => {
+        document.getElementById('add-contacts__button').className = 'add-contacts__button active'
+    }, [])
 
     return (
         <div className="main__create-group-section create-group">
             <div className="create-group__navbar">
                 <div className="create-group__upload-image-container">
                     <label for="create-group__image-input" className="create-group__image-label">
-                        <img className="create-group__image" src={avatar} alt="" />
+                        <img className="create-group__image" src={groupImage} alt="" />
                         <i className="fas fa-camera"></i>
                     </label>
-                    <input type="file" name="file" accept="image/png, image/gif, image/jpeg" id="create-group__image-input" className="create-group__image-input" /**onChange={(e) => verifyImage(e)}**/ />
+                    <input type="file" name="file" accept="image/png, image/gif, image/jpeg" id="create-group__image-input" className="create-group__image-input" onChange={(e) => setGroupImage(URL.createObjectURL(e.target.files[0]))} />
                 </div>
                 <div className="create-group__group-name-container">
-                    <div className="create-group__group-name-form form">
+                    <form className="create-group__group-name-form form" id="create-group__group-name-form" onSubmit={(e) => createGroup(e, groupContacts)}>
                         <label className="form__label" htmlFor="groupName">Nombre del grupo</label>
-                        <input className="form__input" id="groupName" type="text" name="groupName" /*onChange={handleChange}*/  minLength="0" maxLength="18" pattern="[A-Za-z0-9]+"/>
-                    </div>
-                    {/* <button className="form__button" type="submit" /*className={active ? "form__button active" : loading ? "form__button loading" : "form__button"}>
-                        <p className="form__text-button">enviar esto va? wtf</p>
-                    </button> */}
+                        <input className="form__input" id="groupName" type="text" name="groupName" onChange={handleChange}  minLength="0" maxLength="18" pattern="[A-Za-z0-9]+"/>
+                    </form>
                 </div>
             </div>
             <div className="create-group__contacts-container">
                 <ul className="create-group__contact-list list">
-                    <li className="list__item">
-
-                    </li>
-
+                    { 
+                        groupContacts.map(contact => {
+                            return (
+                                <li className="list__item" key={contact._id}>   
+                                    <img className="list__avatar" src={contact.avatar} alt="user-avatar" />
+                                    <div className="list__info">
+                                        <p className="list__username">{contact.username}</p>
+                                    </div>
+                                </li>
+                            )
+                        })
+                    }
                 </ul>
+            </div>
+            <div className="create-group__form-button form">
+                <button className="form__button" type="submit" form="create-group__group-name-form" >
+                    <p className="form__text-button">Crear grupo</p>
+                </button>
             </div>
         </div>
     )

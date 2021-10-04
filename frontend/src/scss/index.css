@@ -3104,10 +3104,10 @@ body main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 20px;
 }
 
 .main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-label {
@@ -3120,6 +3120,9 @@ body main {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 3000px;
 }
 
 .main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-label:hover .fa-camera {
@@ -3128,8 +3131,11 @@ body main {
 }
 
 .main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-label .create-group__image {
-  width: 150px;
-  height: auto;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 3000px;
 }
 
 .main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-label .fa-camera {
@@ -3143,19 +3149,8 @@ body main {
 }
 
 .main__create-group-section .create-group__navbar .create-group__group-name-container {
-  margin-top: 40px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form {
+  margin-top: 30px;
+  color: #aaaaaa;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3168,16 +3163,128 @@ body main {
           align-items: center;
 }
 
+.main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form {
+  min-width: 230px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
 .main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form .form__label {
-  width: 200px;
+  margin-left: 10px;
 }
 
 .main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form .form__input {
-  width: 200px;
+  background-color: #212121;
+  color: white;
+  height: 40px;
+  width: 100%;
+  border: 1px solid #AAAAAA;
+  border-radius: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  padding-left: 10px;
+  outline: none;
+}
+
+.main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form .form__input:hover {
+  border-color: #1975e0;
+  -webkit-transition: .2s;
+  transition: .2s;
+}
+
+.main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form .form__input:focus {
+  border-color: #1975e0;
+}
+
+.main__create-group-section .create-group__contacts-container .create-group__contact-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 0;
 }
 
 .main__create-group-section .create-group__contacts-container .create-group__contact-list .list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   list-style: none;
+  margin-top: 10px;
+  padding: 10px 0 10px 20px;
+}
+
+.main__create-group-section .create-group__contacts-container .create-group__contact-list .list__item:hover {
+  background-color: #37465a;
+}
+
+.main__create-group-section .create-group__contacts-container .create-group__contact-list .list__item .list__avatar {
+  width: 50px;
+  height: 50px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 3000px;
+}
+
+.main__create-group-section .create-group__contacts-container .create-group__contact-list .list__item .list__info {
+  margin-left: 20px;
+}
+
+.main__create-group-section .create-group__form-button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.main__create-group-section .create-group__form-button .form__button {
+  margin-top: 30px;
+  height: 100%;
+  width: 250px;
+  border-radius: 15px;
+  background-color: #1975e0;
+  border-width: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.main__create-group-section .create-group__form-button .form__button:hover {
+  opacity: .5;
+}
+
+.main__create-group-section .create-group__form-button .form__button .form__text-button {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 17px;
 }
 
 .main__navbar-section {

@@ -21,7 +21,7 @@ const Main = memo(({setUserLoggedMain}) => {
     const { displayChat, setDisplayChat } = useContext(DisplayChatContext)
     const [ displayEditProfile, setDisplayEditProfile ] = useState()
     const [ addContactsMenu, setAddContactsMenu ] = useState(false)
-
+    const [ groupContacts, setGroupContacts ] = useState([])
     useEffect(() => {
         socket.emit('connected', userLogged)
         socket.on("userLogged", (userLoggede) => {
@@ -40,19 +40,15 @@ const Main = memo(({setUserLoggedMain}) => {
         if(displayChat) document.getElementById('main__left-section').classList = "main__left-section hidden"
     }, [displayChat])
 
-    useEffect(() => {
-        displayCreateGroup && console.log("hiA???????????????????????")
-    }, [displayCreateGroup])
-
     const displayLeftContent = () => {
         if(addContactsMenu) {
-            return <SearchContacts setDisplayCreateGroup={setDisplayCreateGroup} addContactsMenu={addContactsMenu} setAddContactsMenu={setAddContactsMenu} />
+            return <SearchContacts setDisplayCreateGroup={setDisplayCreateGroup} addContactsMenu={addContactsMenu} setAddContactsMenu={setAddContactsMenu} groupContacts={groupContacts} setGroupContacts={setGroupContacts} />
         } else if(displayConfiguration) {
             return <Configuration setDisplayEditProfile={setDisplayEditProfile} setDisplayConfiguration={setDisplayConfiguration} />
         } else if(displayEditProfile) {
             return <EditProfile setDisplayEditProfile={setDisplayEditProfile} />
         } else if (displayCreateGroup) {
-            return <CreateGroup />
+            return <CreateGroup groupContacts={groupContacts} setGroupContacts={setGroupContacts}/>
         }else return <MainContacts messagesSent={messagesSent} setLastMessage={setLastMessage} setDisplayChat={setDisplayChat} />
     }
 
@@ -65,10 +61,8 @@ const Main = memo(({setUserLoggedMain}) => {
                             <i className="fas fa-bars"></i>
                         </div>
                         <h3 className="navbar__title">Chira</h3>
-                        <div className="main__search" onClick={() => setAddContactsMenu(true)}>
+                        <div className="main__search" onClick={() => setAddContactsMenu('search')}>
                             <i className="fas fa-search"></i>
-                        </div>
-                        <div onClick={() => setDisplayCreateGroup(true)}>
                         </div>
                     </nav>
                     <BurgerMenu active={active} setUserLoggedMain={setUserLoggedMain} setDisplayConfiguration={setDisplayConfiguration} setDisplayEditProfile={setDisplayEditProfile} setAddContactsMenu={setAddContactsMenu} />
@@ -82,7 +76,7 @@ const Main = memo(({setUserLoggedMain}) => {
                     <div className="main_add-contacts-container add-contacts">
                         <div className="add-contacts__sub-container">
                             <div className="add-contacts__left-side">
-                                <div className={addContactsMenu ? "add-contacts__button active" : "add-contacts__button" } onClick={() => {setAddContactsMenu(true)}}>
+                                <div className={addContactsMenu ? "add-contacts__button active" : "add-contacts__button" } id="add-contacts__button" onClick={() => {setAddContactsMenu(true)}}>
                                     <i className="fas fa-user-plus"></i>
                                 </div>
                             </div>

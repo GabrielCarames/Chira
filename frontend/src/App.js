@@ -16,6 +16,7 @@ const App = () => {
   const [ userLoggedMain, setUserLoggedMain ] = useState(true)
   const [ chat, setChat ] = useState()
   const [ displayChat, setDisplayChat ] = useState(false)
+
   const checkLogIn = () => {
     const userLogged = localStorage.getItem('userLogged')
     if(userLogged) return <Main setUserLoggedMain={setUserLoggedMain}/>

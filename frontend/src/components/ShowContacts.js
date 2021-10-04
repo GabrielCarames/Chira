@@ -6,9 +6,9 @@ import Loader from "react-loader-spinner";
 import socket from './Socket'
 import AddContactsMenu from "../contexts/AddContactsMenu";
 
-const ShowContacts = ({contactSearch, setDisplayCreateGroup, addContactsMenu, setAddContactsMenu, contactAdded, setContactAdded}) => {
+const ShowContacts = ({contactSearch, setDisplayCreateGroup, addContactsMenu, setAddContactsMenu, contactAdded, setContactAdded, groupContacts, setGroupContacts}) => {
     const { addContact, onSearchSubmit } = useAddContactsHelper();
-    const { addContactsToGroupList, groupContacts } = useCreateGroupHelper();
+    const { addContactsToGroupList } = useCreateGroupHelper(groupContacts, setGroupContacts);
     const [ showContacts, setShowContacts ] = useState();
     const [ loader, setLoader ] = useState();
     const stringUser = localStorage.getItem('userLogged');
@@ -35,10 +35,24 @@ const ShowContacts = ({contactSearch, setDisplayCreateGroup, addContactsMenu, se
         socket.emit('goToChat', userId, contactId)
     }
 
-    console.log("lista", groupContacts)
+    const displayContactIcon = (contact, instance) => {
+        if(instance) return <i className="fas fa-user-check"></i>
+        else return <i className={contactAdded ? "fas fa-user-check" : "fas fa-user-plus"} onClick={() => {addContactsMenu === 'group' ? addContactsToGroupList(contact) : addContact(contact); setContactAdded(true)}}></i>
+    }
+
+    const checkContactIcon = (contact) => {
+        alreadyContacts = contact.contacts.filter((contact) => user._id === contact._id )
+        alreadyGroupAdded = groupContacts.filter((contactList) => contactList._id === contact._id)
+        if(addContactsMenu === 'group') {
+            return displayContactIcon(contact, alreadyGroupAdded[0])
+        } else {
+            return displayContactIcon(contact, alreadyContacts[0])
+        }
+    }
 
     var alreadyContacts
     var alreadyGroupAdded
+
     if(loader) {
         return <Loader type="Oval" color="#00BFFF" className="contacts__loader" height={60} width={60} />
     } else {
@@ -49,20 +63,14 @@ const ShowContacts = ({contactSearch, setDisplayCreateGroup, addContactsMenu, se
                         <ul className="contacts-list list">
                             { 
                                 showContacts.map(contact => {
-                                    alreadyContacts = contact.contacts.filter((contact) => user._id === contact._id )
-                                    alreadyGroupAdded = groupContacts.filter((contactList) => contactList._id === contact._id)
                                     return (
-                                        <li className="list__item" key={contact._id} onClick={() => alreadyContacts[0] && goToChat(contact._id)}>   
+                                        <li className="list__item" key={contact._id} onClick={() => addContactsMenu === 'search' && alreadyContacts[0] && goToChat(contact._id)}>   
                                             <img className="list__avatar" src={avatar} alt="user-avatar" />
                                             <div className="list__info">
                                                 <p className="list__username">{contact.username}</p>
                                             </div>
-                                            <div className="list__add-contact" >
-                                                {
-                                                    alreadyContacts[0] || alreadyGroupAdded[0]
-                                                    ? <i className="fas fa-user-check"></i>
-                                                    : <i className={contactAdded ? "fas fa-user-check" : "fas fa-user-plus"} onClick={() => {addContactsMenu === 'group' ? addContactsToGroupList(contact) : addContact(contact); setContactAdded(true)}}></i>
-                                                }
+                                            <div className="list__add-contact">
+                                                {checkContactIcon(contact)}
                                             </div>
                                         </li>
                                     )

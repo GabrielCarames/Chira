@@ -71,6 +71,12 @@ module.exports = (io) => {
       socket.emit('newImageProfileUpdated', updatedUser)
     });
 
+    // socket.on('newGroupImage', async (userLoggedId, newImage) => {
+    //   await userController.changeProfileImage(userLoggedId, newImage)
+    //   const updatedUser = await userController.findUserById(userLoggedId)
+    //   socket.emit('newImageProfileUpdated', updatedUser)
+    // });
+
     socket.on('disconnect', async () => {
       socket.broadcast.emit('disconnectingFromAllChats')
       await userController.removeSocketIdFromUserBySocketId(socket.id)

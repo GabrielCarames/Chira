@@ -18,15 +18,16 @@ const EditProfile = ({setDisplayEditProfile}) => {
         const imageData = e.target.files[0]
         const data = new FormData()
         data.append("file", imageData)
-        const res = await axios.post('http://localhost:3001/chat/profileimage', data )
+        const res = await axios.post('http://localhost:3001/chat/uploadimage', data )
         socket.emit('newImageProfile', userLogged._id, res.data)
     };
 
     const displayAvatar = () => {
+        console.log('imagenamostrar', updatedProfileImage)
         if(updatedProfileImage) {
             return url + updatedProfileImage[0].avatar.title
         }else {
-            if(typeof userLogged.avatar === String) {
+            if(userLogged.avatar.search('http') >= -1) {
                 return userLogged.avatar
             } else return url + userLogged.avatar.title
         }

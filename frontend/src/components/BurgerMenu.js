@@ -3,10 +3,21 @@ const BurgerMenu = ({active, setUserLoggedMain, setDisplayConfiguration, setDisp
     const url = 'http://localhost:3001/public/uploads/'
 
     const displayAvatar = () => {
-        if(userLogged.avatar.search('http') !== -1) {
-            return userLogged.avatar
-        } else return url + userLogged.avatar.title
+        if(userLogged.avatar.title) {
+            return url + userLogged.avatar.title
+        } else return userLogged.avatar
     }
+
+    // const displayAvatar = () => {
+    //     console.log('imagenamostrar', updatedProfileImage)
+    //     if(updatedProfileImage) { rremplazar por este
+    //         return url + updatedProfileImage[0].avatar.title
+    //     }else {
+    //         if(userLogged.avatar.search('http') >= -1) {
+    //             return userLogged.avatar
+    //         } else return url + userLogged.avatar.title
+    //     }
+    // }
 
     return(
         <div className={active ? "main__burger-menu burger active" : "main__burger-menu burger"}>

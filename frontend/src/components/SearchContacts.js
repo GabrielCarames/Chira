@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import AddContactsMenu from "../contexts/AddContactsMenu";
 import ShowContacts from './ShowContacts';
 
-const SearchContacts = ({setDisplayCreateGroup, addContactsMenu, setAddContactsMenu}) => {
+const SearchContacts = ({setDisplayCreateGroup, addContactsMenu, setAddContactsMenu, groupContacts, setGroupContacts}) => {
     const [ contactSearch, setContactSearch ] = useState();
     const [ contactAdded, setContactAdded ] = useState();
     
@@ -18,7 +18,7 @@ const SearchContacts = ({setDisplayCreateGroup, addContactsMenu, setAddContactsM
                 </div>
             </section>
             <section className="contacts-section contacts">
-                <ShowContacts contactSearch={contactSearch} setDisplayCreateGroup={setDisplayCreateGroup} addContactsMenu={addContactsMenu} setAddContactsMenu={setAddContactsMenu} contactAdded={contactAdded} setContactAdded={setContactAdded} />
+                <ShowContacts contactSearch={contactSearch} setDisplayCreateGroup={setDisplayCreateGroup} addContactsMenu={addContactsMenu} setAddContactsMenu={setAddContactsMenu} contactAdded={contactAdded} setContactAdded={setContactAdded}  groupContacts={groupContacts} setGroupContacts={setGroupContacts}/>
             </section>
         </section>
     )

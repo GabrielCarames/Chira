@@ -18,18 +18,10 @@ router.post('/searchmessages', async function (req, res) {
     res.send(message)
 })
 
-router.post("/upload", async function(req, res, next) {
+router.post("/uploadimage", async function(req, res, next) {
     const imageData = req.file
     const newImage = await chatController.createImage(imageData)
     res.send(newImage)
-});
-
-router.post("/profileimage", async function(req, res, next) {
-    const imageData = req.file
-    console.log("IMADTETADATA", imageData)
-    const newImage = await chatController.createImage(imageData)
-    res.send(newImage)
-    // await userController.changeProfileImage(userLoggedId, newImage)
 });
 
 module.exports = router;
