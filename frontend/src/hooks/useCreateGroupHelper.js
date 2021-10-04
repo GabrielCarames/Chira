@@ -26,11 +26,23 @@ export function useCreateGroupHelper (groupContacts, setGroupContacts) {
         socket.emit('newImageProfile', userLogged._id, res.data)
     };
 
-    const createGroup = (e, groupContacts) => { //le tengo que pasar el estado como parametro porque sino se pierde
+    const createGroup = async (e, groupContacts) => { //le tengo que pasar el estado como parametro porque sino se pierde
         e.preventDefault()
         const groupName = form.groupName
-        const groupImageToUpload = groupImage
-        console.log('grupo', groupName, groupImageToUpload, groupContacts)
+        const groupImageToUpload = groupImage.imageToUpload
+        console.log("rotativas", groupImageToUpload, groupImage)
+        groupContacts.push(userLogged)
+        var newImage
+        if(groupImageToUpload) {
+            const data = new FormData()
+            data.append("file", groupImageToUpload)
+            const response = await axios.post('http://localhost:3001/chat/uploadimage', data)
+            newImage = response.data
+        } else newImage = groupImage
+        const res = await axios.post('http://localhost:3001/chat/creategroup', {groupName, newImage, groupContacts} )
+        console.log("daleursula", res) 
+        // newGroupChat
+        socket.emit('goToGroupChat', groupName)
     }
 
     const addContactsToGroupList = (contact) => {

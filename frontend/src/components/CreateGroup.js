@@ -4,6 +4,7 @@ const CreateGroup = ({ groupContacts, setGroupContacts}) => {
     const { groupImage, setGroupImage, handleChange, createGroup } = useCreateGroupHelper();
 
     useEffect(() => {
+        console.log("algo", groupImage, groupImage.temporalyImage)
         document.getElementById('add-contacts__button').className = 'add-contacts__button active'
     }, [])
 
@@ -11,11 +12,11 @@ const CreateGroup = ({ groupContacts, setGroupContacts}) => {
         <div className="main__create-group-section create-group">
             <div className="create-group__navbar">
                 <div className="create-group__upload-image-container">
-                    <label for="create-group__image-input" className="create-group__image-label">
-                        <img className="create-group__image" src={groupImage} alt="" />
+                    <label htmlFor="create-group__image-input" className="create-group__image-label">
+                        <img className="create-group__image" src={groupImage.temporalyImage ? groupImage.temporalyImage: groupImage} alt="" />
                         <i className="fas fa-camera"></i>
                     </label>
-                    <input type="file" name="file" accept="image/png, image/gif, image/jpeg" id="create-group__image-input" className="create-group__image-input" onChange={(e) => setGroupImage(URL.createObjectURL(e.target.files[0]))} />
+                    <input type="file" name="file" accept="image/png, image/gif, image/jpeg" id="create-group__image-input" className="create-group__image-input" onChange={(e) => setGroupImage({temporalyImage: URL.createObjectURL(e.target.files[0]), imageToUpload: e.target.files[0]})} />
                 </div>
                 <div className="create-group__group-name-container">
                     <form className="create-group__group-name-form form" id="create-group__group-name-form" onSubmit={(e) => createGroup(e, groupContacts)}>

@@ -69,6 +69,17 @@ chatController.createChat = async (user, contact, type) => {
     await newChat.save()
 }
 
+chatController.createGroupChat = async (groupName, newImage, groupContacts) => {
+    const newGroupChat = await new Chat({
+        name: groupName,
+        type: 'group',
+        users: groupContacts,
+        avatar: newImage
+    });
+    await newGroupChat.save()
+    return newGroupChat
+}
+
 chatController.findAllChatById = async (chatId) => {
     const chat = await Chat.findOne({"_id": chatId}).populate({
         path: 'messages',
@@ -112,6 +123,22 @@ chatController.findChatByContactId = async (userId, contactId) => {
         model: 'User'
     })
     return chatFound
+}
+
+chatController.findGroupChatByGroupName = async (groupName) => {
+    const groupChatFound = await Chat.findOne({name: groupName}).populate({
+        path: 'messages',
+        model: 'Message',
+            populate: {
+                path: 'user',
+                model: 'User'
+            }
+    }).populate({
+        path: 'users',
+        model: 'User'
+    })
+    console.log("chatgroups encontrdao", groupChatFound)
+    return groupChatFound
 }
 
 chatController.findMessageById = async (messageId) => {

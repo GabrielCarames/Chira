@@ -31,7 +31,7 @@
                     flex-direction: column;
                     width: 100%;
                     margin-left: 20px;
-                    .list__username {
+                    .list__name {
                         line-height: 0;
                         font-size: $h5;
                     }
@@ -178,7 +178,7 @@
                         }
                         .list__info{
                             max-width: 300px;
-                            .list__username {
+                            .list__name {
 
                             }
                             .list__message-container {

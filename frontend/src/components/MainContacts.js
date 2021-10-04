@@ -21,6 +21,7 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
             messagesSent && setLastMessage(messagesSent)
             const res = await axios.post('http://localhost:3001/chat/allchatsfromuserlogged', {userLogged})
             const chats = res.data
+            console.log("allchats", chats)
             chats && setChats(chats)
         }
         getAllChats()
@@ -64,8 +65,13 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
                     : ''
     }
 
-    const contactUsername = (users) => {
-        return users.filter((user) => user._id !== userLogged._id)[0].username
+    const displayName = (chat) => {
+        if(chat.name) {
+            return chat.name
+        } else {
+            const users = chat.users
+            return users.filter((user) => user._id !== userLogged._id)[0].username
+        }
     }
 
     const showSeenIcon = (lastMessage) => {
@@ -86,7 +92,7 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
                                 <li className="list__item" onClick={() => goToChat(chat.users)} key={chat._id} id={chat._id}>
                                     <img className="list__avatar" src={avatar} alt="user-avatar" />
                                         <div className="list__info">
-                                            <p className="list__username">{contactUsername(chat.users)}</p>
+                                            <p className="list__name">{displayName(chat)}</p>
                                             <div className="list__message-container">
                                                 {chat.messages.length !== 0 && showSeenIcon(chat.messages[chat.messages.length -1])}
                                                 <p className="list__messages">{ showHistoryLastMessage(chat.messages) ? showHistoryLastMessage(chat.messages) : ''}</p>

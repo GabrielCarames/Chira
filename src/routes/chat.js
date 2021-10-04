@@ -24,4 +24,12 @@ router.post("/uploadimage", async function(req, res, next) {
     res.send(newImage)
 });
 
+router.post("/creategroup", async function(req, res, next) {
+    const groupName = req.body.groupName
+    const newImage = req.body.newImage
+    const groupContacts = req.body.groupContacts
+    const newGroupChat = await chatController.createGroupChat(groupName, newImage, groupContacts)
+    res.send(newGroupChat)
+});
+
 module.exports = router;

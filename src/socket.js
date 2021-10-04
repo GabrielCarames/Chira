@@ -39,6 +39,14 @@ module.exports = (io) => {
       socket.to(updatedUser[0].socketId).emit('contactSeeingChat')
     });
 
+    socket.on("goToGroupChat", async (groupName) => {
+      socket.broadcast.emit('disconnectingFromAllChats')
+      currentlyGroupChat = await chatController.findGroupChatByGroupName(groupName)
+      // const updatedUser = await userController.findUserById(contactId)
+      socket.emit("chatFound", currentlyGroupChat[0]);
+      // socket.to(updatedUser[0].socketId).emit('contactSeeingChat')
+    });
+
     socket.on("sendMessage", async (user, message) => {
       console.log("hola??", message)
       let fullMessage
