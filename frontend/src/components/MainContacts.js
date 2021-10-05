@@ -9,11 +9,17 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
     const [ chats, setChats ] = useState()
     //lastRecentMessage es para mensajes recientes al contacto unicamente, mas no para todos
     //messagesSent es para todos
+    const url = 'http://localhost:3001/public/uploads/'
 
-    const goToChat = users => {
-        const contactId = users.filter((user) => user._id !== userLogged._id)[0]._id
-        setDisplayChat(true)
-        socket.emit('goToChat', userLogged._id, contactId)
+    const goToChat = chat => {
+        if(chat.type === 'group') {
+            setDisplayChat(true)
+            socket.emit('goToGroupChat', chat.name)
+        } else {
+            const contactId = chat.users.filter((user) => user._id !== userLogged._id)[0]._id
+            setDisplayChat(true)
+            socket.emit('goToChat', userLogged._id, contactId)
+        }
     }
 
     useEffect(() => {
@@ -21,7 +27,6 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
             messagesSent && setLastMessage(messagesSent)
             const res = await axios.post('http://localhost:3001/chat/allchatsfromuserlogged', {userLogged})
             const chats = res.data
-            console.log("allchats", chats)
             chats && setChats(chats)
         }
         getAllChats()
@@ -58,11 +63,9 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
     const showTimeAgoMessage = (messages) => {
         return lastRecentMessage //Si el userLogged recibió un mensaje para EL
             ? moment(lastRecentMessage.createdAt).format("LT")
-            : messagesSent //Si el userLogged envió un mensaje para un contacto y lo tiene que visualizar el mismo
-                ? moment(messagesSent.createdAt).format("LT") 
-                : messages.length !== 0
-                    ? moment(messages[messages.length -1].createdAt).format("LT") 
-                    : ''
+            : messages.length !== 0
+                ? moment(messages[messages.length -1].createdAt).format("LT") 
+                : ''
     }
 
     const displayName = (chat) => {
@@ -82,6 +85,17 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
         }
     }
 
+    const displayAvatar = (chat) => {
+        if(chat.title) {
+            return chat.avatar
+        } else {
+            const contact = chat.users.filter((contact) => contact._id !== userLogged._id)[0]
+            if(contact.avatar.title) {
+                return url + contact.avatar.title
+            } else return contact.avatar
+        }
+    }
+
     return(
         <>
             <main className="main__contacts">
@@ -89,19 +103,21 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
                     {chats && 
                         chats.map((chat) => {
                             return (
-                                <li className="list__item" onClick={() => goToChat(chat.users)} key={chat._id} id={chat._id}>
-                                    <img className="list__avatar" src={avatar} alt="user-avatar" />
-                                        <div className="list__info">
-                                            <p className="list__name">{displayName(chat)}</p>
-                                            <div className="list__message-container">
-                                                {chat.messages.length !== 0 && showSeenIcon(chat.messages[chat.messages.length -1])}
-                                                <p className="list__messages">{ showHistoryLastMessage(chat.messages) ? showHistoryLastMessage(chat.messages) : ''}</p>
-                                            </div>
+                                <li className="list__item" onClick={() => goToChat(chat)} key={chat._id} id={chat._id}>
+                                    <div className="list__avatar-container">
+                                        <img className="list__avatar" src={displayAvatar(chat)} alt="user-avatar" />
+                                    </div>
+                                    <div className="list__info">
+                                        <p className="list__name">{displayName(chat)}</p>
+                                        <div className="list__message-container">
+                                            {chat.messages.length !== 0 && showSeenIcon(chat.messages[chat.messages.length -1])}
+                                            <p className="list__messages">{ showHistoryLastMessage(chat.messages) ? showHistoryLastMessage(chat.messages) : ''}</p>
                                         </div>
-                                        <div className="list__message-info">
-                                            <i className={activeMessageNotificationIcon(chat)}></i>
-                                            <h6 className="list__time-ago" id="notification">{ showTimeAgoMessage(chat.messages)} </h6>
-                                        </div>
+                                    </div>
+                                    <div className="list__message-info">
+                                        <i className={activeMessageNotificationIcon(chat)}></i>
+                                        <h6 className="list__time-ago" id="notification">{ showTimeAgoMessage(chat.messages)} </h6>
+                                    </div>
                                 </li>
                             )
                         })

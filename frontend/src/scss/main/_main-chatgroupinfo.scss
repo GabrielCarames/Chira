@@ -35,34 +35,16 @@
             }
         }
     }
-    .info__user-info {
-        display: flex;
-        flex-direction: column;
-        .info__avatar-container {
+    .info__avatar-container {
+        width: 100%;
+        height: 300px;
+        .info__avatar{
             width: 100%;
-            height: 500px;
-            .info__avatar{
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-            }
-        }
-        .info__phone-number-section {
-            display: flex;
-            align-items: center;
-            width: 100%;
-            height: 90px;
-            border-bottom: 2px solid black;
-            .fa-phone-alt {
-                margin-left: 20px;
-                font-size: 21px;
-            }
-            .info__phone-number {
-                margin-left: 20px;
-            }
+            height: 100%;
+            object-fit: cover;
         }
     }
-    .info__edit-contact {
+    .info__edit-name {
         margin-top: 20px;
         color: $gray-color;
         display: flex;
@@ -91,7 +73,6 @@
             cursor: pointer;
             padding: 5px;
             &:hover {
-                transition: .25s;
                 opacity: .5;
             }
             .form__text-button {
@@ -101,6 +82,39 @@
                 font-style: normal;
                 font-weight: 700;
                 line-height: 17px;
+            }
+        }
+    }
+    .info__contacts-container {
+        margin-top: 40px;
+        .info__contacts-title {
+            margin-left: 20px;
+        }
+        .info__contact-list {
+            display: flex;
+            flex-direction: column;
+            padding-left: 0;
+            .list__item {
+                display: flex;
+                align-items: center;
+                list-style: none;
+                margin-top: 10px;
+                padding: 10px 0 10px 20px;
+                &:hover {
+                    background-color: $hover-color;
+                }
+                .list__avatar {
+                    width: 50px;
+                    height: 50px;
+                    object-fit: cover;
+                    border-radius: 3000px;
+                }
+                .list__info {
+                    margin-left: 20px;
+                    .list__username {
+
+                    }
+                }
             }
         }
     }

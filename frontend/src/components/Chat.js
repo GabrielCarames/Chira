@@ -19,7 +19,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     const [ goToMessage, setGoToMessage ] = useState(false)
     const [images, setImages] = useState([]);
     const { chat, setChat } = useContext(TestContext)
-    
+    const url = 'http://localhost:3001/public/uploads/'
     const contact = chat && chat.users.filter((user) => user.username !== userLogged.username)[0]
     const setConnectedContactState = (users) => setConnectedContact(users.filter((user) => user.userLoggedId === contact._id))
 
@@ -29,11 +29,10 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     
 
     useEffect(() => {
-        socket.on("chatFound", (chat) => {
-            console.log("chatengrnate", chat) //si es un caht de gurpo darle un segundo arametro de 'grupo' y asi diferenciarlo
+        socket.on("chatFound", (chat) => {//si es un caht de gurpo darle un segundo arametro de 'grupo' y asi diferenciarlo
             setChat(chat);
         });
-    }, [])
+    })
 
     // useEffect(() => {
     //     if(displayChat && chat) document.getElementById('navbar__back').classList = "navbar__back display"
@@ -45,9 +44,19 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     }
 
     const displayName = () => {
-        console.log("consr", chat)
         if(chat.name) return chat.name
         else return contact.username
+    }
+
+    const displayAvatar = (chat) => {
+        if(chat.title) {
+            return chat.avatar
+        } else {
+            const contact = chat.users.filter((contact) => contact._id !== userLogged._id)[0]
+            if(contact.avatar.title) {
+                return url + contact.avatar.title
+            } else return contact.avatar
+        }
     }
 
     return chat ?
@@ -58,7 +67,9 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                         <i className="fas fa-arrow-left"></i>
                     </div>
                     <div className="navbar__contact" onClick={() => {setShowSearchMessages(false); chat.name ? setDisplayChatGroupInfo(true) : setDisplayContactProfile(true)}}>
-                        <img className="navbar__avatar" src={avatar} alt="contact-avatar" />
+                        <div className="navbar__avatar-container">
+                            <img className="navbar__avatar" src={displayAvatar(chat)} alt="contact-avatar" />
+                        </div>
                         <div className="navbar__info">
                             <p className="navbar__name">{displayName()}</p>
                             <p className="navbar__connected">{connectedContact.length !== 0 && 'En línea'}</p>

@@ -8,6 +8,13 @@ import useEditUserNameHelper from '../hooks/useEditUserNameHelper';
 const ContactProfile = ({setDisplayContactProfile, contact}) => {
     // const [ messageSearch, setMessageSearch ] = useState();
     const {handleChange, editUserName } = useEditUserNameHelper()
+    const url = 'http://localhost:3001/public/uploads/'
+    const displayAvatar = (contact) => {
+        if(contact.avatar.title) {
+            return url + contact.avatar.title
+        } else return contact.avatar
+    }
+
     return (
         <section className="main__contact-profile profile">
             <div className="profile__navbar-section">
@@ -21,7 +28,7 @@ const ContactProfile = ({setDisplayContactProfile, contact}) => {
             </div>
             <div className="profile__user-info info">
                 <div className="info__avatar-container">
-                    <img className="info__avatar" src={erick} alt="contact-avatar" />
+                    <img className="info__avatar" src={displayAvatar(contact)} alt="contact-avatar" />
                 </div>
                 <div className="info__phone-number-section">
                     <i className="fas fa-phone-alt"></i>

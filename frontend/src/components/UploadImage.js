@@ -2,7 +2,6 @@ const UploadImage = ({images, setImages, setDisplayPreviousImage}) => {
     
     const verifyImage = (e) => {
         const imageData = e.target.files[0]
-        console.log("soy", imageData, "rarotravez", URL.createObjectURL(imageData))
         setImages([URL.createObjectURL(imageData), imageData]);
         setDisplayPreviousImage(true)
     };

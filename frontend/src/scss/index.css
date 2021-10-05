@@ -449,6 +449,14 @@ body main {
   background-color: #26313f;
 }
 
+.main__content-section .main__contacts .main__contacts-list .list__item .list__avatar-container .list__avatar {
+  width: 50px;
+  height: 50px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 3000px;
+}
+
 .main__content-section .main__contacts .main__contacts-list .list__item .list__info {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -644,6 +652,7 @@ body main {
   }
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__message-info .list__time-ago {
     position: inherit;
+    margin-right: 20px;
   }
   .main .main__content-section .main_add-contacts-container .add-contacts__sub-container .add-contacts__left-side {
     width: 400px;
@@ -944,7 +953,7 @@ body main {
   margin-left: 10px;
 }
 
-.main__chat-section .main__chat-navbar .navbar__contact .navbar__avatar {
+.main__chat-section .main__chat-navbar .navbar__contact .navbar__avatar-container .navbar__avatar {
   width: 43px;
   height: 43px;
 }
@@ -1092,6 +1101,12 @@ body main {
   overflow: auto;
   margin-top: 10px;
   cursor: pointer;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+.main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__image:hover {
+  opacity: 0.6;
 }
 
 .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__image.active {
@@ -1168,6 +1183,10 @@ body main {
   overflow: auto;
   margin-top: 10px;
   cursor: pointer;
+}
+
+.main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__image:hover {
+  opacity: 0.6;
 }
 
 .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__image.active {
@@ -1529,9 +1548,12 @@ body main {
     height: 90px;
     margin-left: 30px;
   }
-  .main__chat-section .main__chat-navbar .navbar__contact .navbar__avatar {
+  .main__chat-section .main__chat-navbar .navbar__contact .navbar__avatar-container .navbar__avatar {
     width: 66px;
     height: 66px;
+    -o-object-fit: cover;
+       object-fit: cover;
+    border-radius: 3000px;
   }
   .main__chat-section .main__chat-navbar .navbar__contact .navbar__info {
     display: -webkit-box;
@@ -3356,50 +3378,19 @@ body main {
   background-color: #37465a;
 }
 
-.main__group-info .info__user-info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.main__group-info .info__user-info .info__avatar-container {
+.main__group-info .info__avatar-container {
   width: 100%;
-  height: 500px;
+  height: 300px;
 }
 
-.main__group-info .info__user-info .info__avatar-container .info__avatar {
+.main__group-info .info__avatar-container .info__avatar {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.main__group-info .info__user-info .info__phone-number-section {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  width: 100%;
-  height: 90px;
-  border-bottom: 2px solid black;
-}
-
-.main__group-info .info__user-info .info__phone-number-section .fa-phone-alt {
-  margin-left: 20px;
-  font-size: 21px;
-}
-
-.main__group-info .info__user-info .info__phone-number-section .info__phone-number {
-  margin-left: 20px;
-}
-
-.main__group-info .info__edit-contact {
+.main__group-info .info__edit-name {
   margin-top: 20px;
   color: #aaaaaa;
   display: -webkit-box;
@@ -3414,7 +3405,7 @@ body main {
           align-items: center;
 }
 
-.main__group-info .info__edit-contact .form__name-section {
+.main__group-info .info__edit-name .form__name-section {
   min-width: 230px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3425,11 +3416,11 @@ body main {
           flex-direction: column;
 }
 
-.main__group-info .info__edit-contact .form__name-section .form__label {
+.main__group-info .info__edit-name .form__name-section .form__label {
   margin-left: 10px;
 }
 
-.main__group-info .info__edit-contact .form__name-section .form__input {
+.main__group-info .info__edit-name .form__name-section .form__input {
   background-color: #212121;
   color: white;
   height: 40px;
@@ -3443,17 +3434,17 @@ body main {
   outline: none;
 }
 
-.main__group-info .info__edit-contact .form__name-section .form__input:hover {
+.main__group-info .info__edit-name .form__name-section .form__input:hover {
   border-color: #1975e0;
   -webkit-transition: .2s;
   transition: .2s;
 }
 
-.main__group-info .info__edit-contact .form__name-section .form__input:focus {
+.main__group-info .info__edit-name .form__name-section .form__input:focus {
   border-color: #1975e0;
 }
 
-.main__group-info .info__edit-contact .form__button {
+.main__group-info .info__edit-name .form__button {
   margin-top: 30px;
   height: 100%;
   width: 250px;
@@ -3477,19 +3468,64 @@ body main {
   padding: 5px;
 }
 
-.main__group-info .info__edit-contact .form__button:hover {
-  -webkit-transition: .25s;
-  transition: .25s;
+.main__group-info .info__edit-name .form__button:hover {
   opacity: .5;
 }
 
-.main__group-info .info__edit-contact .form__button .form__text-button {
+.main__group-info .info__edit-name .form__button .form__text-button {
   color: white;
   font-family: "Poppins", sans-serif;
   font-size: 13px;
   font-style: normal;
   font-weight: 700;
   line-height: 17px;
+}
+
+.main__group-info .info__contacts-container {
+  margin-top: 40px;
+}
+
+.main__group-info .info__contacts-container .info__contacts-title {
+  margin-left: 20px;
+}
+
+.main__group-info .info__contacts-container .info__contact-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding-left: 0;
+}
+
+.main__group-info .info__contacts-container .info__contact-list .list__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  list-style: none;
+  margin-top: 10px;
+  padding: 10px 0 10px 20px;
+}
+
+.main__group-info .info__contacts-container .info__contact-list .list__item:hover {
+  background-color: #37465a;
+}
+
+.main__group-info .info__contacts-container .info__contact-list .list__item .list__avatar {
+  width: 50px;
+  height: 50px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 3000px;
+}
+
+.main__group-info .info__contacts-container .info__contact-list .list__item .list__info {
+  margin-left: 20px;
 }
 
 @media screen and (min-width: 1201px) {

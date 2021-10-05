@@ -111,7 +111,7 @@ chatController.findAllChatsByUserId = async (userId) => {
 }
 
 chatController.findChatByContactId = async (userId, contactId) => {
-    const chatFound = await Chat.find({"users": {$all: [userId, contactId]}}).populate({ //Se fija en el campo de users del chat a ver si existe un chat entre el usuario logueado y el amigo
+    const chatFound = await Chat.findOne({"users": {$all: [userId, contactId]}}).populate({ //Se fija en el campo de users del chat a ver si existe un chat entre el usuario logueado y el amigo
         path: 'messages',
         model: 'Message',
             populate: {
@@ -137,7 +137,6 @@ chatController.findGroupChatByGroupName = async (groupName) => {
         path: 'users',
         model: 'User'
     })
-    console.log("chatgroups encontrdao", groupChatFound)
     return groupChatFound
 }
 

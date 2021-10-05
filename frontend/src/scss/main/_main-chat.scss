@@ -52,9 +52,12 @@
             width: 80%;
             height: 100%;
             margin-left: 10px;
-            .navbar__avatar {
-                width: 43px;
-                height: 43px;
+            .navbar__avatar-container {
+
+                .navbar__avatar {
+                    width: 43px;
+                    height: 43px;
+                }
             }
             .navbar__info {
                 display: flex;
@@ -145,6 +148,10 @@
                         overflow:auto;
                         margin-top: 10px;
                         cursor: pointer;
+                        transition: 0.25s;
+                        &:hover {
+                            opacity: 0.6;
+                        }
                         &.active {
                             color: red;
                         }
@@ -202,6 +209,9 @@
                         overflow:auto;
                         margin-top: 10px;
                         cursor: pointer;
+                        &:hover {
+                            opacity: 0.6;
+                        }
                         &.active {
                             color: red;
                         }
@@ -428,9 +438,14 @@
                 width: 80%;
                 height: 90px;
                 margin-left: 30px;
-                .navbar__avatar {
-                    width: 66px;
-                    height: 66px;
+                .navbar__avatar-container {
+
+                    .navbar__avatar {
+                        width: 66px;
+                        height: 66px;
+                        object-fit: cover;
+                        border-radius: 3000px;
+                    }
                 }
                 .navbar__info {
                     display: flex;

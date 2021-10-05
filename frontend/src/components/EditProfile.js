@@ -23,7 +23,6 @@ const EditProfile = ({setDisplayEditProfile}) => {
     };
 
     const displayAvatar = () => {
-        console.log('imagenamostrar', updatedProfileImage)
         if(updatedProfileImage) {
             return url + updatedProfileImage[0].avatar.title
         }else {

@@ -2,11 +2,16 @@ import { useEffect } from 'react'
 import { useCreateGroupHelper } from '../hooks/useCreateGroupHelper'
 const CreateGroup = ({ groupContacts, setGroupContacts}) => {
     const { groupImage, setGroupImage, handleChange, createGroup } = useCreateGroupHelper();
-
+    const url = 'http://localhost:3001/public/uploads/'
     useEffect(() => {
-        console.log("algo", groupImage, groupImage.temporalyImage)
         document.getElementById('add-contacts__button').className = 'add-contacts__button active'
     }, [])
+
+    const displayAvatar = (contact) => {
+        if(contact.avatar.title) {
+            return url + contact.avatar.title
+        } else return contact.avatar
+    }
 
     return (
         <div className="main__create-group-section create-group">
@@ -31,7 +36,7 @@ const CreateGroup = ({ groupContacts, setGroupContacts}) => {
                         groupContacts.map(contact => {
                             return (
                                 <li className="list__item" key={contact._id}>   
-                                    <img className="list__avatar" src={contact.avatar} alt="user-avatar" />
+                                    <img className="list__avatar" src={displayAvatar(contact)} alt="user-avatar" />
                                     <div className="list__info">
                                         <p className="list__username">{contact.username}</p>
                                     </div>
