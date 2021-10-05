@@ -26,7 +26,7 @@ const EditProfile = ({setDisplayEditProfile}) => {
         if(updatedProfileImage) {
             return url + updatedProfileImage[0].avatar.title
         }else {
-            if(userLogged.avatar.search('http') >= -1) {
+            if(!userLogged.avatar.title) {
                 return userLogged.avatar
             } else return url + userLogged.avatar.title
         }

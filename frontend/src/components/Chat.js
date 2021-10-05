@@ -22,7 +22,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     const url = 'http://localhost:3001/public/uploads/'
     const contact = chat && chat.users.filter((user) => user.username !== userLogged.username)[0]
     const setConnectedContactState = (users) => setConnectedContact(users.filter((user) => user.userLoggedId === contact._id))
-
+    const [ groupImage, setGroupImage ] = useState()
     socket.on("getUsersConnected", (users) => {
         chat && setConnectedContactState(users)
     });
@@ -32,6 +32,12 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
         socket.on("chatFound", (chat) => {//si es un caht de gurpo darle un segundo arametro de 'grupo' y asi diferenciarlo
             setChat(chat);
         });
+    })
+
+    useEffect(() => {
+        socket.on('updatedGroupChat', (updatedGroupChat) => {
+            setGroupImage(updatedGroupChat)
+        })
     })
 
     // useEffect(() => {
@@ -49,8 +55,10 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     }
 
     const displayAvatar = (chat) => {
-        if(chat.title) {
-            return chat.avatar
+        if(chat.name) {
+            if(groupImage && groupImage._id === chat._id) {
+                return url + groupImage.avatar.title
+            }else return url + chat.avatar.title
         } else {
             const contact = chat.users.filter((contact) => contact._id !== userLogged._id)[0]
             if(contact.avatar.title) {

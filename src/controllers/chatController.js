@@ -181,6 +181,21 @@ chatController.findAllChats = async () => {
     return chat
 }
 
+chatController.findChatById = async (chatId) => {
+    const chat = await Chat.findOne({_id: chatId}).populate({
+        path: 'messages',
+        model: 'Message',
+            populate: {
+                path: 'user',
+                model: 'User'
+            }
+    }).populate({
+        path: 'users',
+        model: 'User'
+    })
+    return chat
+}
+
 chatController.insertMessageInChat = async (fullMessage, currentlyChatId) => {
     await Chat.findOneAndUpdate({_id: currentlyChatId}, 
     {
@@ -188,6 +203,15 @@ chatController.insertMessageInChat = async (fullMessage, currentlyChatId) => {
             messages: fullMessage
         }
     })
+}
+
+chatController.changeGroupAvatarByChatId = async (chatId, newImage) => {
+    const updatedChat = await Chat.findOneAndUpdate({_id: chatId}, 
+    {
+        avatar: newImage
+    })
+    console.log("daleforro", updatedChat)
+    return updatedChat
 }
 
 chatController.updateSeenMessages = async () => {

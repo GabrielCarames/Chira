@@ -7,6 +7,7 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const [ lastRecentMessage, setLastRecentMessage ] = useState()
     const [ chats, setChats ] = useState()
+    const [ groupImage, setGroupImage ] = useState()
     //lastRecentMessage es para mensajes recientes al contacto unicamente, mas no para todos
     //messagesSent es para todos
     const url = 'http://localhost:3001/public/uploads/'
@@ -41,6 +42,12 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
             setLastRecentMessage(newMessage)
         });
     }, [])
+
+    useEffect(() => {
+        socket.on('updatedGroupChat', (updatedGroupChat) => {
+            setGroupImage(updatedGroupChat)
+        })
+    })
     
     const activeMessageNotificationIcon = (chat) => {
         if(chat.messages.length !== 0) {
@@ -86,8 +93,12 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
     }
 
     const displayAvatar = (chat) => {
-        if(chat.title) {
-            return chat.avatar
+        console.log('chat', chat)
+        
+        if(chat.name) {
+            if(groupImage && groupImage._id === chat._id) {
+                return url + groupImage.avatar.title
+            }else return url + chat.avatar.title
         } else {
             const contact = chat.users.filter((contact) => contact._id !== userLogged._id)[0]
             if(contact.avatar.title) {

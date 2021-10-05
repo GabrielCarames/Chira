@@ -78,11 +78,11 @@ module.exports = (io) => {
       socket.emit('newImageProfileUpdated', updatedUser)
     });
 
-    // socket.on('newGroupImage', async (userLoggedId, newImage) => {
-    //   await userController.changeProfileImage(userLoggedId, newImage)
-    //   const updatedUser = await userController.findUserById(userLoggedId)
-    //   socket.emit('newImageProfileUpdated', updatedUser)
-    // });
+    socket.on('newGroupImage', async (chatId, newImage) => {
+       await chatController.changeGroupAvatarByChatId(chatId, newImage)
+       const updatedChat = await chatController.findChatById(chatId)
+      socket.emit('updatedGroupChat', updatedChat)
+    });
 
     socket.on('disconnect', async () => {
       socket.broadcast.emit('disconnectingFromAllChats')

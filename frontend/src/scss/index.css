@@ -3379,15 +3379,56 @@ body main {
 }
 
 .main__group-info .info__avatar-container {
-  width: 100%;
-  height: 300px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 20px;
 }
 
-.main__group-info .info__avatar-container .info__avatar {
+.main__group-info .info__avatar-container .info__image-label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 3000px;
+  cursor: pointer;
+}
+
+.main__group-info .info__avatar-container .info__image-label:hover .info__image {
+  opacity: 0.6;
+}
+
+.main__group-info .info__avatar-container .info__image-label:hover .fa-camera {
+  visibility: visible;
+}
+
+.main__group-info .info__avatar-container .info__image-label .info__image {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  border-radius: 3000px;
+}
+
+.main__group-info .info__avatar-container .info__image-label .fa-camera {
+  visibility: hidden;
+  position: absolute;
+  font-size: 25px;
+}
+
+.main__group-info .info__avatar-container .info__image-input {
+  visibility: hidden;
+  position: absolute;
 }
 
 .main__group-info .info__edit-name {

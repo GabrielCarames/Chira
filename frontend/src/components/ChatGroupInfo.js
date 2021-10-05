@@ -1,20 +1,44 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 // import ShowMessages from './ShowMessages'
 import avatar from '../images/avatar.png'
 import erick from '../images/erick.jpg'
 import Loader from "react-loader-spinner";
 import useEditUserNameHelper from '../hooks/useEditUserNameHelper';
+import axios from 'axios'
+import socket from './Socket';
 
 const ChatGroupInfo = ({setDisplayChatGroupInfo, chat}) => {
     const {handleChange, editUserName } = useEditUserNameHelper()
+    const [ groupImage, setGroupImage ] = useState()
+    const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const url = 'http://localhost:3001/public/uploads/'
+
+    useEffect(() => {
+        socket.on('updatedGroupChat', (updatedGroupChat) => {
+            const updatedAvatar = updatedGroupChat.avatar.title
+            console.log("updated", updatedGroupChat)
+            setGroupImage(updatedAvatar)
+        })
+    })
+
     const displayAvatar = (avatar) => {
-        console.log("avatar", avatar)
-        if(avatar.title ) {
-            return url + avatar.title
-        } else return avatar
+        if(groupImage) {
+            return url + groupImage
+        }else {
+            if(avatar.title ) {
+                return url + avatar.title
+            } else return avatar
+        }
     }
 
+    const changeGroupImage = async (e) => {
+        const imageData = e.target.files[0]
+        const data = new FormData()
+        data.append("file", imageData)
+        const res = await axios.post('http://localhost:3001/chat/uploadimage', data )
+        console.log("estaimagensubida", res.data)
+        socket.emit('newGroupImage', chat._id, res.data)
+    }
 
     const displayContactAvatar = (contact) => {
         if(contact.avatar.title) {
@@ -34,7 +58,12 @@ const ChatGroupInfo = ({setDisplayChatGroupInfo, chat}) => {
                 </div>
             </div>
             <div className="info__avatar-container">
-                <img className="info__avatar" src={displayAvatar(chat.avatar)} alt="contact-avatar" />
+                    <label htmlFor="info__image-input" className="info__image-label">
+                        <img className="info__image" src={displayAvatar(chat.avatar)} alt="" />
+                        <i className="fas fa-camera"></i>
+                    </label>
+                    <input type="file" name="file" accept="image/png, image/gif, image/jpeg" id="info__image-input" className="info__image-input" onChange={(e) => changeGroupImage(e)} />
+                {/* <img className="info__avatar" src={displayAvatar(chat.avatar)} alt="contact-avatar" /> */}
             </div>
             <form className="info__edit-name form" onSubmit={(e) => {e.preventDefault(); alert('Cambiar nombre todavía no disponible')}} >
                 <div className="form__name-section">
