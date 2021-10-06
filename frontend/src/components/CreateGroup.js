@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useCreateGroupHelper } from '../hooks/useCreateGroupHelper'
-const CreateGroup = ({ groupContacts, setGroupContacts}) => {
+const CreateGroup = ({ groupContacts, setGroupContacts, setDisplayCreateGroup}) => {
     const { groupImage, setGroupImage, handleChange, createGroup } = useCreateGroupHelper();
     const url = 'http://localhost:3001/public/uploads/'
     useEffect(() => {
@@ -15,7 +15,13 @@ const CreateGroup = ({ groupContacts, setGroupContacts}) => {
 
     return (
         <div className="main__create-group-section create-group">
-            <div className="create-group__navbar">
+            <div className="create-group__navbar-container">
+                <div className="create-group-navbar">
+                    <div className="create-group-section" onClick={() => setDisplayCreateGroup(false)}>
+                        <i className="fas fa-times" aria-hidden="true"></i>
+                    </div>
+                    <h3 className="create-group__title">Crear grupo</h3>
+                </div>
                 <div className="create-group__upload-image-container">
                     <label htmlFor="create-group__image-input" className="create-group__image-label">
                         <img className="create-group__image" src={groupImage.temporalyImage ? groupImage.temporalyImage: groupImage} alt="" />

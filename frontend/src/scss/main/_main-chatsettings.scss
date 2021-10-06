@@ -34,4 +34,12 @@
         right: 20px;
         margin-top: 92px;
     }
+    .main__chat-section {
+        &.compressed {
+            .main__chat-settings {
+                right: 570px;
+                margin-top: 92px;
+            }
+        }
+    }
 }

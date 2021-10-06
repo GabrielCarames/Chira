@@ -48,7 +48,7 @@ const Main = memo(({setUserLoggedMain}) => {
         } else if(displayEditProfile) {
             return <EditProfile setDisplayEditProfile={setDisplayEditProfile} />
         } else if (displayCreateGroup) {
-            return <CreateGroup groupContacts={groupContacts} setGroupContacts={setGroupContacts}/>
+            return <CreateGroup groupContacts={groupContacts} setGroupContacts={setGroupContacts} setDisplayCreateGroup={setDisplayCreateGroup}/>
         }else return <MainContacts messagesSent={messagesSent} setLastMessage={setLastMessage} setDisplayChat={setDisplayChat} />
     }
 

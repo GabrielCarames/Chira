@@ -539,7 +539,7 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 .main__content-section .main__search-contacts {
@@ -1844,6 +1844,9 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   height: 70px;
   font-size: 18px;
   border-bottom: 2px solid #26313f;
@@ -1876,7 +1879,7 @@ body main {
 }
 
 .main__search-contacts .search-contacts__navbar .search-contacts__input-container {
-  width: 80%;
+  width: 78%;
   height: 40px;
   border-radius: 3000px;
   background-color: #26313f;
@@ -2817,6 +2820,10 @@ body main {
     right: 20px;
     margin-top: 92px;
   }
+  .main__chat-section.compressed .main__chat-settings {
+    right: 570px;
+    margin-top: 92px;
+  }
 }
 
 .main__configuration-section {
@@ -3111,7 +3118,7 @@ body main {
   height: 100%;
 }
 
-.main__create-group-section .create-group__navbar {
+.main__create-group-section .create-group__navbar-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3122,17 +3129,56 @@ body main {
   margin-top: 20px;
 }
 
-.main__create-group-section .create-group__navbar .create-group__upload-image-container {
+.main__create-group-section .create-group__navbar-container .create-group-navbar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.main__create-group-section .create-group__navbar-container .create-group-navbar .create-group-section {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  margin-top: 20px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 300px;
+  margin-right: 15px;
+  cursor: pointer;
+  margin-left: 20px;
 }
 
-.main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-label {
+.main__create-group-section .create-group__navbar-container .create-group-navbar .create-group-section:hover {
+  background-color: #37465a;
+}
+
+.main__create-group-section .create-group__navbar-container .create-group-navbar .create-group-section .fa-times {
+  font-size: 22px;
+}
+
+.main__create-group-section .create-group__navbar-container .create-group-navbar .create-group__title {
+  margin-left: 15%;
+}
+
+.main__create-group-section .create-group__navbar-container .create-group__upload-image-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-top: 40px;
+}
+
+.main__create-group-section .create-group__navbar-container .create-group__upload-image-container .create-group__image-label {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3147,12 +3193,12 @@ body main {
   border-radius: 3000px;
 }
 
-.main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-label:hover .fa-camera {
+.main__create-group-section .create-group__navbar-container .create-group__upload-image-container .create-group__image-label:hover .fa-camera {
   -webkit-transform: scale(1.2);
           transform: scale(1.2);
 }
 
-.main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-label .create-group__image {
+.main__create-group-section .create-group__navbar-container .create-group__upload-image-container .create-group__image-label .create-group__image {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -3160,17 +3206,17 @@ body main {
   border-radius: 3000px;
 }
 
-.main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-label .fa-camera {
+.main__create-group-section .create-group__navbar-container .create-group__upload-image-container .create-group__image-label .fa-camera {
   position: absolute;
   font-size: 25px;
 }
 
-.main__create-group-section .create-group__navbar .create-group__upload-image-container .create-group__image-input {
+.main__create-group-section .create-group__navbar-container .create-group__upload-image-container .create-group__image-input {
   visibility: hidden;
   position: absolute;
 }
 
-.main__create-group-section .create-group__navbar .create-group__group-name-container {
+.main__create-group-section .create-group__navbar-container .create-group__group-name-container {
   margin-top: 30px;
   color: #aaaaaa;
   display: -webkit-box;
@@ -3185,7 +3231,7 @@ body main {
           align-items: center;
 }
 
-.main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form {
+.main__create-group-section .create-group__navbar-container .create-group__group-name-container .create-group__group-name-form {
   min-width: 230px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -3196,11 +3242,11 @@ body main {
           flex-direction: column;
 }
 
-.main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form .form__label {
+.main__create-group-section .create-group__navbar-container .create-group__group-name-container .create-group__group-name-form .form__label {
   margin-left: 10px;
 }
 
-.main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form .form__input {
+.main__create-group-section .create-group__navbar-container .create-group__group-name-container .create-group__group-name-form .form__input {
   background-color: #212121;
   color: white;
   height: 40px;
@@ -3214,13 +3260,13 @@ body main {
   outline: none;
 }
 
-.main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form .form__input:hover {
+.main__create-group-section .create-group__navbar-container .create-group__group-name-container .create-group__group-name-form .form__input:hover {
   border-color: #1975e0;
   -webkit-transition: .2s;
   transition: .2s;
 }
 
-.main__create-group-section .create-group__navbar .create-group__group-name-container .create-group__group-name-form .form__input:focus {
+.main__create-group-section .create-group__navbar-container .create-group__group-name-container .create-group__group-name-form .form__input:focus {
   border-color: #1975e0;
 }
 

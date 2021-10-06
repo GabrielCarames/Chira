@@ -84,7 +84,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                         </div>
                     </div>
                     <div className="navbar__tools">
-                        <div className="navbar__search" onClick={() => {setDisplayContactProfile(false); setShowSearchMessages(true)}}>
+                        <div className="navbar__search" onClick={() => {setDisplayContactProfile(false); setDisplayChatGroupInfo(false); setShowSearchMessages(true)}}>
                             <i className="fas fa-search"></i>
                         </div>
                         <div className="navbar__settings" onClick={() => {displayChatSettings ? setDisplayChatSettings(false) : setDisplayChatSettings(true)}}> 
