@@ -8,7 +8,7 @@ import useEditUserNameHelper from '../hooks/useEditUserNameHelper';
 const ContactProfile = ({setDisplayContactProfile, contact}) => {
     // const [ messageSearch, setMessageSearch ] = useState();
     const {handleChange, editUserName } = useEditUserNameHelper()
-    const url = 'http://localhost:3001/public/uploads/'
+    const url = process.env.REACT_APP_UPLOAD_URL
     const displayAvatar = (contact) => {
         if(contact.avatar.title) {
             return url + contact.avatar.title

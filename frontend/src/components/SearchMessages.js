@@ -12,7 +12,7 @@ const SearchMessages = ({setShowSearchMessages, goToMessage , setGoToMessage}) =
                 </div>
                 <div className="search-messages__input-container">
                     <i className="fas fa-search"></i>
-                    <input className="search-messages__input" name="contactName" type="text" placeholder="Buscar por nombre" onChange={e => setMessageSearch(e.target.value)}/>
+                    <input className="search-messages__input" name="contactName" type="text" placeholder="Buscar mensaje" onChange={e => setMessageSearch(e.target.value)}/>
                 </div>
             </div>
             <div className="search__results-section">

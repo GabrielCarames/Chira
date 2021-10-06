@@ -10,7 +10,7 @@ const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
     const [ groupImage, setGroupImage ] = useState()
     //lastRecentMessage es para mensajes recientes al contacto unicamente, mas no para todos
     //messagesSent es para todos
-    const url = 'http://localhost:3001/public/uploads/'
+    const url = process.env.REACT_APP_UPLOAD_URL
 
     const goToChat = chat => {
         if(chat.type === 'group') {

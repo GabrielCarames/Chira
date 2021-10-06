@@ -27,7 +27,9 @@
                 height: 100px;
                 cursor: pointer;
                 border-radius: 3000px;
+                transition: 0;
                 &:hover {
+                    transition: 0;
                     .burger__user-avatar {
                         opacity: 0.6;
                     }

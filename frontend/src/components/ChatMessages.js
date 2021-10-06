@@ -69,7 +69,8 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                 <FormContent inputOnSubmit={inputOnSubmit} chosenEmoji={chosenEmoji} setChosenEmoji={setChosenEmoji} 
                 setInputMessage={setInputMessage} seeMessage={seeMessage} images={images} setImages={setImages}
                 showEmojiPicker={showEmojiPicker} setShowEmojiPicker={setShowEmojiPicker} setDisplayPreviousImage={setDisplayPreviousImage}
-                messagesSent={messagesSent} user={user} chat={chat} setShowNewMessageNotification={setShowNewMessageNotification} send={send}
+                messagesSent={messagesSent} user={user} chat={chat} setShowNewMessageNotification={setShowNewMessageNotification} send={send} 
+                placeholder={'desktop'}
                 />
             </form>
             {displayChatSettings && <DisplayChatSettings displayChatSettings={displayChatSettings} setDisplayChatSettings={setDisplayChatSettings} setDisplayContactProfile={setDisplayContactProfile} contact={contact} chat={chat} />}

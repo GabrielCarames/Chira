@@ -19,7 +19,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     const [ goToMessage, setGoToMessage ] = useState(false)
     const [images, setImages] = useState([]);
     const { chat, setChat } = useContext(TestContext)
-    const url = 'http://localhost:3001/public/uploads/'
+    const url = process.env.REACT_APP_UPLOAD_URL
     const contact = chat && chat.users.filter((user) => user.username !== userLogged.username)[0]
     const setConnectedContactState = (users) => setConnectedContact(users.filter((user) => user.userLoggedId === contact._id))
     const [ groupImage, setGroupImage ] = useState()
@@ -71,7 +71,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
         <>
             <section className={showSearchMessages || displayContactProfile || displayChatGroupInfo ? 'main__chat-section compressed' : 'main__chat-section'}>
                 <nav className="main__chat-navbar navbar">
-                    <div className={displayChat && chat && !showSearchMessages && !displayContactProfile ? 'navbar__back display' : 'navbar__back'} id="navbar__back" onClick={() => backToMainContacts()}>
+                    <div className={displayChat && chat && !showSearchMessages && !displayContactProfile && !displayChatGroupInfo ? 'navbar__back display' : 'navbar__back'} id="navbar__back" onClick={() => backToMainContacts()}>
                         <i className="fas fa-arrow-left"></i>
                     </div>
                     <div className="navbar__contact" onClick={() => {setShowSearchMessages(false); chat.name ? setDisplayChatGroupInfo(true) : setDisplayContactProfile(true)}}>

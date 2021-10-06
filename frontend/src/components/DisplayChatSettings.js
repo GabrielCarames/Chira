@@ -27,7 +27,7 @@ const DisplayChatSettings = ({ displayChatSettings, setDisplayChatSettings, setD
                     <i className="fas fa-comment-slash"></i>
                     <h4 className="list__setting-title">Silenciar notificaciones</h4>
                 </li>
-                <li className="list__item" onClick={() => deleteContact()}>
+                <li className="list__item" onClick={() => alert('Eliminar contacto todavía no está disponible')}>
                     <i className="fas fa-user-times"></i>
                     <h4 className="list__setting-title">Eliminar contacto</h4>
                 </li>

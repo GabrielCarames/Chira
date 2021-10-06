@@ -57,6 +57,7 @@
                 .navbar__avatar {
                     width: 43px;
                     height: 43px;
+                    border-radius: 3000px;
                 }
             }
             .navbar__info {
@@ -280,12 +281,16 @@
         align-items: center;
         justify-content: center;
         padding: 10px;
-        .main__input-tools {
-            background-color: $second-color;
-            display: flex;
-            align-items: center;
-            border-radius: 30px;
-            .main__emoji-container {
+        .main__emoji-container {
+            @include icons-div-styles;
+            font-size: 20px;
+            margin-right: 0;
+            &:hover {
+                background-color: $hover-color;
+            }
+        }
+        .main__input-image-section {
+            .main__image-label {
                 @include icons-div-styles;
                 font-size: 20px;
                 margin-right: 0;
@@ -293,32 +298,22 @@
                     background-color: $hover-color;
                 }
             }
-            .main__input-image-section {
-                .main__image-label {
-                    @include icons-div-styles;
-                    font-size: 20px;
-                    margin-right: 0;
-                    &:hover {
-                        background-color: $hover-color;
-                    }
-                }
-                .main__image-input {
-                    visibility: hidden; 
-                    position: absolute;
-                }
+            .main__image-input {
+                visibility: hidden; 
+                position: absolute;
             }
-            .main__input {
-                color: $gray-color;
-                background-color: $second-color;
-                border: none;
-                border-radius: 30px;
-                padding-left: 20px;
-                height: 35px;
-                width: 90%;
-                font-size: $h5;
-                font-family: 'Poppins', sans-serif;
-                outline: none;
-            }
+        }
+        .main__input {
+            color: $gray-color;
+            background-color: $second-color;
+            border: none;
+            border-radius: 30px;
+            padding-left: 20px;
+            height: 35px;
+            width: 90%;
+            font-size: $h5;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
         }
         .main__send-message {
             @include icons-div-styles;

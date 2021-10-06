@@ -6,7 +6,7 @@ const EditProfile = ({setDisplayEditProfile}) => {
     const [ updatedProfileImage, setUpdatedProfileImage ] = useState()
 
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-    const url = 'http://localhost:3001/public/uploads/'
+    const url = process.env.REACT_APP_UPLOAD_URL
     
     useEffect(() => {
         socket.on('newImageProfileUpdated', (updatedUser) => {
@@ -49,14 +49,19 @@ const EditProfile = ({setDisplayEditProfile}) => {
                     <input type="file" name="file" accept="image/png, image/gif, image/jpeg" id="edit-profile__image-input" className="edit-profile__image-input" onChange={(e) => verifyImage(e)}/>
                 </div>
                 <div className="edit-profile__change-username">
-                    <div className="edit-profile__username-section form">
+                    <form className="edit-profile__username-section form" id="edit-profile__username-section" onSubmit={(e) => {alert('Cambiar nombre todavía no disponible'); e.preventDefault()}}>
                         <label className="form__label" htmlFor="username">Nombre</label>
                         <input className="form__input" id="username" type="text" name="username" /*onChange={handleChange}*/  minLength="0" maxLength="18" pattern="[A-Za-z0-9]+"/>
-                    </div>
+                    </form>
                     <button className="form__button" type="submit" /*className={active ? "form__button active" : loading ? "form__button loading" : "form__button"}*/>
                         <p className="form__text-button">Editar nombre</p>
                     </button>
                 </div>
+            </div>
+            <div className="edit-profile__form-button form">
+                <button className="form__button" type="submit" form="edit-profile__username-section" >
+                    <p className="form__text-button">Cambiar nombre</p>
+                </button>
             </div>
         </div>
     )

@@ -86,6 +86,7 @@
                     flex-direction: column;
                     margin-left: 30px;
                     line-height: 0;
+                    width: 100%;
                     .list__username {
 
                     }
@@ -97,7 +98,7 @@
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    margin-left: 200px;
+                    margin-right: 20px;
                     font-size: $h2;
                     border-radius: 3000px;
                     width: 50px;
@@ -185,6 +186,32 @@
             }
         }
         .contacts-section {
+            .contacts-suggestion {
+            }
+            .contacts-not-found {
+            }
+            .contacts__loader {
+            }
+            .contacts-list {
+                .list__item {
+                    .list__avatar {
+    
+                    }
+                    .list__info {
+                        .list__username {
+    
+                        }
+                        .list__last-seen {
+                        }
+                    }
+                    .list__add-contact {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-left: 200px;
+                    }
+                }
+            }
             .add-contact-group-container {
                 .add-group__sub-container {
                     .add-group__left-side {

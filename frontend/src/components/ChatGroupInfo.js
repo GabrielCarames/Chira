@@ -11,7 +11,7 @@ const ChatGroupInfo = ({setDisplayChatGroupInfo, chat}) => {
     const {handleChange, editUserName } = useEditUserNameHelper()
     const [ groupImage, setGroupImage ] = useState()
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-    const url = 'http://localhost:3001/public/uploads/'
+    const url = process.env.REACT_APP_UPLOAD_URL
 
     useEffect(() => {
         socket.on('updatedGroupChat', (updatedGroupChat) => {

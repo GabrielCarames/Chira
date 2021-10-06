@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useCreateGroupHelper } from '../hooks/useCreateGroupHelper'
 const CreateGroup = ({ groupContacts, setGroupContacts, setDisplayCreateGroup}) => {
     const { groupImage, setGroupImage, handleChange, createGroup } = useCreateGroupHelper();
-    const url = 'http://localhost:3001/public/uploads/'
+    const url = process.env.REACT_APP_UPLOAD_URL
     useEffect(() => {
         document.getElementById('add-contacts__button').className = 'add-contacts__button active'
     }, [])

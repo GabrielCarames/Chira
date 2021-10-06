@@ -3,7 +3,7 @@ import moment from 'moment'
 
 const DisplayMessages = (({message, user, goToMessage, scrollToBottom, setImages, setDisplayPreviousImage}) => {
 
-    const url = 'http://localhost:3001/public/uploads/'
+    const url = process.env.REACT_APP_UPLOAD_URL
     
     const displayPreviousImage = (pathImage) => {
         setImages([pathImage])

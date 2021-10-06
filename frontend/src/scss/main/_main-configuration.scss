@@ -1,9 +1,10 @@
 .main__configuration-section {
-    width: 400px;
+    width: 100%;
     height: 100%;
     background-color: $second-alpha-color;
     .config__navbar-section {
-        display: flex;
+        display: grid;
+        grid-template-columns: 20% 60% 20%;
         align-items: center;
         .config__back {
             @include icons-div-styles;
@@ -17,7 +18,7 @@
             }
         }
         .config__title {
-            margin-left: 15%;
+            justify-self: center;
         }
     }
     .config__options-section {
