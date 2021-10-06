@@ -1,5 +1,5 @@
-import axios from 'axios'
 import { useHistory } from "react-router-dom";
+import axios from 'axios'
 
 const DisplayChatSettings = ({ displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact, chat}) => {
     let history = useHistory();

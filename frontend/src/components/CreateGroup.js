@@ -1,18 +1,9 @@
-import { useEffect } from 'react'
 import { useCreateGroupHelper } from '../hooks/useCreateGroupHelper'
-const CreateGroup = ({ groupContacts, setGroupContacts, setDisplayCreateGroup}) => {
-    const { groupImage, setGroupImage, handleChange, createGroup } = useCreateGroupHelper();
-    const url = process.env.REACT_APP_UPLOAD_URL
-    useEffect(() => {
-        document.getElementById('add-contacts__button').className = 'add-contacts__button active'
-    }, [])
 
-    const displayAvatar = (contact) => {
-        if(contact.avatar.title) {
-            return url + contact.avatar.title
-        } else return contact.avatar
-    }
+const CreateGroup = ({ groupContacts, setDisplayCreateGroup}) => {
 
+    const { groupImage, setGroupImage, handleChange, createGroup, displayAvatar } = useCreateGroupHelper();
+    
     return (
         <div className="main__create-group-section create-group">
             <div className="create-group__navbar-container">

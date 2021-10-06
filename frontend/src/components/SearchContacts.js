@@ -1,5 +1,4 @@
-import { useState, useContext } from 'react'
-import AddContactsMenu from "../contexts/AddContactsMenu";
+import { useState } from 'react'
 import ShowContacts from './ShowContacts';
 
 const SearchContacts = ({setDisplayCreateGroup, addContactsMenu, setAddContactsMenu, groupContacts, setGroupContacts}) => {

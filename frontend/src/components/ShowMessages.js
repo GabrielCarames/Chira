@@ -1,39 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useShowMessagesHelper } from '../hooks/useShowMessagesHelper'
+import Loader from "react-loader-spinner"
 import avatar from '../images/avatar.png'
-import Loader from "react-loader-spinner";
 import moment from 'moment'
 
 const ShowMessages = ({messageSearch, goToMessage , setGoToMessage, setShowSearchMessages}) => {
-    const { onSearchSubmit } = useShowMessagesHelper();
     const [ showMessages, setShowMessages ] = useState();
     const [ loader, setLoader ] = useState();
-
-    useEffect(() => {
-        if(messageSearch === '') setLoader(false)
-        if(messageSearch) {
-            setLoader(true)
-            const timer = setTimeout(async () => {
-                if(messageSearch !== undefined){
-                    const results = await onSearchSubmit(messageSearch)
-                    setLoader(false)
-                    if(results.length >= 1) setShowMessages(results)
-                    else setShowMessages('')
-                }
-            }, 1000);
-            return () => clearTimeout(timer);
-        }
-    }, [messageSearch])// eslint-disable-line react-hooks/exhaustive-deps
-
-    const scrollToMessage = (messageId) => {
-        setShowSearchMessages(false)
-        setTimeout(() => {
-            let messageItem = document.getElementById(messageId)
-            setGoToMessage(messageId)
-            messageItem.scrollIntoView({behavior: "smooth"})
-        }, 400);
-    }
-
+    const { scrollToMessage } = useShowMessagesHelper(messageSearch, setShowMessages, setShowSearchMessages, setGoToMessage, setLoader);
+    
     if(loader) {
         return <Loader type="Oval" color="#00BFFF" className="messages__loader" height={60} width={60} />
     } else {

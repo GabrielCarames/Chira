@@ -1,57 +1,13 @@
-import { useState, useEffect, useContext } from 'react'
-import { useAddContactsHelper } from '../hooks/useAddContactsHelper'
-import { useCreateGroupHelper } from '../hooks/useCreateGroupHelper'
 import avatar from '../images/avatar.png'
 import Loader from "react-loader-spinner";
-import socket from './Socket'
-import AddContactsMenu from "../contexts/AddContactsMenu";
+import useShowContactsHelper from '../hooks/useShowContactsHelper';
 
 const ShowContacts = ({contactSearch, setDisplayCreateGroup, addContactsMenu, setAddContactsMenu, contactAdded, setContactAdded, groupContacts, setGroupContacts}) => {
-    const { addContact, onSearchSubmit } = useAddContactsHelper();
-    const { addContactsToGroupList } = useCreateGroupHelper(groupContacts, setGroupContacts);
-    const [ showContacts, setShowContacts ] = useState();
-    const [ loader, setLoader ] = useState();
-    const stringUser = localStorage.getItem('userLogged');
-    const user = JSON.parse(stringUser)
-
-    useEffect(() => {
-        if(contactSearch === '') setLoader(false)
-        if(contactSearch) {
-            setLoader(true)
-            const timer = setTimeout(async () => {
-                if(contactSearch !== undefined){
-                    const results = await onSearchSubmit(contactSearch)
-                    setLoader(false)
-                    if(results.length >= 1) setShowContacts(results)
-                    else setShowContacts('')
-                }
-            }, 1000);
-            return () => clearTimeout(timer);
-        }
-    }, [contactSearch])// eslint-disable-line react-hooks/exhaustive-deps
-    
-    const goToChat = (contactId) => {
-        const userId = user._id
-        socket.emit('goToChat', userId, contactId)
-    }
-
-    const displayContactIcon = (contact, instance) => {
-        if(instance) return <i className="fas fa-user-check"></i>
-        else return <i className={contactAdded ? "fas fa-user-check" : "fas fa-user-plus"} onClick={() => {addContactsMenu === 'group' ? addContactsToGroupList(contact) : addContact(contact); setContactAdded(true)}}></i>
-    }
-
-    const checkContactIcon = (contact) => {
-        alreadyContacts = contact.contacts.filter((contact) => user._id === contact._id )
-        alreadyGroupAdded = groupContacts.filter((contactList) => contactList._id === contact._id)
-        if(addContactsMenu === 'group') {
-            return displayContactIcon(contact, alreadyGroupAdded[0])
-        } else {
-            return displayContactIcon(contact, alreadyContacts[0])
-        }
-    }
 
     var alreadyContacts
     var alreadyGroupAdded
+
+    const { goToChat, checkContactIcon, showContacts, loader } = useShowContactsHelper(contactSearch, contactAdded, alreadyContacts, alreadyGroupAdded, addContactsMenu, groupContacts, setGroupContacts, setContactAdded)
 
     if(loader) {
         return <Loader type="Oval" color="#00BFFF" className="contacts__loader" height={60} width={60} />
@@ -77,19 +33,20 @@ const ShowContacts = ({contactSearch, setDisplayCreateGroup, addContactsMenu, se
                                 })
                             }
                         </ul>
-                        {addContactsMenu === 'group' && groupContacts.length >= 2 &&
-                            <div className="add-contact-group-container add-group">
-                                <div className="add-group__sub-container">
-                                    <div className="add-group__left-side">
-                                        <div className={addContactsMenu !== 'group' ? "add-group__button active" : "add-group__button" } onClick={() => {setAddContactsMenu(false); setDisplayCreateGroup(true)}}>
-                                            <i className="fas fa-check"></i>
+                        {
+                            addContactsMenu === 'group' && groupContacts.length >= 2 &&
+                                <div className="add-contact-group-container add-group">
+                                    <div className="add-group__sub-container">
+                                        <div className="add-group__left-side">
+                                            <div className={addContactsMenu !== 'group' ? "add-group__button active" : "add-group__button" } onClick={() => {setAddContactsMenu(false); setDisplayCreateGroup(true)}}>
+                                                <i className="fas fa-check"></i>
+                                            </div>
+                                        </div>
+                                        <div className="add-group__right-side">
+            
                                         </div>
                                     </div>
-                                    <div className="add-group__right-side">
-        
-                                    </div>
                                 </div>
-                            </div>
                         }
                     </>
                 )

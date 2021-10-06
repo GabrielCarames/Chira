@@ -1,71 +1,20 @@
-import { useState, useEffect, useContext } from 'react'
-import TestContext from "../contexts/TestContext";
+import { useState } from 'react'
+import DisplayPreviousImage from './DisplayPreviousImage'
+import ContactProfile from './ContactProfile'
 import SearchMessages from './SearchMessages'
+import ChatGroupInfo from './ChatGroupInfo'
 import ChatMessages from './ChatMessages'
-import avatar from '../images/avatar.png'
-import socket from './Socket'
-import ContactProfile from './ContactProfile';
-import DisplayPreviousImage from './DisplayPreviousImage';
-import ChatGroupInfo from './ChatGroupInfo';
+import useChathelper from '../hooks/useChathelper'
 
 const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, displayChat, setDisplayChat }) => {
-    const userLogged = JSON.parse(localStorage.getItem('userLogged'))
+    const { chat, contact, backToMainContacts, displayName, displayAvatar, connectedContact } = useChathelper(setDisplayChat)
     const [ displayContactProfile, setDisplayContactProfile ] = useState(false)
     const [ displayChatGroupInfo, setDisplayChatGroupInfo ] = useState(false)
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
     const [ displayPreviousImage, setDisplayPreviousImage ] = useState()
     const [ displayChatSettings, setDisplayChatSettings ] = useState()
-    const [ connectedContact, setConnectedContact ] = useState([]);
     const [ goToMessage, setGoToMessage ] = useState(false)
-    const [images, setImages] = useState([]);
-    const { chat, setChat } = useContext(TestContext)
-    const url = process.env.REACT_APP_UPLOAD_URL
-    const contact = chat && chat.users.filter((user) => user.username !== userLogged.username)[0]
-    const setConnectedContactState = (users) => setConnectedContact(users.filter((user) => user.userLoggedId === contact._id))
-    const [ groupImage, setGroupImage ] = useState()
-    socket.on("getUsersConnected", (users) => {
-        chat && setConnectedContactState(users)
-    });
-    
-
-    useEffect(() => {
-        socket.on("chatFound", (chat) => {//si es un caht de gurpo darle un segundo arametro de 'grupo' y asi diferenciarlo
-            setChat(chat);
-        });
-    })
-
-    useEffect(() => {
-        socket.on('updatedGroupChat', (updatedGroupChat) => {
-            setGroupImage(updatedGroupChat)
-        })
-    })
-
-    // useEffect(() => {
-    //     if(displayChat && chat) document.getElementById('navbar__back').classList = "navbar__back display"
-    // }, [displayChat, chat])
-
-    const backToMainContacts = () => {
-        setChat(false)
-        setDisplayChat(false)
-    }
-
-    const displayName = () => {
-        if(chat.name) return chat.name
-        else return contact.username
-    }
-
-    const displayAvatar = (chat) => {
-        if(chat.name) {
-            if(groupImage && groupImage._id === chat._id) {
-                return url + groupImage.avatar.title
-            }else return url + chat.avatar.title
-        } else {
-            const contact = chat.users.filter((contact) => contact._id !== userLogged._id)[0]
-            if(contact.avatar.title) {
-                return url + contact.avatar.title
-            } else return contact.avatar
-        }
-    }
+    const [images, setImages] = useState([])
 
     return chat ?
         <>
@@ -94,7 +43,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                 </nav>
                 {
                     displayPreviousImage 
-                    ? <DisplayPreviousImage images={images} setDisplayPreviousImage={setDisplayPreviousImage} setMessagesSent={setMessagesSent}/> 
+                    ? <DisplayPreviousImage images={images} setDisplayPreviousImage={setDisplayPreviousImage} /> 
                     : <ChatMessages chat={chat} messagesSent={messagesSent} setMessagesSent={setMessagesSent}
                         goToMessage={goToMessage} setShowNewMessageNotification={setShowNewMessageNotification}
                         images={images} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage}
@@ -103,9 +52,9 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                       />
                 }
             </section>
-            {displayContactProfile && <ContactProfile setDisplayContactProfile={setDisplayContactProfile} contact={contact}/>}
+            {displayContactProfile && <ContactProfile setDisplayContactProfile={setDisplayContactProfile} contact={contact} />}
             {displayChatGroupInfo && <ChatGroupInfo setDisplayChatGroupInfo={setDisplayChatGroupInfo} chat={chat} />}
-            {showSearchMessages && <SearchMessages setShowSearchMessages={setShowSearchMessages} goToMessage={goToMessage} setGoToMessage={setGoToMessage}/>}
+            {showSearchMessages && <SearchMessages setShowSearchMessages={setShowSearchMessages} goToMessage={goToMessage} setGoToMessage={setGoToMessage} />}
         </>
     : <div className="main__no-chat"></div>
 }

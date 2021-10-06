@@ -7,15 +7,9 @@ import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
 const Login = () => {
-    const { active, handleChange, loading, verifier } = useLoginHelper();
     const [ phoneNumberInput, setPhoneNumberInput ] = useState()
-
-    const handlePhoneInput = (value, data) => {
-        const phoneNumber = value.slice(data.dialCode.length)
-        const dialCode = data.dialCode
-        setPhoneNumberInput([phoneNumber, dialCode])
-    }
-
+    const { active, handleChange, loading, verifier, handlePhoneInput } = useLoginHelper(setPhoneNumberInput);
+    
     return(
         <section className="login"> 
             <figure className="login__welcome welcome">

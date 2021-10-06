@@ -1,8 +1,8 @@
-import send from '../images/send.png'
 import socket from '../components/Socket'
+import send from '../images/send.png'
 import axios from 'axios'
 
-const DisplayPreviousImage = ({images, setDisplayPreviousImage, setMessagesSent}) => {
+const DisplayPreviousImage = ({images, setDisplayPreviousImage}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
 
     const uploadImage = async () => {

@@ -1,36 +1,10 @@
-import { useEffect, useState } from 'react'
-import axios from 'axios'
-import socket from './Socket'
+import { useState } from 'react'
+import useEditProfileHelper from "../hooks/useEditProfileHelper"
 
 const EditProfile = ({setDisplayEditProfile}) => {
+
     const [ updatedProfileImage, setUpdatedProfileImage ] = useState()
-
-    const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-    const url = process.env.REACT_APP_UPLOAD_URL
-    
-    useEffect(() => {
-        socket.on('newImageProfileUpdated', (updatedUser) => {
-            setUpdatedProfileImage(updatedUser)
-        })
-    }, [])
-
-    const verifyImage = async (e) => {
-        const imageData = e.target.files[0]
-        const data = new FormData()
-        data.append("file", imageData)
-        const res = await axios.post('http://localhost:3001/chat/uploadimage', data )
-        socket.emit('newImageProfile', userLogged._id, res.data)
-    };
-
-    const displayAvatar = () => {
-        if(updatedProfileImage) {
-            return url + updatedProfileImage[0].avatar.title
-        }else {
-            if(!userLogged.avatar.title) {
-                return userLogged.avatar
-            } else return url + userLogged.avatar.title
-        }
-    }
+    const { verifyImage, displayAvatar } = useEditProfileHelper(updatedProfileImage, setUpdatedProfileImage)
 
     return (
         <div className="main__edit-profile">

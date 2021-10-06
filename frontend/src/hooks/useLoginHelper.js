@@ -4,7 +4,7 @@ import firebase from '../firebase'
 import axios from 'axios'
 import FlashContext from '../contexts/FlashContext'
 
-export function useLoginHelper() {
+export function useLoginHelper(setPhoneNumberInput) {
     const [ active, setActive ] = useState()
     const [ loading, setLoading ] = useState()
     const [ form, setForm ] = useState()
@@ -99,11 +99,18 @@ export function useLoginHelper() {
         })
       }
 
+      const handlePhoneInput = (value, data) => {
+        const phoneNumber = value.slice(data.dialCode.length)
+        const dialCode = data.dialCode
+        setPhoneNumberInput([phoneNumber, dialCode])
+    }
+
       return {
           active,
           loading, 
           handleChange,
-          verifier
+          verifier,
+          handlePhoneInput
       }
 }
 

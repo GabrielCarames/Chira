@@ -1,22 +1,21 @@
 import { useState, useEffect } from "react"
-import axios from 'axios'
 import socket from "../components/Socket"
+import axios from 'axios'
 import avatar from '../images/avatar.png'
+
 export function useCreateGroupHelper (groupContacts, setGroupContacts) {
-    // const [ groupContacts, setGroupContacts ] = useState([])
-    const [ form, setForm ] = useState()
     const [ groupImage, setGroupImage ] = useState(avatar)
+    const [ form, setForm ] = useState()
 
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
+    const url = process.env.REACT_APP_UPLOAD_URL
   
-
     const handleChange = (e) => {
         setForm({
             ...form,
             [e.target.name]: e.target.value
         });
     };
-
 
     const uploadImage = async (e) => {
         const imageData = e.target.files[0]
@@ -30,7 +29,6 @@ export function useCreateGroupHelper (groupContacts, setGroupContacts) {
         e.preventDefault()
         const groupName = form.groupName
         const groupImageToUpload = groupImage.imageToUpload
-        console.log("rotativas", groupImageToUpload, groupImage)
         groupContacts.push(userLogged)
         var newImage
         if(groupImageToUpload) {
@@ -40,8 +38,6 @@ export function useCreateGroupHelper (groupContacts, setGroupContacts) {
             newImage = response.data
         } else newImage = groupImage
         const res = await axios.post('http://localhost:3001/chat/creategroup', {groupName, newImage, groupContacts} )
-        console.log("daleursula", res) 
-        // newGroupChat
         socket.emit('goToGroupChat', groupName)
     }
 
@@ -49,12 +45,23 @@ export function useCreateGroupHelper (groupContacts, setGroupContacts) {
         setGroupContacts([...groupContacts, contact])
     }
 
+    useEffect(() => {
+        document.getElementById('add-contacts__button').className = 'add-contacts__button active'
+    }, [])
+
+    const displayAvatar = (contact) => {
+        if(contact.avatar.title) {
+            return url + contact.avatar.title
+        } else return contact.avatar
+    }
+
     return {
         addContactsToGroupList,
         groupImage,
         setGroupImage,
         handleChange,
-        createGroup
+        createGroup,
+        displayAvatar
     }
 }
 

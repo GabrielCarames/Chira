@@ -1,9 +1,10 @@
-import { useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 import _ from 'lodash';
 import FlashContext from '../contexts/FlashContext'
 
-export function useShowMessagesHelper() {
+export function useShowMessagesHelper(messageSearch, setShowMessages, setShowSearchMessages, setGoToMessage, setLoader) {
+
   const { setFlashMessage } = useContext(FlashContext)
 
   const onSearchSubmit = _.memoize(async message => {
@@ -16,8 +17,33 @@ export function useShowMessagesHelper() {
     }
   });
 
+  useEffect(() => {
+    if(messageSearch === '') setLoader(false)
+    if(messageSearch) {
+        setLoader(true)
+        const timer = setTimeout(async () => {
+            if(messageSearch !== undefined){
+                const results = await onSearchSubmit(messageSearch)
+                setLoader(false)
+                if(results.length >= 1) setShowMessages(results)
+                else setShowMessages('')
+            }
+        }, 1000);
+        return () => clearTimeout(timer);
+    }
+}, [messageSearch])// eslint-disable-line react-hooks/exhaustive-deps
+
+const scrollToMessage = (messageId) => {
+    setShowSearchMessages(false)
+    setTimeout(() => {
+        let messageItem = document.getElementById(messageId)
+        setGoToMessage(messageId)
+        messageItem.scrollIntoView({behavior: "smooth"})
+    }, 400);
+}
+
   return {
-    onSearchSubmit
+    scrollToMessage
   }
 }
 

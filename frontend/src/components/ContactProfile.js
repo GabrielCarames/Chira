@@ -1,14 +1,11 @@
-import { useState } from 'react'
-// import ShowMessages from './ShowMessages'
-import avatar from '../images/avatar.png'
-import erick from '../images/erick.jpg'
-import Loader from "react-loader-spinner";
 import useEditUserNameHelper from '../hooks/useEditUserNameHelper';
 
 const ContactProfile = ({setDisplayContactProfile, contact}) => {
-    // const [ messageSearch, setMessageSearch ] = useState();
+
     const {handleChange, editUserName } = useEditUserNameHelper()
+
     const url = process.env.REACT_APP_UPLOAD_URL
+    
     const displayAvatar = (contact) => {
         if(contact.avatar.title) {
             return url + contact.avatar.title

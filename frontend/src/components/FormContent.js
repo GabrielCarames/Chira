@@ -1,6 +1,6 @@
 import UploadImage from './UploadImage'
 
-const FormContent = ({inputOnSubmit, chosenEmoji, setChosenEmoji, setInputMessage, seeMessage, images, setImages, showEmojiPicker, setShowEmojiPicker, setDisplayPreviousImage, messagesSent, user, chat, setShowNewMessageNotification, send, placeholder}) => {
+const FormContent = ({chosenEmoji, setInputMessage, seeMessage, images, setImages, showEmojiPicker, setShowEmojiPicker, setDisplayPreviousImage, messagesSent, user, chat, setShowNewMessageNotification, send, placeholder}) => {
     return (
         <>
             <div className="main__emoji-container" onClick={() => showEmojiPicker ? setShowEmojiPicker(false) : setShowEmojiPicker(true)}>
