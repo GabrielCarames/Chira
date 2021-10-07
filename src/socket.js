@@ -42,9 +42,7 @@ module.exports = (io) => {
     socket.on("goToGroupChat", async (groupName) => {
       socket.broadcast.emit('disconnectingFromAllChats')
       currentlyChat = await chatController.findGroupChatByGroupName(groupName)
-      // const updatedUser = await userController.findUserById(contactId)
       socket.emit("chatFound", currentlyChat);
-      // socket.to(updatedUser[0].socketId).emit('contactSeeingChat')
     });
 
     socket.on("sendMessage", async (user, message) => {
@@ -55,8 +53,8 @@ module.exports = (io) => {
       io.emit("messageSent", fullMessage);
     });
 
-    socket.on('typing', (username) => {
-      socket.broadcast.emit('typing', username)
+    socket.on('typingPrivateChat', (contact, userLogged) => {
+      socket.to(contact.socketId).emit('typingPrivateChat', userLogged)
     });
 
     socket.on('seenMessage', async (user, contactIdToAdviseSeenMessage) => {

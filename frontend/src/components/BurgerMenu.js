@@ -1,5 +1,4 @@
-const BurgerMenu = ({active, setUserLoggedMain, setDisplayConfiguration, setDisplayEditProfile, setAddContactsMenu}) => {
-    
+const BurgerMenu = ({displayBurgerMenu, setUserLoggedMain, setDisplayConfiguration, setDisplayEditProfile, setAddContactsMenu}) => {
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
     const url = process.env.REACT_APP_UPLOAD_URL
 
@@ -10,7 +9,7 @@ const BurgerMenu = ({active, setUserLoggedMain, setDisplayConfiguration, setDisp
     }
 
     return(
-        <div className={active ? "main__burger-menu burger active" : "main__burger-menu burger"}>
+        <div className={displayBurgerMenu ? "main__burger-menu burger active" : "main__burger-menu burger"}>
             <section className="burger__user-info">
                 <div className="burger__user-avatar-container" onClick={() => setDisplayEditProfile(true)}>
                     <img className="burger__user-avatar" src={displayAvatar()} alt="userLogged-avatar" />

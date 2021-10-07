@@ -1,10 +1,9 @@
-import { useState, useEffect, useContext } from 'react'
+import { useEffect, useContext } from 'react'
 import axios from 'axios'
 import _ from 'lodash';
 import FlashContext from '../contexts/FlashContext'
 
 export function useShowMessagesHelper(messageSearch, setShowMessages, setShowSearchMessages, setGoToMessage, setLoader) {
-
   const { setFlashMessage } = useContext(FlashContext)
 
   const onSearchSubmit = _.memoize(async message => {

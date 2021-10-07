@@ -18,7 +18,7 @@ export function useChatGroupInfoHelper (chat) {
         if(groupImage) {
             return url + groupImage
         }else {
-            if(avatar.title ) {
+            if(avatar.title) {
                 return url + avatar.title
             } else return avatar
         }
@@ -38,8 +38,7 @@ export function useChatGroupInfoHelper (chat) {
             return url + contact.avatar.title
         } else return contact.avatar
     }
-
-
+    
     return {
         displayAvatar,
         changeGroupImage,

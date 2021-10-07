@@ -5,6 +5,7 @@ import axios from 'axios'
 export function useEditProfileHelper (updatedProfileImage, setUpdatedProfileImage) {
 
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
+    
     const url = process.env.REACT_APP_UPLOAD_URL
 
     useEffect(() => {

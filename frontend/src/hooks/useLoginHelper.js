@@ -5,8 +5,8 @@ import axios from 'axios'
 import FlashContext from '../contexts/FlashContext'
 
 export function useLoginHelper(setPhoneNumberInput) {
-    const [ active, setActive ] = useState()
     const [ loading, setLoading ] = useState()
+    const [ active, setActive ] = useState()
     const [ form, setForm ] = useState()
     const { setFlashMessage } = useContext(FlashContext)
     let history = useHistory()

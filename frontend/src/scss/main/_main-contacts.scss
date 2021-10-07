@@ -69,20 +69,19 @@
                 .list__message-info {
                     display: flex;
                     align-items: center;
-                    width: 100px;
+                    width: 120px;
                     .fa-comment-dots {
                         visibility: hidden;
                         position: absolute;
                         color: $first-color;
                         font-size: $h1;
-                        
                         &:hover {
                             color: $first-alpha-color;
                         }
                     }
                     .fa-comment-dots.active {
                         visibility: visible;
-                        position:inherit;
+                        position: inherit;
                     }
                     .list__time-ago {
                         width: 150px;
@@ -150,28 +149,6 @@
         }
     }
 }
-
-// @media screen and (min-width: 481px) and (max-width: 1200px) {
-//     // .main {
-//     //     .main__left-section {
-//     //         .main__content-section {
-//     //             .main__contacts {
-//     //                 .main__contacts-list {
-//     //                     .list__item {
-//     //                         grid-template-columns: 50px 320px 92px;
-//     //                         gap: 18px;
-//     //                         .list__time-ago {
-//     //                             position: fixed;
-//     //                             right: 0;
-//     //                             margin-right: 20px;
-//     //                         }
-//     //                     }
-//     //                 }
-//     //             }
-//     //         }
-//     //     }
-//     // }
-// }
 
 @media screen and (min-width: 1201px) {
     .main {

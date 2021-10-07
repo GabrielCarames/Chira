@@ -1,16 +1,16 @@
 import { useEffect } from 'react'
 import socket from '../components/Socket'
 
-export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping) {
+export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping, contact, chat) {
+
   const messageInput = message => socket.emit("sendMessage", user, message)
+
   const verifyAndSendInputValue = input => input !== '' && messageInput(input)
     
   useEffect(() => {
-    if(inputMessage) socket.emit('typing', user.username)
+    inputMessage && socket.emit('typingPrivateChat', contact, user)
     const listener = event => {
       if (event.code === "Enter" || event.code === "NumpadEnter") {
-        const input = document.getElementsByClassName('main__input');
-        console.log("input?", input[1], 'active', document.activeElement.classList[0])
         if (document.activeElement.classList[0] === 'main__input') {
             event.preventDefault();
             verifyAndSendInputValue(document.activeElement.value)
@@ -28,7 +28,6 @@ export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUser
   }, [inputMessage]);
 
   const inputOnSubmit = (e, setChosenEmoji) => {
-    console.log("aaaaaaaaa")
     e.preventDefault()
     const inputValue = e.target[0].value
     verifyAndSendInputValue(inputValue)
@@ -41,10 +40,10 @@ export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUser
 
   useEffect(() => {
     let timeout;
-    socket.on('typing', (username) => {
-        setUsertyping(username)
-        clearTimeout(timeout);
-        timeout = setTimeout(timeOutFunction, 2000); //Basicamente el clear es retardar a la ejecucion del setTimeOut
+    socket.on('typingPrivateChat', (user) => {
+      if(user._id === contact._id) setUsertyping(user.username)
+      clearTimeout(timeout)
+      timeout = setTimeout(timeOutFunction, 2000)
     })
   }, [])
 

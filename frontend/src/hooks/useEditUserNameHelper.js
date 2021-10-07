@@ -5,8 +5,8 @@ import axios from 'axios'
 import FlashContext from '../contexts/FlashContext'
 
 export function useEditUserNameHelper() {
-    const [ active, setActive ] = useState()
     const [ loading, setLoading ] = useState()
+    const [ active, setActive ] = useState()
     const [ form, setForm ] = useState()
     const { setFlashMessage } = useContext(FlashContext)
     let history = useHistory()
@@ -19,9 +19,8 @@ export function useEditUserNameHelper() {
     };
 
     const editUserName = async (e, originalUserName) => {
-
+        //
     }
-
 
       return {
           handleChange,

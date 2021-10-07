@@ -3,6 +3,7 @@ import send from '../images/send.png'
 import axios from 'axios'
 
 const DisplayPreviousImage = ({images, setDisplayPreviousImage}) => {
+
     const user = JSON.parse(localStorage.getItem('userLogged'))
 
     const uploadImage = async () => {
@@ -21,16 +22,16 @@ const DisplayPreviousImage = ({images, setDisplayPreviousImage}) => {
             </div>
             <div className="previous__image-container" id="previous__image">
                 <div className="previous__image-item">
-                    <img className="previous__image" src={images[0]} alt="" width="100" />
+                    <img className="previous__image" src={images[0]} alt="previousImg" width="100" />
                 </div>
             </div>
             {
                 images[0].search('blob') !== -1 &&
-                    <div className="previous__bottom-container">
-                        <button className="previous__send-image" type="submit" onClick={() => uploadImage()}>
-                            <img className="previous__send-image-image" src={send} alt="" />
-                        </button>
-                    </div>
+                <div className="previous__bottom-container">
+                    <button className="previous__send-image" type="submit" onClick={() => uploadImage()}>
+                        <img className="previous__send-image-image" src={send} alt="previousImg" />
+                    </button>
+                </div>
             }
         </div>
     )

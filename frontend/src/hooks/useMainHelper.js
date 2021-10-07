@@ -6,11 +6,12 @@ import EditProfile from '../components/EditProfile';
 import CreateGroup from '../components/CreateGroup';
 import socket from '../components/Socket';
 
-export function useMainHelper (messagesSent, active, setActive, addContactsMenu, setAddContactsMenu, displayConfiguration, setDisplayConfiguration, displayEditProfile, setDisplayEditProfile, displayChat, setDisplayChat) {
-    const userLogged = JSON.parse(localStorage.getItem('userLogged'))
+export function useMainHelper (messagesSent, displayBurgerMenu, setDisplayBurgerMenu, addContactsMenu, setAddContactsMenu, displayConfiguration, setDisplayConfiguration, displayEditProfile, setDisplayEditProfile, displayChat, setDisplayChat) {
     const [ displayCreateGroup, setDisplayCreateGroup ] = useState(false)
-    const [ lastMessage, setLastMessage ] = useState()
     const [ groupContacts, setGroupContacts ] = useState([])
+    const [ lastMessage, setLastMessage ] = useState()
+    
+    const userLogged = JSON.parse(localStorage.getItem('userLogged'))
 
     useEffect(() => {
         socket.emit('connected', userLogged)
@@ -21,8 +22,8 @@ export function useMainHelper (messagesSent, active, setActive, addContactsMenu,
     }, [])
 
     window.onclick = (event) => {
-        if(active && event.target.className !== 'burger__user-info' && event.target.className !== 'main__settings' && event.target.className !== 'fas fa-bars') {
-            setActive(false)
+        if(displayBurgerMenu && event.target.className !== 'burger__user-info' && event.target.className !== 'main__settings' && event.target.className !== 'fas fa-bars') {
+            setDisplayBurgerMenu(false)
         }
     }
 

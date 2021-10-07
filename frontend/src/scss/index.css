@@ -505,7 +505,7 @@ body main {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  width: 100px;
+  width: 120px;
 }
 
 .main__content-section .main__contacts .main__contacts-list .list__item .list__message-info .fa-comment-dots {

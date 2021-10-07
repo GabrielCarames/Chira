@@ -7,6 +7,7 @@ import socket from '../components/Socket'
 export function useAddContactsHelper() {
   const { setFlashMessage } = useContext(FlashContext)
   const userLogged = JSON.parse(localStorage.getItem('userLogged'))
+
   const onSearchSubmit = _.memoize(async term => {
     try {
         const res = await axios.post('http://localhost:3001/users/contactsearch', {term})
@@ -18,11 +19,10 @@ export function useAddContactsHelper() {
     }
   });
 
-  const addContact = async (contact, addContactsMenu) => {
+  const addContact = async (contact) => {
       try {
           await axios.post('http://localhost:3001/users/addcontact', {contact})
           socket.emit('update', userLogged, contact)
-          // localStorage.setItem('userLogged', JSON.stringify(res.data))
       } catch (error) {
           if(error.response) setFlashMessage({type: 'failure', error: error.response.data})
           else setFlashMessage({type: 'failure', error: error})

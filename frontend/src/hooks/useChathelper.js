@@ -3,13 +3,16 @@ import TestContext from "../contexts/TestContext"
 import socket from "../components/Socket"
 
 export function useChathelper (setDisplayChat, ) {
-    const { chat, setChat } = useContext(TestContext)
-    const [ groupImage, setGroupImage ] = useState()
     const [ connectedContact, setConnectedContact ] = useState([]);
+    const [ groupImage, setGroupImage ] = useState()
+    const { chat, setChat } = useContext(TestContext)
 
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
+
     const url = process.env.REACT_APP_UPLOAD_URL
+
     const contact = chat && chat.users.filter((user) => user.username !== userLogged.username)[0]
+    
     const setConnectedContactState = (users) => setConnectedContact(users.filter((user) => user.userLoggedId === contact._id))
 
     useEffect(() => {

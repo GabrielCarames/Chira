@@ -1,5 +1,5 @@
-import DisplaySeenIcon from './DisplaySeenIcon'
 import useDisplayMessagesHelper from '../hooks/useDisplayMessagesHelper'
+import DisplaySeenIcon from './DisplaySeenIcon'
 import moment from 'moment'
 
 const DisplayMessages = (({message, user, goToMessage, scrollToBottom, setImages, setDisplayPreviousImage}) => {

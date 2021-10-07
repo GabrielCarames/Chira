@@ -1,4 +1,3 @@
-
 export function useDisplayMessagesHelper (setImages, setDisplayPreviousImage, scrollToBottom) {
 
     const url = process.env.REACT_APP_UPLOAD_URL
@@ -14,7 +13,7 @@ export function useDisplayMessagesHelper (setImages, setDisplayPreviousImage, sc
             const img = new Image();
             img.src = message.image.title;
             return <img className="messages__image" loading='lazy' onClick={() => displayPreviousImage(imageSource)} onLoad={() => scrollToBottom()} src={imageSource} alt="contactImage" />
-        }else return <p className="messages__message">{message.message}</p>
+        } else return <p className="messages__message">{message.message}</p>
     }
 
     return {

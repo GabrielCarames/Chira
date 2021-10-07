@@ -8,6 +8,7 @@ export function useCreateGroupHelper (groupContacts, setGroupContacts) {
     const [ form, setForm ] = useState()
 
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
+
     const url = process.env.REACT_APP_UPLOAD_URL
   
     const handleChange = (e) => {
@@ -25,7 +26,7 @@ export function useCreateGroupHelper (groupContacts, setGroupContacts) {
         socket.emit('newImageProfile', userLogged._id, res.data)
     };
 
-    const createGroup = async (e, groupContacts) => { //le tengo que pasar el estado como parametro porque sino se pierde
+    const createGroup = async (e, groupContacts) => {
         e.preventDefault()
         const groupName = form.groupName
         const groupImageToUpload = groupImage.imageToUpload

@@ -1,14 +1,15 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import socket from '../components/Socket';
 import useCreateGroupHelper from './useCreateGroupHelper';
 import useAddContactsHelper from './useAddContactsHelper';
 
 export function useShowContactsHelper (contactSearch, contactAdded, alreadyContacts, alreadyGroupAdded, addContactsMenu, groupContacts, setGroupContacts, setContactAdded) {
-    const [ loader, setLoader ] = useState();
     const [ showContacts, setShowContacts ] = useState();
-    const user = JSON.parse(localStorage.getItem('userLogged'))
-    const { addContact, onSearchSubmit } = useAddContactsHelper();
+    const [ loader, setLoader ] = useState();
     const { addContactsToGroupList } = useCreateGroupHelper(groupContacts, setGroupContacts);
+    const { addContact, onSearchSubmit } = useAddContactsHelper();
+
+    const user = JSON.parse(localStorage.getItem('userLogged'))
 
     useEffect(() => {
         if(contactSearch === '') setLoader(false)

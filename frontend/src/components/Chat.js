@@ -14,7 +14,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     const [ displayPreviousImage, setDisplayPreviousImage ] = useState()
     const [ displayChatSettings, setDisplayChatSettings ] = useState()
     const [ goToMessage, setGoToMessage ] = useState(false)
-    const [images, setImages] = useState([])
+    const [ images, setImages ] = useState([])
 
     return chat ?
         <>

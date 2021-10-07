@@ -1,5 +1,3 @@
-import EditProfile from "./EditProfile"
-
 const Configuration = ({setDisplayEditProfile, setDisplayConfiguration}) => {
 
     return(

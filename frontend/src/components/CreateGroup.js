@@ -1,7 +1,6 @@
 import { useCreateGroupHelper } from '../hooks/useCreateGroupHelper'
 
 const CreateGroup = ({ groupContacts, setDisplayCreateGroup}) => {
-
     const { groupImage, setGroupImage, handleChange, createGroup, displayAvatar } = useCreateGroupHelper();
     
     return (

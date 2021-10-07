@@ -1,9 +1,8 @@
 import useEditUserNameHelper from '../hooks/useEditUserNameHelper';
 
 const ContactProfile = ({setDisplayContactProfile, contact}) => {
-
     const {handleChange, editUserName } = useEditUserNameHelper()
-
+    
     const url = process.env.REACT_APP_UPLOAD_URL
     
     const displayAvatar = (contact) => {

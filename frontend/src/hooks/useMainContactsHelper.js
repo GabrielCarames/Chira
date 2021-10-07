@@ -10,6 +10,7 @@ export function useMainContactsHelper (setChats, messagesSent, setLastMessage, s
     const [ groupImage, setGroupImage ] = useState()
 
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
+
     const url = process.env.REACT_APP_UPLOAD_URL
 
     const goToChat = chat => {
@@ -96,7 +97,7 @@ export function useMainContactsHelper (setChats, messagesSent, setLastMessage, s
         if(chat.name) {
             if(groupImage && groupImage._id === chat._id) {
                 return url + groupImage.avatar.title
-            }else return url + chat.avatar.title
+            } else return url + chat.avatar.title
         } else {
             const contact = chat.users.filter((contact) => contact._id !== userLogged._id)[0]
             if(contact.avatar.title) {
@@ -106,7 +107,13 @@ export function useMainContactsHelper (setChats, messagesSent, setLastMessage, s
     }
 
     return {
-        goToChat, activeMessageNotificationIcon, showHistoryLastMessage, showTimeAgoMessage, displayName, showSeenIcon, displayAvatar
+        goToChat, 
+        activeMessageNotificationIcon, 
+        showHistoryLastMessage, 
+        showTimeAgoMessage, 
+        displayName, 
+        showSeenIcon, 
+        displayAvatar
     }
 }
 

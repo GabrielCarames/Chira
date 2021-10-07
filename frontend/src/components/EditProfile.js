@@ -2,7 +2,6 @@ import { useState } from 'react'
 import useEditProfileHelper from "../hooks/useEditProfileHelper"
 
 const EditProfile = ({setDisplayEditProfile}) => {
-
     const [ updatedProfileImage, setUpdatedProfileImage ] = useState()
     const { verifyImage, displayAvatar } = useEditProfileHelper(updatedProfileImage, setUpdatedProfileImage)
 
@@ -17,7 +16,7 @@ const EditProfile = ({setDisplayEditProfile}) => {
             <div className="edit-profile__main-content">
                 <div className="edit-profile__change-avatar">
                     <label for="edit-profile__image-input" className="edit-profile__image-label">
-                        <img className="edit-profile__avatar" src={displayAvatar()} alt="" />
+                        <img className="edit-profile__avatar" src={displayAvatar()} alt="avatar" />
                         <i className="fas fa-camera"></i>
                     </label>
                     <input type="file" name="file" accept="image/png, image/gif, image/jpeg" id="edit-profile__image-input" className="edit-profile__image-input" onChange={(e) => verifyImage(e)}/>

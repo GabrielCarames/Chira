@@ -3,9 +3,9 @@ import socket from '../components/Socket'
 export function useSeenMessageHelper() {
   
   const warnMessageSeen = (user, chat, contactIdToAdviseSeenMessage, setShowNewMessageNotification) => {
-      document.getElementById(chat._id).children[2].children[0].classList = 'far fa-comment-dots'
-      setShowNewMessageNotification(false)
-      socket.emit('seenMessage', user, contactIdToAdviseSeenMessage)
+    document.getElementById(chat._id).children[2].children[0].classList = 'far fa-comment-dots'
+    setShowNewMessageNotification(false)
+    socket.emit('seenMessage', user, contactIdToAdviseSeenMessage)
   }
   
   const seeMessage = (messagesSent, user, chat, setShowNewMessageNotification) => {

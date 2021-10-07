@@ -8,11 +8,10 @@ const EmojisPicker = memo((({chosenEmoji, setChosenEmoji }) => {
             const inputValueEmoji = chosenEmoji + emojiObject.emoji
             setChosenEmoji(inputValueEmoji)
         } else setChosenEmoji(emojiObject.emoji)
-      };
+    };
 
-    return (
-        <EmojiPicker onEmojiClick={onEmojiClick} />
-    )
+    return <EmojiPicker onEmojiClick={onEmojiClick} />
+
 }))
 
 export default EmojisPicker

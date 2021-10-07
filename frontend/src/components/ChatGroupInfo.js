@@ -1,9 +1,9 @@
-import useEditUserNameHelper from '../hooks/useEditUserNameHelper';
 import useChatGroupInfoHelper from '../hooks/useChatGroupInfoHelper';
+import useEditUserNameHelper from '../hooks/useEditUserNameHelper';
 
 const ChatGroupInfo = ({setDisplayChatGroupInfo, chat}) => {
-    const {handleChange, editUserName } = useEditUserNameHelper()
     const { displayAvatar, changeGroupImage, displayContactAvatar } = useChatGroupInfoHelper(chat)
+    const { handleChange, editUserName } = useEditUserNameHelper()
 
     return (
         <section className="main__group-info info">

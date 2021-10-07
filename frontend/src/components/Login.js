@@ -1,9 +1,9 @@
 
 import { useState } from 'react'
 import { useLoginHelper } from '../hooks/useLoginHelper'
+import PhoneInput from 'react-phone-input-2'
 import Loader from "react-loader-spinner";
 import logo from '../images/logo.png'
-import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
 const Login = () => {
@@ -17,9 +17,7 @@ const Login = () => {
                 <figcaption className="welcome__text">
                     <h1 className="welcome__title">Entrar a Chira</h1>
                     <p className="welcome__paragraph">Ingresa tu nombre y número de celular</p>
-                    <div className="recaptcha-container">
-
-                    </div>
+                    <div className="recaptcha-container"></div>
                 </figcaption>
             </figure>
             <form className="login__form form" onSubmit={(e) => {verifier(e, phoneNumberInput)}}>
@@ -38,12 +36,12 @@ const Login = () => {
                     </div>
                 </section>
                 <button type="submit" className={active ? "form__button active" : loading ? "form__button loading" : "form__button"}>
-                        {loading ? <Loader type="Oval" color="#00BFFF" height={40} width={65} /> : <p className="form__text-button">Enviar código de verificación</p>}
+                    {loading ? <Loader type="Oval" color="#00BFFF" height={40} width={65} /> : <p className="form__text-button">Enviar código de verificación</p>}
                 </button>
                 <button type="submit" className={active ? loading ? "form__otp-button active loading" :"form__otp-button active" : "form__otp-button"}>
                     <p className="form__text-button">
-                         {loading ? <Loader type="Oval" color="#00BFFF" height={40} width={65} /> : "Entrar"}
-                        </p>
+                        {loading ? <Loader type="Oval" color="#00BFFF" height={40} width={65} /> : "Entrar"}
+                    </p>
                 </button>
                 <div id="sign-in-button"></div>
             </form>
