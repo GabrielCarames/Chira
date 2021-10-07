@@ -356,6 +356,14 @@ body main {
   }
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  overflow-y: hidden !important;
+}
+
 .main {
   color: white;
 }
@@ -377,6 +385,9 @@ body main {
 }
 
 @media screen and (min-width: 1201px) {
+  body {
+    overflow-y: visible !important;
+  }
   .main {
     display: -webkit-box;
     display: -ms-flexbox;
