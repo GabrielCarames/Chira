@@ -27,7 +27,7 @@ export function useMainContactsHelper (setChats, messagesSent, setLastMessage, s
     useEffect(() => {
         const getAllChats = async () => {
             messagesSent && setLastMessage(messagesSent)
-            const res = await axios.post('http://localhost:3001/chat/allchatsfromuserlogged', {userLogged})
+            const res = await axios.post('/chat/allchatsfromuserlogged', {userLogged})
             const chats = res.data
             chats && setChats(chats)
         }

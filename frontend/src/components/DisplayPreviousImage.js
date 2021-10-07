@@ -10,7 +10,7 @@ const DisplayPreviousImage = ({images, setDisplayPreviousImage}) => {
         const imageData = images[1]
         const data = new FormData()
         data.append("file", imageData)
-        const res = await axios.post('http://localhost:3001/chat/uploadimage', data)
+        const res = await axios.post('/chat/uploadimage', data)
         socket.emit("sendMessage", user, res.data)
         setDisplayPreviousImage(false)
     }
