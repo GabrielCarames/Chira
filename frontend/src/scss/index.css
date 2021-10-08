@@ -14,8 +14,11 @@ body {
   font-family: "Poppins", sans-serif;
   margin: 0;
   overflow-x: hidden;
-  height: calc(100vh - calc(100vh - 100%)) main;
-  height-overflow-x: clip;
+  height: calc(100vh - calc(100vh - 100%));
+}
+
+body main {
+  overflow-x: clip;
 }
 
 .login {
@@ -352,10 +355,6 @@ body {
   .login .login__form .form_section .form__phone-section .form__phone-input .form__dropdown-button .form__dropdown {
     width: 310px;
   }
-}
-
-html {
-  height: 100%;
 }
 
 body {
