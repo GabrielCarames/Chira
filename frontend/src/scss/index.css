@@ -893,8 +893,8 @@ body main {
   height: 100vh;
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 9.5% 80.5% 10% 0%;
-      grid-template-rows: 9.5% 80.5% 10% 0%;
+  -ms-grid-rows: 9.5% 73.5% 10% 0%;
+      grid-template-rows: 9.5% 73.5% 10% 0%;
   position: fixed;
 }
 
