@@ -15,6 +15,7 @@
     height: 100vh;
     display: grid;
     grid-template-rows: 9.5% 80.5% 10% 0%;
+    position: fixed;
     &.compressed {
         visibility: hidden;
         position: absolute;

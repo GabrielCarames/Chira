@@ -895,6 +895,7 @@ body main {
   display: grid;
   -ms-grid-rows: 9.5% 80.5% 10% 0%;
       grid-template-rows: 9.5% 80.5% 10% 0%;
+  position: fixed;
 }
 
 .main__chat-section.compressed {
