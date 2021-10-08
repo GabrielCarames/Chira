@@ -1,6 +1,7 @@
 html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+  position: fixed;
 }
 
 html*, html *::before, html *::after {
