@@ -8,11 +8,13 @@
     visibility: visible;
     // visibility: hidden;
     // position: absolute;
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     border-right: 2px solid #000;
     width: 100%;
     height: 100vh;
+    display: grid;
+    grid-template-rows: 8vh 92vh;
     &.compressed {
         visibility: hidden;
         position: absolute;
@@ -23,7 +25,7 @@
         justify-content: space-between;
         align-items: center;
         background-color: $second-color;
-        height: 60px;
+        // height: 60px;
         width: 100%;
         border-left: 2px solid #000;
         cursor: pointer;
@@ -100,7 +102,8 @@
         }
     }
     .main__messages-section {
-        height: 85%;
+        // height: 85%;
+        height: 100%;
         width: 100%;
         background-color: #1976e080;
         box-shadow: inset 226px 260px 250px rgba(0, 0, 0, 0.25);
@@ -281,6 +284,9 @@
         align-items: center;
         justify-content: center;
         padding: 10px;
+        position: fixed;
+        bottom: 0;
+    
         .main__emoji-container {
             @include icons-div-styles;
             font-size: 20px;

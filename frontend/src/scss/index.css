@@ -1,7 +1,6 @@
 html {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
-  position: fixed;
 }
 
 html*, html *::before, html *::after {
@@ -893,16 +892,13 @@ body {
 
 .main__chat-section {
   visibility: visible;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
   border-right: 2px solid #000;
   width: 100%;
   height: 100vh;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 8vh 92vh;
+      grid-template-rows: 8vh 92vh;
 }
 
 .main__chat-section.compressed {
@@ -921,7 +917,6 @@ body {
       -ms-flex-align: center;
           align-items: center;
   background-color: #26313f;
-  height: 60px;
   width: 100%;
   border-left: 2px solid #000;
   cursor: pointer;
@@ -1054,7 +1049,7 @@ body {
 }
 
 .main__chat-section .main__messages-section {
-  height: 85%;
+  height: 100%;
   width: 100%;
   background-color: #1976e080;
   -webkit-box-shadow: inset 226px 260px 250px rgba(0, 0, 0, 0.25);
@@ -1289,6 +1284,8 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 10px;
+  position: fixed;
+  bottom: 0;
 }
 
 .main__chat-section .main__input-section .main__emoji-container {
