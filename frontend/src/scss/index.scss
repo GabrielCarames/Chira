@@ -59,6 +59,7 @@ html {
     &*, *::before, *::after {
         box-sizing: inherit;
     }
+    height: calc(100 * var(--vh));
     // position: fixed;
 }
 body {
