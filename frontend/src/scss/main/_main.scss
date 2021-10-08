@@ -22,7 +22,7 @@ body {
         flex-direction: column;
         &.hidden {
             visibility: hidden;
-            position: absolute;
+            position: fixed;
             margin-left: 3000000px;
         }
     }

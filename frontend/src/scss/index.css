@@ -30,7 +30,6 @@ body main {
   -webkit-box-pack: start;
       -ms-flex-pack: start;
           justify-content: flex-start;
-  position: fixed;
   height: 100%;
   width: 100%;
   overflow-y: auto;
@@ -380,7 +379,7 @@ body {
 
 .main .main__left-section.hidden {
   visibility: hidden;
-  position: absolute;
+  position: fixed;
   margin-left: 3000000px;
 }
 
