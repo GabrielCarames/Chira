@@ -59,6 +59,7 @@ html {
     &*, *::before, *::after {
         box-sizing: inherit;
     }
+    position: fixed;
 }
 body {
     background-color: $second-alpha-color;
