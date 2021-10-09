@@ -31,7 +31,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                     {showEmojiPicker && <EmojisPicker chosenEmoji={chosenEmoji} setChosenEmoji={setChosenEmoji}/>}
                 </div>
             </div>
-            <form encType="multipart/form-data" className="main__input-section" id="main__input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji )}>
+            <form encType="multipart/form-data" className="main__input-section" id="main__input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji)}>
                 <div className="main__emoji-container" onClick={() => showEmojiPicker ? setShowEmojiPicker(false) : setShowEmojiPicker(true)}>
                     <i className="far fa-grin"></i>
                 </div>
@@ -44,7 +44,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                     <img className="main__send-image" src={send} alt="" />
                 </button>
             </form>
-            <form encType="multipart/form-data" className="main__desktop-input-section" id="main__desktop-input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji )}>
+            <form encType="multipart/form-data" className="main__desktop-input-section" id="main__desktop-input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji, {"value": 'desktop'})}>
                 <div className="main__emoji-container" onClick={() => showEmojiPicker ? setShowEmojiPicker(false) : setShowEmojiPicker(true)}>
                     <i className="far fa-grin"></i>
                 </div>
