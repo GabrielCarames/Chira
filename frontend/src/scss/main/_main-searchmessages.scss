@@ -84,26 +84,17 @@
                 &:hover {
                     background-color: $second-color;
                 }
-                .list__avatar {
-
-                }
                 .list__info {
                     display: flex;
                     flex-direction: column;
                     margin-left: 30px;
                     line-height: 0;
                     width: 100%;
-                    .list__username {
-
-                    }
                     .list__message-container {
                         width:fit-content;
                         background-color: $first-color;
                         padding: 2px;
                         border-radius: 10px;
-                        .list__message {
-                            // color: $gray-color;
-                        }
                     }
                 }
                 .list__date-message {
@@ -203,9 +194,6 @@
                     &:hover {
                         background-color: $second-color;
                     }
-                    .list__avatar {
-    
-                    }
                     .list__info {
                         display: flex;
                         flex-direction: column;
@@ -220,9 +208,6 @@
                             background-color: $first-color;
                             padding: 2px;
                             border-radius: 10px;
-                            .list__message {
-                                // color: $gray-color;
-                            }
                         }
                     }
                     .list__date-message {

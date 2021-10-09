@@ -8,7 +8,7 @@ const UploadImage = ({images, setImages, setDisplayPreviousImage}) => {
 
     return (
         <div className="main__input-image-section">
-            <label for="main__image-input" className="main__image-label">
+            <label htmlFor="main__image-input" className="main__image-label">
                 <i className="fas fa-paperclip"></i>
             </label>
             <input type="file" name="file" accept="image/png, image/gif, image/jpeg" id="main__image-input" className="main__image-input" onChange={(e) => verifyImage(e)}/>

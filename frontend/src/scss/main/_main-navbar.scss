@@ -101,19 +101,11 @@
             &:hover {
                 background-color: $hover-color;
             }
-            .fa-bars {
-                
-            }
-        }
-        .navbar__title {
-
         }
         .main__search {
             @include icons-div-styles;
             &:hover {
                  background-color: $hover-color;
-            }
-            .fa-search {
             }
         }
     }

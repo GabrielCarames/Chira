@@ -4,12 +4,9 @@
     border-right: 2px solid #000;
     border-left: 1px solid #000;
 }
+
 .main__chat-section {
     visibility: visible;
-    // visibility: hidden;
-    // position: absolute;
-    // display: flex;
-    // flex-direction: column;
     border-right: 2px solid #000;
     width: 100%;
     height: 100vh;
@@ -24,13 +21,11 @@
         visibility: hidden;
         position: absolute;
     }
-    
     .main__chat-navbar {
         display: flex;
         justify-content: space-between;
         align-items: center;
         background-color: $second-color;
-        // height: 60px;
         width: 100%;
         border-left: 2px solid #000;
         cursor: pointer;
@@ -48,9 +43,6 @@
             &.display {
                 visibility: visible;
                 position: initial;
-            }
-            .fa-arrow-left {
-
             }
         }
         .navbar__contact {
@@ -74,9 +66,6 @@
                 text-align: start;
                 margin-left: 20px;
                 margin-top: -10px;
-                .navbar__name {
-
-                }
                 .navbar__connected {
                     font-size: $h5;
                     color: $gray-color;
@@ -110,7 +99,6 @@
         }
     }
     .main__messages-section {
-        // height: 85%;
         height: 100%;
         width: 100%;
         background-color: #1976e080;
@@ -178,8 +166,6 @@
                             color: $gray-color;
                             margin-right: 10px;
                         }
-                        .fas {
-                        }
                         .fa-check {
                             color: $first-alpha-color;
                         }
@@ -238,8 +224,6 @@
                             color: $gray-color;
                             margin-right: 10px;
                         }
-                        .fas {
-                        }
                         .fa-check {
                             color: $first-alpha-color;
                         }
@@ -275,13 +259,6 @@
                 .emoji-search {
                     background-color: $second-alpha-color;
                     color: white;
-                }
-                .content-wrapper {
-                    .emoji-scroll-wrapper {
-
-                        .emoji-group {
-                        }
-                    }
                 }
             }
         }
@@ -354,7 +331,6 @@
         visibility: hidden;
         position: absolute;
         background-color: $second-alpha-color;
-        // height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -445,7 +421,6 @@
             }
             .navbar__contact {
                 display: flex;
-                // justify-content: space-evenly;
                 align-items: center;
                 width: 80%;
                 height: 90px;
@@ -465,9 +440,6 @@
                     line-height: 0;
                     text-align: start;
                     margin-left: 20px;
-                    .navbar__name {
-    
-                    }
                     .navbar__connected {
                         font-size: $h5;
                         color: $gray-color;
@@ -551,8 +523,6 @@
                             color: $gray-color;
                             margin-right: 10px;
                         }
-                        .fas {
-                        }
                         .fa-check {
                             color: $first-alpha-color;
                         }
@@ -611,8 +581,6 @@
                             color: $gray-color;
                             margin-right: 10px;
                         }
-                        .fas {
-                        }
                         .fa-check {
                             color: $first-alpha-color;
                         }
@@ -661,8 +629,6 @@
             }
             .main__send-message {
                 margin-right: 20px;
-            }
-            .main__send-image {
             }
         }
     }

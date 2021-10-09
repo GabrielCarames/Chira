@@ -7,14 +7,8 @@
     border-radius: 300px;
     margin-right: 15px;
     cursor: pointer;
-    // transition: .2s;
 }
-// html {
-//     height: 100%;
-// }
-body {
-    // overflow-y: hidden !important;
-}
+
 .main {
     color: $white-color;
     .main__left-section {
@@ -49,9 +43,6 @@ body {
                 .main__navbar {
                     height: 90px;
                 }
-            }
-            .main__content-section {
-                
             }
         }
     }

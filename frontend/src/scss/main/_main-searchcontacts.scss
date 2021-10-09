@@ -78,18 +78,12 @@
                 &:hover {
                     background-color: $second-color;
                 }
-                .list__avatar {
-
-                }
                 .list__info {
                     display: flex;
                     flex-direction: column;
                     margin-left: 30px;
                     line-height: 0;
                     width: 100%;
-                    .list__username {
-
-                    }
                     .list__last-seen {
                         color: $gray-color;
                     }
@@ -186,24 +180,8 @@
             }
         }
         .contacts-section {
-            .contacts-suggestion {
-            }
-            .contacts-not-found {
-            }
-            .contacts__loader {
-            }
             .contacts-list {
                 .list__item {
-                    .list__avatar {
-    
-                    }
-                    .list__info {
-                        .list__username {
-    
-                        }
-                        .list__last-seen {
-                        }
-                    }
                     .list__add-contact {
                         display: flex;
                         align-items: center;

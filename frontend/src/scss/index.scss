@@ -60,8 +60,8 @@ html {
         box-sizing: inherit;
     }
     height: calc(100vh - calc(100vh - 100%));
-    // position: fixed;
 }
+
 body {
     background-color: $second-alpha-color;
     font-family: $poppins;
@@ -69,7 +69,6 @@ body {
     overflow-x: hidden;
     height: calc(100vh - calc(100vh - 100%));
     width: 100%;
-    // position: fixed;
     main {
         overflow-x: clip;
     }

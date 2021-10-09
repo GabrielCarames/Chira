@@ -45,6 +45,7 @@ export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUser
       clearTimeout(timeout)
       timeout = setTimeout(timeOutFunction, 2000)
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return {

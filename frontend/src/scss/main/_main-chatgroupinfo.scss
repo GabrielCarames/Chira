@@ -15,9 +15,6 @@
             &:hover {
                 background-color: $hover-color;
             }
-            .fa-arrow-left {
-
-            }
         }
         .info__name {
             width: 100%;
@@ -29,9 +26,6 @@
             font-size: 21px;
             &:hover {
                 background-color: $hover-color;
-            }
-            .fa-edit {
-                
             }
         }
     }
@@ -72,15 +66,6 @@
             position: absolute;
         }
     }
-    // .info__avatar-container {
-    //     width: 100%;
-    //     height: 300px;
-    //     .info__avatar{
-    //         width: 100%;
-    //         height: 100%;
-    //         object-fit: cover;
-    //     }
-    // }
     .info__edit-name {
         margin-top: 20px;
         color: $gray-color;
@@ -148,9 +133,6 @@
                 }
                 .list__info {
                     margin-left: 20px;
-                    .list__username {
-
-                    }
                 }
             }
         }
