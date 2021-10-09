@@ -16,7 +16,6 @@ body {
   overflow-x: hidden;
   height: calc(100vh - calc(100vh - 100%));
   width: 100%;
-  position: fixed;
 }
 
 body main {
@@ -893,15 +892,15 @@ body main {
   height: 100vh;
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 70px 80.5% 70px 0%;
-      grid-template-rows: 70px 80.5% 70px 0%;
+  -ms-grid-rows: 60px 83.5% 60px 0;
+      grid-template-rows: 60px 83.5% 60px 0;
   position: fixed;
   height: calc(100vh - calc(100vh - 100%));
 }
 
 .main__chat-section.focus {
-  -ms-grid-rows: 70px 68.5% 0px 0%;
-      grid-template-rows: 70px 68.5% 0px 0%;
+  -ms-grid-rows: 60px 72.5% 0px 0%;
+      grid-template-rows: 60px 72.5% 0px 0%;
 }
 
 .main__chat-section.compressed {
@@ -969,6 +968,10 @@ body main {
   margin-left: 10px;
 }
 
+.main__chat-section .main__chat-navbar .navbar__contact .navbar__avatar-container {
+  margin-top: 10px;
+}
+
 .main__chat-section .main__chat-navbar .navbar__contact .navbar__avatar-container .navbar__avatar {
   width: 43px;
   height: 43px;
@@ -986,6 +989,7 @@ body main {
   line-height: 0;
   text-align: start;
   margin-left: 20px;
+  margin-top: 10px;
 }
 
 .main__chat-section .main__chat-navbar .navbar__contact .navbar__info .navbar__connected {
@@ -1020,8 +1024,8 @@ body main {
   border-radius: 300px;
   margin-right: 15px;
   cursor: pointer;
-  width: 100px;
   height: 50px;
+  margin-right: 0;
 }
 
 .main__chat-section .main__chat-navbar .navbar__tools .navbar__search:hover {
@@ -1043,8 +1047,8 @@ body main {
   border-radius: 300px;
   margin-right: 15px;
   cursor: pointer;
-  width: 100px;
   height: 50px;
+  margin-right: 0;
 }
 
 .main__chat-section .main__chat-navbar .navbar__tools .navbar__settings:hover {
@@ -1289,6 +1293,7 @@ body main {
   padding: 10px;
   position: fixed;
   bottom: 0;
+  height: 40px;
 }
 
 .main__chat-section .main__input-section .main__emoji-container {
@@ -1605,6 +1610,7 @@ body main {
     border-radius: 300px;
     margin-right: 15px;
     cursor: pointer;
+    width: 100px;
   }
   .main__chat-section .main__chat-navbar .navbar__tools .navbar__search:hover {
     background-color: #37465a;
@@ -1624,6 +1630,7 @@ body main {
     border-radius: 300px;
     margin-right: 15px;
     cursor: pointer;
+    width: 100px;
   }
   .main__chat-section .main__chat-navbar .navbar__tools .navbar__settings:hover {
     background-color: #37465a;

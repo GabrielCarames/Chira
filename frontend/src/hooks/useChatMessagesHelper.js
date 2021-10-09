@@ -26,7 +26,6 @@ export function useChatMessagesHelper (chat, messagesSent, setMessagesSent, user
     const scrollToBottom = () => messagesEndRef.current?.scrollIntoView()
 
     useEffect(() => {
-        console.log("hacemescroll")
         scrollToBottom()
         focus && 
         setTimeout(() => {
