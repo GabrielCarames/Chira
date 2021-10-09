@@ -40,7 +40,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                     onFocus={() => setFocus(true)} 
                     onBlur={() => setFocus(false)}
                 />
-                <button className="main__send-message" type="submit">
+                <button className="main__send-message" type="submit" form="main__input-section">
                     <img className="main__send-image" src={send} alt="" />
                 </button>
             </form>
@@ -53,7 +53,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                     onFocus={() => setFocus(true)} 
                     onBlur={() => setFocus(false)}
                 />
-                <button className="main__send-message" type="submit">
+                <button className="main__send-message" type="submit" form="main__desktop-input-section">
                     <img className="main__send-image" src={send} alt="" />
                 </button>
             </form>
