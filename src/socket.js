@@ -49,6 +49,8 @@ module.exports = (io) => {
       let fullMessage
       if(message.mimetype) fullMessage = await chatController.saveImageMessageAndReturnFullMessage(user, message)
       else fullMessage = await chatController.saveMessagesAndReturnFullMessage(user, message)
+      console.log("mesasge", message)
+      console.log("fullMessage", fullMessage)
       await chatController.insertMessageInChat(fullMessage, currentlyChat._id)
       io.emit("messageSent", fullMessage);
     });
