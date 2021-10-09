@@ -30,7 +30,10 @@ export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUser
   const inputOnSubmit = (e, setChosenEmoji, formType) => {
     e.preventDefault()
     const inputValue = document.activeElement.value
+    console.log("inputValue", inputValue, "cosa", document.activeElement)
     socket.emit("sendMessage", user, inputValue)
+    document.activeElement.value = ''
+    document.activeElement.defaultValue = ''
     verifyAndSendInputValue(inputValue)
     setChosenEmoji(null)
   }
