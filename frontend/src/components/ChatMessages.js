@@ -12,7 +12,7 @@ import UploadImage from './UploadImage'
 const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact, focus, setFocus}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ chosenEmoji, setChosenEmoji ] = useState('')
-    const [ inputMessage, setInputMessage ] = useState("")
+    const [ inputMessage, setInputMessage ] = useState(null)
     const [ userTyping, setUsertyping ] = useState(false)
     const { messagesEndRef, showEmojiPicker, scrollToBottom, setShowEmojiPicker } = useChatMessagesHelper(chat, messagesSent, setMessagesSent, user, focus)
     const { inputOnSubmit } = useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping, contact, chat)
