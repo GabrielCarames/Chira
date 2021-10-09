@@ -14,8 +14,12 @@
     width: 100%;
     height: 100vh;
     display: grid;
-    grid-template-rows: 9.5% 73.5% 10% 0%;
+    grid-template-rows: 70px 80.5% 70px 0%;
     position: fixed;
+    height: calc(100vh - calc(100vh - 100%));
+    &.focus {
+        grid-template-rows: 70px 68.5% 0px 0%;
+    }
     &.compressed {
         visibility: hidden;
         position: absolute;
@@ -285,8 +289,8 @@
         align-items: center;
         justify-content: center;
         padding: 10px;
-        // position: fixed;
-        // bottom: 0;
+        position: fixed;
+        bottom: 0;
     
         .main__emoji-container {
             @include icons-div-styles;

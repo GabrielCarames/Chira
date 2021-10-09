@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef  } from 'react'
 import socket from '../components/Socket';
 
-export function useChatMessagesHelper (chat, messagesSent, setMessagesSent, user) {
+export function useChatMessagesHelper (chat, messagesSent, setMessagesSent, user, focus) {
     const [ showEmojiPicker, setShowEmojiPicker ] = useState(false)
     const messagesEndRef = useRef(null)
 
@@ -26,8 +26,13 @@ export function useChatMessagesHelper (chat, messagesSent, setMessagesSent, user
     const scrollToBottom = () => messagesEndRef.current?.scrollIntoView()
 
     useEffect(() => {
+        console.log("hacemescroll")
         scrollToBottom()
-    }, [messagesSent]);
+        focus && 
+        setTimeout(() => {
+            scrollToBottom()
+        }, 500);
+    }, [messagesSent, focus]);
 
     return {
         messagesEndRef,

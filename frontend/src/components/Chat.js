@@ -15,10 +15,11 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     const [ displayChatSettings, setDisplayChatSettings ] = useState()
     const [ goToMessage, setGoToMessage ] = useState(false)
     const [ images, setImages ] = useState([])
+    const [ focus, setFocus ] = useState()
 
     return chat ?
         <>
-            <section className={showSearchMessages || displayContactProfile || displayChatGroupInfo ? 'main__chat-section compressed' : 'main__chat-section'}>
+            <section className={showSearchMessages || displayContactProfile || displayChatGroupInfo ? 'main__chat-section compressed' : focus? 'main__chat-section focus' :'main__chat-section'} id="main__chat-section">
                 <nav className="main__chat-navbar navbar">
                     <div className={displayChat && chat && !showSearchMessages && !displayContactProfile && !displayChatGroupInfo ? 'navbar__back display' : 'navbar__back'} id="navbar__back" onClick={() => backToMainContacts()}>
                         <i className="fas fa-arrow-left"></i>
@@ -49,6 +50,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                         images={images} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage}
                         displayChatSettings={displayChatSettings} setDisplayChatSettings={setDisplayChatSettings}
                         setDisplayContactProfile={setDisplayContactProfile} contact={contact}
+                        focus={focus} setFocus={setFocus}
                       />
                 }
             </section>

@@ -893,9 +893,15 @@ body main {
   height: 100vh;
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 9.5% 73.5% 10% 0%;
-      grid-template-rows: 9.5% 73.5% 10% 0%;
+  -ms-grid-rows: 70px 80.5% 70px 0%;
+      grid-template-rows: 70px 80.5% 70px 0%;
   position: fixed;
+  height: calc(100vh - calc(100vh - 100%));
+}
+
+.main__chat-section.focus {
+  -ms-grid-rows: 70px 68.5% 0px 0%;
+      grid-template-rows: 70px 68.5% 0px 0%;
 }
 
 .main__chat-section.compressed {
@@ -1281,6 +1287,8 @@ body main {
       -ms-flex-pack: center;
           justify-content: center;
   padding: 10px;
+  position: fixed;
+  bottom: 0;
 }
 
 .main__chat-section .main__input-section .main__emoji-container {

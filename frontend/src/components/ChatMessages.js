@@ -8,12 +8,12 @@ import EmojisPicker from './EmojisPicker'
 import FormContent from './FormContent'
 import send from '../images/send.png'
 
-const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact}) => {
+const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact, focus, setFocus}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ chosenEmoji, setChosenEmoji ] = useState(null)
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
-    const { messagesEndRef, showEmojiPicker, scrollToBottom, setShowEmojiPicker } = useChatMessagesHelper(chat, messagesSent, setMessagesSent, user)
+    const { messagesEndRef, showEmojiPicker, scrollToBottom, setShowEmojiPicker } = useChatMessagesHelper(chat, messagesSent, setMessagesSent, user, focus)
     const { inputOnSubmit } = useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping, contact, chat)
     const { seeMessage } = useSeenMessageHelper()
 
@@ -34,6 +34,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                 <FormContent chosenEmoji={chosenEmoji} setInputMessage={setInputMessage} seeMessage={seeMessage} images={images} setImages={setImages}
                 showEmojiPicker={showEmojiPicker} setShowEmojiPicker={setShowEmojiPicker} setDisplayPreviousImage={setDisplayPreviousImage}
                 messagesSent={messagesSent} user={user} chat={chat} setShowNewMessageNotification={setShowNewMessageNotification} send={send}
+                setFocus={setFocus}
                 />
             </form>
             <form enctype="multipart/form-data" className="main__desktop-input-section" id="main__desktop-input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji )}>
