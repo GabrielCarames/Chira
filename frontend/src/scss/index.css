@@ -989,12 +989,14 @@ body main {
   line-height: 0;
   text-align: start;
   margin-left: 20px;
-  margin-top: 10px;
+  margin-top: -10px;
 }
 
 .main__chat-section .main__chat-navbar .navbar__contact .navbar__info .navbar__connected {
   font-size: 13px;
   color: #aaaaaa;
+  margin: 0;
+  margin-top: 6px;
 }
 
 .main__chat-section .main__chat-navbar .navbar__tools {
@@ -1520,6 +1522,14 @@ body main {
   .main__chat-section {
     width: 1200px;
     position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    height: 100vh;
   }
   .main__chat-section.compressed {
     visibility: visible;
@@ -1610,7 +1620,6 @@ body main {
     border-radius: 300px;
     margin-right: 15px;
     cursor: pointer;
-    width: 100px;
   }
   .main__chat-section .main__chat-navbar .navbar__tools .navbar__search:hover {
     background-color: #37465a;
@@ -1630,7 +1639,6 @@ body main {
     border-radius: 300px;
     margin-right: 15px;
     cursor: pointer;
-    width: 100px;
   }
   .main__chat-section .main__chat-navbar .navbar__tools .navbar__settings:hover {
     background-color: #37465a;
@@ -1786,8 +1794,7 @@ body main {
     margin-bottom: 10px;
   }
   .main__chat-section .main__input-section {
-    visibility: hidden;
-    position: absolute;
+    display: none;
   }
   .main__chat-section .main__desktop-input-section {
     visibility: visible;
