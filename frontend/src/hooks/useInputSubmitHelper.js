@@ -16,7 +16,7 @@ export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUser
             verifyAndSendInputValue(document.activeElement.value)
             document.activeElement.value = ''
             document.activeElement.defaultValue = ''
-            setChosenEmoji('')
+            setChosenEmoji(undefined)
         }
       }
     };
@@ -33,7 +33,7 @@ export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUser
     verifyAndSendInputValue(inputValue)
     e.target[1].value = ''
     e.target[1].defaultValue = ''
-    setChosenEmoji('')
+    setChosenEmoji(undefined)
   }
 
   const timeOutFunction = () => setUsertyping(false)

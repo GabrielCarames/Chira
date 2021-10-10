@@ -483,7 +483,7 @@ body main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  max-width: 220px;
+  max-width: 126px;
   height: 25px;
 }
 
@@ -640,6 +640,7 @@ body main {
     -webkit-box-align: inherit;
         -ms-flex-align: inherit;
             align-items: inherit;
+    max-width: 220px;
   }
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__message-container .list__messages {
     text-overflow: ellipsis;
@@ -654,7 +655,7 @@ body main {
   }
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__message-info .list__time-ago {
     position: inherit;
-    margin-right: 30px;
+    width: 78px;
   }
   .main .main__content-section .main_add-contacts-container .add-contacts__sub-container .add-contacts__left-side {
     width: 400px;
