@@ -2713,6 +2713,7 @@ body main {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
+  overflow-y: auto;
 }
 
 .main__previous-image .previous__close {
