@@ -27,20 +27,13 @@ export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUser
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputMessage]);
 
-  const inputOnSubmit = (e, setChosenEmoji, formType) => {
+  const inputOnSubmit = (e, setChosenEmoji) => {
     e.preventDefault()
-    let inputValue
-    if(formType){
-      inputValue = e.target[1].value
-      e.target[1].value = ''
-      e.target[1].defaultValue = ''
-    } else {
-      inputValue = e.target[0].value
-      e.target[0].value = ''
-      e.target[0].defaultValue = ''
-    }
+    const inputValue = e.target[1].value
     socket.emit("sendMessage", user, inputValue)
     verifyAndSendInputValue(inputValue)
+    e.target[1].value = ''
+    e.target[1].defaultValue = ''
     setChosenEmoji(null)
   }
 

@@ -44,7 +44,7 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
                     <img className="main__send-image" src={send} alt="" />
                 </button>
             </form>
-            <form encType="multipart/form-data" className="main__desktop-input-section" id="main__desktop-input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji, {"value": 'desktop'})}>
+            <form encType="multipart/form-data" className="main__desktop-input-section" id="main__desktop-input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji)}>
                 <div className="main__emoji-container" onClick={() => showEmojiPicker ? setShowEmojiPicker(false) : setShowEmojiPicker(true)}>
                     <i className="far fa-grin"></i>
                 </div>

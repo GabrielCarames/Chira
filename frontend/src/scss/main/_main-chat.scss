@@ -272,6 +272,7 @@
         position: fixed;
         bottom: 0;
         height: 40px;
+        width: 100%;
         .main__emoji-container {
             @include icons-div-styles;
             font-size: 20px;
@@ -308,8 +309,7 @@
         }
         .main__send-message {
             @include icons-div-styles;
-            margin-left: 20px;
-            margin-right: 0;
+            margin-left: 15px;
             width: 50px;
             height: 35px;
             justify-content: right;
