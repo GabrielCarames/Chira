@@ -1,7 +1,7 @@
-import useEditUserNameHelper from '../hooks/useEditUserNameHelper';
+// import useEditUserNameHelper from '../hooks/useEditUserNameHelper';
 
 const ContactProfile = ({setDisplayContactProfile, contact}) => {
-    const {handleChange, editUserName } = useEditUserNameHelper()
+    // const { handleChange, editUserName } = useEditUserNameHelper()
     
     const url = process.env.REACT_APP_UPLOAD_URL
     
@@ -18,7 +18,7 @@ const ContactProfile = ({setDisplayContactProfile, contact}) => {
                     <i className="fas fa-times"></i>
                 </div>
                 <h3 className="profile__username">{contact.username}</h3>
-                <div className="profile__edit">
+                <div className="profile__edit" onClick={(e) => {alert('Editar nombre todavía no disponible'); e.preventDefault()}}>
                     <i className="fas fa-edit"></i>
                 </div>
             </div>
@@ -31,10 +31,10 @@ const ContactProfile = ({setDisplayContactProfile, contact}) => {
                     <p className="info__phone-number">{contact.phoneNumber}</p>
                 </div>
             </div>
-            <form className="profile__edit-contact form" onSubmit={(e) => editUserName(e, contact.username)}>
+            <form className="profile__edit-contact form" onSubmit={(e) => {alert('Editar nombre todavía no disponible'); e.preventDefault(); /*editUserName(e, contact.username)*/}} >
                 <div className="form__name-section">
                     <label className="form__label" htmlFor="username">Nuevo nombre</label>
-                    <input className="form__input" id="username" type="text" name="username" onChange={handleChange} minLength="0" maxLength="18" pattern="[A-Za-z0-9]+"/>
+                    <input className="form__input" id="username" type="text" name="username" /*onChange={handleChange}*/  minLength="0" maxLength="18" pattern="[A-Za-z0-9]+"/>
                 </div>
                 <button type="submit" className="form__button" /*className={active ? "form__button active" : loading ? "form__button loading" : "form__button"}*/>
                     {/* {loading

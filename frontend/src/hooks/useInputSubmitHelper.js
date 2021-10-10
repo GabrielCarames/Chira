@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import socket from '../components/Socket'
 
-export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping, contact, chat) {
+export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping, contact) {
 
   const messageInput = message => socket.emit("sendMessage", user, message)
 
@@ -16,7 +16,7 @@ export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUser
             verifyAndSendInputValue(document.activeElement.value)
             document.activeElement.value = ''
             document.activeElement.defaultValue = ''
-            setChosenEmoji(null)
+            setChosenEmoji('')
         }
       }
     };
@@ -30,11 +30,10 @@ export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUser
   const inputOnSubmit = (e, setChosenEmoji) => {
     e.preventDefault()
     const inputValue = e.target[1].value
-    socket.emit("sendMessage", user, inputValue)
     verifyAndSendInputValue(inputValue)
     e.target[1].value = ''
     e.target[1].defaultValue = ''
-    setChosenEmoji(null)
+    setChosenEmoji('')
   }
 
   const timeOutFunction = () => setUsertyping(false)
