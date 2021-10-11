@@ -7,24 +7,23 @@ import DisplayMessages from './DisplayMessages'
 import EmojisPicker from './EmojisPicker'
 import send from '../images/send.png'
 import UploadImage from './UploadImage'
-
-const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact, focus, setFocus}) => {
+const ChatMessages = memo((({chat, setChat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact, focus, setFocus, chats, setChats}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ chosenEmoji, setChosenEmoji ] = useState(null)
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
-    const { messagesEndRef, showEmojiPicker, scrollToBottom, setShowEmojiPicker } = useChatMessagesHelper(chat, messagesSent, setMessagesSent, user, focus)
-    const { inputOnSubmit } = useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping, contact, chat)
+    const { messagesEndRef, showEmojiPicker, scrollToBottom, setShowEmojiPicker } = useChatMessagesHelper(chat, setChat, messagesSent, setMessagesSent, user, focus, chats, setChats)
+    const { inputOnSubmit } = useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping, contact)
     const { seeMessage } = useSeenMessageHelper()
 
-    console.log("messagesSent", messagesSent)
+    
 
     return (
         <>
             <div className="main__messages-section messages" id="list-messages">
                 <div className="messages__scroll">
                     {chat && chat.messages.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} key={message._id} />  )}
-                    {messagesSent && messagesSent.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} key={message._id} />)}
+                    {/* {messagesSent && messagesSent.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} key={message._id} />)} */}
                     <div ref={messagesEndRef}></div>
                 </div>
                 <div className="messages__typing">

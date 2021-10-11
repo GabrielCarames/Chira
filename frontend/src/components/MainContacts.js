@@ -1,10 +1,10 @@
 import { useState, memo } from 'react'
 import useMainContactsHelper from '../hooks/useMainContactsHelper'
 
-const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat}) => {
-    const [ chats, setChats ] = useState()
-    const { goToChat, activeMessageNotificationIcon, showHistoryLastMessage, showTimeAgoMessage, displayName, showSeenIcon, displayAvatar } = useMainContactsHelper(setChats, messagesSent, setLastMessage, setDisplayChat)
-
+const MainContacts = ({messagesSent, setLastMessage, setDisplayChat, lastMessager, setLastMessager, chats, setChats}) => {
+    // const [ chats, setChats ] = useState()
+    const { goToChat, activeMessageNotificationIcon, showLastMessage, showTimeAgoMessage, displayName, showSeenIcon, displayAvatar } = useMainContactsHelper(setChats, messagesSent, setLastMessage, setDisplayChat)
+                console.log("chat", chats)
     return(
         <>
             <main className="main__contacts">

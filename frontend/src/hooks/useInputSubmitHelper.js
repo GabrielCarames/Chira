@@ -3,7 +3,11 @@ import socket from '../components/Socket'
 
 export function useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping, contact, chat) {
 
-  const messageInput = message => socket.emit("sendMessage", user, message)
+  const messageInput = message =>
+  {
+    console.log("enviomensae")
+    socket.emit("sendMessage", user, message)
+  }
 
   const verifyAndSendInputValue = input => input !== '' && messageInput(input)
     

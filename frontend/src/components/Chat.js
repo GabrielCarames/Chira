@@ -1,13 +1,14 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import DisplayPreviousImage from './DisplayPreviousImage'
 import ContactProfile from './ContactProfile'
 import SearchMessages from './SearchMessages'
 import ChatGroupInfo from './ChatGroupInfo'
 import ChatMessages from './ChatMessages'
 import useChathelper from '../hooks/useChathelper'
+import socket from './Socket'
 
-const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, displayChat, setDisplayChat }) => {
-    const { chat, contact, backToMainContacts, displayName, displayAvatar, connectedContact } = useChathelper(setDisplayChat)
+const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, displayChat, setDisplayChat, chats, setChats }) => {
+    const { chat, setChat, contact, backToMainContacts, displayName, displayAvatar, connectedContact } = useChathelper(setDisplayChat)
     const [ displayContactProfile, setDisplayContactProfile ] = useState(false)
     const [ displayChatGroupInfo, setDisplayChatGroupInfo ] = useState(false)
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
@@ -16,6 +17,8 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     const [ goToMessage, setGoToMessage ] = useState(false)
     const [ images, setImages ] = useState([])
     const [ focus, setFocus ] = useState()
+
+    
 
     return chat ?
         <>
@@ -51,6 +54,8 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                         displayChatSettings={displayChatSettings} setDisplayChatSettings={setDisplayChatSettings}
                         setDisplayContactProfile={setDisplayContactProfile} contact={contact}
                         focus={focus} setFocus={setFocus}
+                        chats={chats} setChats={setChats}
+                        setChat={setChat}
                       />
                 }
             </section>

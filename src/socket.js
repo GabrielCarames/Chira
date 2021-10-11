@@ -18,15 +18,16 @@ module.exports = (io) => {
     let user = currentlyUsers.filter((user) => user.socketId === socketId)
     return user
   };
-
+  
   io.on('connection', (socket) => {
     socket.on('connected', async (userLogged) => {
       if(getUserLoggedFromList(socket.id).length === 0) {
         await userController.addSocketIdToUser(userLogged._id, socket.id)
         const updatedUserLogged = await userController.findUserById(userLogged._id)
         localStorage.setItem('userLogged', JSON.stringify(updatedUserLogged));
-        socket.emit('userLogged', updatedUserLogged)
-        addUserLoggedToList(updatedUserLogged[0]._id, socket.id);
+        const chats = await chatController.findAllChats()
+        socket.emit('userLogged', updatedUserLogged, chats)
+        addUserLoggedToList(updatedUserLogged._id, socket.id);
       }
       io.emit("getUsersConnected", currentlyUsers);
     })
@@ -36,7 +37,7 @@ module.exports = (io) => {
       currentlyChat = await chatController.findChatByContactId(userId, contactId)
       const updatedUser = await userController.findUserById(contactId)
       socket.emit("chatFound", currentlyChat);
-      socket.to(updatedUser[0].socketId).emit('contactSeeingChat')
+      socket.to(updatedUser.socketId).emit('contactSeeingChat')
     });
 
     socket.on("goToGroupChat", async (groupName) => {
@@ -46,6 +47,7 @@ module.exports = (io) => {
     });
 
     socket.on("sendMessage", async (user, message) => {
+      console.log("guardomensaje")
       let fullMessage
       if(message.mimetype) fullMessage = await chatController.saveImageMessageAndReturnFullMessage(user, message)
       else fullMessage = await chatController.saveMessagesAndReturnFullMessage(user, message)

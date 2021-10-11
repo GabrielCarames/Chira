@@ -5,8 +5,8 @@ import socket from "../components/Socket"
 export function useChathelper (setDisplayChat, ) {
     const [ connectedContact, setConnectedContact ] = useState([]);
     const [ groupImage, setGroupImage ] = useState()
-    const { chat, setChat } = useContext(TestContext)
-
+    // const { chat, setChat } = useContext(TestContext)
+    const [ chat, setChat ] = useState()
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
 
     const url = process.env.REACT_APP_UPLOAD_URL
@@ -336,7 +336,8 @@ export function useChathelper (setDisplayChat, ) {
     }
 
     return {
-        chat, 
+        chat,
+        setChat,
         contact,
         backToMainContacts,
         displayName,

@@ -24,23 +24,32 @@ export function useMainContactsHelper (setChats, messagesSent, setLastMessage, s
         }
     }
 
-    useEffect(() => {
-        const getAllChats = async () => {
-            messagesSent && setLastMessage(messagesSent)
-            const res = await axios.post('/chat/allchatsfromuserlogged', {userLogged})
-            const chats = res.data
-            chats && setChats(chats)
-        }
-        getAllChats()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [messagesSent])
+    // useEffect(() => {
+    //     const chatsToUpdate = chats
+    //     chatsToUpdate..push(messagesSent)
+    //     setChats()
+
+    //     // console.log("barilocheameputita", messagesSent)
+    //     // const getAllChats = async () => {
+    //     //     messagesSent && setLastMessage(messagesSent)
+    //     //     const res = await axios.post('/chat/allchatsfromuserlogged', {userLogged})
+    //     //     const chats = res.data
+    //     //     console.log("chatsacutalizados", chats)
+    //     //     chats && setChats(chats)
+    //     // }
+    //     // getAllChats()
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [messagesSent])
 
     useEffect(() => {
         socket.on("newNotification", (newMessage, contactChat) => {
-            document.getElementById(contactChat[0]._id).children[2].children[0].classList = 'far fa-comment-dots active' //Activa la visibilidad del icono de notificacion de mensaje
-            document.getElementById(contactChat[0]._id).children[1].children[1].textContent 
-            = contactChat[0].messages[contactChat[0].messages.length -1].message //Agarra el ultimo mensaje actual desactualizado de tal chat, y lo actualiza con el mensaje actualziado unicamente a el
-            setLastRecentMessage(newMessage)
+            console.log("newmessage", newMessage)
+            // console.log("contactChat", document.getElementById(contactChat._id).children[1].children[1] )
+            // console.log("insecptrgarcher", document.getElementById(contactChat._id).children)
+            // console.log("copsaamater", contactChat.messages[contactChat.messages.length -1].message)
+            // document.getElementById(contactChat._id).children[2].children[0].className = 'far fa-comment-dots active' //Activa la visibilidad del icono de notificacion de mensaje
+            // document.getElementById(contactChat._id).children[1].children[1].textContent = contactChat.messages[contactChat.messages.length -1].message //Agarra el ultimo mensaje actual desactualizado de tal chat, y lo actualiza con el mensaje actualziado unicamente a el
+            // setLastRecentMessage(newMessage) //che esto actualiza la hora del mensaje yn oel mensaje xd, hacelo para que haga los dos
         });
     }, [])
 
@@ -58,13 +67,43 @@ export function useMainContactsHelper (setChats, messagesSent, setLastMessage, s
         }
     }
 
-    const showHistoryLastMessage = (messages) => {
-        if(messages.length !== 0) {
-            const lastMessage = messages[messages.length -1].message
-            if(lastMessage === 'false') {
-                return 'Foto'
-            }
-            else return lastMessage
+    const showHistoryLastMessage = (historyLastMessage) => {
+        // console.log("soy2")
+        const lastMessage = historyLastMessage //ultimo mensaje del historial
+        if(lastMessage === 'false') {
+            return 'Foto'
+        } else return lastMessage
+    }
+
+    const showRecentLastMessage = (lastMessager, setLastMessager) => {
+        // console.log("soy1")
+        setLastMessager(lastRecentMessage.message)
+        if(lastMessager === 'false') {
+            // setLastRecentMessage('')
+            return 'Foto'
+        } else {
+            // console.log("lastMessage", lastMessage)
+            // setLastRecentMessage('')
+            return lastMessager
+        }
+    }
+
+    const showLastMessage = (messages, users, lastMessager, setLastMessager) => {
+        
+        const contactUsername = users.filter((user) => user._id !== userLogged._id)[0].username
+        // console.log("ultimomensaje", messages[messages.length -1])
+        // console.log("lastmessagevariable", lastMessage, "lastmessagedelotro", lastRecentMessage)
+        // console.log("lastMessanger", lastMessager)}
+        if(lastRecentMessage && lastMessager === lastRecentMessage.message) {
+            console.log("d", messages[messages.length -1])
+            return showHistoryLastMessage(messages[messages.length -1].message)
+        } else {
+
+            if(lastRecentMessage && contactUsername === lastRecentMessage.user.username) { //si recibiste un mensaje
+                return showRecentLastMessage(lastMessager, setLastMessager)
+            }else if(messages.length !== 0) {
+                return showHistoryLastMessage(messages[messages.length -1].message)
+            } else return ''
         }
     }
 

@@ -8,6 +8,7 @@ import ShowFlashMessages from './components/ShowFlashMessages';
 import Login from './components/Login'
 import Main from './components/Main';
 import Chat from './components/Chat';
+import ChatsContext from './contexts/ChatsContext'
 
 const App = () => {
   const [ flashMessage, setFlashMessage ] = useState(false)
@@ -21,8 +22,12 @@ const App = () => {
     else return <Login />
   }
 
+  const [ chats, setChats ] = useState()
+
   return (
     <main>
+      <ChatsContext.Provider value={{chats, setChats}}>
+        
       <DisplayChatContext.Provider value={{displayChat, setDisplayChat}}>
         <TestContext.Provider value={{chat, setChat}}>
           <FlashContext.Provider value={{flashMessage, setFlashMessage}}>
@@ -38,6 +43,7 @@ const App = () => {
           </FlashContext.Provider>
         </TestContext.Provider>
       </DisplayChatContext.Provider>
+      </ChatsContext.Provider>
     </main>
   );
 }
