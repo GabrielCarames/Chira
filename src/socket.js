@@ -46,6 +46,7 @@ module.exports = (io) => {
     });
 
     socket.on("sendMessage", async (user, message) => {
+
       let fullMessage
       if(message.mimetype) fullMessage = await chatController.saveImageMessageAndReturnFullMessage(user, message)
       else fullMessage = await chatController.saveMessagesAndReturnFullMessage(user, message)
@@ -57,16 +58,18 @@ module.exports = (io) => {
       socket.to(contact.socketId).emit('typingPrivateChat', userLogged)
     });
 
-    socket.on('seenMessage', async (user, contactIdToAdviseSeenMessage) => {
-      await chatController.updateSeenMessages()
-      const updatedUser = await userController.findUserById(contactIdToAdviseSeenMessage)
-      const contactChat = await chatController.findChatByContactId(user, contactIdToAdviseSeenMessage)
-      io.to(updatedUser[0].socketId).emit('messageAlreadySeen', contactChat[0].messages)
+    socket.on('seenMessage', async (user, contactIdToAdviseSeenMessage, lastMessage) => {
+      await chatController.updateSeenMessages(lastMessage)
+      // const updatedUser = await userController.findUserById(contactIdToAdviseSeenMessage)
+      // const contactChat = await chatController.findChatByContactId(user, contactIdToAdviseSeenMessage)
+      // console.log("contactchat", contactChat)
+      // io.to(updatedUser[0].socketId).emit('messageAlreadySeen', contactChat[0].messages)
     });
 
     socket.on('newMessageNotification', async (message, user, contact) => {
       const updatedUser = await userController.findUserById(contact[0]._id)
       const contactChat = await chatController.findChatByContactId(user._id, contact[0]._id)
+      console.log("newMessageNotification", contactChat, "user", updatedUser[0].socketId)
       socket.to(updatedUser[0].socketId).emit('newNotification', message, contactChat)
     });
 

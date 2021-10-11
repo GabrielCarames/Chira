@@ -1086,6 +1086,16 @@ body main {
           box-shadow: 3px solid black;
 }
 
+.main__chat-section .main__messages-section .messages-user-logged-messages {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+  padding: 20px;
+}
+
 .main__chat-section .main__messages-section .messages-user-logged-messages.active {
   background-color: #1975e0;
 }
@@ -1093,27 +1103,24 @@ body main {
 .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container {
   display: inline-block;
   background-color: #26313f;
-  text-align: left;
-  margin: 20px 0 20px 20px;
-  padding: 0px 10px 0 10px;
+  text-align: right;
+  margin: 20px 10px 20px 0;
+  padding: 10px 20px 0 20px;
   border-radius: 10px;
   max-width: 200px;
 }
 
 .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__username {
+  font-weight: 700px;
   color: #5297e8;
   font-size: 13px;
 }
 
 .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__message {
-  font-weight: 400px;
-  line-height: 1.2;
+  font-weight: 500px;
   word-break: break-word;
+  line-height: 1.2;
   font-size: 13px;
-}
-
-.main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__message.active {
-  color: red;
 }
 
 .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__image {
@@ -1161,16 +1168,6 @@ body main {
   color: #1975e0;
 }
 
-.main__chat-section .main__messages-section .messages-contact-messages {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: right;
-      -ms-flex-pack: right;
-          justify-content: right;
-  padding: 20px;
-}
-
 .main__chat-section .main__messages-section .messages-contact-messages.active {
   background-color: #1975e0;
 }
@@ -1178,24 +1175,27 @@ body main {
 .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container {
   display: inline-block;
   background-color: #172029;
-  text-align: right;
-  margin: 20px 10px 20px 0;
-  padding: 10px 20px 0 20px;
+  text-align: left;
+  margin: 20px 0 20px 20px;
+  padding: 0px 10px 0 10px;
   border-radius: 10px;
   max-width: 200px;
 }
 
 .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__username {
-  font-weight: 700px;
   color: #1975e0;
   font-size: 13px;
 }
 
 .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__message {
-  font-weight: 500px;
-  word-break: break-word;
+  font-weight: 400px;
   line-height: 1.2;
+  word-break: break-word;
   font-size: 13px;
+}
+
+.main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__message.active {
+  color: red;
 }
 
 .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__image {
@@ -1660,20 +1660,30 @@ body main {
     -webkit-box-shadow: 3px solid black;
             box-shadow: 3px solid black;
   }
+  .main__chat-section .main__messages-section .messages-user-logged-messages {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: right;
+        -ms-flex-pack: right;
+            justify-content: right;
+    padding: 20px;
+  }
   .main__chat-section .main__messages-section .messages-user-logged-messages.active {
     background-color: #1975e0;
   }
   .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container {
     display: inline-block;
-    background-color: #26313f;
-    text-align: left;
-    margin: 20px 0 20px 60px;
-    padding: 0px 10px 0 10px;
+    background-color: #172029;
+    text-align: right;
+    margin: 20px 40px 20px 0;
+    padding: 10px 20px 0 20px;
     border-radius: 10px;
     max-width: 500px;
   }
   .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__username {
-    color: #5297e8;
+    font-weight: 700px;
+    color: #1975e0;
     font-size: 13px;
   }
   .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .messages__message {
@@ -1718,30 +1728,20 @@ body main {
   .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container .message__info .fa-check-double {
     color: #1975e0;
   }
-  .main__chat-section .main__messages-section .messages-contact-messages {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: right;
-        -ms-flex-pack: right;
-            justify-content: right;
-    padding: 20px;
-  }
   .main__chat-section .main__messages-section .messages-contact-messages.active {
     background-color: #1975e0;
   }
   .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container {
     display: inline-block;
-    background-color: #172029;
-    text-align: right;
-    margin: 20px 40px 20px 0;
-    padding: 10px 20px 0 20px;
+    background-color: #26313f;
+    text-align: left;
+    margin: 20px 0 20px 60px;
+    padding: 0px 10px 0 10px;
     border-radius: 10px;
     max-width: 500px;
   }
   .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__username {
-    font-weight: 700px;
-    color: #1975e0;
+    color: #5297e8;
     font-size: 13px;
   }
   .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container .messages__message {

@@ -214,8 +214,9 @@ chatController.changeGroupAvatarByChatId = async (chatId, newImage) => {
     return updatedChat
 }
 
-chatController.updateSeenMessages = async () => {
-    await Message.updateMany({"seen": false}, {"$set":{"seen": true}})
+chatController.updateSeenMessages = async (lastMessage) => {
+    const lastMessageId = lastMessage._id
+    await Message.updateMany({_id: lastMessageId ,"seen": false}, {"$set":{"seen": true}})
 }
 
 chatController.deleteChatById = async (chatId) => {

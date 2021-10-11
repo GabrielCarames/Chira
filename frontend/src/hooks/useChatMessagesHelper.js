@@ -6,16 +6,16 @@ export function useChatMessagesHelper (chat, messagesSent, setMessagesSent, user
     const messagesEndRef = useRef(null)
 
     useEffect(() => {
-        socket.on("messageSent", async (newMessage) => {
+        socket.on("messageSent", (newMessage) => {
+            console.log("memandaloriaron")
             const contact = chat.users.filter((userInChat) => userInChat._id !== user._id)
+            console.log("newMessage.user.username", newMessage.message, "user.username", user.username)
             newMessage.user.username === user.username && socket.emit('newMessageNotification', newMessage, user, contact)
-            setMessagesSent([...messagesSent, newMessage]); //Representa los mensajes enviados ahora mismo en el chat, no el historial.
+            setMessagesSent(messagesSent => [...messagesSent, newMessage]); //Representa los mensajes enviados ahora mismo en el chat, no el historial.
         });
-        return () => {
-          socket.off();
-        };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [messagesSent]);
+    }, []);
+
 
     window.onclick = (event) => {
         if(showEmojiPicker && !document.getElementsByClassName('emoji-picker-react')[0].contains(event.target) && event.target.className !== 'far fa-grin' && event.target.className !== 'main__emoji-container') {

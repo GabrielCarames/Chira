@@ -12,6 +12,7 @@ export function useMainHelper (messagesSent, displayBurgerMenu, setDisplayBurger
     const [ lastMessage, setLastMessage ] = useState()
     
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
+    const [ lastMessager, setLastMessager ] = useState()
 
     useEffect(() => {
         socket.emit('connected', userLogged)
@@ -40,7 +41,7 @@ export function useMainHelper (messagesSent, displayBurgerMenu, setDisplayBurger
             return <EditProfile setDisplayEditProfile={setDisplayEditProfile} />
         } else if (displayCreateGroup) {
             return <CreateGroup groupContacts={groupContacts} setDisplayCreateGroup={setDisplayCreateGroup}/>
-        }else return <MainContacts messagesSent={messagesSent} setLastMessage={setLastMessage} setDisplayChat={setDisplayChat} />
+        }else return <MainContacts messagesSent={messagesSent} setLastMessage={setLastMessage} setDisplayChat={setDisplayChat} lastMessager={lastMessager} setLastMessager={setLastMessager} />
     }
 
     return {
