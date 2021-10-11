@@ -5,7 +5,6 @@ import useInputSubmitHelper from '../hooks/useInputSubmitHelper'
 import DisplayChatSettings from './DisplayChatSettings';
 import DisplayMessages from './DisplayMessages'
 import EmojisPicker from './EmojisPicker'
-import FormContent from './FormContent'
 import send from '../images/send.png'
 import UploadImage from './UploadImage'
 
@@ -17,6 +16,8 @@ const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, s
     const { messagesEndRef, showEmojiPicker, scrollToBottom, setShowEmojiPicker } = useChatMessagesHelper(chat, messagesSent, setMessagesSent, user, focus)
     const { inputOnSubmit } = useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping, contact, chat)
     const { seeMessage } = useSeenMessageHelper()
+
+    console.log("messagesSent", messagesSent)
 
     return (
         <>
