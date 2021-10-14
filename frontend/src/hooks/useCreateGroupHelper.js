@@ -3,7 +3,7 @@ import socket from "../components/Socket"
 import axios from 'axios'
 import avatar from '../images/avatar.png'
 
-export function useCreateGroupHelper (groupContacts, setGroupContacts) {
+export function useCreateGroupHelper (groupContacts, setGroupContacts, setDisplayCreateGroup) {
     const [ groupImage, setGroupImage ] = useState(avatar)
     const [ form, setForm ] = useState()
 
@@ -40,6 +40,7 @@ export function useCreateGroupHelper (groupContacts, setGroupContacts) {
         }
         const res = await axios.post('/chat/creategroup', {groupName, newImage, groupContacts} )
         socket.emit('goToGroupChat', groupName)
+        setDisplayCreateGroup(false)
     }
 
     const addContactsToGroupList = (contact) => {

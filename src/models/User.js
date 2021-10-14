@@ -14,7 +14,7 @@ const User = new Schema({
     },
     avatar: {
         type: Object,
-        default: 'https://w7.pngwing.com/pngs/971/686/png-transparent-computer-icons-social-media-blog-avatar-material-service-logo-material.png',
+        default: "https://images.assetsdelivery.com/compings_v2/ylivdesign/ylivdesign1510/ylivdesign151000120.jpg",
         required: false
     }
 });

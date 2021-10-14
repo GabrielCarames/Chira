@@ -337,9 +337,13 @@ export function useChathelper (setDisplayChat) {
 
     const displayAvatar = (chat) => {
         if(chat.name) {
+            console.log("avatar", chat.avatar)
             if(groupImage && groupImage._id === chat._id) {
                 return url + groupImage.avatar.title
-            }else return url + chat.avatar.title
+            }else if(chat.avatar.title) {
+                return url + chat.avatar.title
+            }else return chat.avatar
+            
         } else {
             const contact = chat.users.filter((contact) => contact._id !== userLogged._id)[0]
             if(contact.avatar.title) {
