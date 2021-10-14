@@ -1,7 +1,7 @@
 Chira
 =============
 
-Página web similar a "WhatsApp" o "Telegram".
+Página web similar a "WhatsApp" o "Telegram". (Aún en desarrollo)
 <br />
 
 <div align="center">
