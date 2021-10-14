@@ -12,6 +12,7 @@ export function useEditProfileHelper (updatedProfileImage, setUpdatedProfileImag
         socket.on('newImageProfileUpdated', (updatedUser) => {
             setUpdatedProfileImage(updatedUser)
         })
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const verifyImage = async (e) => {

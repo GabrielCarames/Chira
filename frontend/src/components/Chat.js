@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import DisplayPreviousImage from './DisplayPreviousImage'
 import ContactProfile from './ContactProfile'
 import SearchMessages from './SearchMessages'

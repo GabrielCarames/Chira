@@ -43,7 +43,8 @@
                     }
                     .list__message-container {
                         display: flex;
-                        max-width: 126px;
+                        align-items: center;
+                        max-width: 220px;
                         height: 25px;
                         .list__messages {
                             text-overflow: ellipsis;
@@ -157,7 +158,6 @@
                             .list__message-container {
                                 display: flex;
                                 align-items: inherit;
-                                max-width: 220px;
                                 .list__messages {
                                     text-overflow: ellipsis;
                                     white-space: nowrap;
@@ -174,8 +174,7 @@
                         .list__message-info {
                             .list__time-ago{
                                 position: inherit;
-                                // margin-right: 30px;
-                                width: 78px;
+                                margin-right: 30px;
                             }
                         }
                     }

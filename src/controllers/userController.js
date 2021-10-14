@@ -20,7 +20,7 @@ userController.findUserByPhoneNumber = async (phoneNumber) => {
 }
 
 userController.findUserById = async (userId) => {
-    const user = await User.find({_id: userId}).populate({
+    const user = await User.findOne({_id: userId}).populate({
         path: 'contacts',
         model: 'User'
     })

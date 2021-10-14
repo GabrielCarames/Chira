@@ -7,7 +7,7 @@ const CreateGroup = ({ groupContacts, setDisplayCreateGroup}) => {
         <div className="main__create-group-section create-group">
             <div className="create-group__navbar-container">
                 <div className="create-group-navbar">
-                    <div className="create-group-section" onClick={() => {setDisplayCreateGroup(false); document.getElementById('add-contacts__button').className = 'add-contacts__button'}}>
+                    <div className="create-group-section" onClick={() => setDisplayCreateGroup(false)}>
                         <i className="fas fa-times" aria-hidden="true"></i>
                     </div>
                     <h3 className="create-group__title">Crear grupo</h3>

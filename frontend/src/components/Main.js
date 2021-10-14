@@ -1,4 +1,4 @@
-import { useState, useContext, memo } from 'react'
+import { useState, useContext, memo, useEffect } from 'react'
 import BurgerMenu from './BurgerMenu';
 import Chat from './Chat';
 import useMainHelper from '../hooks/useMainHelper';
@@ -36,7 +36,10 @@ const Main = memo(({setUserLoggedMain}) => {
     // }, [chats])
 
     return(
+        
         <section className="main">
+            {/* <button onClick={() => setChat(chata)}> */}
+            {/* </button> */}
             <section className="main__left-section" id="main__left-section">
                 <section className="main__navbar-section">
                     <nav className="main__navbar navbar">

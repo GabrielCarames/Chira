@@ -18,7 +18,7 @@ const ContactProfile = ({setDisplayContactProfile, contact}) => {
                     <i className="fas fa-times"></i>
                 </div>
                 <h3 className="profile__username">{contact.username}</h3>
-                <div className="profile__edit" onClick={(e) => {alert('Editar nombre todavía no disponible'); e.preventDefault()}}>
+                <div className="profile__edit">
                     <i className="fas fa-edit"></i>
                 </div>
             </div>

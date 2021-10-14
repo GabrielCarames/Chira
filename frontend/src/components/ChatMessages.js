@@ -5,13 +5,12 @@ import useInputSubmitHelper from '../hooks/useInputSubmitHelper'
 import DisplayChatSettings from './DisplayChatSettings';
 import DisplayMessages from './DisplayMessages'
 import EmojisPicker from './EmojisPicker'
-import FormContent from './FormContent'
 import send from '../images/send.png'
 import UploadImage from './UploadImage'
 import { useChatStore } from '../store/ChatProvider';
 const ChatMessages = memo((({messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact, focus, setFocus}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
-    const [ chosenEmoji, setChosenEmoji ] = useState(undefined)
+    const [ chosenEmoji, setChosenEmoji ] = useState(null)
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
     const { chat } = useChatStore()
@@ -27,7 +26,7 @@ const ChatMessages = memo((({messagesSent, setMessagesSent, goToMessage, setShow
             <div className="main__messages-section messages" id="list-messages">
                 <div className="messages__scroll">
                     {chat && chat.messages.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} key={message._id} />  )}
-                    {messagesSent && messagesSent.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} key={message._id} />)}
+                    {/* {messagesSent && messagesSent.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} key={message._id} />)} */}
                     <div ref={messagesEndRef}></div>
                 </div>
                 <div className="messages__typing">
@@ -48,7 +47,7 @@ const ChatMessages = memo((({messagesSent, setMessagesSent, goToMessage, setShow
                     <img className="main__send-image" src={send} alt="" />
                 </button>
             </form>
-            <form encType="multipart/form-data" className="main__desktop-input-section" id="main__desktop-input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji)}>
+            <form encType="multipart/form-data" className="main__desktop-input-section" id="main__desktop-input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji, {"value": 'desktop'})}>
                 <div className="main__emoji-container" onClick={() => showEmojiPicker ? setShowEmojiPicker(false) : setShowEmojiPicker(true)}>
                     <i className="far fa-grin"></i>
                 </div>

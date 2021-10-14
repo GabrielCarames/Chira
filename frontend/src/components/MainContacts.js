@@ -9,12 +9,11 @@ const MainContacts = ({messagesSent, setLastMessage, setDisplayChat, lastMessage
     console.log("maincontacts", chats)
 
     return(
-        <div>
+        <>
             <main className="main__contacts">
                 <ul className="main__contacts-list list">
                     {chats && 
                         chats.map((chat) => {
-                            // console.log("chat", chat)
                             return (
                                 <li className="list__item" onClick={() => goToChat(chat)} key={chat._id} id={chat._id}>
                                     <div className="list__avatar-container">
@@ -29,7 +28,7 @@ const MainContacts = ({messagesSent, setLastMessage, setDisplayChat, lastMessage
                                     </div>
                                     <div className="list__message-info">
                                         <i className={activeMessageNotificationIcon(chat)}></i>
-                                        <h6 className="list__time-ago" id="notification">{showTimeAgoMessage(chat.messages)} </h6>
+                                        <h6 className="list__time-ago" id="notification">{ showTimeAgoMessage(chat.messages)} </h6>
                                     </div>
                                 </li>
                             )
@@ -37,7 +36,7 @@ const MainContacts = ({messagesSent, setLastMessage, setDisplayChat, lastMessage
                     }
                 </ul>
             </main>
-        </div>
+        </>
     )
 }
 

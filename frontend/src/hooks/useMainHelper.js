@@ -14,7 +14,6 @@ export function useMainHelper (messagesSent, displayBurgerMenu, setDisplayBurger
     const [ lastMessage, setLastMessage ] = useState()
     
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-    const [ lastMessager, setLastMessager ] = useState()
 
     const { chats } = useChatsStore()
     const chatsDispatch = useChatsDispatch()

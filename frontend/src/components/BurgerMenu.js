@@ -11,7 +11,7 @@ const BurgerMenu = ({displayBurgerMenu, setUserLoggedMain, setDisplayConfigurati
     return(
         <div className={displayBurgerMenu ? "main__burger-menu burger active" : "main__burger-menu burger"}>
             <section className="burger__user-info">
-                <div className="burger__user-avatar-container" onClick={() => {setAddContactsMenu(false); setDisplayEditProfile(true)}}>
+                <div className="burger__user-avatar-container" onClick={() => setDisplayEditProfile(true)}>
                     <img className="burger__user-avatar" src={displayAvatar()} alt="userLogged-avatar" />
                     <i className="fas fa-user-edit"></i>
                 </div>
