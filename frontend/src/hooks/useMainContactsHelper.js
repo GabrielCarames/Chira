@@ -13,6 +13,7 @@ export function useMainContactsHelper (messagesSent, setLastMessage, setDisplayC
     const [ groupImage, setGroupImage ] = useState()
 
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
+
     const url = process.env.REACT_APP_UPLOAD_URL
 
     const { chats } = useChatsStore()
@@ -29,18 +30,22 @@ export function useMainContactsHelper (messagesSent, setLastMessage, setDisplayC
         }
     }
 
-    useEffect(() => {
-        console.log("barilocheameputita", messagesSent)
-        const getAllChats = async () => {
-            messagesSent && setLastMessage(messagesSent)
-            const res = await axios.post('/chat/allchatsfromuserlogged', {userLogged})
-            const chats = res.data
-            console.log("chatsacutalizados", chats)
-            chats && setChats(chats)
-        }
-        getAllChats()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [messagesSent])
+    // useEffect(() => {
+    //     const chatsToUpdate = chats
+    //     chatsToUpdate..push(messagesSent)
+    //     setChats()
+
+    //     // console.log("barilocheameputita", messagesSent)
+    //     // const getAllChats = async () => {
+    //     //     messagesSent && setLastMessage(messagesSent)
+    //     //     const res = await axios.post('/chat/allchatsfromuserlogged', {userLogged})
+    //     //     const chats = res.data
+    //     //     console.log("chatsacutalizados", chats)
+    //     //     chats && setChats(chats)
+    //     // }
+    //     // getAllChats()
+    //     // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [messagesSent])
 
     useEffect(() => {
         socket.on("newNotification", (chats) => {
@@ -54,7 +59,7 @@ export function useMainContactsHelper (messagesSent, setLastMessage, setDisplayC
             // console.log("copsaamater", contactChat.messages[contactChat.messages.length -1].message)
             // document.getElementById(contactChat._id).children[2].children[0].className = 'far fa-comment-dots active' //Activa la visibilidad del icono de notificacion de mensaje
             // document.getElementById(contactChat._id).children[1].children[1].textContent = contactChat.messages[contactChat.messages.length -1].message //Agarra el ultimo mensaje actual desactualizado de tal chat, y lo actualiza con el mensaje actualziado unicamente a el
-            setLastRecentMessage(newMessage) //che esto actualiza la hora del mensaje yn oel mensaje xd, hacelo para que haga los dos
+            // setLastRecentMessage(newMessage) //che esto actualiza la hora del mensaje yn oel mensaje xd, hacelo para que haga los dos
         });
     }, [])
 
