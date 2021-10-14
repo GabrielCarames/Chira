@@ -37,7 +37,7 @@ export function useCreateGroupHelper (groupContacts, setGroupContacts) {
             data.append("file", groupImageToUpload)
             const response = await axios.post('/chat/uploadimage', data)
             newImage = response.data
-        } else newImage = groupImage
+        }
         const res = await axios.post('/chat/creategroup', {groupName, newImage, groupContacts} )
         socket.emit('goToGroupChat', groupName)
     }

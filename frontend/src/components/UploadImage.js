@@ -1,9 +1,18 @@
+import { usePreviousImageDispatch, usePreviousImageStore } from "../store/PreviousImageProvider";
+import { previousImageTypes } from "../store/previousImageReducer";
+
 const UploadImage = ({images, setImages, setDisplayPreviousImage}) => {
     
+    const { previousImage } = usePreviousImageStore()
+    const previousImageDispatch = usePreviousImageDispatch()
+
     const verifyImage = (e) => {
         const imageData = e.target.files[0]
         setImages([URL.createObjectURL(imageData), imageData]);
-        setDisplayPreviousImage(true)
+        // setDisplayPreviousImage(true)
+        previousImageDispatch({
+            type: previousImageTypes.display
+        })
     };
 
     return (

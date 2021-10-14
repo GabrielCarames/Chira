@@ -70,12 +70,21 @@ chatController.createChat = async (user, contact, type) => {
 }
 
 chatController.createGroupChat = async (groupName, newImage, groupContacts) => {
-    const newGroupChat = await new Chat({
-        name: groupName,
-        type: 'group',
-        users: groupContacts,
-        avatar: newImage
-    });
+    let NewGroupChat
+    if(newImage) {
+        newGroupChat = await new Chat({
+            name: groupName,
+            type: 'group',
+            users: groupContacts,
+            avatar: newImage
+        });
+    } else {
+        newGroupChat = await new Chat({
+            name: groupName,
+            type: 'group',
+            users: groupContacts
+        });
+    }
     await newGroupChat.save()
     return newGroupChat
 }
@@ -215,8 +224,7 @@ chatController.changeGroupAvatarByChatId = async (chatId, newImage) => {
 }
 
 chatController.updateSeenMessages = async (lastMessage) => {
-    const lastMessageId = lastMessage._id
-    await Message.updateMany({_id: lastMessageId ,"seen": false}, {"$set":{"seen": true}})
+    await Message.updateMany({'user': lastMessage.user._id , "seen": false}, {"$set":{"seen": true}})
 }
 
 chatController.deleteChatById = async (chatId) => {

@@ -31,10 +31,10 @@ router.post('/addcontact', async function (req, res) {
     const contact = req.body.contact
     const contactId = contact._id
     const user = JSON.parse(localStorage.getItem('userLogged'))
-    const userId = user[0]._id
+    const userId = user._id
     await userController.addNewContact(userId, contactId)
     const updatedUserLogged = await updateUserLogged(userId)
-    await chatController.createChat(user[0], contact, 'private')
+    await chatController.createChat(user, contact, 'private')
     res.send(updatedUserLogged)
 })
 

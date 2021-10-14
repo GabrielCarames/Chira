@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
 import socket from '../components/Socket'
 import axios from 'axios'
+import { useChatsStore } from '../store/ChatsProvider'
 
-export function useChatGroupInfoHelper (chat) {
+export function useChatGroupInfoHelper () {
     const [ groupImage, setGroupImage ] = useState()
     const url = process.env.REACT_APP_UPLOAD_URL
+
+    const { chat } = useChatsStore()
 
     useEffect(() => {
         socket.on('updatedGroupChat', (updatedGroupChat) => {

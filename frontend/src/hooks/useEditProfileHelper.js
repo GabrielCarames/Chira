@@ -24,7 +24,7 @@ export function useEditProfileHelper (updatedProfileImage, setUpdatedProfileImag
 
     const displayAvatar = () => {
         if(updatedProfileImage) {
-            return url + updatedProfileImage[0].avatar.title
+            return url + updatedProfileImage.avatar.title
         }else {
             if(!userLogged.avatar.title) {
                 return userLogged.avatar

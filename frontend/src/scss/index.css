@@ -1102,7 +1102,7 @@ body main {
 
 .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container {
   display: inline-block;
-  background-color: #26313f;
+  background-color: #172029;
   text-align: right;
   margin: 20px 10px 20px 0;
   padding: 10px 20px 0 20px;
@@ -1174,7 +1174,7 @@ body main {
 
 .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container {
   display: inline-block;
-  background-color: #172029;
+  background-color: #26313f;
   text-align: left;
   margin: 20px 0 20px 20px;
   padding: 0px 10px 0 10px;
@@ -2144,7 +2144,6 @@ body main {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    margin-left: 200px;
   }
   .main__search-contacts .contacts-section .add-contact-group-container .add-group__sub-container .add-group__left-side {
     width: 400px;

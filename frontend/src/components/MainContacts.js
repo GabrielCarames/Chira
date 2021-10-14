@@ -1,9 +1,13 @@
 import { useState, memo } from 'react'
 import useMainContactsHelper from '../hooks/useMainContactsHelper'
+import { useChatsDispatch, useChatsStore } from '../store/ChatsProvider'
 
 const MainContacts = ({messagesSent, setLastMessage, setDisplayChat, lastMessager, setLastMessager}) => {
-    const [ chats, setChats ] = useState()
-    const { goToChat, activeMessageNotificationIcon, showLastMessage, showTimeAgoMessage, displayName, showSeenIcon, displayAvatar } = useMainContactsHelper(setChats, messagesSent, setLastMessage, setDisplayChat)
+    // const [ chats, setChats ] = useState()
+    const { goToChat, activeMessageNotificationIcon, showLastMessage, showTimeAgoMessage, displayName, showSeenIcon, displayAvatar } = useMainContactsHelper(messagesSent, setLastMessage, setDisplayChat)
+    const { chats } = useChatsStore()
+    console.log("maincontacts", chats)
+
     return(
         <div>
             <main className="main__contacts">
@@ -20,7 +24,7 @@ const MainContacts = ({messagesSent, setLastMessage, setDisplayChat, lastMessage
                                         <p className="list__name">{displayName(chat)}</p>
                                         <div className="list__message-container">
                                             {chat.messages.length !== 0 && showSeenIcon(chat.messages[chat.messages.length -1])}
-                                            <p className="list__messages">{showLastMessage(chat.messages, chat.users, lastMessager, setLastMessager)}</p>
+                                            <p className="list__messages">{ showLastMessage(chat.messages, chat.users)}</p>
                                         </div>
                                     </div>
                                     <div className="list__message-info">

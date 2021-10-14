@@ -8,15 +8,19 @@ import EmojisPicker from './EmojisPicker'
 import FormContent from './FormContent'
 import send from '../images/send.png'
 import UploadImage from './UploadImage'
-
-const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact, focus, setFocus}) => {
+import { useChatStore } from '../store/ChatProvider';
+const ChatMessages = memo((({messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact, focus, setFocus}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ chosenEmoji, setChosenEmoji ] = useState(undefined)
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
-    const { messagesEndRef, showEmojiPicker, scrollToBottom, setShowEmojiPicker } = useChatMessagesHelper(chat, messagesSent, setMessagesSent, user, focus)
+    const { chat } = useChatStore()
+
+
+    const { messagesEndRef, showEmojiPicker, scrollToBottom, setShowEmojiPicker } = useChatMessagesHelper(messagesSent, setMessagesSent, user, focus )
     const { inputOnSubmit } = useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping, contact)
     const { seeMessage } = useSeenMessageHelper()
+
 
     return (
         <>

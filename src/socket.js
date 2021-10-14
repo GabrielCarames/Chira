@@ -58,19 +58,19 @@ module.exports = (io) => {
       socket.to(contact.socketId).emit('typingPrivateChat', userLogged)
     });
 
-    socket.on('seenMessage', async (user, contactIdToAdviseSeenMessage, lastMessage) => {
+    socket.on('seenMessage', async (contactIdToAdviseSeenMessage, updatedChats, lastMessage) => {
       await chatController.updateSeenMessages(lastMessage)
-      // const updatedUser = await userController.findUserById(contactIdToAdviseSeenMessage)
+      //queda avisarle al usuario a traves del socketid que se hizo el visto y darle el updated chats
+      //tambienfijate de arreglar esto del lastmessage para updatearlo en la bd
+      const updatedUser = await userController.findUserById(contactIdToAdviseSeenMessage)
       // const contactChat = await chatController.findChatByContactId(user, contactIdToAdviseSeenMessage)
       // console.log("contactchat", contactChat)
-      // io.to(updatedUser[0].socketId).emit('messageAlreadySeen', contactChat[0].messages)
+      io.to(updatedUser.socketId).emit('messageAlreadySeen', updatedChats)
     });
 
-    socket.on('newMessageNotification', async (message, user, contact) => {
-      const updatedUser = await userController.findUserById(contact[0]._id)
-      const contactChat = await chatController.findChatByContactId(user._id, contact[0]._id)
-      console.log("newMessageNotification", contactChat, "user", updatedUser[0].socketId)
-      socket.to(updatedUser[0].socketId).emit('newNotification', message, contactChat)
+    socket.on('newMessageNotification', async (chats, contact) => {
+      const updatedUser = await userController.findUserById(contact._id)
+      socket.to(updatedUser.socketId).emit('newNotification', chats)
     });
 
     socket.on('newImageProfile', async (userLoggedId, newImage) => {
