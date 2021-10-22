@@ -4,6 +4,7 @@ import axios from 'axios'
 import socket from "../components/Socket"
 import { useChatsDispatch, useChatsStore } from '../store/ChatsProvider'
 import { chatsTypes } from '../store/chatsReducer'
+import { useSelector, useDispatch } from 'react-redux'
 
 export function useMainContactsHelper (messagesSent, setLastMessage, setDisplayChat) {
     //lastRecentMessage es para mensajes recientes al contacto unicamente, mas no para todos
@@ -16,8 +17,10 @@ export function useMainContactsHelper (messagesSent, setLastMessage, setDisplayC
 
     const url = process.env.REACT_APP_UPLOAD_URL
 
-    const { chats } = useChatsStore()
-    const chatsDispatch = useChatsDispatch()
+    // const { chats } = useChatsStore()
+    // const chatsDispatch = useChatsDispatch()
+    const chats = useSelector(state => state.chatsReducer)
+    const dispatch = useDispatch()
 
     const goToChat = chat => {
         if(chat.type === 'group') {
@@ -50,10 +53,10 @@ export function useMainContactsHelper (messagesSent, setLastMessage, setDisplayC
     useEffect(() => {
         socket.on("newNotification", (chats) => {
             console.log("newmessage", chats)
-            chatsDispatch({
-                type: chatsTypes.updateChats,
-                updatedChats: chats
-            })
+            // chatsDispatch({
+            //     type: chatsTypes.updateChats,
+            //     updatedChats: chats
+            // })
             // console.log("contactChat", document.getElementById(contactChat._id).children[1].children[1] )
             // console.log("insecptrgarcher", document.getElementById(contactChat._id).children)
             // console.log("copsaamater", contactChat.messages[contactChat.messages.length -1].message)

@@ -7,6 +7,7 @@ import CreateGroup from '../components/CreateGroup';
 import socket from '../components/Socket';
 import { useChatsDispatch, useChatsStore } from '../store/ChatsProvider';
 import { chatsTypes } from '../store/chatsReducer';
+import { useSelector, useDispatch } from 'react-redux'
 
 export function useMainHelper (messagesSent, displayBurgerMenu, setDisplayBurgerMenu, addContactsMenu, setAddContactsMenu, displayConfiguration, setDisplayConfiguration, displayEditProfile, setDisplayEditProfile, displayChat, setDisplayChat) {
     const [ displayCreateGroup, setDisplayCreateGroup ] = useState(false)
@@ -15,16 +16,20 @@ export function useMainHelper (messagesSent, displayBurgerMenu, setDisplayBurger
     
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
 
-    const { chats } = useChatsStore()
-    const chatsDispatch = useChatsDispatch()
+    // const { chats } = useChatsStore()
+    // const chatsDispatch = useChatsDispatch()
+
+    const chats = useSelector(state => state.chatsReducer)
+    const dispatch = useDispatch()
+    console.log("chats", chats)
 
     useEffect(() => {
         socket.emit('connected', userLogged)
         socket.on("userLogged", (updatedUserLogged, chats) => {
             localStorage.setItem('userLogged', JSON.stringify(updatedUserLogged));
-            chatsDispatch({
-                type: chatsTypes.updateChats,
-                updatedChats: chats
+            dispatch({
+                type: '@initialChats',
+                payload: chats
             })
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -31,7 +31,7 @@ export function useChatGroupInfoHelper () {
         const imageData = e.target.files[0]
         const data = new FormData()
         data.append("file", imageData)
-        const res = await axios.post('/chat/uploadimage', data )
+        const res = await axios.post('http://localhost:3001/chat/uploadimage', data )
         console.log("estaimagensubida", res.data)
         socket.emit('newGroupImage', chat._id, res.data)
     }

@@ -8,14 +8,16 @@ import EmojisPicker from './EmojisPicker'
 import send from '../images/send.png'
 import UploadImage from './UploadImage'
 import { useChatStore } from '../store/ChatProvider';
-const ChatMessages = memo((({messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact, focus, setFocus}) => {
+import { useSelector } from 'react-redux'
+
+const ChatMessages = memo(({messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact, focus, setFocus}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
     const [ chosenEmoji, setChosenEmoji ] = useState(null)
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
-    const { chat } = useChatStore()
-
-
+    // const { chat } = useChatStore()
+    const chat = useSelector(state => state.chatReducer)
+    console.log("chatindividual", chat)
     const { messagesEndRef, showEmojiPicker, scrollToBottom, setShowEmojiPicker } = useChatMessagesHelper(messagesSent, setMessagesSent, user, focus )
     const { inputOnSubmit } = useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping, contact)
     const { seeMessage } = useSeenMessageHelper()
@@ -63,6 +65,6 @@ const ChatMessages = memo((({messagesSent, setMessagesSent, goToMessage, setShow
             {displayChatSettings && <DisplayChatSettings displayChatSettings={displayChatSettings} setDisplayChatSettings={setDisplayChatSettings} setDisplayContactProfile={setDisplayContactProfile} contact={contact} chat={chat} />}
         </>
     )
-}))
+})
 
 export default ChatMessages

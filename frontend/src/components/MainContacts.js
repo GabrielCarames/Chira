@@ -1,13 +1,14 @@
 import { useState, memo } from 'react'
 import useMainContactsHelper from '../hooks/useMainContactsHelper'
 import { useChatsDispatch, useChatsStore } from '../store/ChatsProvider'
+import { useSelector, useDispatch } from 'react-redux'
 
-const MainContacts = ({messagesSent, setLastMessage, setDisplayChat, lastMessager, setLastMessager}) => {
+const MainContacts = memo(({messagesSent, setLastMessage, setDisplayChat, lastMessager, setLastMessager}) => {
     // const [ chats, setChats ] = useState()
     const { goToChat, activeMessageNotificationIcon, showLastMessage, showTimeAgoMessage, displayName, showSeenIcon, displayAvatar } = useMainContactsHelper(messagesSent, setLastMessage, setDisplayChat)
-    const { chats } = useChatsStore()
+    // const { chats } = useChatsStore()
+    const chats = useSelector(state => state.chatsReducer)
     console.log("maincontacts", chats)
-
     return(
         <>
             <main className="main__contacts">
@@ -38,6 +39,6 @@ const MainContacts = ({messagesSent, setLastMessage, setDisplayChat, lastMessage
             </main>
         </>
     )
-}
+})
 
 export default MainContacts

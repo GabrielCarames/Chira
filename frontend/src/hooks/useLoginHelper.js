@@ -78,7 +78,7 @@ export function useLoginHelper(setPhoneNumberInput) {
         // console.log("usertruccho", userTrucho)
         // history.push("/");
         try {
-            await axios.post('/users/register', user).then(res => {
+            await axios.post('http://localhost:3001/users/register', user).then(res => {
                 setLoading(false);
                 
                 console.log("res.data", res.data)

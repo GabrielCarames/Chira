@@ -3,6 +3,7 @@ import TestContext from "../contexts/TestContext"
 import socket from "../components/Socket"
 import { useChatDispatch, useChatStore } from "../store/ChatProvider";
 import { chatTypes } from "../store/chatReducer";
+import { useSelector, useDispatch } from 'react-redux'
 
 export function useChathelper (setDisplayChat) {
     const [ connectedContact, setConnectedContact ] = useState([]);
@@ -10,9 +11,11 @@ export function useChathelper (setDisplayChat) {
     // const { chat, setChat } = useContext(TestContext)
     // const [ chat, setChat ] = useState() este era el ultimo que use 
 
-    const { chat } = useChatStore()
-    const dispatch = useChatDispatch()
-
+    // const { chat } = useChatStore()
+    // const dispatch = useChatDispatch()
+    
+    const chat = useSelector(state => state.chatReducer)
+    const dispatch = useDispatch()
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
 
     const url = process.env.REACT_APP_UPLOAD_URL
@@ -20,6 +23,7 @@ export function useChathelper (setDisplayChat) {
     const contact = chat && chat.users.filter((user) => user.username !== userLogged.username)[0]
     
     const setConnectedContactState = (users) => setConnectedContact(users.filter((user) => user.userLoggedId === contact._id))
+
 
     useEffect(() => {
         socket.on("chatFound", (chat) => {
@@ -308,11 +312,14 @@ export function useChathelper (setDisplayChat) {
                 "createdAt": "2021-10-06T12:43:18.561Z",
                 "__v": 0
               }
-
               dispatch({
-                type: chatTypes.updateChat,
-                updatedChat: chat
-            })
+                type: '@initialChat',
+                payload: chat
+              })
+            //   dispatch({
+            //     type: chatTypes.updateChat,
+            //     updatedChat: chat
+            // })
         });
         socket.on("getUsersConnected", (users) => {
             chat && setConnectedContactState(users)
@@ -323,10 +330,10 @@ export function useChathelper (setDisplayChat) {
     })
 
     const backToMainContacts = () => {
-        dispatch({
-          type: chatTypes.updateChat,
-          updatedChat: false
-      })
+        // dispatch({
+        //   type: chatTypes.updateChat,
+        //   updatedChat: false
+        // })
         setDisplayChat(false)
     }
 

@@ -11,6 +11,13 @@ import Chat from './components/Chat';
 import ChatsProvider from "./store/ChatsProvider";
 import ChatProvider from "./store/ChatProvider";
 import PreviousImageProvider from "./store/PreviousImageProvider";
+import { connect } from 'react-redux'
+
+const mapStateToProps = (state) => {
+  return {
+    chat: state
+  }
+}
 
 const App = () => {
   const [ flashMessage, setFlashMessage ] = useState(false)
@@ -55,4 +62,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default connect(mapStateToProps)(App);

@@ -8,6 +8,7 @@ import useChathelper from '../hooks/useChathelper'
 import socket from './Socket'
 import { useChatStore } from '../store/ChatProvider'
 import { usePreviousImageDispatch, usePreviousImageStore } from '../store/PreviousImageProvider'
+import { useSelector, useDispatch } from 'react-redux'
 
 const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, displayChat, setDisplayChat }) => {
     const {contact, backToMainContacts, displayName, displayAvatar, connectedContact } = useChathelper(setDisplayChat)
@@ -20,11 +21,11 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     const [ images, setImages ] = useState([])
     const [ focus, setFocus ] = useState()
 
-    const { chat } = useChatStore()
+    // const { chat } = useChatStore()
     
     const { previousImage } = usePreviousImageStore()
     const previousImageDispatch = usePreviousImageDispatch()
-
+    const chat = useSelector(state => state.chatReducer)
     return chat ?
         <>
             <section className={showSearchMessages || displayContactProfile || displayChatGroupInfo ? 'main__chat-section compressed' : focus? 'main__chat-section focus' :'main__chat-section'} id="main__chat-section">
@@ -52,7 +53,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                 </nav>
                 {
                     previousImage 
-                    ? <DisplayPreviousImage images={images} setDisplayPreviousImage={setDisplayPreviousImage} /> 
+                    ? <DisplayPreviousImage images={images} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} /> 
                     : <ChatMessages messagesSent={messagesSent} setMessagesSent={setMessagesSent}
                         goToMessage={goToMessage} setShowNewMessageNotification={setShowNewMessageNotification}
                         images={images} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage}

@@ -5,7 +5,7 @@ import { usePreviousImageDispatch, usePreviousImageStore } from '../store/Previo
 import { previousImageTypes } from '../store/previousImageReducer'
 import { memo } from 'react'
 
-const DisplayPreviousImage = memo(({images, setDisplayPreviousImage}) => {
+const DisplayPreviousImage = memo(({images, setImages, setDisplayPreviousImage}) => {
 
     const user = JSON.parse(localStorage.getItem('userLogged'))
 
@@ -19,16 +19,16 @@ const DisplayPreviousImage = memo(({images, setDisplayPreviousImage}) => {
         previousImageDispatch({
             type: previousImageTypes.hide
         })
-        const res = await axios.post('/chat/uploadimage', data)
+        const res = await axios.post('http://localhost:3001/chat/uploadimage', data)
         socket.emit("sendMessage", user, res.data)
         // setDisplayPreviousImage(false)
     }
 
     return (
         <div className="main__previous-image previous">
-            <div className="previous__close" onClick={() => previousImageDispatch({
+            <div className="previous__close" onClick={() => {setImages(null); previousImageDispatch({
             type: previousImageTypes.hide
-        })}>
+        })}}>
                 <i className="fas fa-times"></i>
             </div>
             <div className="previous__image-container" id="previous__image">
