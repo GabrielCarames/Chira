@@ -5,30 +5,25 @@ import useInputSubmitHelper from '../hooks/useInputSubmitHelper'
 import DisplayChatSettings from './DisplayChatSettings';
 import DisplayMessages from './DisplayMessages'
 import EmojisPicker from './EmojisPicker'
+import FormContent from './FormContent'
 import send from '../images/send.png'
 import UploadImage from './UploadImage'
-import { useChatStore } from '../store/ChatProvider';
-import { useSelector } from 'react-redux'
 
-const ChatMessages = memo(({messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact, focus, setFocus}) => {
+const ChatMessages = memo((({chat, messagesSent, setMessagesSent, goToMessage, setShowNewMessageNotification, images, setImages, setDisplayPreviousImage, displayChatSettings, setDisplayChatSettings, setDisplayContactProfile, contact, focus, setFocus}) => {
     const user = JSON.parse(localStorage.getItem('userLogged'))
-    const [ chosenEmoji, setChosenEmoji ] = useState(null)
+    const [ chosenEmoji, setChosenEmoji ] = useState(undefined)
     const [ inputMessage, setInputMessage ] = useState("")
     const [ userTyping, setUsertyping ] = useState(false)
-    // const { chat } = useChatStore()
-    const chat = useSelector(state => state.chatReducer)
-    console.log("chatindividual", chat)
-    const { messagesEndRef, showEmojiPicker, scrollToBottom, setShowEmojiPicker } = useChatMessagesHelper(messagesSent, setMessagesSent, user, focus )
+    const { messagesEndRef, showEmojiPicker, scrollToBottom, setShowEmojiPicker } = useChatMessagesHelper(chat, messagesSent, setMessagesSent, user, focus)
     const { inputOnSubmit } = useInputSubmitHelper(inputMessage, setChosenEmoji, user, setUsertyping, contact)
     const { seeMessage } = useSeenMessageHelper()
-
 
     return (
         <>
             <div className="main__messages-section messages" id="list-messages">
                 <div className="messages__scroll">
                     {chat && chat.messages.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} key={message._id} />  )}
-                    {/* {messagesSent && messagesSent.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} key={message._id} />)} */}
+                    {messagesSent && messagesSent.map((message) => <DisplayMessages message={message} user={user} goToMessage={goToMessage} scrollToBottom={scrollToBottom} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} key={message._id} />)}
                     <div ref={messagesEndRef}></div>
                 </div>
                 <div className="messages__typing">
@@ -49,7 +44,7 @@ const ChatMessages = memo(({messagesSent, setMessagesSent, goToMessage, setShowN
                     <img className="main__send-image" src={send} alt="" />
                 </button>
             </form>
-            <form encType="multipart/form-data" className="main__desktop-input-section" id="main__desktop-input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji, {"value": 'desktop'})}>
+            <form encType="multipart/form-data" className="main__desktop-input-section" id="main__desktop-input-section" onSubmit={(e) => inputOnSubmit(e, setChosenEmoji)}>
                 <div className="main__emoji-container" onClick={() => showEmojiPicker ? setShowEmojiPicker(false) : setShowEmojiPicker(true)}>
                     <i className="far fa-grin"></i>
                 </div>
@@ -65,6 +60,6 @@ const ChatMessages = memo(({messagesSent, setMessagesSent, goToMessage, setShowN
             {displayChatSettings && <DisplayChatSettings displayChatSettings={displayChatSettings} setDisplayChatSettings={setDisplayChatSettings} setDisplayContactProfile={setDisplayContactProfile} contact={contact} chat={chat} />}
         </>
     )
-})
+}))
 
 export default ChatMessages

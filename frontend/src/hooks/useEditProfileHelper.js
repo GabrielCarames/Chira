@@ -12,20 +12,19 @@ export function useEditProfileHelper (updatedProfileImage, setUpdatedProfileImag
         socket.on('newImageProfileUpdated', (updatedUser) => {
             setUpdatedProfileImage(updatedUser)
         })
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const verifyImage = async (e) => {
         const imageData = e.target.files[0]
         const data = new FormData()
         data.append("file", imageData)
-        const res = await axios.post('http://localhost:3001/chat/uploadimage', data )
+        const res = await axios.post('/chat/uploadimage', data )
         socket.emit('newImageProfile', userLogged._id, res.data)
     };
 
     const displayAvatar = () => {
         if(updatedProfileImage) {
-            return url + updatedProfileImage.avatar.title
+            return url + updatedProfileImage[0].avatar.title
         }else {
             if(!userLogged.avatar.title) {
                 return userLogged.avatar

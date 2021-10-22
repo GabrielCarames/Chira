@@ -1,34 +1,23 @@
 import socket from '../components/Socket'
 import send from '../images/send.png'
 import axios from 'axios'
-import { usePreviousImageDispatch, usePreviousImageStore } from '../store/PreviousImageProvider'
-import { previousImageTypes } from '../store/previousImageReducer'
-import { memo } from 'react'
 
-const DisplayPreviousImage = memo(({images, setImages, setDisplayPreviousImage}) => {
+const DisplayPreviousImage = ({images, setDisplayPreviousImage}) => {
 
     const user = JSON.parse(localStorage.getItem('userLogged'))
-
-    const { previousImage } = usePreviousImageStore()
-    const previousImageDispatch = usePreviousImageDispatch()
 
     const uploadImage = async () => {
         const imageData = images[1]
         const data = new FormData()
         data.append("file", imageData)
-        previousImageDispatch({
-            type: previousImageTypes.hide
-        })
-        const res = await axios.post('http://localhost:3001/chat/uploadimage', data)
+        const res = await axios.post('/chat/uploadimage', data)
         socket.emit("sendMessage", user, res.data)
-        // setDisplayPreviousImage(false)
+        setDisplayPreviousImage(false)
     }
 
     return (
         <div className="main__previous-image previous">
-            <div className="previous__close" onClick={() => {setImages(null); previousImageDispatch({
-            type: previousImageTypes.hide
-        })}}>
+            <div className="previous__close" onClick={() => setDisplayPreviousImage(false)}>
                 <i className="fas fa-times"></i>
             </div>
             <div className="previous__image-container" id="previous__image">
@@ -46,6 +35,6 @@ const DisplayPreviousImage = memo(({images, setImages, setDisplayPreviousImage})
             }
         </div>
     )
-})
+}
 
 export default DisplayPreviousImage

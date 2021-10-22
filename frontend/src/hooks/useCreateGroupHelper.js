@@ -3,7 +3,7 @@ import socket from "../components/Socket"
 import axios from 'axios'
 import avatar from '../images/avatar.png'
 
-export function useCreateGroupHelper (groupContacts, setGroupContacts, setDisplayCreateGroup) {
+export function useCreateGroupHelper (groupContacts, setGroupContacts) {
     const [ groupImage, setGroupImage ] = useState(avatar)
     const [ form, setForm ] = useState()
 
@@ -22,7 +22,7 @@ export function useCreateGroupHelper (groupContacts, setGroupContacts, setDispla
         const imageData = e.target.files[0]
         const data = new FormData()
         data.append("file", imageData)
-        const res = await axios.post('http://localhost:3001/chat/uploadimage', data )
+        const res = await axios.post('/chat/uploadimage', data )
         socket.emit('newImageProfile', userLogged._id, res.data)
     };
 
@@ -35,12 +35,11 @@ export function useCreateGroupHelper (groupContacts, setGroupContacts, setDispla
         if(groupImageToUpload) {
             const data = new FormData()
             data.append("file", groupImageToUpload)
-            const response = await axios.post('http://localhost:3001/chat/uploadimage', data)
+            const response = await axios.post('/chat/uploadimage', data)
             newImage = response.data
-        }
-        const res = await axios.post('http://localhost:3001/chat/creategroup', {groupName, newImage, groupContacts} )
+        } else newImage = groupImage
+        const res = await axios.post('/chat/creategroup', {groupName, newImage, groupContacts} )
         socket.emit('goToGroupChat', groupName)
-        setDisplayCreateGroup(false)
     }
 
     const addContactsToGroupList = (contact) => {

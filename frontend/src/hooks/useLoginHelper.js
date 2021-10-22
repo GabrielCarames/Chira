@@ -11,15 +11,6 @@ export function useLoginHelper(setPhoneNumberInput) {
     const { setFlashMessage } = useContext(FlashContext)
     let history = useHistory()
 
-    const userTrucho = {
-        "contacts": [],
-        "avatar": "https://w7.pngwing.com/pngs/971/686/png-transparent-computer-icons-social-media-blog-avatar-material-service-logo-material.png",
-        "_id": "6161f87685215b27bcd3f474",
-        "username": "petete",
-        "phoneNumber": "+541139153268",
-        "__v": 0
-    }
-
     const handleChange = (e) => {
         setForm({
             ...form,
@@ -73,15 +64,9 @@ export function useLoginHelper(setPhoneNumberInput) {
     }
 
     const registerUser = async (user) => {
-        
-        // localStorage.setItem('userLogged', JSON.stringify(userTrucho));
-        // console.log("usertruccho", userTrucho)
-        // history.push("/");
         try {
-            await axios.post('http://localhost:3001/users/register', user).then(res => {
+            await axios.post('/users/register', user).then(res => {
                 setLoading(false);
-                
-                console.log("res.data", res.data)
                 localStorage.setItem('userLogged', JSON.stringify(res.data));
                 history.push("/");
             })

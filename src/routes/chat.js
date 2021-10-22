@@ -27,7 +27,6 @@ router.post("/uploadimage", async function(req, res, next) {
 router.post("/creategroup", async function(req, res, next) {
     const groupName = req.body.groupName
     const newImage = req.body.newImage
-    console.log("groupimage", newImage)
     const groupContacts = req.body.groupContacts
     const newGroupChat = await chatController.createGroupChat(groupName, newImage, groupContacts)
     res.send(newGroupChat)

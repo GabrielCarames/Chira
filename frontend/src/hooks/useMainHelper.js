@@ -5,9 +5,6 @@ import MainContacts from '../components/MainContacts';
 import EditProfile from '../components/EditProfile';
 import CreateGroup from '../components/CreateGroup';
 import socket from '../components/Socket';
-import { useChatsDispatch, useChatsStore } from '../store/ChatsProvider';
-import { chatsTypes } from '../store/chatsReducer';
-import { useSelector, useDispatch } from 'react-redux'
 
 export function useMainHelper (messagesSent, displayBurgerMenu, setDisplayBurgerMenu, addContactsMenu, setAddContactsMenu, displayConfiguration, setDisplayConfiguration, displayEditProfile, setDisplayEditProfile, displayChat, setDisplayChat) {
     const [ displayCreateGroup, setDisplayCreateGroup ] = useState(false)
@@ -15,22 +12,12 @@ export function useMainHelper (messagesSent, displayBurgerMenu, setDisplayBurger
     const [ lastMessage, setLastMessage ] = useState()
     
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-
-    // const { chats } = useChatsStore()
-    // const chatsDispatch = useChatsDispatch()
-
-    const chats = useSelector(state => state.chatsReducer)
-    const dispatch = useDispatch()
-    console.log("chats", chats)
+    const [ lastMessager, setLastMessager ] = useState()
 
     useEffect(() => {
         socket.emit('connected', userLogged)
-        socket.on("userLogged", (updatedUserLogged, chats) => {
-            localStorage.setItem('userLogged', JSON.stringify(updatedUserLogged));
-            dispatch({
-                type: '@initialChats',
-                payload: chats
-            })
+        socket.on("userLogged", (userLoggede) => {
+            localStorage.setItem('userLogged', JSON.stringify(userLoggede[0]));
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -54,7 +41,7 @@ export function useMainHelper (messagesSent, displayBurgerMenu, setDisplayBurger
             return <EditProfile setDisplayEditProfile={setDisplayEditProfile} />
         } else if (displayCreateGroup) {
             return <CreateGroup groupContacts={groupContacts} setDisplayCreateGroup={setDisplayCreateGroup}/>
-        }else return <MainContacts messagesSent={messagesSent} setLastMessage={setLastMessage} setDisplayChat={setDisplayChat}  />
+        }else return <MainContacts messagesSent={messagesSent} setLastMessage={setLastMessage} setDisplayChat={setDisplayChat} lastMessager={lastMessager} setLastMessager={setLastMessager} />
     }
 
     return {

@@ -18,16 +18,15 @@ module.exports = (io) => {
     let user = currentlyUsers.filter((user) => user.socketId === socketId)
     return user
   };
-  
+
   io.on('connection', (socket) => {
     socket.on('connected', async (userLogged) => {
       if(getUserLoggedFromList(socket.id).length === 0) {
         await userController.addSocketIdToUser(userLogged._id, socket.id)
         const updatedUserLogged = await userController.findUserById(userLogged._id)
         localStorage.setItem('userLogged', JSON.stringify(updatedUserLogged));
-        const chats = await chatController.findAllChats()
-        socket.emit('userLogged', updatedUserLogged, chats)
-        addUserLoggedToList(updatedUserLogged._id, socket.id);
+        socket.emit('userLogged', updatedUserLogged)
+        addUserLoggedToList(updatedUserLogged[0]._id, socket.id);
       }
       io.emit("getUsersConnected", currentlyUsers);
     })
@@ -37,7 +36,7 @@ module.exports = (io) => {
       currentlyChat = await chatController.findChatByContactId(userId, contactId)
       const updatedUser = await userController.findUserById(contactId)
       socket.emit("chatFound", currentlyChat);
-      socket.to(updatedUser.socketId).emit('contactSeeingChat')
+      socket.to(updatedUser[0].socketId).emit('contactSeeingChat')
     });
 
     socket.on("goToGroupChat", async (groupName) => {
@@ -47,7 +46,7 @@ module.exports = (io) => {
     });
 
     socket.on("sendMessage", async (user, message) => {
-      console.log("guardomensaje")
+
       let fullMessage
       if(message.mimetype) fullMessage = await chatController.saveImageMessageAndReturnFullMessage(user, message)
       else fullMessage = await chatController.saveMessagesAndReturnFullMessage(user, message)
@@ -59,19 +58,19 @@ module.exports = (io) => {
       socket.to(contact.socketId).emit('typingPrivateChat', userLogged)
     });
 
-    socket.on('seenMessage', async (contactIdToAdviseSeenMessage, updatedChats, lastMessage) => {
+    socket.on('seenMessage', async (user, contactIdToAdviseSeenMessage, lastMessage) => {
       await chatController.updateSeenMessages(lastMessage)
-      //queda avisarle al usuario a traves del socketid que se hizo el visto y darle el updated chats
-      //tambienfijate de arreglar esto del lastmessage para updatearlo en la bd
-      const updatedUser = await userController.findUserById(contactIdToAdviseSeenMessage)
+      // const updatedUser = await userController.findUserById(contactIdToAdviseSeenMessage)
       // const contactChat = await chatController.findChatByContactId(user, contactIdToAdviseSeenMessage)
       // console.log("contactchat", contactChat)
-      io.to(updatedUser.socketId).emit('messageAlreadySeen', updatedChats)
+      // io.to(updatedUser[0].socketId).emit('messageAlreadySeen', contactChat[0].messages)
     });
 
-    socket.on('newMessageNotification', async (chats, contact) => {
-      const updatedUser = await userController.findUserById(contact._id)
-      socket.to(updatedUser.socketId).emit('newNotification', chats)
+    socket.on('newMessageNotification', async (message, user, contact) => {
+      const updatedUser = await userController.findUserById(contact[0]._id)
+      const contactChat = await chatController.findChatByContactId(user._id, contact[0]._id)
+      console.log("newMessageNotification", contactChat, "user", updatedUser[0].socketId)
+      socket.to(updatedUser[0].socketId).emit('newNotification', message, contactChat)
     });
 
     socket.on('newImageProfile', async (userLoggedId, newImage) => {

@@ -1,17 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import DisplayPreviousImage from './DisplayPreviousImage'
 import ContactProfile from './ContactProfile'
 import SearchMessages from './SearchMessages'
 import ChatGroupInfo from './ChatGroupInfo'
 import ChatMessages from './ChatMessages'
 import useChathelper from '../hooks/useChathelper'
-import socket from './Socket'
-import { useChatStore } from '../store/ChatProvider'
-import { usePreviousImageDispatch, usePreviousImageStore } from '../store/PreviousImageProvider'
-import { useSelector, useDispatch } from 'react-redux'
 
 const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, displayChat, setDisplayChat }) => {
-    const {contact, backToMainContacts, displayName, displayAvatar, connectedContact } = useChathelper(setDisplayChat)
+    const { chat, contact, backToMainContacts, displayName, displayAvatar, connectedContact } = useChathelper(setDisplayChat)
     const [ displayContactProfile, setDisplayContactProfile ] = useState(false)
     const [ displayChatGroupInfo, setDisplayChatGroupInfo ] = useState(false)
     const [ showSearchMessages, setShowSearchMessages ] = useState(false)
@@ -21,11 +17,6 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
     const [ images, setImages ] = useState([])
     const [ focus, setFocus ] = useState()
 
-    // const { chat } = useChatStore()
-    
-    const { previousImage } = usePreviousImageStore()
-    const previousImageDispatch = usePreviousImageDispatch()
-    const chat = useSelector(state => state.chatReducer)
     return chat ?
         <>
             <section className={showSearchMessages || displayContactProfile || displayChatGroupInfo ? 'main__chat-section compressed' : focus? 'main__chat-section focus' :'main__chat-section'} id="main__chat-section">
@@ -52,9 +43,9 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                     </div>
                 </nav>
                 {
-                    previousImage 
-                    ? <DisplayPreviousImage images={images} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage} /> 
-                    : <ChatMessages messagesSent={messagesSent} setMessagesSent={setMessagesSent}
+                    displayPreviousImage 
+                    ? <DisplayPreviousImage images={images} setDisplayPreviousImage={setDisplayPreviousImage} /> 
+                    : <ChatMessages chat={chat} messagesSent={messagesSent} setMessagesSent={setMessagesSent}
                         goToMessage={goToMessage} setShowNewMessageNotification={setShowNewMessageNotification}
                         images={images} setImages={setImages} setDisplayPreviousImage={setDisplayPreviousImage}
                         displayChatSettings={displayChatSettings} setDisplayChatSettings={setDisplayChatSettings}
@@ -64,7 +55,7 @@ const Chat = ({messagesSent, setMessagesSent, setShowNewMessageNotification, dis
                 }
             </section>
             {displayContactProfile && <ContactProfile setDisplayContactProfile={setDisplayContactProfile} contact={contact} />}
-            {displayChatGroupInfo && <ChatGroupInfo setDisplayChatGroupInfo={setDisplayChatGroupInfo} />}
+            {displayChatGroupInfo && <ChatGroupInfo setDisplayChatGroupInfo={setDisplayChatGroupInfo} chat={chat} />}
             {showSearchMessages && <SearchMessages setShowSearchMessages={setShowSearchMessages} goToMessage={goToMessage} setGoToMessage={setGoToMessage} />}
         </>
     : <div className="main__no-chat"></div>

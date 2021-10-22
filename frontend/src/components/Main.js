@@ -1,10 +1,9 @@
-import { useState, useContext, memo, useEffect } from 'react'
+import { useState, useContext, memo } from 'react'
 import BurgerMenu from './BurgerMenu';
 import Chat from './Chat';
 import useMainHelper from '../hooks/useMainHelper';
 import DisplayChatContext from '../contexts/DisplayChatContext';
-import socket from './Socket';
-import { useDispatch, useStore } from '../store/ChatsProvider';
+
 const Main = memo(({setUserLoggedMain}) => {
     const [ showNewMessageNotification, setShowNewMessageNotification ] = useState(false)
     const [ displayConfiguration, setDisplayConfiguration ] = useState(false)
@@ -13,33 +12,10 @@ const Main = memo(({setUserLoggedMain}) => {
     const [ addContactsMenu, setAddContactsMenu ] = useState(false)
     const [ messagesSent, setMessagesSent ] = useState("");
     const { displayChat, setDisplayChat } = useContext(DisplayChatContext)
-
-    // const { chats, setChats } = useContext(ChatsContext)
-
-    // const [ chats, setChats ] = useState()
-
-
     const { displayLeftContent } = useMainHelper(messagesSent, displayBurgerMenu, setDisplayBurgerMenu, addContactsMenu, setAddContactsMenu, displayConfiguration, setDisplayConfiguration, displayEditProfile, setDisplayEditProfile, displayChat, setDisplayChat)
 
-    // useEffect(() => {
-    //     socket.on("messageSent", (newMessage) => {
-    //         let allChats = chats
-    //         console.log("allboys", chats, setChats)
-    //         // allChats[chat._id].messages[allChats[chat._id].messages.length -1].push(newMessage)
-    //         // setChats(allChats)
-    //     });
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [chats]);
-
-    // useEffect(() => {
-    //     console.log("chatrulette", chats)
-    // }, [chats])
-
     return(
-        
         <section className="main">
-            {/* <button onClick={() => setChat(chata)}> */}
-            {/* </button> */}
             <section className="main__left-section" id="main__left-section">
                 <section className="main__navbar-section">
                     <nav className="main__navbar navbar">
@@ -72,7 +48,6 @@ const Main = memo(({setUserLoggedMain}) => {
             <Chat messagesSent={messagesSent} setMessagesSent={setMessagesSent} 
             setShowNewMessageNotification={setShowNewMessageNotification}
             displayChat={displayChat} setDisplayChat={setDisplayChat}
-            
             />
         </section>
     )

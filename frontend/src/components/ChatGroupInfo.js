@@ -1,11 +1,9 @@
 import useChatGroupInfoHelper from '../hooks/useChatGroupInfoHelper';
 import useEditUserNameHelper from '../hooks/useEditUserNameHelper';
-import { useChatStore } from '../store/ChatProvider';
 
-const ChatGroupInfo = ({setDisplayChatGroupInfo}) => {
-    const { chat } = useChatStore()
-    const { displayAvatar, changeGroupImage, displayContactAvatar } = useChatGroupInfoHelper()
-    // const { handleChange, editUserName } = useEditUserNameHelper()
+const ChatGroupInfo = ({setDisplayChatGroupInfo, chat}) => {
+    const { displayAvatar, changeGroupImage, displayContactAvatar } = useChatGroupInfoHelper(chat)
+    const { handleChange, editUserName } = useEditUserNameHelper()
 
     return (
         <section className="main__group-info info">
@@ -28,7 +26,7 @@ const ChatGroupInfo = ({setDisplayChatGroupInfo}) => {
             <form className="info__edit-name form" onSubmit={(e) => {e.preventDefault(); alert('Cambiar nombre todavía no disponible')}} >
                 <div className="form__name-section">
                     <label className="form__label" htmlFor="groupname">Editar nombre</label>
-                    <input className="form__input" placeholder={chat.name} id="groupname" type="text" name="groupname" /*onChange={handleChange}*/ minLength="0" maxLength="18" pattern="[A-Za-z0-9]+"/>
+                    <input className="form__input" placeholder={chat.name} id="groupname" type="text" name="groupname" onChange={handleChange} minLength="0" maxLength="18" pattern="[A-Za-z0-9]+"/>
                 </div>
                 <button type="submit" className="form__button" /*className={active ? "form__button active" : loading ? "form__button loading" : "form__button"}*/>
                     {/* {loading

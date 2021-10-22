@@ -483,10 +483,7 @@ body main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  max-width: 220px;
+  max-width: 126px;
   height: 25px;
 }
 
@@ -643,6 +640,7 @@ body main {
     -webkit-box-align: inherit;
         -ms-flex-align: inherit;
             align-items: inherit;
+    max-width: 220px;
   }
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__info .list__message-container .list__messages {
     text-overflow: ellipsis;
@@ -657,7 +655,7 @@ body main {
   }
   .main .main__content-section .main__contacts .main__contacts-list .list__item .list__message-info .list__time-ago {
     position: inherit;
-    margin-right: 30px;
+    width: 78px;
   }
   .main .main__content-section .main_add-contacts-container .add-contacts__sub-container .add-contacts__left-side {
     width: 400px;
@@ -1104,7 +1102,7 @@ body main {
 
 .main__chat-section .main__messages-section .messages-user-logged-messages .messages-message-container {
   display: inline-block;
-  background-color: #172029;
+  background-color: #26313f;
   text-align: right;
   margin: 20px 10px 20px 0;
   padding: 10px 20px 0 20px;
@@ -1176,7 +1174,7 @@ body main {
 
 .main__chat-section .main__messages-section .messages-contact-messages .messages-message-container {
   display: inline-block;
-  background-color: #26313f;
+  background-color: #172029;
   text-align: left;
   margin: 20px 0 20px 20px;
   padding: 0px 10px 0 10px;
@@ -2146,6 +2144,7 @@ body main {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+    margin-left: 200px;
   }
   .main__search-contacts .contacts-section .add-contact-group-container .add-group__sub-container .add-group__left-side {
     width: 400px;
@@ -2714,6 +2713,7 @@ body main {
       -ms-flex-direction: column;
           flex-direction: column;
   width: 100%;
+  overflow-y: auto;
 }
 
 .main__previous-image .previous__close {
@@ -3018,6 +3018,8 @@ body main {
   border-radius: 3000px;
   -webkit-transition: .5s;
   transition: .5s;
+  width: 100px;
+  height: 100px;
 }
 
 .main__edit-profile .edit-profile__main-content .edit-profile__change-avatar .edit-profile__image-label:hover .edit-profile__avatar {

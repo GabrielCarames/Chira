@@ -2,25 +2,15 @@ import { useState, useEffect } from 'react'
 import moment from 'moment'
 import axios from 'axios'
 import socket from "../components/Socket"
-import { useChatsDispatch, useChatsStore } from '../store/ChatsProvider'
-import { chatsTypes } from '../store/chatsReducer'
-import { useSelector, useDispatch } from 'react-redux'
 
-export function useMainContactsHelper (messagesSent, setLastMessage, setDisplayChat) {
+export function useMainContactsHelper (setChats, messagesSent, setLastMessage, setDisplayChat) {
     //lastRecentMessage es para mensajes recientes al contacto unicamente, mas no para todos
     //messagesSent es para todos
-
     const [ lastRecentMessage, setLastRecentMessage ] = useState()
     const [ groupImage, setGroupImage ] = useState()
 
     const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-
     const url = process.env.REACT_APP_UPLOAD_URL
-
-    // const { chats } = useChatsStore()
-    // const chatsDispatch = useChatsDispatch()
-    const chats = useSelector(state => state.chatsReducer)
-    const dispatch = useDispatch()
 
     const goToChat = chat => {
         if(chat.type === 'group') {
@@ -33,36 +23,28 @@ export function useMainContactsHelper (messagesSent, setLastMessage, setDisplayC
         }
     }
 
-    // useEffect(() => {
-    //     const chatsToUpdate = chats
-    //     chatsToUpdate..push(messagesSent)
-    //     setChats()
-
-    //     // console.log("barilocheameputita", messagesSent)
-    //     // const getAllChats = async () => {
-    //     //     messagesSent && setLastMessage(messagesSent)
-    //     //     const res = await axios.post('/chat/allchatsfromuserlogged', {userLogged})
-    //     //     const chats = res.data
-    //     //     console.log("chatsacutalizados", chats)
-    //     //     chats && setChats(chats)
-    //     // }
-    //     // getAllChats()
-    //     // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [messagesSent])
+    useEffect(() => {
+        console.log("barilocheameputita", messagesSent)
+        const getAllChats = async () => {
+            messagesSent && setLastMessage(messagesSent)
+            const res = await axios.post('/chat/allchatsfromuserlogged', {userLogged})
+            const chats = res.data
+            console.log("chatsacutalizados", chats)
+            chats && setChats(chats)
+        }
+        getAllChats()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [messagesSent])
 
     useEffect(() => {
-        socket.on("newNotification", (chats) => {
-            console.log("newmessage", chats)
-            // chatsDispatch({
-            //     type: chatsTypes.updateChats,
-            //     updatedChats: chats
-            // })
+        socket.on("newNotification", (newMessage, contactChat) => {
+            console.log("newmessage", newMessage)
             // console.log("contactChat", document.getElementById(contactChat._id).children[1].children[1] )
             // console.log("insecptrgarcher", document.getElementById(contactChat._id).children)
             // console.log("copsaamater", contactChat.messages[contactChat.messages.length -1].message)
             // document.getElementById(contactChat._id).children[2].children[0].className = 'far fa-comment-dots active' //Activa la visibilidad del icono de notificacion de mensaje
             // document.getElementById(contactChat._id).children[1].children[1].textContent = contactChat.messages[contactChat.messages.length -1].message //Agarra el ultimo mensaje actual desactualizado de tal chat, y lo actualiza con el mensaje actualziado unicamente a el
-            // setLastRecentMessage(newMessage) //che esto actualiza la hora del mensaje yn oel mensaje xd, hacelo para que haga los dos
+            setLastRecentMessage(newMessage) //che esto actualiza la hora del mensaje yn oel mensaje xd, hacelo para que haga los dos
         });
     }, [])
 
@@ -80,18 +62,44 @@ export function useMainContactsHelper (messagesSent, setLastMessage, setDisplayC
         }
     }
 
-    const showLastMessage = (messages, users ) => {
-        // const contactUsername = users.filter((user) => user._id !== userLogged._id)[0].username
-        const lastMessage = messages[messages.length -1]
+    const showHistoryLastMessage = (historyLastMessage) => {
+        // console.log("soy2")
+        const lastMessage = historyLastMessage //ultimo mensaje del historial
+        if(lastMessage === 'false') {
+            return 'Foto'
+        } else return lastMessage
+    }
 
-        if(lastMessage) {
-            console.log("lastmessage", lastMessage)
-            if(lastMessage === 'false') {
-                return 'Foto'
-            } else {
-                return lastMessage.message
-            }
-        } else return ''
+    const showRecentLastMessage = (lastMessager, setLastMessager) => {
+        // console.log("soy1")
+        setLastMessager(lastRecentMessage.message)
+        if(lastMessager === 'false') {
+            // setLastRecentMessage('')
+            return 'Foto'
+        } else {
+            // console.log("lastMessage", lastMessage)
+            // setLastRecentMessage('')
+            return lastMessager
+        }
+    }
+
+    const showLastMessage = (messages, users, lastMessager, setLastMessager) => {
+        
+        const contactUsername = users.filter((user) => user._id !== userLogged._id)[0].username
+        // console.log("ultimomensaje", messages[messages.length -1])
+        // console.log("lastmessagevariable", lastMessage, "lastmessagedelotro", lastRecentMessage)
+        console.log("lastMessanger", lastMessager)
+        if(lastRecentMessage && lastMessager === lastRecentMessage.message) {
+            console.log("d", messages[messages.length -1])
+            return showHistoryLastMessage(messages[messages.length -1].message)
+        } else {
+
+            if(lastRecentMessage && contactUsername === lastRecentMessage.user.username) { //si recibiste un mensaje
+                return showRecentLastMessage(lastMessager, setLastMessager)
+            }else if(messages.length !== 0) {
+                return showHistoryLastMessage(messages[messages.length -1].message)
+            } else return ''
+        }
     }
 
     const showTimeAgoMessage = (messages) => {
@@ -123,9 +131,7 @@ export function useMainContactsHelper (messagesSent, setLastMessage, setDisplayC
         if(chat.name) {
             if(groupImage && groupImage._id === chat._id) {
                 return url + groupImage.avatar.title
-            } else if(chat.avatar.title){
-                return url + chat.avatar.title
-            } else return chat.avatar
+            } else return url + chat.avatar.title
         } else {
             const contact = chat.users.filter((contact) => contact._id !== userLogged._id)[0]
             if(contact.avatar.title) {

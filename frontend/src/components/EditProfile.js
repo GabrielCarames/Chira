@@ -1,14 +1,18 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import useEditProfileHelper from "../hooks/useEditProfileHelper"
 
 const EditProfile = ({setDisplayEditProfile}) => {
     const [ updatedProfileImage, setUpdatedProfileImage ] = useState()
     const { verifyImage, displayAvatar } = useEditProfileHelper(updatedProfileImage, setUpdatedProfileImage)
 
+    useEffect(() => {
+        document.getElementById('add-contacts__button').className = 'add-contacts__button active'
+    }, [])
+
     return (
         <div className="main__edit-profile">
             <div className="edit-profile__navbar-section navbar">
-                <div className="navbar__close-section" onClick={() => setDisplayEditProfile(false)}>
+                <div className="navbar__close-section" onClick={() => {setDisplayEditProfile(false); document.getElementById('add-contacts__button').className = 'add-contacts__button'}}>
                     <i className="fas fa-times" aria-hidden="true"></i>
                 </div>
                 <h3 className="navbar__title">Editar perfil</h3>
