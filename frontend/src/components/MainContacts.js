@@ -10,7 +10,6 @@ const MainContacts = ({messagesSent, setLastMessage, setDisplayChat, lastMessage
                 <ul className="main__contacts-list list">
                     {chats && 
                         chats.map((chat) => {
-                            // console.log("chat", chat)
                             return (
                                 <li className="list__item" onClick={() => goToChat(chat)} key={chat._id} id={chat._id}>
                                     <div className="list__avatar-container">

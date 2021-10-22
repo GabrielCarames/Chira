@@ -4,8 +4,6 @@ import axios from 'axios'
 import socket from "../components/Socket"
 
 export function useMainContactsHelper (setChats, messagesSent, setLastMessage, setDisplayChat) {
-    //lastRecentMessage es para mensajes recientes al contacto unicamente, mas no para todos
-    //messagesSent es para todos
     const [ lastRecentMessage, setLastRecentMessage ] = useState()
     const [ groupImage, setGroupImage ] = useState()
 
@@ -24,12 +22,10 @@ export function useMainContactsHelper (setChats, messagesSent, setLastMessage, s
     }
 
     useEffect(() => {
-        console.log("barilocheameputita", messagesSent)
         const getAllChats = async () => {
             messagesSent && setLastMessage(messagesSent)
             const res = await axios.post('/chat/allchatsfromuserlogged', {userLogged})
             const chats = res.data
-            console.log("chatsacutalizados", chats)
             chats && setChats(chats)
         }
         getAllChats()
@@ -38,13 +34,7 @@ export function useMainContactsHelper (setChats, messagesSent, setLastMessage, s
 
     useEffect(() => {
         socket.on("newNotification", (newMessage, contactChat) => {
-            console.log("newmessage", newMessage)
-            // console.log("contactChat", document.getElementById(contactChat._id).children[1].children[1] )
-            // console.log("insecptrgarcher", document.getElementById(contactChat._id).children)
-            // console.log("copsaamater", contactChat.messages[contactChat.messages.length -1].message)
-            // document.getElementById(contactChat._id).children[2].children[0].className = 'far fa-comment-dots active' //Activa la visibilidad del icono de notificacion de mensaje
-            // document.getElementById(contactChat._id).children[1].children[1].textContent = contactChat.messages[contactChat.messages.length -1].message //Agarra el ultimo mensaje actual desactualizado de tal chat, y lo actualiza con el mensaje actualziado unicamente a el
-            setLastRecentMessage(newMessage) //che esto actualiza la hora del mensaje yn oel mensaje xd, hacelo para que haga los dos
+            setLastRecentMessage(newMessage)
         });
     }, [])
 
@@ -63,22 +53,17 @@ export function useMainContactsHelper (setChats, messagesSent, setLastMessage, s
     }
 
     const showHistoryLastMessage = (historyLastMessage) => {
-        // console.log("soy2")
-        const lastMessage = historyLastMessage //ultimo mensaje del historial
+        const lastMessage = historyLastMessage
         if(lastMessage === 'false') {
             return 'Foto'
         } else return lastMessage
     }
 
     const showRecentLastMessage = (lastMessager, setLastMessager) => {
-        // console.log("soy1")
         setLastMessager(lastRecentMessage.message)
         if(lastMessager === 'false') {
-            // setLastRecentMessage('')
             return 'Foto'
         } else {
-            // console.log("lastMessage", lastMessage)
-            // setLastRecentMessage('')
             return lastMessager
         }
     }
@@ -86,11 +71,7 @@ export function useMainContactsHelper (setChats, messagesSent, setLastMessage, s
     const showLastMessage = (messages, users, lastMessager, setLastMessager) => {
         
         const contactUsername = users.filter((user) => user._id !== userLogged._id)[0].username
-        // console.log("ultimomensaje", messages[messages.length -1])
-        // console.log("lastmessagevariable", lastMessage, "lastmessagedelotro", lastRecentMessage)
-        console.log("lastMessanger", lastMessager)
         if(lastRecentMessage && lastMessager === lastRecentMessage.message) {
-            console.log("d", messages[messages.length -1])
             return showHistoryLastMessage(messages[messages.length -1].message)
         } else {
 

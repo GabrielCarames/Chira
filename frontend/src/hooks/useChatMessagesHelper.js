@@ -7,9 +7,7 @@ export function useChatMessagesHelper (chat, messagesSent, setMessagesSent, user
 
     useEffect(() => {
         socket.on("messageSent", (newMessage) => {
-            console.log("memandaloriaron")
             const contact = chat.users.filter((userInChat) => userInChat._id !== user._id)
-            console.log("newMessage.user.username", newMessage.message, "user.username", user.username)
             newMessage.user.username === user.username && socket.emit('newMessageNotification', newMessage, user, contact)
             setMessagesSent(messagesSent => [...messagesSent, newMessage]); //Representa los mensajes enviados ahora mismo en el chat, no el historial.
         });

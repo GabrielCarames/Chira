@@ -5,7 +5,6 @@ import useInputSubmitHelper from '../hooks/useInputSubmitHelper'
 import DisplayChatSettings from './DisplayChatSettings';
 import DisplayMessages from './DisplayMessages'
 import EmojisPicker from './EmojisPicker'
-import FormContent from './FormContent'
 import send from '../images/send.png'
 import UploadImage from './UploadImage'
 

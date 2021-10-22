@@ -9,7 +9,6 @@ export function useChatGroupInfoHelper (chat) {
     useEffect(() => {
         socket.on('updatedGroupChat', (updatedGroupChat) => {
             const updatedAvatar = updatedGroupChat.avatar.title
-            console.log("updated", updatedGroupChat)
             setGroupImage(updatedAvatar)
         })
     })
@@ -29,7 +28,6 @@ export function useChatGroupInfoHelper (chat) {
         const data = new FormData()
         data.append("file", imageData)
         const res = await axios.post('/chat/uploadimage', data )
-        console.log("estaimagensubida", res.data)
         socket.emit('newGroupImage', chat._id, res.data)
     }
 
