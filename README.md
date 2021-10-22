@@ -27,6 +27,33 @@ Página web similar a "WhatsApp" o "Telegram". (Aún en desarrollo)
 </div>
 
 <br />
+
+<div align="center">
+
+## Cuentas de prueba
+
+</div>
+
+  Puedes entrar con tu número de teléfono o bien usar alguno de estos usuarios de prueba:
+  
+    Nombre de usuario: tachancka
+    Número de teléfono: +54 11 99999999
+    Código de verificación: 123456
+  
+  <br />
+
+    Nombre de usuario: petete
+    Número de teléfono: +54 11 88888888
+    Código de verificación: 123456
+    
+<br />
+
+    Nombre de usuario: rodolfo
+    Número de teléfono: +54 11 77777777
+    Código de verificación: 123456
+
+<br />
+
 <div align="center">
   
 ## Funcionalidades
