@@ -7,7 +7,7 @@ const DisplayChatSettings = ({ displayChatSettings, setDisplayChatSettings, setD
 
     const deleteContact = async () => {
         const userLogged = JSON.parse(localStorage.getItem('userLogged'))
-        await axios.post('/users/deletecontact', {userLogged, contact, chat})
+        await axios.post('http://localhost:3001/users/deletecontact', {userLogged, contact, chat})
         history.push('/')
     }
 
