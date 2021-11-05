@@ -5,7 +5,7 @@ const cors = require('cors')
 const multer = require('multer')
 const path = require('path')
 
-app.set('port', process.env.PORT || 3001)
+app.set('port', process.env.PORT || 3000)
 
 app.use(cors());
 app.use(express.json())

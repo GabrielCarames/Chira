@@ -8,7 +8,7 @@ export function useShowMessagesHelper(messageSearch, setShowMessages, setShowSea
 
   const onSearchSubmit = _.memoize(async message => {
     try {
-        const res = await axios.post('http://localhost:3001/chat/searchmessages', {message})
+        const res = await axios.post('/chat/searchmessages', {message})
         return res.data
     } catch (error) {
         if(error.response) setFlashMessage({type: 'failure', error: error.response.data})

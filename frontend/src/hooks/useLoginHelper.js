@@ -65,7 +65,7 @@ export function useLoginHelper(setPhoneNumberInput) {
 
     const registerUser = async (user) => {
         try {
-            await axios.post('http://localhost:3001/users/register', user).then(res => {
+            await axios.post('/users/register', user).then(res => {
                 setLoading(false);
                 localStorage.setItem('userLogged', JSON.stringify(res.data));
                 history.push("/");

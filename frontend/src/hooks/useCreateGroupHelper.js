@@ -22,7 +22,7 @@ export function useCreateGroupHelper (groupContacts, setGroupContacts) {
         const imageData = e.target.files[0]
         const data = new FormData()
         data.append("file", imageData)
-        const res = await axios.post('http://localhost:3001/chat/uploadimage', data )
+        const res = await axios.post('/chat/uploadimage', data )
         socket.emit('newImageProfile', userLogged._id, res.data)
     };
 
@@ -35,10 +35,10 @@ export function useCreateGroupHelper (groupContacts, setGroupContacts) {
         if(groupImageToUpload) {
             const data = new FormData()
             data.append("file", groupImageToUpload)
-            const response = await axios.post('http://localhost:3001/chat/uploadimage', data)
+            const response = await axios.post('/chat/uploadimage', data)
             newImage = response.data
         } else newImage = groupImage
-        const res = await axios.post('http://localhost:3001/chat/creategroup', {groupName, newImage, groupContacts} )
+        const res = await axios.post('/chat/creategroup', {groupName, newImage, groupContacts} )
         socket.emit('goToGroupChat', groupName)
     }
 
